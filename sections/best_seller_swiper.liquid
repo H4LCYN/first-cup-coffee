@@ -1,0 +1,86 @@
+<div class="padding-global-2">
+          <div class="container-large-2">
+            <div class="padding-section-medium-2">
+              <div class="featured-slider_component">
+                <div class="slider_top-wrapper">
+                  <div class="slider_top-content is-featured-slider">
+                    <h3 sym-bind="{"children":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"70d1a853-ea32-bcc4-1c19-e76b8181bfbe"}}}" class="h3 text-color-white">Best Sellers</h3>
+                  </div>
+                  <div class="home-dashed-rule_wrapper">
+                    <div class="home-dashed-rule_left"></div>
+                    <div class="home-dashed-rule_right"></div>
+                  </div>
+                </div>
+                <div bind="21b84778-a562-103d-dd13-81d8f762c612" class="swiper w-dyn-list">
+                  <div bind="21b84778-a562-103d-dd13-81d8f762c613" role="list" class="swiper-wrapper w-dyn-items">
+                    <div bind="21b84778-a562-103d-dd13-81d8f762c614" role="listitem" class="swiper-slide is-featured-slider w-dyn-item">
+                      {% for product in collection.products %}    <a li-for="product in collection.products" href="#" class="home-product_link w-inline-block">
+                                    
+                        
+                            <script src="{{ 'li_custom.js' | asset_url }}" type="text/javascript"></script>
+<div li-element="product-variant-container" class="product-item_component" x-data="handleVariant({{ product | json | escape }}, {{ product.options_by_name | json | escape }}, {{ product.selected_or_first_available_variant | json | escape }})" x-init="$nextTick(() => { activateVariants() })" @setbundleitem.window="updateBundleItem($event.detail.product, $event.detail.quantity)">
+                          <div class="product-item_image-link">
+                            <div li-object:href="product.url" class="product-item_image-wrapper" href="{{ product.url }}"><img li-object:src="product.featured_image | image_url: width: 450" li-object:alt="product.featured_image.alt" alt="{{ product.featured_image.alt }}" src="{{ product.featured_image | image_url: width: 450 }}" loading="lazy" class="product-item_image"></div>
+                            <div class="product-item_tag_list">
+                              {% if product.selected_or_first_available_variant.available != true %}    <div li-if="product.selected_or_first_available_variant.available != true" class="product-item_tag">
+    Not in Stock    </div>
+{% endif %}
+                              {% if product.compare_at_price_max > product.price %}    <div li-if="product.compare_at_price_max > product.price" class="product-item_tag is-red">
+    Sale    </div>
+{% endif %}
+                            </div>
+                          </div>
+                          <div class="spacer-xxsmall"></div>
+                          <div li-object:href="product.url" class="product-item_text-link" href="{{ product.url }}">
+                            <div class="product-item_left">
+                              <div li-object="product.title" class="item-name-small">{{ product.title }}</div>
+                            </div>
+                            <div class="product-item_price">
+                              {% if product.compare_at_price_max > product.price %}    <div li-if="product.compare_at_price_max > product.price">
+    
+                                <div li-object="product.compare_at_price | money" class="text-size-regular text-style-strikethrough text-style-muted">{{ product.compare_at_price | money }}</div>
+                                  </div>
+{% endif %}
+                              <div li-object="product.price | money" class="text-size-regular">{{ product.price | money }}</div>
+                            </div>
+                          </div>
+                        </div>
+                            
+                      
+                        </a>
+{% endfor %}
+                    </div>
+                  </div>
+                  <div bind="21b84778-a562-103d-dd13-81d8f762c61b" class="w-dyn-empty">
+                    <div>No items found.</div>
+                  </div>
+                </div>
+                <div class="featured-slider_bottom-wrapper">
+                  <div class="featured-slider_button-wrapper">
+                    <a href="#" class="featured-slider_button swiper-prev w-inline-block">
+                      <div bind="21b84778-a562-103d-dd13-81d8f762c621" class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 23" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5001 0.50502L12.4901 1.49497L2.48503 11.5L12.4901 21.505L11.5001 22.495L0.505127 11.5L11.5001 0.50502Z" fill="currentColor"></path>
+                        </svg></div>
+                    </a>
+                    <a href="#" class="featured-slider_button swiper-next w-inline-block">
+                      <div bind="21b84778-a562-103d-dd13-81d8f762c623" class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 23" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.49502 22.495L0.505067 21.505L10.5101 11.5L0.505069 1.49497L1.49502 0.505023L12.49 11.5L1.49502 22.495Z" fill="currentColor"></path>
+                        </svg></div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> {% schema %} {
+    "tag": "section",
+    "name": "Best Seller Swiper",
+    "class": "section_featured-home",
+    "presets": [
+        {
+            "name": "Best Seller Swiper",
+            "category": "Liquify",
+            "blocks": []
+        }
+    ]
+} {% endschema %}

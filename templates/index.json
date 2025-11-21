@@ -1,0 +1,45 @@
+{
+    "sections": {
+        "best_seller_swiper": {
+            "type": "best_seller_swiper"
+        },
+        "home_cta_1": {
+            "type": "home_cta_1"
+        },
+        "image_with_text": {
+            "type": "image_with_text"
+        },
+        "featured_products": {
+            "type": "featured_products"
+        },
+        "featured_collections": {
+            "type": "featured_collections",
+            "blocks": {
+                "block": {
+                    "type": "block",
+                    "name": "Block"
+                }
+            },
+            "block_order": [
+                "block"
+            ]
+        },
+        "blog_posts": {
+            "type": "blog_posts"
+        },
+        "custom_liquid": {
+            "type": "custom_liquid"
+        }
+    },
+    "layout": "theme",
+    "wrapper": "main.main-wrapper",
+    "order": [
+        "best_seller_swiper",
+        "home_cta_1",
+        "image_with_text",
+        "featured_products",
+        "featured_collections",
+        "blog_posts",
+        "custom_liquid"
+    ]
+}
