@@ -1,0 +1,69 @@
+{
+    "sections": {
+        "home_hero_1": {
+            "type": "home_hero_1"
+        },
+        "best_seller_swiper": {
+            "type": "best_seller_swiper"
+        },
+        "home_cta_1": {
+            "type": "home_cta_1"
+        },
+        "home_roasts": {
+            "type": "home_roasts"
+        },
+        "home_category_grid": {
+            "type": "home_category_grid"
+        },
+        "home_cta_2": {
+            "type": "home_cta_2"
+        },
+        "newsletter_signup": {
+            "type": "newsletter_signup"
+        },
+        "image_with_text": {
+            "type": "image_with_text"
+        },
+        "featured_products": {
+            "type": "featured_products"
+        },
+        "featured_collections": {
+            "type": "featured_collections",
+            "blocks": {
+                "block": {
+                    "type": "block",
+                    "name": "Block"
+                }
+            },
+            "block_order": [
+                "block"
+            ]
+        },
+        "blog_posts": {
+            "type": "blog_posts"
+        },
+        "custom_liquid": {
+            "type": "custom_liquid"
+        },
+        "product_swiper_1": {
+            "type": "product_swiper_1"
+        }
+    },
+    "layout": "theme",
+    "wrapper": "main.main-wrapper",
+    "order": [
+        "home_hero_1",
+        "best_seller_swiper",
+        "home_cta_1",
+        "home_roasts",
+        "home_category_grid",
+        "home_cta_2",
+        "newsletter_signup",
+        "image_with_text",
+        "featured_products",
+        "featured_collections",
+        "blog_posts",
+        "custom_liquid",
+        "product_swiper_1"
+    ]
+}
