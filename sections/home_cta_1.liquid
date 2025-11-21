@@ -1,0 +1,58 @@
+<div class="padding-global-3">
+          <div class="container-large-2">
+            <div class="padding-section-medium-2">
+              <div class="home-cta_component">
+                <div class="home-cta_content-wrapper">
+                  <h2 class="h2">
+{{ section.settings.text_heading }}
+</h2>
+                  <p class="text-size-medium-2"> {{ section.settings.textarea_paragraph }} </p>
+                  <div class="spacer-small-2"></div>
+                  <a href="{{ section.settings.url_button_link }}" class="button-1 w-inline-block"> <div sym-bind="{"children":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"a0245da8-bf00-0142-c204-45501d9430aa"}}}" class="text-block">SUBSCRIBE NOW</div> <div class="btn-anim"></div> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="home-cta-1_background">
+          <div class="home-cta-1_background-overlay"></div>{% if section.settings.image_background_image %}
+{{ section.settings.image_background_image | image_url: width: 1000 | image_tag: class: 'home-cta-1_background-image', sizes: '(max-width: 2160px) 100vw, 2160px', loading: 'lazy' }}
+{% else %}
+<img class="home-cta-1_background-image" src="{{ 'cta-1_background_1cta-1_background.webp' | asset_url }}" alt="" sizes="(max-width: 2160px) 100vw, 2160px" loading="lazy" srcset="{{ 'cta-1_background_1-p-500.jpg' | asset_url }} 500w, {{ 'cta-1_background_1-p-800.jpg' | asset_url }} 800w, {{ 'cta-1_background_1-p-1080.jpg' | asset_url }} 1080w, {{ 'cta-1_background_1-p-1600.jpg' | asset_url }} 1600w, {{ 'cta-1_background_1-p-2000.jpg' | asset_url }} 2000w, {{ 'cta-1_background_1cta-1_background.webp' | asset_url }} 2160w">
+{% endif %}
+        </div> {% schema %} {
+    "tag": "section",
+    "name": "Home CTA 1",
+    "class": "section_home-cta-1",
+    "settings": [
+        {
+            "id": "text_heading",
+            "type": "text",
+            "label": "Heading",
+            "default": "SAVE\u00a020% WHEN YOU SUBSCRIBE"
+        },
+        {
+            "id": "textarea_paragraph",
+            "type": "textarea",
+            "label": "paragraph",
+            "default": "Choose your coffee, select delivery times, &amp; get fresh coffee delivered to your door. There\u2019s no contracts so you can cancel anytime."
+        },
+        {
+            "id": "url_button_link",
+            "type": "url",
+            "label": "Button Link"
+        },
+        {
+            "id": "image_background_image",
+            "type": "image_picker",
+            "label": "Background Image"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Home CTA 1",
+            "category": "Liquify",
+            "blocks": []
+        }
+    ]
+} {% endschema %}

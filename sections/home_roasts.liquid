@@ -1,0 +1,102 @@
+<div class="container-full">
+          <div class="padding-section-medium-2">
+            <div class="product-slider_component">
+              <div class="padding-global-4">
+                <div class="container-large-2">
+                  <div class="slider_top-wrapper">
+                    <div class="slider_top-content">
+                      <h3 class="h3 text-color-white">Our Roasts</h3>
+                      <a collection-link="coffee" href="#" class="button-1 is-1b w-inline-block">
+                        <div class="text-block">SHOP COFFEE</div>
+                      </a>
+                    </div>
+                    <div class="home-dashed-rule_wrapper">
+                      <div class="home-dashed-rule_left"></div>
+                      <div class="home-dashed-rule_right"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="product-slider_left-button">
+                <div class="featured-slider_button-wrapper">
+                  <a href="#" class="featured-slider_button swiper-prev w-inline-block">
+                    <div bind="62b4a8be-f31d-2e14-fa5a-9bd5f154aaa3" class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 23" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5001 0.50502L12.4901 1.49497L2.48503 11.5L12.4901 21.505L11.5001 22.495L0.505127 11.5L11.5001 0.50502Z" fill="currentColor"></path>
+                      </svg></div>
+                  </a>
+                </div>
+              </div>
+              <div class="product-slider_right-button">
+                <div class="featured-slider_button-wrapper">
+                  <a href="#" class="featured-slider_button swiper-next w-inline-block">
+                    <div bind="dd76825c-e107-5c04-91f3-f290c575852a" class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 23" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.49502 22.495L0.505067 21.505L10.5101 11.5L0.505069 1.49497L1.49502 0.505023L12.49 11.5L1.49502 22.495Z" fill="currentColor"></path>
+                      </svg></div>
+                  </a>
+                </div>
+              </div>
+              <div bind="251138ad-7006-da25-c786-3eddc19a3160" class="swiper w-dyn-list">
+                <div bind="251138ad-7006-da25-c786-3eddc19a3161" role="list" class="swiper-wrapper is-product-slider w-dyn-items">
+                  {% for product in section.settings.collection_roasts_collection.products limit: section.settings.collection_roasts_collection_limit %}
+<div role="listitem" class="swiper-slide is-roasts-slider w-dyn-item">
+    
+                    
+    <a bind="6750f1b9-d174-1725-70a1-858b40a7f156" href="#" class="link-block w-inline-block">
+                      <div class="product-container-image is-isolated"><img class="product-image is-isolated" src="{{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min.webp' | asset_url }}" alt="" sizes="(max-width: 589px) 100vw, 589px" product-metafield:image="isolated_image" loading="lazy" bind="251138ad-7006-da25-c786-3eddc19a3166" srcset="{{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1-p-500.png' | asset_url }} 500w, {{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min.webp' | asset_url }} 589w"></div>
+                      <div class="product-container-info is-isolated">
+                        <div bind="251138ad-7006-da25-c786-3eddc19a3168" class="item-name-small">This is some text inside of a div block.</div>
+                        <div class="roast-profile_wrapper is-centered">
+                          <div bind="39dfc8e7-977e-8435-b738-6ab13a629867" fs-cmsfilter-field="Roast" product-metafield:text="roast_profile">Dark</div>
+                          <div bind="39dfc8e7-977e-8435-b738-6ab13a629869" class="text-block-2">Roast</div>
+                        </div>
+                      </div>
+                    </a>
+    
+                  
+</div>
+{% endfor %}
+                </div>
+                <div bind="251138ad-7006-da25-c786-3eddc19a316a" class="w-dyn-empty">
+                  <div>No items found.</div>
+                </div>
+              </div>
+              <div class="padding-global-4">
+                <div class="container-large-2">
+                  <div class="featured-slider_bottom-wrapper">
+                    <div class="centered-rule"></div>
+                    <div class="swiper-drag-wrapper is-product-sllider">
+                      <div class="swiper-drag is-product-slider"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> {% schema %} {
+    "tag": "section",
+    "name": "Home Roasts",
+    "class": "section_products-home",
+    "settings": [
+        {
+            "id": "collection_roasts_collection",
+            "type": "collection",
+            "label": "Roasts Collection"
+        },
+        {
+            "type": "range",
+            "id": "collection_roasts_collection_limit",
+            "min": 1,
+            "max": 99,
+            "step": 1,
+            "label": "Limit: Roasts Collection",
+            "default": 6
+        }
+    ],
+    "presets": [
+        {
+            "name": "Home Roasts",
+            "category": "Liquify",
+            "blocks": []
+        }
+    ]
+} {% endschema %}
