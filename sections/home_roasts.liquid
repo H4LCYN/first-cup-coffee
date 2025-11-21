@@ -6,9 +6,7 @@
                   <div class="slider_top-wrapper">
                     <div class="slider_top-content">
                       <h3 class="h3 text-color-white">Our Roasts</h3>
-                      <a collection-link="coffee" href="#" class="button-1 is-1b w-inline-block">
-                        <div class="text-block">SHOP COFFEE</div>
-                      </a>
+                      <a href="{{ section.settings.url_button_link }}" class="button-1 is-1b w-inline-block"> <div class="text-block">SHOP COFFEE</div> </a>
                     </div>
                     <div class="home-dashed-rule_wrapper">
                       <div class="home-dashed-rule_left"></div>
@@ -41,8 +39,8 @@
 <div role="listitem" class="swiper-slide is-roasts-slider w-dyn-item">
     
                     
-    <a bind="6750f1b9-d174-1725-70a1-858b40a7f156" href="#" class="link-block w-inline-block">
-                      <div class="product-container-image is-isolated"><img class="product-image is-isolated" src="{{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min.webp' | asset_url }}" alt="" sizes="100vw" product-metafield:image="isolated_image" loading="lazy" bind="251138ad-7006-da25-c786-3eddc19a3166" srcset="{{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1-p-500.png' | asset_url }} 500w, {{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min.webp' | asset_url }} 589w"></div>
+    <a li-object:href="product.url" href="{{ product.url }}" class="link-block w-inline-block">
+                      <div class="product-container-image is-isolated"><img class="product-image is-isolated" src="{{ item.metafields.custom['isolated_image'].value | img_url: 'master' }}" alt="" sizes="(max-width: 589px) 100vw, 589px" li-object:src="item.metafields.custom['isolated_image'].value | img_url: 'master'" loading="lazy" srcset="{{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1-p-500.png' | asset_url }} 500w, {{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min.webp' | asset_url }} 589w"></div>
                       <div class="product-container-info is-isolated">
                         <div bind="251138ad-7006-da25-c786-3eddc19a3168" class="item-name-small">This is some text inside of a div block.</div>
                         <div class="roast-profile_wrapper is-centered">
@@ -77,6 +75,11 @@
     "name": "Home Roasts",
     "class": "section_products-home",
     "settings": [
+        {
+            "id": "url_button_link",
+            "type": "url",
+            "label": "Button Link"
+        },
         {
             "id": "collection_roasts_collection",
             "type": "collection",
