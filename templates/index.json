@@ -36,7 +36,7 @@
     "home_roasts": {
       "type": "home_roasts",
       "settings": {
-        "collection_roasts_collection": "roasts",
+        "collection_roasts_collection": "",
         "collection_roasts_collection_limit": 6
       }
     },
