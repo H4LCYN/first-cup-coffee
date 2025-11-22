@@ -1,12 +1,12 @@
-<div data-animation="default" class="nav_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="9132635a-7891-b0d1-9b20-ecb0d5a86df9" role="banner" data-duration="400" x-data="">
+<div data-animation="default" class="nav_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" role="banner" data-duration="400" x-data="">
           <div class="nav_container">
-            <a href="{{ routes.root_url }}" li-object:href="routes.root_url" class="nav_logo-link w-nav-brand">{% if section.settings.image_logo %}
-{{ section.settings.image_logo | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'nav_logo' }}
+            <a href="{{ routes.root_url }}" li-object:href="routes.root_url" class="brand w-nav-brand">{% if section.settings.image_logo %}
+{{ section.settings.image_logo | image_url: width: 1000 | image_tag: class: 'brand-image', sizes: '(max-width: 479px) 98vw, (max-width: 767px) 99vw, (max-width: 2239px) 100vw, 2239px', loading: 'lazy' }}
 {% else %}
-<img src="{{ 'liquify-logo.svg' | asset_url }}" loading="lazy" alt="" class="nav_logo">
+<img class="brand-image" src="{{ 'Firstu-Cup-Horizontal-White_1Firstu-Cup-Horizontal-White.webp' | asset_url }}" alt="" sizes="(max-width: 479px) 98vw, (max-width: 767px) 99vw, (max-width: 2239px) 100vw, 2239px" loading="lazy" srcset="{{ 'Firstu-Cup-Horizontal-White_1-p-500.png' | asset_url }} 500w, {{ 'Firstu-Cup-Horizontal-White_1Firstu-Cup-Horizontal-White.webp' | asset_url }} 2239w">
 {% endif %}</a>
-            <nav role="navigation" id="w-node-_9132635a-7891-b0d1-9b20-ecb0d5a86dfd-d5a86df8" class="nav_menu is-page-height-tablet w-nav-menu">
-              {% for link in linklists[section.settings.menu].links %}    <div data-hover="true" data-delay="200" li-for="link in linklists[section.settings.menu].links" class="nav_menu-dropdown w-dropdown">
+            <nav role="navigation" id="w-node-_0c705e43-e6c7-609e-cdd0-20a6dd2c1aeb-09bbae20" class="nav_menu is-page-height-tablet w-nav-menu">
+              {% for link in linklists[section.settings.menu].links %}    <div data-delay="200" data-hover="true" li-for="link in linklists[section.settings.menu].links" class="nav_menu-dropdown w-dropdown">
                                     
                 
                             <div class="nav_dropdown-toggle w-dropdown-toggle">
@@ -28,7 +28,7 @@
                   <div class="padding-global max-width-full">
                     <div class="container-large">
                       <div class="nav_dropdown-grid">
-                        {% for child_link in link.links %}    <div li-for="child_link in link.links" id="w-node-_9132635a-7891-b0d1-9b20-ecb0d5a86e09-d5a86df8">
+                        {% for child_link in link.links %}    <div li-for="child_link in link.links" id="w-node-_0c705e43-e6c7-609e-cdd0-20a6dd2c1af7-09bbae20">
                                     
                           
                             <a href="{{ child_link.url }}" li-object="child_link.title" li-object:href="child_link.url" class="nav_dropdown-link w-dropdown-link">{{ child_link.title }}</a>

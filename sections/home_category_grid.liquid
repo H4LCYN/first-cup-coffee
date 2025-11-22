@@ -24,9 +24,9 @@
                 <a sym-bind="{"link":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"f9cb8889-0d61-1e5f-ed5f-fb0333b11121"}}}" data-w-id="cf8380ad-4d9a-7587-3301-8f183c558d82" href="#" class="home-category_component w-inline-block">
                   <div class="home-category-grid-background is-long">
                     <div class="category-grid_background-overlay is-yellow"></div>{% if section.settings.image_category_4_image %}
-{{ section.settings.image_category_4_image | image_url: width: 1000 | image_tag: class: 'category-grid_background-image is-short', sizes: '(max-width: 800px) 100vw, 800px', loading: 'lazy' }}
+{{ section.settings.image_category_4_image | image_url: width: 1000 | image_tag: class: 'category-grid_background-image is-short', sizes: '100vw', loading: 'lazy' }}
 {% else %}
-<img class="category-grid_background-image is-short" src="{{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }}" alt="" sizes="(max-width: 800px) 100vw, 800px" loading="lazy" srcset="{{ 'first-cup-merch-bkgd_1-p-500.jpg' | asset_url }} 500w, {{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }} 800w">
+<img class="category-grid_background-image is-short" src="{{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }}" alt="" sizes="100vw" loading="lazy" srcset="{{ 'first-cup-merch-bkgd_1-p-500.jpg' | asset_url }} 500w, {{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }} 800w">
 {% endif %}
                   </div>
                   <div class="category-grid_content">
