@@ -36,13 +36,22 @@
     "home_roasts": {
       "type": "home_roasts",
       "settings": {
-        "collection_roasts_collection": "",
+        "collection_roasts_collection": "roasts",
         "collection_roasts_collection_limit": 6
       }
     },
     "home_category_grid": {
       "type": "home_category_grid",
-      "settings": {}
+      "settings": {
+        "url_category_1_link": "",
+        "text_category_1_heading": "Subscription Box",
+        "text_category_1_paragraph": "Pick from all of our different roasts, choose a delivery schedule &amp; prep for a coffee adventure.",
+        "text_category_1_cta_text": "SUBSCRIBE AND SAVE",
+        "url_category_2_link": "",
+        "text_category_2_heading": "Follow",
+        "text_category_2_paragraph": "Updates &amp; deals you can't see anywhere else. Tag us &amp; you may be featured in our story!",
+        "text_category_2_cta_text": "JOIN THE FAMILY"
+      }
     },
     "home_cta_2": {
       "type": "home_cta_2",
