@@ -69,12 +69,6 @@
       "settings": {
         "text_checkbox": "By subscribing you agree to with our <a href=\"#\"><span>Privacy Policy</span></a> and provide consent to receive updates from our company."
       }
-    },
-    "custom_liquid": {
-      "type": "custom_liquid",
-      "settings": {
-        "custom_liquid": ""
-      }
     }
   },
   "layout": "theme",
@@ -86,7 +80,6 @@
     "home_roasts",
     "home_category_grid",
     "home_cta_2",
-    "newsletter_signup",
-    "custom_liquid"
+    "newsletter_signup"
   ]
 }
