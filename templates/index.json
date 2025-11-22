@@ -1,137 +1,69 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "home_hero_1": {
-      "type": "home_hero_1",
-      "settings": {
-        "text_paragraph": "Save up to 20% off and enjoy free shipping on all subscriptions",
-        "url_button_link": "",
-        "text_button_text": "SUBSCRIBE NOW"
-      }
-    },
-    "best_seller_swiper": {
-      "type": "best_seller_swiper",
-      "settings": {
-        "text_heading": "Best Sellers",
-        "collection_featured_collection": "best-sellers",
-        "collection_featured_collection_limit": 6
-      }
-    },
-    "home_cta_1": {
-      "type": "home_cta_1",
-      "settings": {
-        "text_heading": "SAVE 20% WHEN YOU SUBSCRIBE",
-        "textarea_paragraph": "Choose your coffee, select delivery times, &amp; get fresh coffee delivered to your door. There’s no contracts so you can cancel anytime.",
-        "url_button_link": ""
-      }
-    },
-    "home_roasts": {
-      "type": "home_roasts",
-      "settings": {
-        "collection_roasts_collection": "",
-        "collection_roasts_collection_limit": 6
-      }
-    },
-    "home_category_grid": {
-      "type": "home_category_grid",
-      "settings": {}
-    },
-    "home_cta_2": {
-      "type": "home_cta_2",
-      "settings": {}
-    },
-    "newsletter_signup": {
-      "type": "newsletter_signup",
-      "settings": {}
-    },
-    "image_with_text": {
-      "type": "image_with_text",
-      "settings": {
-        "text_heading": "Short heading here",
-        "richtext_paragraph": "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>",
-        "url_button_link": "",
-        "text_button_text": "More Information"
-      }
-    },
-    "featured_products": {
-      "type": "featured_products",
-      "settings": {
-        "text_heading": "Short heading here",
-        "url_button_link": "",
-        "text_button_text": "All products",
-        "collection_collection": "",
-        "collection_collection_limit": 6
-      }
-    },
-    "featured_collections": {
-      "type": "featured_collections",
-      "blocks": {
-        "block": {
-          "type": "block",
-          "name": "Block",
-          "settings": {
-            "url_link": "",
-            "text_heading": "Bestselling"
-          },
-          "blocks": {}
+    "sections": {
+        "home_hero_1": {
+            "type": "home_hero_1"
+        },
+        "best_seller_swiper": {
+            "type": "best_seller_swiper"
+        },
+        "home_cta_1": {
+            "type": "home_cta_1"
+        },
+        "home_roasts": {
+            "type": "home_roasts"
+        },
+        "home_category_grid": {
+            "type": "home_category_grid"
+        },
+        "home_cta_2": {
+            "type": "home_cta_2"
+        },
+        "newsletter_signup": {
+            "type": "newsletter_signup"
+        },
+        "image_with_text": {
+            "type": "image_with_text"
+        },
+        "featured_products": {
+            "type": "featured_products"
+        },
+        "featured_collections": {
+            "type": "featured_collections",
+            "blocks": {
+                "block": {
+                    "type": "block",
+                    "name": "Block"
+                }
+            },
+            "block_order": [
+                "block"
+            ]
+        },
+        "blog_posts": {
+            "type": "blog_posts"
+        },
+        "custom_liquid": {
+            "type": "custom_liquid"
+        },
+        "product_swiper_1": {
+            "type": "product_swiper_1"
         }
-      },
-      "block_order": [
-        "block"
-      ],
-      "settings": {
-        "text_heading": "Short heading here"
-      }
     },
-    "blog_posts": {
-      "type": "blog_posts",
-      "settings": {
-        "text_heading": "Short heading here",
-        "text_button_text": "All Articles",
-        "url_button_link": "",
-        "article_article": "",
-        "blog_blog": "",
-        "post_limit_blog": 3
-      }
-    },
-    "custom_liquid": {
-      "type": "custom_liquid",
-      "settings": {
-        "custom_liquid": ""
-      }
-    },
-    "product_swiper_1": {
-      "type": "product_swiper_1",
-      "settings": {
-        "text_heading": "Discover our bestellers",
-        "product_list": [],
-        "products_limit": 12
-      }
-    }
-  },
-  "layout": "theme",
-  "wrapper": "main.main-wrapper",
-  "order": [
-    "home_hero_1",
-    "best_seller_swiper",
-    "home_cta_1",
-    "home_roasts",
-    "home_category_grid",
-    "home_cta_2",
-    "newsletter_signup",
-    "image_with_text",
-    "featured_products",
-    "featured_collections",
-    "blog_posts",
-    "custom_liquid",
-    "product_swiper_1"
-  ]
+    "layout": "theme",
+    "wrapper": "main.main-wrapper",
+    "order": [
+        "home_hero_1",
+        "best_seller_swiper",
+        "home_cta_1",
+        "home_roasts",
+        "home_category_grid",
+        "home_cta_2",
+        "newsletter_signup",
+        "image_with_text",
+        "featured_products",
+        "featured_collections",
+        "blog_posts",
+        "custom_liquid",
+        "product_swiper_1"
+    ]
 }
