@@ -40,7 +40,7 @@
     
                     
     <a li-object:href="product.url" href="{{ product.url }}" class="link-block w-inline-block">
-                      <div class="product-container-image is-isolated"><img class="product-image is-isolated" src="{{ 'product.metafields.custom['isolated_image'].value | img_url: 'master'' | asset_url }}" alt="" sizes="(max-width: 589px) 100vw, 589px" loading="lazy" srcset="{{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1-p-500.png' | asset_url }} 500w, {{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min.webp' | asset_url }} 589w"></div>
+                      <div class="product-container-image is-isolated"><img class="product-image is-isolated" src="{{ product.metafields.custom['isolated_image'].value | img_url: 'master' }}" alt="" sizes="(max-width: 589px) 100vw, 589px" loading="lazy" srcset="{{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1-p-500.png' | asset_url }} 500w, {{ 'Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min_1Hero-Bags-Isolated-Buzz-Armstrong-v1-Top-View-min.webp' | asset_url }} 589w"></div>
                       <div class="product-container-info is-isolated">
                         <div li-object="product.title" class="item-name-small">{{ product.title }}</div>
                         <div class="roast-profile_wrapper is-centered">
