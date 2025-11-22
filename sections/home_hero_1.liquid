@@ -1,0 +1,60 @@
+<div class="container-large-2">
+          <div class="home-hero-1_content-wrapper">
+            <div class="home-hero-1_content-container">{% if section.settings.image_header_lockup_image %}
+{{ section.settings.image_header_lockup_image | image_url: width: 1000 | image_tag: class: 'home-hero-1_header-image', sizes: '(max-width: 651px) 100vw, 651px', loading: 'eager' }}
+{% else %}
+<img class="home-hero-1_header-image" src="{{ 'FCC004_subscribe-and-save_text-lockup-1_1FCC004_subscribe-and-save_text-lockup-1.webp' | asset_url }}" alt="" sizes="(max-width: 651px) 100vw, 651px" loading="eager" srcset="{{ 'FCC004_subscribe-and-save_text-lockup-1_1-p-500.png' | asset_url }} 500w, {{ 'FCC004_subscribe-and-save_text-lockup-1_1FCC004_subscribe-and-save_text-lockup-1.webp' | asset_url }} 651w">
+{% endif %}
+              <p class="text-size-large-2 is-hero-1">
+{{ section.settings.text_paragraph }}
+</p>
+              <div class="spacer-small-2"></div>
+              <a href="{{ section.settings.url_button_link }}" class="button-1 w-inline-block"> <div class="text-block">{{ section.settings.text_button_text }}</div> </a>
+            </div>
+          </div>
+        </div>
+        <div class="home-hero-1_background-wrapper">{% if section.settings.image_background_image %}
+{{ section.settings.image_background_image | image_url: width: 2000 | image_tag: class: 'home-hero-1_background-image', sizes: '(max-width: 2664px) 100vw, 2664px', loading: 'eager' }}
+{% else %}
+<img class="home-hero-1_background-image" src="{{ 'Hero-Bags-on-table-v1.1-Camera_1Hero-Bags-on-table-v1.1-Camera.webp' | asset_url }}" alt="" sizes="(max-width: 2664px) 100vw, 2664px" loading="eager" srcset="{{ 'Hero-Bags-on-table-v1.1-Camera_1-p-500.jpg' | asset_url }} 500w, {{ 'Hero-Bags-on-table-v1.1-Camera_1-p-800.jpg' | asset_url }} 800w, {{ 'Hero-Bags-on-table-v1.1-Camera_1-p-1080.jpg' | asset_url }} 1080w, {{ 'Hero-Bags-on-table-v1.1-Camera_1-p-1600.jpg' | asset_url }} 1600w, {{ 'Hero-Bags-on-table-v1.1-Camera_1-p-2000.jpg' | asset_url }} 2000w, {{ 'Hero-Bags-on-table-v1.1-Camera_1Hero-Bags-on-table-v1.1-Camera.webp' | asset_url }} 2664w">
+{% endif %}</div> {% schema %} {
+    "tag": "section",
+    "name": "Home Hero 1",
+    "class": "section_home-hero-1",
+    "settings": [
+        {
+            "id": "image_header_lockup_image",
+            "type": "image_picker",
+            "label": "Header Lockup Image"
+        },
+        {
+            "id": "text_paragraph",
+            "type": "text",
+            "label": "Paragraph",
+            "default": "Save up to 20% off and enjoy free shipping on all subscriptions"
+        },
+        {
+            "id": "url_button_link",
+            "type": "url",
+            "label": "Button Link"
+        },
+        {
+            "id": "text_button_text",
+            "type": "text",
+            "label": "Button Text",
+            "default": "SUBSCRIBE\u00a0NOW"
+        },
+        {
+            "id": "image_background_image",
+            "type": "image_picker",
+            "label": "Background Image"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Home Hero 1",
+            "category": "Liquify",
+            "blocks": []
+        }
+    ]
+} {% endschema %}
