@@ -12,6 +12,7 @@
     "home_hero_1": {
       "type": "home_hero_1",
       "settings": {
+        "image_header_lockup_image": "shopify://shop_images/FCC_subscribe-and-save_text-lockup_1.webp",
         "text_paragraph": "Save up to 20% off and enjoy free shipping on all subscriptions",
         "url_button_link": "",
         "text_button_text": "SUBSCRIBE NOW"
@@ -56,74 +57,23 @@
     },
     "home_cta_2": {
       "type": "home_cta_2",
-      "settings": {}
+      "settings": {
+        "url_button_1_link": "",
+        "text_button_1_text": "LEARN MORE",
+        "url_button_2_link": "",
+        "text_button_2_text": "ORDER AHEAD"
+      }
     },
     "newsletter_signup": {
       "type": "newsletter_signup",
-      "settings": {}
-    },
-    "image_with_text": {
-      "type": "image_with_text",
       "settings": {
-        "text_heading": "Short heading here",
-        "richtext_paragraph": "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>",
-        "url_button_link": "",
-        "text_button_text": "More Information"
-      }
-    },
-    "featured_products": {
-      "type": "featured_products",
-      "settings": {
-        "text_heading": "Short heading here",
-        "url_button_link": "",
-        "text_button_text": "All products",
-        "collection_collection": "",
-        "collection_collection_limit": 6
-      }
-    },
-    "featured_collections": {
-      "type": "featured_collections",
-      "blocks": {
-        "block": {
-          "type": "block",
-          "name": "Block",
-          "settings": {
-            "url_link": "",
-            "text_heading": "Bestselling"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "block"
-      ],
-      "settings": {
-        "text_heading": "Short heading here"
-      }
-    },
-    "blog_posts": {
-      "type": "blog_posts",
-      "settings": {
-        "text_heading": "Short heading here",
-        "text_button_text": "All Articles",
-        "url_button_link": "",
-        "article_article": "",
-        "blog_blog": "",
-        "post_limit_blog": 3
+        "text_checkbox": "By subscribing you agree to with our <a href=\"#\"><span>Privacy Policy</span></a> and provide consent to receive updates from our company."
       }
     },
     "custom_liquid": {
       "type": "custom_liquid",
       "settings": {
         "custom_liquid": ""
-      }
-    },
-    "product_swiper_1": {
-      "type": "product_swiper_1",
-      "settings": {
-        "text_heading": "Discover our bestellers",
-        "product_list": [],
-        "products_limit": 12
       }
     }
   },
@@ -137,11 +87,6 @@
     "home_category_grid",
     "home_cta_2",
     "newsletter_signup",
-    "image_with_text",
-    "featured_products",
-    "featured_collections",
-    "blog_posts",
-    "custom_liquid",
-    "product_swiper_1"
+    "custom_liquid"
   ]
 }
