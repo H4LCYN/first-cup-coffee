@@ -39,7 +39,7 @@
       "settings": {
         "url_button_link": "",
         "collection_roasts_collection": "roasts",
-        "collection_roasts_collection_limit": 6
+        "collection_roasts_collection_limit": 10
       }
     },
     "home_category_grid": {
