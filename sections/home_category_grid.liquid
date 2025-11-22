@@ -2,11 +2,15 @@
           <div class="container-large-2">
             <div class="padding-section-medium-2">
               <div class="category-grid">
-                <a id="w-node-cf8380ad-4d9a-7587-3301-8f183c558d58-09bbad8b" data-w-id="cf8380ad-4d9a-7587-3301-8f183c558d58" href="{{ section.settings.url_category_1_link }}" class="home-category_component is-long w-inline-block"> <div class="home-category-grid-background is-long"> <div class="category-grid_background-overlay"></div><img class="category-grid_background-image is-long" sym-bind="{"img":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"b730705b-df9b-40c5-8dd4-ef1b55269720"}}}" src="{{ 'Bags-in-box-v1-Camera-5_1Bags-in-box-v1-Camera-5.webp' | asset_url }}" alt="" sizes="(max-width: 1000px) 100vw, 1000px" loading="lazy" srcset="{{ 'Bags-in-box-v1-Camera-5_1-p-500.jpg' | asset_url }} 500w, {{ 'Bags-in-box-v1-Camera-5_1-p-800.jpg' | asset_url }} 800w, {{ 'Bags-in-box-v1-Camera-5_1Bags-in-box-v1-Camera-5.webp' | asset_url }} 1000w"> </div> <div class="category-grid_content"> <h3 class="h3 is-category-grid">{{ section.settings.text_category_1_heading }}</h3> <p class="paragraph is-category-grid text-balance">{{ section.settings.text_category_1_paragraph }}</p> <div class="category-grid_cta-txt-wrapper"> <div class="category-grid_cta-text">{{ section.settings.text_category_1_cta_text }}</div> <div class="fa-icon is-category-grid"></div> </div> </div> </a>
-                <a id="w-node-cf8380ad-4d9a-7587-3301-8f183c558d66-09bbad8b" data-w-id="cf8380ad-4d9a-7587-3301-8f183c558d66" href="{{ section.settings.url_category_2_link }}" class="home-category_component is-tall w-inline-block"> <div class="home-category-grid-background is-tall"> <div class="category-grid_background-overlay is-red"></div><img class="category-grid_background-image is-short" sym-bind="{"img":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"6fe48b2b-54c0-c5b3-2129-44985c72d0dd"}}}" src="{{ 'first-cup-social-mockup_1first-cup-social-mockup.webp' | asset_url }}" alt="" sizes="(max-width: 800px) 100vw, 800px" loading="lazy" srcset="{{ 'first-cup-social-mockup_1-p-500.jpg' | asset_url }} 500w, {{ 'first-cup-social-mockup_1first-cup-social-mockup.webp' | asset_url }} 800w"> </div> <div class="category-grid_content"> <h3 class="h3 is-category-grid">{{ section.settings.text_category_2_heading }}</h3> <p class="paragraph is-category-grid text-balance">{{ section.settings.text_category_2_paragraph }}</p> <div class="category-grid_cta-txt-wrapper"> <div class="category-grid_cta-text">{{ section.settings.text_category_2_cta_text }}</div> <div class="fa-icon is-category-grid"></div> </div> </div> </a>
+                <a id="w-node-cf8380ad-4d9a-7587-3301-8f183c558d58-09bbad8b" data-w-id="cf8380ad-4d9a-7587-3301-8f183c558d58" href="{{ section.settings.url_category_1_link }}" class="home-category_component is-long w-inline-block"> <div class="home-category-grid-background is-long"> <div class="category-grid_background-overlay"></div>{% if section.settings.image_category_1_image %} {{ section.settings.image_category_1_image | image_url: width: 1000 | image_tag: class: 'category-grid_background-image is-long', sizes: '(max-width: 1000px) 100vw, 1000px', loading: 'lazy' }} {% else %} <img class="category-grid_background-image is-long" src="{{ 'Bags-in-box-v1-Camera-5_1Bags-in-box-v1-Camera-5.webp' | asset_url }}" alt="" sizes="(max-width: 1000px) 100vw, 1000px" loading="lazy" srcset="{{ 'Bags-in-box-v1-Camera-5_1-p-500.jpg' | asset_url }} 500w, {{ 'Bags-in-box-v1-Camera-5_1-p-800.jpg' | asset_url }} 800w, {{ 'Bags-in-box-v1-Camera-5_1Bags-in-box-v1-Camera-5.webp' | asset_url }} 1000w"> {% endif %} </div> <div class="category-grid_content"> <h3 class="h3 is-category-grid">{{ section.settings.text_category_1_heading }}</h3> <p class="paragraph is-category-grid text-balance">{{ section.settings.text_category_1_paragraph }}</p> <div class="category-grid_cta-txt-wrapper"> <div class="category-grid_cta-text">{{ section.settings.text_category_1_cta_text }}</div> <div class="fa-icon is-category-grid"></div> </div> </div> </a>
+                <a id="w-node-cf8380ad-4d9a-7587-3301-8f183c558d66-09bbad8b" data-w-id="cf8380ad-4d9a-7587-3301-8f183c558d66" href="{{ section.settings.url_category_2_link }}" class="home-category_component is-tall w-inline-block"> <div class="home-category-grid-background is-tall"> <div class="category-grid_background-overlay is-red"></div>{% if section.settings.image_category_2_image %} {{ section.settings.image_category_2_image | image_url: width: 1000 | image_tag: class: 'category-grid_background-image is-short', sizes: '(max-width: 800px) 100vw, 800px', loading: 'lazy' }} {% else %} <img class="category-grid_background-image is-short" src="{{ 'first-cup-social-mockup_1first-cup-social-mockup.webp' | asset_url }}" alt="" sizes="(max-width: 800px) 100vw, 800px" loading="lazy" srcset="{{ 'first-cup-social-mockup_1-p-500.jpg' | asset_url }} 500w, {{ 'first-cup-social-mockup_1first-cup-social-mockup.webp' | asset_url }} 800w"> {% endif %} </div> <div class="category-grid_content"> <h3 class="h3 is-category-grid">{{ section.settings.text_category_2_heading }}</h3> <p class="paragraph is-category-grid text-balance">{{ section.settings.text_category_2_paragraph }}</p> <div class="category-grid_cta-txt-wrapper"> <div class="category-grid_cta-text">{{ section.settings.text_category_2_cta_text }}</div> <div class="fa-icon is-category-grid"></div> </div> </div> </a>
                 <a sym-bind="{"link":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"72560a48-ea3e-1a76-137d-7db9aace2961"}}}" data-w-id="cf8380ad-4d9a-7587-3301-8f183c558d74" href="#" class="home-category_component w-inline-block">
                   <div class="home-category-grid-background is-long">
-                    <div class="category-grid_background-overlay is-gold"></div><img class="category-grid_background-image is-short" sym-bind="{"img":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"6cffa374-1da5-3630-9862-b45dc2bbac82"}}}" src="{{ 'Bags-on-Table-Bundles_1Bags-on-Table-Bundles.webp' | asset_url }}" alt="" sizes="(max-width: 800px) 100vw, 800px" loading="lazy" srcset="{{ 'Bags-on-Table-Bundles_1-p-500.jpg' | asset_url }} 500w, {{ 'Bags-on-Table-Bundles_1Bags-on-Table-Bundles.webp' | asset_url }} 800w">
+                    <div class="category-grid_background-overlay is-gold"></div>{% if section.settings.image_category_3_image %}
+{{ section.settings.image_category_3_image | image_url: width: 1000 | image_tag: class: 'category-grid_background-image is-short', sizes: '(max-width: 800px) 100vw, 800px', loading: 'lazy' }}
+{% else %}
+<img class="category-grid_background-image is-short" src="{{ 'Bags-on-Table-Bundles_1Bags-on-Table-Bundles.webp' | asset_url }}" alt="" sizes="(max-width: 800px) 100vw, 800px" loading="lazy" srcset="{{ 'Bags-on-Table-Bundles_1-p-500.jpg' | asset_url }} 500w, {{ 'Bags-on-Table-Bundles_1Bags-on-Table-Bundles.webp' | asset_url }} 800w">
+{% endif %}
                   </div>
                   <div class="category-grid_content">
                     <h3 sym-bind="{"children":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"d5820b71-8be0-c379-3992-b4267a3e37e0"}}}" class="h3 is-category-grid">Bundles</h3>
@@ -19,7 +23,11 @@
                 </a>
                 <a sym-bind="{"link":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"f9cb8889-0d61-1e5f-ed5f-fb0333b11121"}}}" data-w-id="cf8380ad-4d9a-7587-3301-8f183c558d82" href="#" class="home-category_component w-inline-block">
                   <div class="home-category-grid-background is-long">
-                    <div class="category-grid_background-overlay is-yellow"></div><img class="category-grid_background-image is-short" sym-bind="{"img":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"38cd64e0-5eb7-0301-9f1e-c3a57f656884"}}}" src="{{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }}" alt="" sizes="(max-width: 800px) 100vw, 800px" loading="lazy" srcset="{{ 'first-cup-merch-bkgd_1-p-500.jpg' | asset_url }} 500w, {{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }} 800w">
+                    <div class="category-grid_background-overlay is-yellow"></div>{% if section.settings.image_category_4_image %}
+{{ section.settings.image_category_4_image | image_url: width: 1000 | image_tag: class: 'category-grid_background-image is-short', sizes: '(max-width: 800px) 100vw, 800px', loading: 'lazy' }}
+{% else %}
+<img class="category-grid_background-image is-short" src="{{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }}" alt="" sizes="(max-width: 800px) 100vw, 800px" loading="lazy" srcset="{{ 'first-cup-merch-bkgd_1-p-500.jpg' | asset_url }} 500w, {{ 'first-cup-merch-bkgd_1first-cup-merch-bkgd.webp' | asset_url }} 800w">
+{% endif %}
                   </div>
                   <div class="category-grid_content">
                     <h3 sym-bind="{"children":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"6f1a0598-7450-703a-2115-8e101e652ce6"}}}" class="h3 is-category-grid">Merch</h3>
@@ -42,6 +50,11 @@
             "id": "url_category_1_link",
             "type": "url",
             "label": "Category 1 Link"
+        },
+        {
+            "id": "image_category_1_image",
+            "type": "image_picker",
+            "label": "Category 1 Image"
         },
         {
             "id": "text_category_1_heading",
@@ -67,6 +80,11 @@
             "label": "Category 2 Link"
         },
         {
+            "id": "image_category_2_image",
+            "type": "image_picker",
+            "label": "Category 2 Image"
+        },
+        {
             "id": "text_category_2_heading",
             "type": "text",
             "label": "Category 2 Heading",
@@ -83,6 +101,16 @@
             "type": "text",
             "label": "Category 2 CTA Text",
             "default": "JOIN THE FAMILY"
+        },
+        {
+            "id": "image_category_3_image",
+            "type": "image_picker",
+            "label": "Category 3 Image"
+        },
+        {
+            "id": "image_category_4_image",
+            "type": "image_picker",
+            "label": "Category 4 Image"
         }
     ],
     "presets": [

@@ -4,12 +4,18 @@
               <div class="email-signup_content-wrapper">
                 <h3 class="text-color-white-2">BE THE first to know</h3>
                 <p class="text-size-medium-4 text-color-white-2">Join the First Cup newsletter to be the first to know about new products and offers.</p>
-                <div bind="cb0fada3-aafb-d3d0-493f-23e536f17a9f" class="email-signup-form_component w-form">
-                  <form id="wf-form-Subscribe" name="wf-form-Subscribe" data-name="Subscribe" method="get" class="form-4" data-wf-page-id="691baada2a7cebd809bbad8b" data-wf-element-id="0068765b-3d69-015e-edd9-48d09ae45708"><input class="text-field w-input" maxlength="256" name="email-2" data-name="Email 2" placeholder="" type="email" id="email-2" required=""><input type="submit" data-wait="Please wait..." class="button-2 w-button" value="SIGNUP"></form>
-                  <div class="w-form-done">
+                <div class="email-signup-form_component w-form">
+                  {% form 'customer', return_to: '/', class: 'footer_form' %}
+<div class="form-4"><label for="Email" class="form_hidden-label">Your E-Mail-Address</label><input class="text-field w-input" maxlength="256" name="contact[email]" data-name="Email" placeholder="{{ section.settings.placeholder_text }}" type="email" id="Email" required=""><input type="submit" data-wait="" id="w-node-ab0288fc-b85e-8127-26d0-37f474f6854a-09bbad8b" class="button-2 w-button" value="Subscribe"></div>
+                    <div li-object="form.errors | default_errors" class="text-size-tiny text-color-red">{{ form.errors | default_errors }}</div>
+                    <div id="w-node-_7b0d66a6-07e9-ea68-033a-4410eacf649e-09bbad8b" class="hide w-embed"><input type="hidden" name="contact[accepts_marketing]" value="false"></div><label id="w-node-_7b0d66a6-07e9-ea68-033a-4410eacf649f-09bbad8b" class="w-checkbox form_checkbox" name="contact[accepts_marketing]"><input type="checkbox" name="Accepts-Marketing-2" id="Accepts-Marketing-2" data-name="Accepts Marketing 2" class="w-checkbox-input form_checkbox-icon"><span class="form_checkbox-label text-size-tiny w-form-label" for="Accepts-Marketing-2">
+{{ section.settings.text_checkbox }}
+</span></label>
+                  {% endform %}
+                  <div class="hide w-form-done">
                     <div>Thank you! Your submission has been received!</div>
                   </div>
-                  <div class="w-form-fail">
+                  <div class="hide w-form-fail">
                     <div>Oops! Something went wrong while submitting the form.</div>
                   </div>
                 </div>
@@ -20,6 +26,14 @@
     "tag": "div",
     "name": "Newsletter Signup",
     "class": "section_email-signup",
+    "settings": [
+        {
+            "id": "text_checkbox",
+            "type": "text",
+            "label": "Checkbox",
+            "default": "By subscribing you agree to with our <a href=\"#\"><span>Privacy Policy<\/span><\/a> and provide consent to receive updates from our company."
+        }
+    ],
     "presets": [
         {
             "name": "Newsletter Signup",
