@@ -17,9 +17,9 @@
         </div>
         <div class="home-cta-1_background">
           <div class="home-cta-2_background-overlay"></div>{% if section.settings.image_background_image %}
-{{ section.settings.image_background_image | image_url: width: 1000 | image_tag: class: 'home-cta-1_background-image', sizes: '(max-width: 1162px) 100vw, 1162px', loading: 'lazy' }}
+{{ section.settings.image_background_image | image_url: width: 1000 | image_tag: class: 'home-cta-1_background-image', sizes: '100vw', loading: 'lazy' }}
 {% else %}
-<img class="home-cta-1_background-image" src="{{ '2Q6A9148.jpg' | asset_url }}" alt="" sizes="(max-width: 1162px) 100vw, 1162px" loading="lazy" srcset="{{ '2Q6A9148-p-500.jpg' | asset_url }} 500w, {{ '2Q6A9148-p-800.jpg' | asset_url }} 800w, {{ '2Q6A9148.jpg' | asset_url }} 1162w">
+<img class="home-cta-1_background-image" src="{{ '2Q6A9148.jpg' | asset_url }}" alt="" sizes="100vw" loading="lazy" srcset="{{ '2Q6A9148-p-500.jpg' | asset_url }} 500w, {{ '2Q6A9148-p-800.jpg' | asset_url }} 800w, {{ '2Q6A9148.jpg' | asset_url }} 1162w">
 {% endif %}
         </div> {% schema %} {
     "tag": "section",
