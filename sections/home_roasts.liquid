@@ -33,8 +33,8 @@
                   </a>
                 </div>
               </div>
-              <div bind="251138ad-7006-da25-c786-3eddc19a3160" class="swiper w-dyn-list">
-                <div bind="251138ad-7006-da25-c786-3eddc19a3161" role="list" class="swiper-wrapper is-product-slider w-dyn-items">
+              <div class="swiper w-dyn-list">
+                <div role="list" class="swiper-wrapper is-product-slider w-dyn-items">
                   {% for product in section.settings.collection_roasts_collection.products limit: section.settings.collection_roasts_collection_limit %}
 <div role="listitem" class="swiper-slide is-roasts-slider w-dyn-item">
     
@@ -45,7 +45,7 @@
                         <div li-object="product.title" class="item-name-small">{{ product.title }}</div>
                         <div class="roast-profile_wrapper is-centered">
                           <div li-object="{{ product.metafields.custom['roast_profile'].value }}" fs-cmsfilter-field="Roast">{{ {{ product.metafields.custom['roast_profile'].value }} }}</div>
-                          <div bind="39dfc8e7-977e-8435-b738-6ab13a629869" class="text-block-2">Roast</div>
+                          <div class="text-block-2">Roast</div>
                         </div>
                       </div>
                     </a>
