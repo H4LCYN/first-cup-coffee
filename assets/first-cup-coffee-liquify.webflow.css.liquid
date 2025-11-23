@@ -4907,8 +4907,7 @@ figcaption {
 }
 
 .product-header_radio-2 {
-  background-color: #eee;
-  padding: .4rem 1rem .3rem;
+  padding: .825rem 1.2rem .625rem;
   font-weight: 600;
   position: relative;
 }
@@ -4999,19 +4998,21 @@ figcaption {
 }
 
 .product-header_radio-button-2 {
-  border-width: 0;
-  border-color: #000;
+  border: .15rem solid var(--base-color-neutral--white);
+  border-radius: .2rem;
   width: auto;
   height: auto;
   margin-top: 0;
   margin-left: 0;
+  font-style: normal;
   position: absolute;
   inset: 0%;
 }
 
 .product-header_radio-button-2.w--redirected-checked {
-  border-width: 1px;
-  border-color: #000;
+  background-color: var(--base-color-brand--butterscotch);
+  border-style: none;
+  border-radius: 0;
 }
 
 .form_input-3 {
@@ -5702,6 +5703,13 @@ figcaption {
 
 .subscription-js {
   display: none;
+}
+
+.variant-text {
+  z-index: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  position: relative;
 }
 
 @media screen and (min-width: 1280px) {
