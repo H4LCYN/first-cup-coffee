@@ -9,6 +9,11 @@
  */
 {
   "sections": {
+    "product_hero_non_sub_yV3ULM": {
+      "type": "product_hero_non_sub",
+      "name": "Product Hero Non Sub",
+      "settings": {}
+    },
     "product_hero": {
       "type": "product_hero",
       "blocks": {
@@ -67,9 +72,9 @@
         "text_heading": "Recommended"
       }
     },
-    "product_hero_non_sub_yV3ULM": {
-      "type": "product_hero_non_sub",
-      "name": "Product Hero Non Sub",
+    "prodcut_hero_sub_JfFw7w": {
+      "type": "prodcut_hero_sub",
+      "name": "Prodcut Hero Sub",
       "settings": {}
     }
   },
@@ -77,6 +82,7 @@
   "wrapper": "main.main-wrapper",
   "order": [
     "product_hero_non_sub_yV3ULM",
+    "prodcut_hero_sub_JfFw7w",
     "product_hero",
     "recommended_products"
   ]
