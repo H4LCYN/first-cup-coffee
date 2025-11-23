@@ -1,13 +1,14 @@
 <div class="padding-global-4">
           <div class="container-large-2">
             <div class="padding-section-medium-2">
-              <div class="product_component-wrapper">
+              <script src="{{ 'li_custom.js' | asset_url }}" type="text/javascript"></script>
+<div li-element="product-variant-container" class="product_component-wrapper" x-data="handleVariant({{ product | json | escape }}, {{ product.options_by_name | json | escape }}, {{ product.selected_or_first_available_variant | json | escape }})" x-init="$nextTick(() => { activateVariants() })" @setbundleitem.window="updateBundleItem($event.detail.product, $event.detail.quantity)">
                 <div class="product_column is-product-image">
                   <div class="mobile-product-header">
                     <div bind="ebb11bc1-2166-0851-e3b7-ad96dedd723f" class="product_type">This is some text inside of a div block.</div>
                     <h1 bind="0040017f-7c26-9959-7d79-27275f4be331" class="product_name">Heading</h1>
                   </div>
-                  <a href="#" bind="e0d1fe0a-2226-15e2-b9ed-82964567df80" product="images" class="product-lightbox w-inline-block w-lightbox"><img li-object:alt="media.alt" alt="{{ media.alt }}" src="{{ 'media | image_url: width: 1000' | asset_url }}" loading="eager" class="product-image is-product-page">
+                  <a href="#" bind="e0d1fe0a-2226-15e2-b9ed-82964567df80" product="images" class="product-lightbox w-inline-block w-lightbox"><img li-object:alt="image.alt" alt="{{ image.alt }}" src="{{ 'product.featured_image | image_url: width: 1000' | asset_url }}" loading="eager" class="product-image is-product-page">
                     <div bind="15449d83-2901-fb69-a830-6a7be4f24072" class="zoom-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 64 64" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
                         <path d="M30.0098 16.51H24.0098V24.01H16.5098V30.01H24.0098V37.51H30.0098V30.01H37.5098V24.01H30.0098V16.51Z" fill="currentColor"></path>
                         <path d="M48.09 43.8501C57.4 32.2001 55.5 15.2101 43.85 5.90006C32.21 -3.39994 15.22 -1.49994 5.91001 10.1501C-3.39999 21.8001 -1.49999 38.7901 10.15 48.0901C20.01 55.9601 34 55.9601 43.86 48.0901L59.04 63.2701L63.28 59.0301L48.1 43.8501H48.09ZM27.01 48.0101C15.41 48.0101 6.01001 38.6101 6.01001 27.0101C6.01001 15.4101 15.42 6.01006 27.01 6.01006C38.6 6.01006 48.01 15.4101 48.01 27.0101C48.01 38.6101 38.61 48.0101 27.01 48.0101Z" fill="currentColor"></path>
@@ -26,14 +27,17 @@
 {{ product.title }}
 </h1>
                     </div>
-                    <div li-js-price="product.selected_or_first_available_variant.compare_at_price" data-commerce-type="variation-price" class="product-price compare-at" x-text="LiquifyHelper.moneyFormat(product.selected_or_first_available_variant.compare_at_price, true, '{{ shop.money_with_currency_format }}')">This is some text inside of a div block.</div>
-                    <div li-js-price="product.selected_or_first_available_variant.price" data-commerce-type="variation-price" class="product_price" x-text="LiquifyHelper.moneyFormat(product.selected_or_first_available_variant.price, true, '{{ shop.money_with_currency_format }}')">This is some text inside of a div block.</div>
+                    <div li-object:text="product.selected_or_first_available_variant.compare_at_price" data-commerce-type="variation-price" class="product-price compare-at">
+{{ product.selected_or_first_available_variant.compare_at_price }}
+</div>
+                    <div li-object:text="product.selected_or_first_available_variant.price" data-commerce-type="variation-price" class="product_price">
+{{ product.selected_or_first_available_variant.price }}
+</div>
                     <div class="product-description_wrapper">
                       <p li-object="product.description" class="product_description-text">{{ product.description }}</p>
                       <div liquid:object="product.description" class="product_description-text"></div>
                     </div>
-                    <div class="product-header_form-block w-form">
-                      {% form 'product', product, class: 'product-header_default-state' %}
+                    {% form 'product', product %}
 {% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
     
                           <template x-for="(option, optionKey) in product.options" :key="optionKey">
@@ -67,15 +71,7 @@
                             <a href="#" class="button-2 is-secondary max-width-full pointer-events-off w-button">Not in Stock</a>
                                   </div>
     </template>
-                        </div>
-                      {% endform %}
-                      <div class="hide w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                      </div>
-                      <div class="hide w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form.</div>
-                      </div>
-                    </div>
+                        </div>{% endform %}
                     <div class="default-product"></div>
                   </div>
                 </div>
