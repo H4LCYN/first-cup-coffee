@@ -143,6 +143,79 @@ Learn more: https://www.liquify.pro/docu/getting-started#template-structure
 <body li-page="product" li-layout="theme">
   <div class="page-wrapper">
     {% render 'global_styles' %}
+    <div bind="082ee68e-a711-f1f6-ccbf-7401726cff1c" class="top-ad">
+      <div sym-bind="{"children":{"type":"Select","val":{"from":{"type":"Variable","val":"data"},"prop":"6e8efd76-0691-7747-6afb-73dd8204889f"}}}" class="text-balance">ALL SUBSCRIPTIONS AND ORDERS $35+ RECEIVE FREE SHIPPING</div>
+    </div>
+    <div class="subscription-js">
+      <div class="sub-script w-embed w-script"><svg class="hide" width="0" height="0" viewbox="0 0 592 511" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="Assets" fill="none">
+            <defs>
+              <clippath id="mask" clippathunits="objectBoundingBox" transform="scale(0.001689617301681, 0.00195848021935)">
+                <path d="M0 510.6H567.41L591.85 452.48V0H24.44L0 58.13V510.6Z"></path>
+              </clippath>
+            </defs>
+          </g>
+        </svg>
+        <style>
+.clipping-mask {
+  	-webkit-clip-path: url(#mask);
+    clip-path: url(#mask);
+    object-fit: cover;
+    width: 100%;
+    }
+.hide {
+height:0 px;
+}
+    </style>
+        <script>
+    document.querySelector("input[type='submit'].subscription-add-to-cart").addEventListener('click', async () => {
+        var bundleId = document.querySelector('#wf-form-subscription-box-form').getAttribute('data-bundle-id');
+        var selectedBundleVariantId = document.querySelector("input[name='product-count']:checked", '#wf-form-subscription-box-form').getAttribute('data-bundle-variant-id');
+        var sellingPlan = document.querySelector("input[name='Deliver-Every']:checked", '#wf-form-subscription-box-form').getAttribute('data-selling-plan-id');
+        var productId = '{{ product.id }}';
+        var selectedVariant = '{{ product.selected_or_first_available_variant.id }}';
+        var collectionId = document.querySelector('#wf-form-subscription-box-form').getAttribute('data-collection-id');
+        var quantity = parseInt(document.querySelector("input[name='product-count']:checked", '#wf-form-subscription-box-form').value);
+      var productName = $('.desktop-product-header .product_name').text();
+        const bundleProductData = {
+            variantId: selectedBundleVariantId, //ID of the custom coffee box variant (i.e. number of bags)
+            productId: bundleId, //ID of the custom coffee box
+            sellingPlan: sellingPlan
+        }
+        // This creates the bundle object containing the selections
+        // we'll pass this object to `getBundleId`.
+        const bundle = {
+        "externalVariantId": bundleProductData.variantId,
+        "externalProductId": bundleProductData.productId,
+        "selections": [
+            {
+            "collectionId": collectionId,
+            "externalProductId": productId,
+            "externalVariantId": selectedVariant,
+            "quantity": quantity
+            },
+        ]
+        };
+        const rbId = await recharge.bundle.getBundleId(bundle);
+        // Adds the value directly to the cart
+        const cartData = {
+        items: [{
+            id: bundleProductData.variantId,
+            quantity: 1,
+            selling_plan: bundleProductData.sellingPlan,
+            properties: { Contents: quantity+'X '+productName,_rb_id: rbId },
+        }]
+        };
+        await fetch(window.Shopify.routes.root + 'cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cartData),
+        });
+        window.location.href = '/cart';
+    });
+</script>
+      </div>
+    </div>
     {% sections 'header_group' %}
     {{ content_for_layout }}
     {% sections 'footer_group' %}
