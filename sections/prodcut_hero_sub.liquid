@@ -1,0 +1,416 @@
+<div class="padding-global-4">
+          <div class="container-large-2">
+            <div class="padding-section-medium-2">
+              <div class="product_component-wrapper">
+                <div class="product_column is-product-image">
+                  <div class="mobile-product-header">
+                    <div bind="42ea09d9-e9ac-e8f0-dfa6-fe554184dfba" class="product_type">This is some text inside of a div block.</div>
+                    <h1 bind="42ea09d9-e9ac-e8f0-dfa6-fe554184dfbb" class="product_name">Heading</h1>
+                  </div>
+                  <a href="#" bind="42ea09d9-e9ac-e8f0-dfa6-fe554184dfbc" product="images" class="product-lightbox w-inline-block w-lightbox"><img li-object:alt="image.alt" alt="{{ image.alt }}" src="{{ 'product.featured_image | image_url: width: 1000' | asset_url }}" loading="eager" class="product-image is-product-page">
+                    <div bind="42ea09d9-e9ac-e8f0-dfa6-fe554184dfbe" class="zoom-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 64 64" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M30.0098 16.51H24.0098V24.01H16.5098V30.01H24.0098V37.51H30.0098V30.01H37.5098V24.01H30.0098V16.51Z" fill="currentColor"></path>
+                        <path d="M48.09 43.8501C57.4 32.2001 55.5 15.2101 43.85 5.90006C32.21 -3.39994 15.22 -1.49994 5.91001 10.1501C-3.39999 21.8001 -1.49999 38.7901 10.15 48.0901C20.01 55.9601 34 55.9601 43.86 48.0901L59.04 63.2701L63.28 59.0301L48.1 43.8501H48.09ZM27.01 48.0101C15.41 48.0101 6.01001 38.6101 6.01001 27.0101C6.01001 15.4101 15.42 6.01006 27.01 6.01006C38.6 6.01006 48.01 15.4101 48.01 27.0101C48.01 38.6101 38.61 48.0101 27.01 48.0101Z" fill="currentColor"></path>
+                      </svg></div>
+                    <script type="application/json" class="w-json">{
+  "items": [],
+  "group": ""
+}</script>
+                  </a>
+                </div>
+                <div class="product_column is-product-description">
+                  <div class="product_description-component">
+                    <div class="desktop-product-header">
+                      <div li-object="product.type" class="product_type">{{ product.type }}</div>
+                      <h1 li-object:text="product.title" class="product_name">
+{{ product.title }}
+</h1>
+                    </div>
+                    <div li-js-price="product.selected_or_first_available_variant.compare_at_price" data-commerce-type="variation-price" class="product-price compare-at" x-text="LiquifyHelper.moneyFormat(product.selected_or_first_available_variant.compare_at_price, true, '{{ shop.money_with_currency_format }}')">This is some text inside of a div block.</div>
+                    <div li-js-price="product.selected_or_first_available_variant.price" data-commerce-type="variation-price" class="product_price" x-text="LiquifyHelper.moneyFormat(product.selected_or_first_available_variant.price, true, '{{ shop.money_with_currency_format }}')">This is some text inside of a div block.</div>
+                    <div class="product-description_wrapper">
+                      <p li-object="product.description" class="product_description-text">{{ product.description }}</p>
+                      <div liquid:object="product.description" class="product_description-text"></div>
+                    </div>
+                    <div liquid:if="product.metafields.custom.subscription_type.value == 'Bag'" class="subscription-product">
+                      <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100" class="w-tabs">
+                        <div class="tabs-menu w-tab-menu">
+                          <a data-w-tab="Tab 1" class="sub-prod-sel_tab is-left w-inline-block w-tab-link">
+                            <div class="sub-prod-sel_text">SINGLE PURCHASE</div>
+                            <div class="sub-prod-sel_price-wrapper">
+                              <div li-js-price="product.selected_or_first_available_variant.price" data-commerce-type="variation-price" x-text="LiquifyHelper.moneyFormat(product.selected_or_first_available_variant.price, true, '{{ shop.money_with_currency_format }}')">$ 19.50</div>
+                              <div>  + SHIPPING</div>
+                            </div>
+                          </a>
+                          <a data-w-tab="Tab 2" class="sub-prod-sel_tab is-right w-inline-block w-tab-link w--current">
+                            <div class="sub-prod-sel_text">SUBSCRIBE & SAVE</div>
+                            <div class="sub-prod-sel_price-wrapper">
+                              <div data-commerce-type="variation-price" bind="70b26a5c-6627-2f08-d3b0-3c27bcfbbd13">$19.50</div>
+                              <div>  PER ITEM</div>
+                            </div>
+                            <div class="free-shipping-badge">
+                              <div>Free <br>Shipping!</div>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="w-tab-content">
+                          <div data-w-tab="Tab 1" class="w-tab-pane">
+                            <div class="product-header_form-block w-form">
+                              {% form 'product', product, class: 'product-header_default-state' %}
+{% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
+    
+                                  <template x-for="(option, optionKey) in product.options" :key="optionKey">
+    <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true">
+                                    <div li-element="product-options-name" x-text="option">Variant</div>
+                                    <div class="product-header_radio-list"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
+    <label li-element="product-option-loop" class="product-header_radio-3 w-radio">
+                                        <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product-header_radio-button-3 w-radio-input"></div><input type="radio" li-element="product-option-input" style="opacity:0;position:absolute;z-index:-1" x-on:click="setVariant" :name="option" :data-name="option" :value="variantName" :id="variantName.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')" :checked="selected_or_first_available_variant?.options.includes(variantName)" data-selectorType="radio" :class="firstOptionHasAvailableChildren[variantName] ? '' : 'data-disabled'"><span li-element="product-option-name" class="text-size-regular text-weight-semibold w-form-label" for="radio-6" x-text="variantName" :for="variantName">XS</span>
+                                      </label></template></div>
+                                  </div></template>
+                                    </div>
+{% endif %}
+                                <div class="product-header_add-to-cart-wrapper">
+                                  <template x-if="selected_or_first_available_variant.available">
+            <div li-js-if="selected_or_first_available_variant.available" class="product-header_buy-wrappper">
+        
+                                    <div class="input-group">
+                                      <div class="input-group-button">
+                                        <div class="input-number-decrement">–</div>
+                                      </div><input class="input-number w-input" maxlength="256" name="quantity-4" li-element="add-to-cart-quantity" data-name="Quantity 4" placeholder="1" type="number" id="quantity-4" required="" x-model="quantity">
+                                      <div class="input-group-button">
+                                        <div class="input-number-increment">+</div>
+                                      </div>
+                                    </div>
+                                    <a li-element="add-to-cart" href="#" class="add-to-cart-button w-button" @click="addToCart($event, true)" :disabled="!addToCartButton">Add to cart</a>
+                                          </div>
+    </template>
+                                  <template x-if="!selected_or_first_available_variant.available">
+            <div li-js-if="!selected_or_first_available_variant.available" class="product-header_out-of-stock">
+        
+                                    <a href="#" class="button-2 is-secondary max-width-full pointer-events-off w-button">Not in Stock</a>
+                                          </div>
+    </template>
+                                </div>
+                              {% endform %}
+                              <div class="hide w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                              </div>
+                              <div class="hide w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div data-w-tab="Tab 2" class="w-tab-pane w--tab-active">
+                            <div bind="33aac038-2e4c-58f0-d5aa-520898e068c7" class="w-form">
+                              <form method="get" data-bundle-id="7818386833630" data-collection-id="415585861854" name="wf-form-subscription-box-form" data-name="subscription-box-form" action="https://" id="wf-form-subscription-box-form" data-wf-page-id="691baada2a7cebd809bbae20" data-wf-element-id="2a437e9e-99f0-df65-1b7e-3c22565036d8">
+                                <div class="fs_radio-2_component"><label for="name">Deliver Every</label>
+                                  <div bind="e5748e0d-979e-cecb-9643-ed60a12e8b18" class="fs_radio-2_embed w-embed w-script"><!--  [Finsweet Attributes] Input Active Class  -->
+                                    <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                                  </div>
+                                  <div aria-label="add_description_here" role="radiogroup" class="fs_radio-2_group"><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="14-Days" data-name="Deliver Every" data-selling-plan-id="4534894814" style="opacity:0;position:absolute;z-index:-1" value="14 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="14-Days">14 Days</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="21-Days" data-name="Deliver Every" data-selling-plan-id="4534927582" style="opacity:0;position:absolute;z-index:-1" value="21 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="21-Days">21 Days</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="most-popular-badge">
+                                        <div>MOST POPULAR</div>
+                                      </div>
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input w--redirected-checked"></div><input name="Deliver-Every" data-name="Deliver Every" type="radio" id="30-Days" data-selling-plan-id="4534960350" style="opacity:0;position:absolute;z-index:-1" checked="" value="30 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="30-Days">30 Days</span>
+                                    </label><label class="fs_radio-2_field is-active-inputactive w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="60-Days" data-name="Deliver Every" data-selling-plan-id="4534993118" style="opacity:0;position:absolute;z-index:-1" value="60 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="60-Days">60 Days</span>
+                                    </label></div>
+                                </div>
+                                <div class="fs_radio-2_component"><label for="name">Bag Count</label>
+                                  <div bind="2f37acb9-794b-529b-ca47-dd5dad8e7e97" class="fs_radio-2_embed w-embed w-script"><!--  [Finsweet Attributes] Input Active Class  -->
+                                    <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                                  </div>
+                                  <div aria-label="add_description_here" role="radiogroup" class="fs_radio-2_group"><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="1" data-name="product-count" data-bundle-variant-id="43466456531166" style="opacity:0;position:absolute;z-index:-1" value="1"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="1">1 Bag</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="most-popular-badge">
+                                        <div>MOST POPULAR</div>
+                                      </div>
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input w--redirected-checked"></div><input data-bundle-variant-id="43466456596702" name="product-count" data-name="product-count" type="radio" id="2" style="opacity:0;position:absolute;z-index:-1" checked="" value="2"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="2">2 Bags</span>
+                                      <div class="sale-variant-text">5% OFF</div>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="3" data-name="product-count" data-bundle-variant-id="43466456662238" style="opacity:0;position:absolute;z-index:-1" value="3"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="3">3 Bags</span>
+                                      <div class="sale-variant-text">10% OFF</div>
+                                    </label><label class="fs_radio-2_field is-active-inputactive w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="4" data-name="product-count" data-bundle-variant-id="43466456727774" style="opacity:0;position:absolute;z-index:-1" value="4"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="4">4 Bags</span>
+                                      <div class="sale-variant-text">15% OFF</div>
+                                    </label></div>
+                                </div><input type="submit" data-wait="Adding to cart..." class="subscription-add-to-cart is-margin-top w-button" value="Add to Cart">
+                              </form>
+                              <div class="w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                              </div>
+                              <div class="w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div liquid:if="product.metafields.custom.subscription_type.value == 'Bulk'" class="subscription-product">
+                      <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100" class="w-tabs">
+                        <div class="tabs-menu w-tab-menu">
+                          <a data-w-tab="Tab 1" class="sub-prod-sel_tab is-left w-inline-block w-tab-link">
+                            <div class="sub-prod-sel_text">SINGLE PURCHASE</div>
+                            <div class="sub-prod-sel_price-wrapper">
+                              <div data-commerce-type="variation-price">$ 19.50</div>
+                              <div>  + SHIPPING</div>
+                            </div>
+                          </a>
+                          <a data-w-tab="Tab 2" class="sub-prod-sel_tab is-right w-inline-block w-tab-link w--current">
+                            <div class="sub-prod-sel_text">SUBSCRIBE & SAVE</div>
+                            <div class="sub-prod-sel_price-wrapper">
+                              <div data-commerce-type="variation-price" bind="26cb54a5-20ee-a8ff-6225-720f260f7cb1">$19.50</div>
+                              <div>  PER ITEM</div>
+                            </div>
+                            <div class="free-shipping-badge">
+                              <div>Free <br>Shipping!</div>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="w-tab-content">
+                          <div data-w-tab="Tab 1" class="w-tab-pane">
+                            <div class="product-header_form-block w-form">
+                              {% form 'product', product, class: 'product-header_default-state' %}
+{% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
+    
+                                  <template x-for="(option, optionKey) in product.options" :key="optionKey">
+    <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true">
+                                    <div li-element="product-options-name" x-text="option">Variant</div>
+                                    <div class="product-header_radio-list"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
+    <label li-element="product-option-loop" class="product-header_radio-3 w-radio">
+                                        <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product-header_radio-button-3 w-radio-input"></div><input type="radio" li-element="product-option-input" style="opacity:0;position:absolute;z-index:-1" x-on:click="setVariant" :name="option" :data-name="option" :value="variantName" :id="variantName.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')" :checked="selected_or_first_available_variant?.options.includes(variantName)" data-selectorType="radio" :class="firstOptionHasAvailableChildren[variantName] ? '' : 'data-disabled'"><span li-element="product-option-name" class="text-size-regular text-weight-semibold w-form-label" for="radio-6" x-text="variantName" :for="variantName">XS</span>
+                                      </label></template></div>
+                                  </div></template>
+                                    </div>
+{% endif %}
+                                <div class="product-header_add-to-cart-wrapper"><input class="form_input-3 w-input" maxlength="256" name="properties[Note]" data-name="Field" placeholder="Note" type="text" id="field">
+                                  <template x-if="selected_or_first_available_variant.available">
+            <div li-js-if="selected_or_first_available_variant.available" class="product-header_buy-wrappper">
+        
+                                    <div class="input-group"><input class="form_input-3 is-quantity w-input" maxlength="256" name="quantity-4" li-element="add-to-cart-quantity" data-name="Quantity 4" placeholder="1" type="number" id="quantity-4" required="" x-model="quantity">
+                                      <div class="input-group-button">
+                                        <div class="input-number-decrement">–</div>
+                                      </div>
+                                    </div>
+                                    <div class="input-group-button">
+                                      <div class="input-number-increment">+</div>
+                                    </div>
+                                    <a li-element="add-to-cart" href="#" class="add-to-cart-button w-button" @click="addToCart($event, true)" :disabled="!addToCartButton">Add to cart</a>
+                                          </div>
+    </template>
+                                  <template x-if="!selected_or_first_available_variant.available">
+            <div li-js-if="!selected_or_first_available_variant.available" class="product-header_out-of-stock">
+        
+                                    <a href="#" class="button-2 is-secondary max-width-full pointer-events-off w-button">Not in Stock</a>
+                                          </div>
+    </template>
+                                </div>
+                              {% endform %}
+                              <div class="hide w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                              </div>
+                              <div class="hide w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div data-w-tab="Tab 2" class="w-tab-pane w--tab-active">
+                            <div bind="9568b0a6-87d5-296b-59f4-6e1efb1515b2" class="w-form">
+                              <form method="get" data-bundle-id="8263666368734" data-collection-id="424944664798" name="wf-form-subscription-box-form" data-name="subscription-box-form" action="https://" id="wf-form-subscription-box-form" data-wf-page-id="691baada2a7cebd809bbae20" data-wf-element-id="2a437e9e-99f0-df65-1b7e-3c2256503753">
+                                <div class="fs_radio-2_component"><label for="name">Deliver Every</label>
+                                  <div bind="9568b0a6-87d5-296b-59f4-6e1efb1515b7" class="fs_radio-2_embed w-embed w-script"><!--  [Finsweet Attributes] Input Active Class  -->
+                                    <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                                  </div>
+                                  <div aria-label="add_description_here" role="radiogroup" class="fs_radio-2_group"><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="14-Days" data-name="Deliver Every" data-selling-plan-id="4534894814" style="opacity:0;position:absolute;z-index:-1" value="14 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="14-Days">14 Days</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="21-Days" data-name="Deliver Every" data-selling-plan-id="4534927582" style="opacity:0;position:absolute;z-index:-1" value="21 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="21-Days">21 Days</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="most-popular-badge">
+                                        <div>MOST POPULAR</div>
+                                      </div>
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input w--redirected-checked"></div><input name="Deliver-Every" data-name="Deliver Every" type="radio" id="30-Days" data-selling-plan-id="4534960350" style="opacity:0;position:absolute;z-index:-1" checked="" value="30 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="30-Days">30 Days</span>
+                                    </label><label class="fs_radio-2_field is-active-inputactive w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="60-Days" data-name="Deliver Every" data-selling-plan-id="4534993118" style="opacity:0;position:absolute;z-index:-1" value="60 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="60-Days">60 Days</span>
+                                    </label></div>
+                                </div>
+                                <div class="fs_radio-2_component"><label for="name">Bag Count</label>
+                                  <div bind="9568b0a6-87d5-296b-59f4-6e1efb1515cf" class="fs_radio-2_embed w-embed w-script"><!--  [Finsweet Attributes] Input Active Class  -->
+                                    <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                                  </div>
+                                  <div aria-label="add_description_here" role="radiogroup" class="fs_radio-2_group"><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="1" data-name="product-count" data-bundle-variant-id="44708553687262" style="opacity:0;position:absolute;z-index:-1" value="1"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="1">1 Bag</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="most-popular-badge">
+                                        <div>MOST POPULAR</div>
+                                      </div>
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input w--redirected-checked"></div><input data-bundle-variant-id="44708567810270" name="product-count" data-name="product-count" type="radio" id="2" style="opacity:0;position:absolute;z-index:-1" checked="" value="2"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="2">2 Bags</span>
+                                      <div class="sale-variant-text">10% OFF</div>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="3" data-name="product-count" data-bundle-variant-id="44708568367326" style="opacity:0;position:absolute;z-index:-1" value="3"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="3">3 Bags</span>
+                                      <div class="sale-variant-text">15% OFF</div>
+                                    </label><label class="fs_radio-2_field is-active-inputactive w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="4" data-name="product-count" data-bundle-variant-id="44708569022686" style="opacity:0;position:absolute;z-index:-1" value="4"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="4">4 Bags</span>
+                                      <div class="sale-variant-text">20% OFF</div>
+                                    </label></div>
+                                </div><input type="submit" data-wait="Adding to cart..." class="subscription-add-to-cart is-margin-top w-button" value="Add to Cart">
+                              </form>
+                              <div class="w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                              </div>
+                              <div class="w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div liquid:if="product.metafields.custom.subscription_type.value == 'Pod'" class="subscription-product">
+                      <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100" class="w-tabs">
+                        <div class="tabs-menu w-tab-menu">
+                          <a data-w-tab="Tab 1" class="sub-prod-sel_tab is-left w-inline-block w-tab-link">
+                            <div class="sub-prod-sel_text">SINGLE PURCHASE</div>
+                            <div class="sub-prod-sel_price-wrapper">
+                              <div data-commerce-type="variation-price" bind="92c2ec7f-1d7c-231e-843d-5275e709d032">$19.50</div>
+                              <div>  + SHIPPING</div>
+                            </div>
+                          </a>
+                          <a data-w-tab="Tab 2" class="sub-prod-sel_tab is-right w-inline-block w-tab-link w--current">
+                            <div class="sub-prod-sel_text">SUBSCRIBE & SAVE</div>
+                            <div class="sub-prod-sel_price-wrapper">
+                              <div data-commerce-type="variation-price" bind="f8c07c5e-eaa6-1490-23ed-41216e4de57d">$19.50</div>
+                              <div>  PER ITEM</div>
+                            </div>
+                            <div class="free-shipping-badge">
+                              <div>Free <br>Shipping!</div>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="w-tab-content">
+                          <div data-w-tab="Tab 1" class="w-tab-pane">
+                            <div class="product-header_form-block w-form">
+                              {% form 'product', product, class: 'product-header_default-state' %}
+{% if product.has_only_default_variant != true %}    <div li-if="product.has_only_default_variant != true" class="product-header_option-list">
+    
+                                  <template x-for="(option, optionKey) in product.options" :key="optionKey">
+    <div li-element="product-options-loop" class="product-header_option" data-ProductVariantsLoop="true">
+                                    <div li-element="product-options-name" x-text="option">Variant</div>
+                                    <div class="product-header_radio-list"><template x-for="(variantName, variantKey) in options_by_name[option].option.values" :key="variantName">
+    <label li-element="product-option-loop" class="product-header_radio-3 w-radio">
+                                        <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product-header_radio-button-3 w-radio-input"></div><input type="radio" li-element="product-option-input" style="opacity:0;position:absolute;z-index:-1" x-on:click="setVariant" :name="option" :data-name="option" :value="variantName" :id="variantName.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')" :checked="selected_or_first_available_variant?.options.includes(variantName)" data-selectorType="radio" :class="firstOptionHasAvailableChildren[variantName] ? '' : 'data-disabled'"><span li-element="product-option-name" class="text-size-regular text-weight-semibold w-form-label" for="radio-6" x-text="variantName" :for="variantName">XS</span>
+                                      </label></template></div>
+                                  </div></template>
+                                    </div>
+{% endif %}
+                                <div class="product-header_add-to-cart-wrapper">
+                                  <template x-if="selected_or_first_available_variant.available">
+            <div li-js-if="selected_or_first_available_variant.available" class="product-header_buy-wrappper">
+        
+                                    <div class="input-group">
+                                      <div class="input-group-button">
+                                        <div class="input-number-decrement">–</div>
+                                      </div><input class="input-number w-input" maxlength="256" name="quantity-4" li-element="add-to-cart-quantity" data-name="Quantity 4" placeholder="1" type="number" id="quantity-4" required="" x-model="quantity">
+                                      <div class="input-group-button">
+                                        <div class="input-number-increment">+</div>
+                                      </div>
+                                    </div>
+                                    <a li-element="add-to-cart" href="#" class="add-to-cart-button w-button" @click="addToCart($event, true)" :disabled="!addToCartButton">Add to cart</a>
+                                          </div>
+    </template>
+                                  <template x-if="!selected_or_first_available_variant.available">
+            <div li-js-if="!selected_or_first_available_variant.available" class="product-header_out-of-stock">
+        
+                                    <a href="#" class="button-2 is-secondary max-width-full pointer-events-off w-button">Not in Stock</a>
+                                          </div>
+    </template>
+                                </div>
+                              {% endform %}
+                              <div class="hide w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                              </div>
+                              <div class="hide w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div data-w-tab="Tab 2" class="w-tab-pane w--tab-active">
+                            <div bind="e15bec90-3a80-8654-99bf-0032f21d1105" class="w-form">
+                              <form method="get" data-bundle-id="8015662350558" data-collection-id="418391785694" name="wf-form-subscription-box-form" data-name="subscription-box-form" action="https://" id="wf-form-subscription-box-form" data-wf-page-id="691baada2a7cebd809bbae20" data-wf-element-id="2a437e9e-99f0-df65-1b7e-3c22565037ce">
+                                <div class="fs_radio-2_component"><label for="name">Deliver Every</label>
+                                  <div bind="e15bec90-3a80-8654-99bf-0032f21d110a" class="fs_radio-2_embed w-embed w-script"><!--  [Finsweet Attributes] Input Active Class  -->
+                                    <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                                  </div>
+                                  <div aria-label="add_description_here" role="radiogroup" class="fs_radio-2_group"><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="14-Days" data-name="Deliver Every" data-selling-plan-id="4534894814" style="opacity:0;position:absolute;z-index:-1" value="14 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="14-Days">14 Days</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="21-Days" data-name="Deliver Every" data-selling-plan-id="4534927582" style="opacity:0;position:absolute;z-index:-1" value="21 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="21-Days">21 Days</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="most-popular-badge">
+                                        <div>MOST POPULAR</div>
+                                      </div>
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input w--redirected-checked"></div><input name="Deliver-Every" data-name="Deliver Every" type="radio" id="30-Days" data-selling-plan-id="4534960350" style="opacity:0;position:absolute;z-index:-1" checked="" value="30 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="30-Days">30 Days</span>
+                                    </label><label class="fs_radio-2_field is-active-inputactive w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="Deliver-Every" id="60-Days" data-name="Deliver Every" data-selling-plan-id="4534993118" style="opacity:0;position:absolute;z-index:-1" value="60 Days"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="60-Days">60 Days</span>
+                                    </label></div>
+                                </div>
+                                <div class="fs_radio-2_component"><label for="name">Box Count</label>
+                                  <div bind="e15bec90-3a80-8654-99bf-0032f21d1122" class="fs_radio-2_embed w-embed w-script"><!--  [Finsweet Attributes] Input Active Class  -->
+                                    <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                                  </div>
+                                  <div aria-label="add_description_here" role="radiogroup" class="fs_radio-2_group"><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="1" data-name="product-count" data-bundle-variant-id="44143495053534" style="opacity:0;position:absolute;z-index:-1" value="1"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="1">1 Box</span>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="most-popular-badge">
+                                        <div>MOST POPULAR</div>
+                                      </div>
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input w--redirected-checked"></div><input data-bundle-variant-id="44143495086302" name="product-count" data-name="product-count" type="radio" id="2" style="opacity:0;position:absolute;z-index:-1" checked="" value="2"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="2">2 Boxes</span>
+                                      <div class="sale-variant-text">5% OFF</div>
+                                    </label><label class="fs_radio-2_field w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="3" data-name="product-count" data-bundle-variant-id="44143495119070" style="opacity:0;position:absolute;z-index:-1" value="3"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="3">3 Boxes</span>
+                                      <div class="sale-variant-text">10% OFF</div>
+                                    </label><label class="fs_radio-2_field is-active-inputactive w-radio">
+                                      <div class="w-form-formradioinput w-form-formradioinput--inputType-custom fs_radio-2_button w-radio-input"></div><input type="radio" name="product-count" id="4" data-name="product-count" data-bundle-variant-id="44143495151838" style="opacity:0;position:absolute;z-index:-1" value="4"><span fs-inputactive-class="is-active-inputactive" class="fs_radio-2_label w-form-label" for="4">4 Boxes</span>
+                                      <div class="sale-variant-text">15% OFF</div>
+                                    </label></div>
+                                </div><input type="submit" data-wait="Adding to cart..." class="subscription-add-to-cart is-margin-top w-button" value="Add to Cart">
+                              </form>
+                              <div class="w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                              </div>
+                              <div class="w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> {% schema %} {
+    "tag": "section",
+    "name": "Prodcut Hero Sub",
+    "class": "section_product-2",
+    "presets": [
+        {
+            "name": "Prodcut Hero Sub",
+            "category": "Liquify",
+            "blocks": []
+        }
+    ],
+    "enabled_on": {
+        "templates": [
+            "product"
+        ]
+    }
+} {% endschema %}
