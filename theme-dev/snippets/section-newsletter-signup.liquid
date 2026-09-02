@@ -1,0 +1,21 @@
+<div class="section_email-signup">
+        <div class="padding-global">
+          <div class="container-xs">
+            <div class="padding-section-medium">
+              <div class="email-signup_content-wrapper">
+                <h3 class="text-color-white">{{ 't6b189a74' | t }}</h3>
+                <p class="text-size-medium text-color-white">{{ 'tn5061f7c4' | t }}</p>
+                <div class="email-signup-form_component w-form">
+                  {%- form "customer",  class: "form-4" -%}<input type="hidden" name="contact[tags]" value="newsletter"><input class="text-field w-input" maxlength="256" name="contact[email]" data-name="Email 2" placeholder="" type="email" id="email-2" required=""><input type="submit" data-wait="Please wait..." class="button-2 w-button" value="{{ 'tn6e379ae8' | t }}">{%- assign form_success = form.posted_successfully? -%}{%- assign form_errors = form.errors -%}{%- render "form-general-script", form_success: form_success, form_errors: form_errors -%}{%- endform -%}
+                  <div class="w-form-done  {% if form_success %}form-posted-successfully{% endif %}">
+                    <div>{{ 't5a0ea5a1' | t }}</div>
+                  </div>
+                  {%- unless form_success -%}<div class="w-form-fail  {% if form.errors %}form-has-errors{% endif %}">
+                    <div>{%- render "form-errors", form_errors: form_errors -%}</div>
+                  </div>{%- endunless -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

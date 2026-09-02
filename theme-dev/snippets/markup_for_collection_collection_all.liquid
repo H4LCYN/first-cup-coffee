@@ -1,0 +1,26 @@
+{% capture listItems %}
+{% for item in collections[settings.collection_collection_all].products limit: settings.collection_collection_all_limit %}
+<div role="listitem" class="w-dyn-item">
+              <a href="{{ item.url }}" class="product-card w-inline-block">
+                <div class="product-container-image">
+                  {% assign ref = item.selected_or_first_available_variant %}{%- if ref.compare_at_price -%}<div class="product-label">ON&nbsp;SALE</div>{%- endif -%}<img alt="{{ item.featured_image.alt }}" loading="lazy" src="{{ item.featured_image | img_url: 'master' }}" class="product-image" data-commerce-type="variation-image" srcset="{{ item.featured_image | img_url: '1920x' }} 1920w,{{ item.featured_image | img_url: '1600x' }} 1600w,{{ item.featured_image | img_url: '1366x' }} 1366w,{{ item.featured_image | img_url: '1024x' }} 1024w,{{ item.featured_image | img_url: '768x' }} 768w,{{ item.featured_image | img_url: '640x' }} 640w">
+                </div>
+                <div class="product-container-info">
+                  <div class="p-medium">{{ item.title }}</div>
+                  <div class="p-small text-color-gray2">{{ item.type }}</div>
+                </div>
+                <div data-commerce-type="variation-compare_at_price" class="product-price compare-at">{{ item.selected_or_first_available_variant.compare_at_price | money }}</div>
+                <div data-commerce-type="variation-price" class="product-price">{{ item.price | money }}</div>
+              </a>
+            </div>
+{%- endfor -%}
+{% endcapture %}
+{% assign items_length = listItems | strip | size %}
+<div class="product-collection w-dyn-list" udy-collection="product">
+          {%- unless items_length == 0 -%}<div role="list" class="product-collection-list grid w-dyn-items">
+            {{ listItems }}
+          </div>{%- endunless -%}
+          {%- if items_length == 0 -%}<div class="w-dyn-empty">
+            <div>No items found.</div>
+          </div>{%- endif -%}
+        </div>

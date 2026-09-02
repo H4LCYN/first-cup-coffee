@@ -1,0 +1,60 @@
+
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="four-item-grid_wrapper">
+              {%- for block in section.blocks -%}{%- if block.type == "location" -%}<div id="w-node-_61fbb3eb-a6d1-74d5-a62f-3c276caccd67-6caccd63" class="_4grid-item" block.shopify_attributes>
+                <div class="_4grid_img-wrapper">
+                  <div class="img_default-text">{{ 't78a406e1' | t }}<br>{{ 't35f53b' | t }}</div>{%- if block.settings.location_thumb == nil -%}<img checkbox="location-thumb" alt="" loading="lazy" src="{{ 'pearland-square-1.avif' | asset_url }}" class="image-6">{%- else -%}<img checkbox="location-thumb" alt="{{ block.settings.location_thumb.alt | escape }}" loading="lazy" src="{{ block.settings.location_thumb.src | img_url: 'master' }}" class="image-6">{%- endif -%}
+                </div>
+                <div class="spacer-small"></div>
+                <h2 class="h5">{{ block.settings.location_name }}</h2>
+                <div class="spacer-small"></div>
+                <a href="{% if block.settings.location_link %}{{ block.settings.location_link }}{% else %}#{% endif %}" class="button-1 w-inline-block">
+                  <div class="text-block">{{ block.settings.location_link_text }}</div>
+                </a>
+              </div>{%- endif -%}{%- endfor -%}
+            </div>
+          </div>
+          <div class="spacer-4"></div>
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_four-item-grid");</script>
+        
+{% schema %}
+{
+  "name": "Section - Location Grid",
+  "tag": "section",
+  "class": "section_four-item-grid",
+  "blocks": [
+    {
+      "name": "location",
+      "type": "location",
+      "settings": [
+            {
+              "type": "image_picker",
+              "id": "location_thumb",
+              "label": "Location Thumb"
+            },
+            {
+              "id": "location_link",
+              "label": "Location Link",
+              "type": "url"
+            },
+            {
+              "type": "text",
+              "id": "location_name",
+              "label": "Location Name",
+              "default": "Pearland"
+            },
+            {
+              "type": "text",
+              "id": "location_link_text",
+              "label": "Link Text",
+              "default": "LEARN MORE"
+            }
+  ],
+    }
+  ]
+}
+{% endschema %}

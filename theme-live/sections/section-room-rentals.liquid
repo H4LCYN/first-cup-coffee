@@ -1,0 +1,109 @@
+
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-medium">
+              <div class="room-rentals_content">
+                {%- for block in section.blocks -%}{%- if block.type == "room_rental_location" -%}<a id="w-node-_1650aee0-ed79-80c1-c26a-f784d41ad18f-d41ad18a" data-w-id="1650aee0-ed79-80c1-c26a-f784d41ad18f" href="{% if block.settings.rental_link %}{{ block.settings.rental_link }}{% else %}#{% endif %}" target="_blank" class="room-rentals_item w-inline-block" block.shopify_attributes>
+                  <div class="room-rentals_img-wrapper">{%- if block.settings.location-image == nil -%}<img alt="" loading="lazy" src="{{ 'pearland-square-1.avif' | asset_url }}" class="room-rentals_image">{%- else -%}<img alt="" loading="lazy" src="{{ block.settings.location-image.src | img_url: 'master' }}" class="room-rentals_image">{%- endif -%}</div>
+                  <div class="room-rentals_content-wrppr">
+                    <div id="w-node-_1650aee0-ed79-80c1-c26a-f784d41ad193-d41ad18a" class="room-rentals_item-content">
+                      <div class="room-rentals_heading-wrapper">
+                        <h2 class="heading-style-h4">{{ block.settings.location_name }}</h2>
+                      </div>
+                      <div class="room-rentals_info-component">
+                        {%- if block.settings.show_conference_rooms -%}<div class="room-rentals_info-item">
+                          <div class="room-rentals_icon w-embed"><svg width="100%" height="100%" viewBox="0 0 63 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M16.0001 8.8C18.4302 8.8 20.4001 6.83005 20.4001 4.4C20.4001 1.96995 18.4302 0 16.0001 0C13.57 0 11.6001 1.96995 11.6001 4.4C11.6001 6.83005 13.57 8.8 16.0001 8.8Z" fill="currentColor"></path>
+                              <path d="M21.1002 13.1C20.6002 11.2 18.8002 9.90002 16.9002 9.90002H15.1002C13.1002 9.90002 11.4002 11.2 10.9002 13.1L9.7002 17.2H22.3002L21.1002 13.1Z" fill="currentColor"></path>
+                              <path d="M31.2999 8.8C33.73 8.8 35.6999 6.83005 35.6999 4.4C35.6999 1.96995 33.73 0 31.2999 0C28.8698 0 26.8999 1.96995 26.8999 4.4C26.8999 6.83005 28.8698 8.8 31.2999 8.8Z" fill="currentColor"></path>
+                              <path d="M36.4 13.1C35.9 11.2 34.1 9.90002 32.2 9.90002H30.4C28.4 9.90002 26.7 11.2 26.2 13.1L25 17.2H37.6L36.4 13.1Z" fill="currentColor"></path>
+                              <path d="M46.6002 8.8C49.0302 8.8 51.0002 6.83005 51.0002 4.4C51.0002 1.96995 49.0302 0 46.6002 0C44.1701 0 42.2002 1.96995 42.2002 4.4C42.2002 6.83005 44.1701 8.8 46.6002 8.8Z" fill="currentColor"></path>
+                              <path d="M51.6998 13.1C51.1998 11.2 49.3998 9.90002 47.4998 9.90002H45.6998C43.6998 9.90002 41.9998 11.2 41.4998 13.1L40.2998 17.2H52.8998L51.6998 13.1Z" fill="currentColor"></path>
+                              <path d="M62.7 20.1C62.7 19.4 62.1 18.8 61.4 18.8H1.3C0.6 18.8 0 19.4 0 20.1C0 20.8 0.6 21.4 1.3 21.4H8V38.7001C8 39.4001 8.6 40 9.3 40H53.3C54 40 54.6 39.4001 54.6 38.7001V21.4H61.3C62.1 21.4 62.7 20.8 62.7 20.1Z" fill="currentColor"></path>
+                            </svg></div>
+                          <div>{{ block.settings.conference_rooms }}</div>
+                        </div>{%- endif -%}
+                        {%- if block.settings.show_meeting_rooms -%}<div class="room-rentals_info-item">
+                          <div class="room-rentals_icon w-embed"><svg width="100%" height="100%" viewBox="0 0 80 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M10.4399 10.6C10.4399 13.44 11.5199 16.08 13.5399 18.1C16.6099 21.17 21.5299 21.95 25.4099 20.22C25.8699 15.88 28.1499 12.1 31.5399 9.72C31.0799 4.24 26.6199 0 21.0099 0C15.3999 0 10.4399 4.76 10.4399 10.6Z" fill="currentColor"></path>
+                              <path d="M58.96 21.2C64.8 21.2 69.56 16.44 69.56 10.6C69.56 4.76 64.8 0 58.96 0C53.45 0 48.88 4.34 48.46 9.75C51.82 12.13 54.07 15.88 54.56 20.15C55.9 20.8 57.4 21.2 58.96 21.2Z" fill="currentColor"></path>
+                              <path d="M67.4401 20.41C65.1601 22.37 62.2201 23.64 58.9601 23.64C57.4601 23.64 55.9901 23.35 54.5901 22.86C54.3601 25.93 53.2201 28.7 51.3901 30.95C57.6801 34.31 62.4101 40.11 64.8301 47.19C69.7501 46.77 73.5401 45.92 76.1101 44.97C78.6601 44.02 80.0001 42.95 80.0001 42.13C80.0001 42.13 79.9701 42.13 79.9701 42.1C79.9701 32.61 75.0801 24.23 67.4401 20.41Z" fill="currentColor"></path>
+                              <path d="M39.9802 9.48999C33.2002 9.48999 27.7202 15 27.7202 21.75C27.7202 28.5 33.2002 34.05 39.9802 34.05C46.7602 34.05 52.2802 28.54 52.2802 21.75C52.2802 14.96 46.7702 9.48999 39.9802 9.48999Z" fill="currentColor"></path>
+                              <path d="M49.67 32.77C47.06 35.05 43.7 36.49 39.98 36.49C36.26 36.49 32.9 35.06 30.29 32.77C25.89 34.96 22.27 38.48 19.72 42.81C17.21 47.15 15.77 52.3 15.77 57.78C15.77 60.16 23.79 63.75 38.27 64.01C38.86 64.04 39.44 64.08 39.97 64.04C40.59 64.04 41.21 64.04 41.8 64.01C49.01 63.85 54.58 62.9 58.4 61.69C62.18 60.45 64.17 58.95 64.17 57.78C64.18 46.83 58.48 37.14 49.67 32.77Z" fill="currentColor"></path>
+                              <path d="M28.57 30.95C26.74 28.7 25.6 25.93 25.37 22.89C23.97 23.35 22.5 23.64 21 23.64C17.84 23.64 14.87 22.47 12.52 20.41C4.89 24.23 0 32.64 0 42.1V42.13C0 43.79 5.28 46.4 15.13 47.18C17.55 40.14 22.27 34.31 28.57 30.95Z" fill="currentColor"></path>
+                            </svg></div>
+                          <div>{{ block.settings.meeting_rooms }}</div>
+                        </div>{%- endif -%}
+                      </div>
+                    </div>
+                    <div class="room-rentals_button-wrapper">
+                      <div class="button-1 is-room-rental" href="/collections/coffee">
+                        <div class="text-block">{{ 'tn59ac7f81' | t }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>{%- endif -%}{%- endfor -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_room-rentals");</script>
+        
+{% schema %}
+{
+  "name": "Section - Room Rentals",
+  "tag": "section",
+  "class": "section_room-rentals",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "room-rental-location",
+      "type": "room_rental_location",
+      "settings": [
+                    {
+              "id": "rental_link",
+              "label": "Rental Link",
+              "type": "url"
+            },
+            {
+              "type": "image_picker",
+              "id": "location-image",
+              "label": "Location Image"
+            },
+        {
+          "type": "text",
+          "id": "location_name",
+          "label": "location-name",
+          "default": "Pearland"
+        },
+        {
+          "type": "text",
+          "id": "conference_rooms",
+          "label": "conference-rooms",
+          "default": "1 Conference Room"
+        },
+        {
+          "type": "text",
+          "id": "meeting_rooms",
+          "label": "meeting-rooms",
+          "default": "3 Meeting Rooms"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_conference_rooms",
+          "label": "show-conference-rooms",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_meeting_rooms",
+          "label": "show-meeting-rooms",
+          "default": true
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

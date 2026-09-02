@@ -1,0 +1,21 @@
+
+      <div class="text-balance p-contents">{{ section.settings.top_ad_text | newline_to_br }}</div>
+    
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","top-ad");</script>
+        
+{% schema %}
+{
+  "name": "top-ad",
+  "tag": "div",
+  "class": "top-ad",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "top_ad_text",
+      "label": "top ad text",
+      "default": "<p>ALL SUBSCRIPTIONS AND ORDERS $35+ RECEIVE FREE SHIPPING</p>"
+    }
+  ]
+}
+{% endschema %}

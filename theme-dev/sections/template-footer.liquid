@@ -1,0 +1,113 @@
+
+    <div class="container">
+      <div class="flex align-center">
+        <div class="col md-cols-12">
+          <div class="flex is-vertical">
+            <a href="{{ routes.root_url }}" class="brand-link w-nav-brand">{%- if section.settings.brand_logo == nil -%}<img src="{{ 'e-coffee-logo-white.svg' | asset_url }}" loading="lazy" alt="" class="brand-image">{%- else -%}<img src="{{ section.settings.brand_logo.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.brand_logo.alt | escape }}" class="brand-image">{%- endif -%}</a>
+            <div class="spacer-2"></div>
+            <div class="newsletter-form-block footer w-form">
+              {%- form "contact",  class: "newsletter-form" -%}<input class="newsletter-field is-white w-input" maxlength="256" name="contact[email]" data-name="Newsletter-footer" placeholder="{{ 'tn47761f27' | t }}" type="email" id="Newsletter-footer" required="">
+                <div class="icon-container"><input type="submit" data-wait="Please wait..." class="submit-button w-button" value="">
+                  <div class="icon is-gray w-embed"><span class="material-symbols-outlined">
+                      arrow_forward
+                    </span></div>
+                </div>
+              {%- assign form_success = form.posted_successfully? -%}{%- assign form_errors = form.errors -%}{%- render "form-general-script", form_success: form_success, form_errors: form_errors -%}{%- endform -%}
+              <div class="form-success w-form-done  {% if form_success %}form-posted-successfully{% endif %}">
+                <div class="p-medium text-color-white">{{ 't5a0ea5a1' | t }}</div>
+              </div>
+              {%- unless form_success -%}<div class="form-error w-form-fail  {% if form.errors %}form-has-errors{% endif %}">
+                <div class="p-medium">{%- render "form-errors", form_errors: form_errors -%}</div>
+              </div>{%- endunless -%}
+            </div>
+          </div>
+        </div>
+        <div class="spacer-3"></div>
+        <div class="col md-cols-12">
+          <div class="flex align-center md-justify-center">
+            <div class="footer-container-links">
+              <a href="{% if section.settings.link_3_link %}{{ section.settings.link_3_link }}{% else %}/collections/all{% endif %}" class="footer-link">{{ section.settings.link_3_text }}</a>
+              <div class="spacer-05"></div>
+              <a href="{% if section.settings.link_2_link %}{{ section.settings.link_2_link }}{% else %}/collections{% endif %}" class="footer-link">{{ section.settings.link_2_text }}</a>
+              <div class="spacer-05"></div>
+              <a href="{% if section.settings.link_1_link %}{{ section.settings.link_1_link }}{% else %}{{ pages["contact"].url }}{% endif %}" class="footer-link">{{ section.settings.link_1_text }}</a>
+            </div>
+            <div class="flex is-vertical">
+              {%- if shop.brand.metafields.social_links.facebook.value -%}<a href="{{ shop.brand.metafields.social_links.facebook.value }}" class="icon-container less-padding w-inline-block"><svg stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon is-white">
+                  <path d="M17 2H14C12.6739 2 11.4021 2.52678 10.4645 3.46447C9.52678 4.40215 9 5.67392 9 7V10H6V14H9V22H13V14H16L17 10H13V7C13 6.73478 13.1054 6.48043 13.2929 6.29289C13.4804 6.10536 13.7348 6 14 6H17V2Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></a>{%- endif -%}
+              {%- if shop.brand.metafields.social_links.instagram.value -%}<a href="{{ shop.brand.metafields.social_links.instagram.value }}" class="icon-container less-padding w-inline-block"><svg stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon is-white">
+                  <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="currentColor" stroke-width="1.5"></path>
+                  <path d="M17.5 6.51L17.51 6.49889" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></a>{%- endif -%}
+              <a href="#" class="icon-container less-padding w-inline-block"><svg stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon is-white">
+                  <path d="M14 12L10.5 14V10L14 12Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M2 12.7075V11.2924C2 8.39705 2 6.94939 2.90549 6.01792C3.81099 5.08645 5.23656 5.04613 8.08769 4.96549C9.43873 4.92728 10.8188 4.8999 12 4.8999C13.1812 4.8999 14.5613 4.92728 15.9123 4.96549C18.7634 5.04613 20.189 5.08645 21.0945 6.01792C22 6.94939 22 8.39705 22 11.2924V12.7075C22 15.6028 22 17.0505 21.0945 17.9819C20.189 18.9134 18.7635 18.9537 15.9124 19.0344C14.5613 19.0726 13.1812 19.1 12 19.1C10.8188 19.1 9.43867 19.0726 8.0876 19.0344C5.23651 18.9537 3.81097 18.9134 2.90548 17.9819C2 17.0505 2 15.6028 2 12.7075Z" stroke="currentColor" stroke-width="1.5"></path>
+                </svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="spacer-4"></div>
+      <div class="footer-credits">
+        <div p-add-class="p-extra-small text-color-gray4">{{ section.settings.credits | newline_to_br }}</div>
+      </div>
+    </div>
+  
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","footer");</script>
+        
+{% schema %}
+{
+  "name": "Template-Footer",
+  "tag": "footer",
+  "class": "footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "brand_logo",
+      "label": "Brand Logo"
+    },
+    {
+      "id": "link_3_link",
+      "label": "Link 3 - Link",
+      "type": "url"
+    },
+    {
+      "id": "link_2_link",
+      "label": "Link 2 - Link",
+      "type": "url"
+    },
+    {
+      "id": "link_1_link",
+      "label": "Link 1 - Link",
+      "type": "url"
+    },
+    {
+      "type": "text",
+      "id": "link_3_text",
+      "label": "Link 3 - Text",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 - Text",
+      "default": "Collections"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 - Text",
+      "default": "Contact"
+    },
+    {
+      "type": "richtext",
+      "id": "credits",
+      "label": "Credits",
+      "default": "<p>© 2023, Nevo Luxury Powered by Shopify</p>"
+    }
+  ]
+}
+{% endschema %}

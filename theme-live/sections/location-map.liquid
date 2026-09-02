@@ -1,0 +1,441 @@
+
+        <section class="location-coordinates">
+          <p id="loc-lat" class="map-coord">{{ section.settings.location_latitude }}</p>
+          <p id="loc-long" class="map-coord">{{ section.settings.location_longitude }}</p>
+        </section>
+        <div class="container-large">
+          <div class="_2-column-wrapper is-location-map">
+            <div class="_2-column_column">
+              <div class="padding-global padding-section-medium">
+                <h1 class="h2 padding-bottom-medium">{{ section.settings.location_name }}</h1>{%- if section.settings.location_image == nil -%}<img src="{{ 'pearland-wide_1.webp' | asset_url }}" loading="lazy" alt="" class="location-map_locaton-img">{%- else -%}<img src="{{ section.settings.location_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.location_image.alt | escape }}" class="location-map_locaton-img">{%- endif -%}
+                <div class="_2-column-wrapper padding-top-medium border-white-bottom">
+                  <div class="_2-column_column">
+                    <h3 class="h6 text-color-gold">{{ 'tn199cd82c' | t }}</h3>
+                    <div class="padding-bottom-medium" p-add-id="padding-bottom-medium">{{ section.settings.location_address | newline_to_br }}</div>
+                    <h3 class="h6 text-color-gold">{{ 't489454e' | t }}</h3>
+                    <p class="padding-bottom-medium">
+                      <a href="{% if section.settings.location_phone %}{{ section.settings.location_phone }}{% else %}tel:(832)736-4028{% endif %}" class="link">{{ section.settings.location_phone_display }}</a>
+                    </p>
+                  </div>
+                  <div class="_2-column_column">
+                    <div class="location-map_button-wrapper">
+                      <a target="_blank" href="{% if section.settings.location_directions %}{{ section.settings.location_directions }}{% else %}https://www.google.com/maps/dir//First+Cup+Coffee+Co.+2645+E+Broadway+St+Pearland,+TX+77581/@29.5542487,-95.2578744,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x864091cf9434c415:0x3fcb034246249a6f!2m2!1d-95.2578744!2d29.5542487?entry=ttu&g_ep=EgoyMDI0MTIwOS4wIKXMDSoASAFQAw%3D%3D{% endif %}" class="button-1 is-full-width w-inline-block">
+                        <div class="text-block">{{ 'tn52a78382' | t }}</div>
+                      </a>
+                      <a target="_blank" href="{% if section.settings.location_reserve %}{{ section.settings.location_reserve }}{% else %}https://squareup.com/appointments/book/94g5blubh9sean/LYPA9FWH5ZQXF/services{% endif %}" class="button-1 is-full-width w-inline-block">
+                        <div class="text-block">{{ 't5e68915e' | t }}</div>
+                      </a>
+                      <a target="_blank" href="{% if section.settings.location_order_ahead %}{{ section.settings.location_order_ahead }}{% else %}https://order.incentivio.com/c/firstcupcoffee/{% endif %}" class="button-1 is-full-width w-inline-block">
+                        <div class="text-block">{{ 'tn3ff839d1' | t }}</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="_2-column-wrapper padding-top-medium">
+                  <div class="_2-column_column">
+                    <h3 class="h6 text-color-gold">{{ 't41bceef' | t }}</h3>
+                    <div p-add-class="padding-bottom-medium">{{ section.settings.location_hours | newline_to_br }}</div>
+                  </div>
+                  <div class="_2-column_column">
+                    <h3 class="h6 text-color-gold">{{ 'tnd78b7a3' | t }}</h3>
+                    <div checkbox="pickup" class="location_feature-wrapper">
+                      <div class="icon-wrapper"><img src="{{ 'pickup.svg' | asset_url }}" loading="lazy" alt="" class="icon is-feature"></div>
+                      <div class="padding-left-xs">{{ 'tn71860964' | t }}</div>
+                    </div>
+                    <div checkbox="digital-drive-thru" class="location_feature-wrapper">
+                      <div class="icon-wrapper"><img src="{{ 'digital-drive-thru.svg' | asset_url }}" loading="lazy" alt="" class="icon is-feature"></div>
+                      <div class="padding-left-xs">{{ 't128243f5' | t }}</div>
+                    </div>
+                    <div checkbox="delivery" class="location_feature-wrapper">
+                      <div class="icon-wrapper"><img src="{{ 'delivery.svg' | asset_url }}" loading="lazy" alt="" class="icon is-feature-deliver"></div>
+                      <div class="padding-left-xs">{{ 't34ef8014' | t }}</div>
+                    </div>
+                    <div checkbox="dine-in" class="location_feature-wrapper">
+                      <div class="icon-wrapper"><img src="{{ 'dine-in.svg' | asset_url }}" loading="lazy" alt="" class="icon is-dine-in"></div>
+                      <div class="padding-left-xs">{{ 'tn396ee537' | t }}</div>
+                    </div>
+                    <div checkbox="room-reservations" class="location_feature-wrapper">
+                      <div class="icon-wrapper"><img src="{{ 'reservations.svg' | asset_url }}" loading="lazy" alt="" class="icon is-feature-reservation"></div>
+                      <div class="padding-left-xs">{{ 't5839954c' | t }}</div>
+                    </div>
+                    <div checkbox="catering" class="location_feature-wrapper">
+                      <div class="icon-wrapper"><img src="{{ 'catering.svg' | asset_url }}" loading="lazy" alt="" class="icon is-feature"></div>
+                      <div class="padding-left-xs">{{ 't6e20a1f' | t }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="_2-column_column">
+              <div id="google-map" class="google-map"></div>
+            </div>
+          </div>
+        </div>
+        <div class="google-map-cc w-embed w-script">
+          <script async="false">
+function initMap() 
+{
+
+	/** 
+	* Create array of locations
+	*/
+	const locLat = parseFloat(document.getElementById("loc-lat").innerHTML.trim());
+	const locLong = parseFloat(document.getElementById("loc-long").innerHTML.trim());
+	const mapAdd = document.getElementById("map-address").innerHTML;
+
+	const markers = [
+		{
+			locationName: 'First Cup Coffee', 
+			lat: locLat,
+			lng: locLong,
+			address: mapAdd
+		}
+	];
+
+	/** 
+	* Create custom marker icon
+	*/
+	const fehMarker = {
+		url: "https://halcyon-site-files.s3.us-east-1.amazonaws.com/first-cup-coffee/location/geo_tag.png",
+		scaledSize: new google.maps.Size(46,70),
+		};
+
+	/** 
+	* Initially center map on Pearland, TX
+	*/
+	const centerMap = { lat: locLat, lng: locLong }
+
+	/** 
+	* Create map options for our map
+	*/
+	const mapOptions = {
+		center: centerMap,
+		zoom: 14,
+		disableDefaultUI: true,
+		styles: [
+			{
+				"featureType": "all",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"weight": "2.00"
+					}
+				]
+			},
+			{
+				"featureType": "all",
+				"elementType": "geometry.stroke",
+				"stylers": [
+					{
+						"color": "#9c9c9c"
+					}
+				]
+			},
+			{
+				"featureType": "all",
+				"elementType": "labels.text",
+				"stylers": [
+					{
+						"visibility": "on"
+					}
+				]
+			},
+			{
+				"featureType": "landscape",
+				"elementType": "all",
+				"stylers": [
+					{
+						"color": "#f2f2f2"
+					}
+				]
+			},
+			{
+				"featureType": "landscape",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"color": "#ffffff"
+					}
+				]
+			},
+			{
+				"featureType": "landscape.man_made",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"color": "#f2f1ea"
+					}
+				]
+			},
+			{
+				"featureType": "poi",
+				"elementType": "all",
+				"stylers": [
+					{
+						"visibility": "simplified",
+						"pointer-events": "none", 
+					}
+				]
+			},
+			{
+				"featureType": "road",
+				"elementType": "all",
+				"stylers": [
+					{
+						"saturation": -100
+					},
+					{
+						"lightness": 45
+					}
+				]
+			},
+			{
+				"featureType": "road",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"color": "#cbcbcb"
+					}
+				]
+			},
+			{
+				"featureType": "road",
+				"elementType": "labels.text.fill",
+				"stylers": [
+					{
+						"color": "#7b7b7b"
+					}
+				]
+			},
+			{
+				"featureType": "road",
+				"elementType": "labels.text.stroke",
+				"stylers": [
+					{
+						"color": "#ffffff"
+					}
+				]
+			},
+			{
+				"featureType": "road.highway",
+				"elementType": "all",
+				"stylers": [
+					{
+						"visibility": "simplified"
+					}
+				]
+			},
+			{
+				"featureType": "road.arterial",
+				"elementType": "labels.icon",
+				"stylers": [
+					{
+						"visibility": "off"
+					}
+				]
+			},
+			{
+				"featureType": "transit",
+				"elementType": "all",
+				"stylers": [
+					{
+						"visibility": "off"
+					}
+				]
+			},
+			{
+				"featureType": "water",
+				"elementType": "all",
+				"stylers": [
+					{
+						"color": "#46bcec"
+					},
+					{
+						"visibility": "on"
+					}
+				]
+			},
+			{
+				"featureType": "water",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"color": "#a2c0c8"
+					}
+				]
+			},
+			{
+				"featureType": "water",
+				"elementType": "labels.text.fill",
+				"stylers": [
+					{
+						"color": "#070707"
+					}
+				]
+			},
+			{
+				"featureType": "water",
+				"elementType": "labels.text.stroke",
+				"stylers": [
+					{
+						"color": "#ffffff"
+					}
+				]
+			}
+		]
+	}
+
+	/** 
+	* Add map to div, and include above map options
+	*/
+	const map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
+
+	/** 
+	* Create InfoWindow object 
+	*/
+	const infoWindow = new google.maps.InfoWindow({
+		minWidth: 200,
+		maxWidth: 200
+	});
+
+	/** 
+	* Create bounds object
+	*/
+	const bounds = new google.maps.LatLngBounds();
+
+	/** 
+	* Loop through all markers
+	*/
+	for (let i = 0; i < markers.length; i++) 
+	{
+
+		/** 
+		* Create new markers
+		*/
+		const marker = new google.maps.Marker({
+			position: { lat: markers[i]['lat'], lng: markers[i]['lng'] },
+			map: map,
+			icon: fehMarker,
+			// animation: google.maps.Animation.DROP
+		});
+
+		/** 
+		* Function that will create new info windows with info from markers array/objects
+		* and click events to open them
+		*/
+		function createInfoWindows() 
+		{
+			const infoWindowHeaderContent = markers[i]['locationName']
+			;
+
+			const infoWindowContent = `
+				<div class="feh-content">
+					<address>
+						<p>${markers[i]['address']}</p>
+					</address>
+				<div>
+			`;
+
+			google.maps.event.addListener(marker, "click", function ()
+			{
+				infoWindow.setHeaderContent(infoWindowHeaderContent);
+				infoWindow.setContent(infoWindowContent);
+				infoWindow.open(map, marker);
+			}); 
+		}
+
+
+		createInfoWindows();
+
+				/** 
+		* Recenter map when an info window is closed
+
+		infoWindow.addListener('closeclick', function() {
+			map.fitBounds(bounds);
+		});
+
+		* Fit all of our markers on the map, neatly
+		
+		bounds.extend(new google.maps.LatLng(markers[i]['lat'], markers[i]['lng']));		
+		map.fitBounds(bounds); 
+		*/
+   }	
+};
+</script>
+          <script defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7G0jq9Ytdbrm7-shdmUH-aj51vSpUsZw&amp;callback=initMap"></script>
+          <script defer="" src="{{ 'main.js' | asset_url }}"></script>
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_location-map");</script>
+        
+{% schema %}
+{
+  "name": "Location Map",
+  "tag": "div",
+  "class": "section_location-map",
+  "settings": [
+    {
+      "type": "text",
+      "id": "location_latitude",
+      "label": "Location Latitude",
+      "default": "29.55436533631979"
+    },
+    {
+      "type": "text",
+      "id": "location_longitude",
+      "label": "Location Longitude",
+      "default": "-95.2578368531154"
+    },
+    {
+      "type": "text",
+      "id": "location_name",
+      "label": "Location Name",
+      "default": "Pearland"
+    },
+    {
+      "id": "location_order_ahead",
+      "label": "Location Order Ahead",
+      "type": "url"
+    },
+    {
+      "id": "location_reserve",
+      "label": "Location Reserve",
+      "type": "url"
+    },
+    {
+      "id": "location_directions",
+      "label": "Location Directions",
+      "type": "url"
+    },
+    {
+      "type": "richtext",
+      "id": "location_hours",
+      "label": "Location Hours",
+      "default": "<p><strong>S</strong> CLOSED<br><strong>M</strong> 6 AM- 10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>W</strong> 6 AM-10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>F</strong> 6AM-11 PM<br><strong>S</strong> 6 AM-11 PM</p>"
+    },
+    {
+      "type": "text",
+      "id": "location_phone_display",
+      "label": "Location Phone Display",
+      "default": "(832) 736-4028"
+    },
+    {
+      "id": "location_phone",
+      "label": "Location Phone",
+      "type": "url"
+    },
+    {
+      "type": "richtext",
+      "id": "location_address",
+      "label": "Location Address",
+      "default": "<p>2645 E Broadway St, <br>Pearland, TX <br>77581</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "location_image",
+      "label": "Location Image"
+    }
+  ]
+}
+{% endschema %}

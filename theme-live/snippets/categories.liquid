@@ -1,0 +1,26 @@
+{% capture listItems %}
+{% paginate collections by 999 %}
+{%- assign allItems = collections -%}
+{%- for item in allItems  -%}
+                <div role="listitem" class="w-dyn-item">
+              <a href="{{ item.url }}" class="collection-card w-inline-block">
+                <div class="collection-container-image"><img alt="{{ item.image.alt }}" loading="lazy" src="{{ item.image | img_url: 'master' }}" class="collection-image" srcset="{{ item.image | img_url: '1920x' }} 1920w,{{ item.image | img_url: '1600x' }} 1600w,{{ item.image | img_url: '1366x' }} 1366w,{{ item.image | img_url: '1024x' }} 1024w,{{ item.image | img_url: '768x' }} 768w,{{ item.image | img_url: '640x' }} 640w"></div>
+                <div class="collection-container-info">
+                  <h6>{{ item.title }}</h6>
+                  <div class="p-small text-color-gray2">{{ item.description }}</div>
+                </div>
+              </a>
+            </div>
+{%- endfor -%}
+{% endpaginate %}
+{% endcapture %}
+{% assign items_length = listItems | strip | size %}
+
+<div class="product-collection w-dyn-list" udy-collection="collection">
+          {%- unless items_length == 0 -%}<div role="list" class="categories-collection-list w-dyn-items">
+            {{ listItems }}
+          </div>{%- endunless -%}
+          {%- if items_length == 0 -%}<div class="w-dyn-empty">
+            <div>No items found.</div>
+          </div>{%- endif -%}
+        </div>

@@ -1,0 +1,47 @@
+
+          <h4>{{ section.settings.title }}</h4>
+          {%- if section.settings.spacer_1_rem_visibility -%}<div class="spacer-1"></div>{%- endif -%}
+          {%- if section.settings.paragraph_visibility -%}<div p-add-class="p-medium">{{ section.settings.paragraph | newline_to_br }}</div>{%- endif -%}
+          {%- if section.settings.spacer_3_rem_visibility -%}<div class="spacer-3"></div>{%- endif -%}
+        
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');</script>
+        
+{% schema %}
+{
+  "name": "Section - Title & Paragra",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "spacer_3_rem_visibility",
+      "label": "Spacer 3 rem Visibility",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "spacer_1_rem_visibility",
+      "label": "Spacer 1 rem Visibility",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "paragraph_visibility",
+      "label": "Paragraph Visibility",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph",
+      "label": "Paragraph",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    }
+  ]
+}
+{% endschema %}

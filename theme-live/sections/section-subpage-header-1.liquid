@@ -1,0 +1,40 @@
+
+        <div class="padding-global padding-section-medium">
+          <div class="container-small">
+            <h1 class="text-color-white text-align-center">{{ section.settings.page_title }}</h1>
+            {%- if section.settings.subheader -%}<div>
+              <div p-add-class="text-size-medium is-supage-header-1">{{ section.settings.subheader_text | newline_to_br }}</div>
+            </div>{%- endif -%}
+          </div>
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_subpage-header-1");</script>
+        
+{% schema %}
+{
+  "name": "Section - Subpage Header ",
+  "tag": "section",
+  "class": "section_subpage-header-1",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "subheader_text",
+      "label": "subheader text",
+      "default": "<p>We’re growing! New First Cup locations are opening all the time. Find one near you:</p>"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "Roasted in texas, brewed at the source"
+    },
+    {
+      "type": "checkbox",
+      "id": "subheader",
+      "label": "subheader",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

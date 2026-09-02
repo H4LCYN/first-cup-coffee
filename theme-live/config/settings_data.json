@@ -1,0 +1,257 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "collection_home": "best-sellers",
+    "collection_home_limit": 6,
+    "collection_2_home": "roasts",
+    "collection_2_home_limit": 11,
+    "sections": {
+      "top-ad": {
+        "type": "top-ad",
+        "settings": {
+          "top_ad_text": "<p>ALL SUBSCRIPTIONS AND ORDERS $35+ RECEIVE FREE SHIPPING</p>"
+        }
+      },
+      "navbar": {
+        "type": "navbar",
+        "settings": {
+          "dark_roast_bundle_link": "shopify://products/dark-roast-bundle",
+          "dark_roast_bundle_text": "Dark Roast Bundle",
+          "medium_roast_bundle_link": "shopify://products/medium-roast-bundle",
+          "medium_roast_bundle_text": "Medium Roast Bundle",
+          "mediumdark_roast_bundle_link": "shopify://products/medium-dark-roast-bundle",
+          "mediumdark_roast_bundle_text": "Medium/Dark Roast Bundle",
+          "lightmedium_roast_bundle_text": "Light/Medium Roast Bundle",
+          "lightmedium_roast_bundle_link": "shopify://products/light-medium-roast-bundle",
+          "mega_menu_16_oz_bags_url": "https://firstcup.com/collections/coffee?package=16+oz+Bags",
+          "account_portal": "",
+          "bulk_link": "https://firstcup.com/collections/coffee?package=5+lb+Bulk",
+          "pods_link": "https://firstcup.com/collections/coffee?package=Pods",
+          "light_roast_link": "https://firstcup.com/collections/coffee?roast=Light",
+          "medium_roast_link": "https://firstcup.com/collections/coffee?roast=Medium",
+          "dark_roast_link": "https://firstcup.com/collections/coffee?roast=Dark",
+          "blend_roast_link": "https://firstcup.com/collections/coffee?roast=Blend",
+          "main_nav_menu": "main-menu-new-do-not-use-yet"
+        }
+      },
+      "section-home-hero-1": {
+        "type": "section-home-hero-1",
+        "settings": {
+          "home_hero_1_cta_button_text": "<p>SUBSCRIBE NOW</p>",
+          "home_hero_1_background_image": "shopify://shop_images/Hero-Bags-on-table-v2_d0acdd0c-2666-4276-a3c1-a901cd9a5d22.jpg",
+          "button_1_link": "shopify://pages/subscribe-save",
+          "home_hero_1_paragraph": "<p>Save up to 20% off and enjoy free shipping on all subscriptions</p>"
+        }
+      },
+      "section-featured-home": {
+        "type": "section-featured-home",
+        "settings": {
+          "section_header": "Best Sellers"
+        }
+      },
+      "home-cta-1": {
+        "type": "home-cta-1",
+        "settings": {
+          "home_cta_1_link": "shopify://pages/subscribe-save",
+          "home_cta_1_button_text": "<p>SUBSCRIBE NOW</p>",
+          "home_cta_1_paragraph": "<p>Choose your coffee, select delivery times, & get fresh coffee delivered to your door. There’s no contracts so you can cancel anytime.</p>",
+          "home_cta_header": "SAVE 20% WHEN YOU SUBSCRIBE"
+        }
+      },
+      "section-home-category-grid": {
+        "type": "section-home-category-grid",
+        "settings": {
+          "red_grid_url": "shopify://pages/follow",
+          "brown_grid_url": "shopify://collections/coffee-bundles",
+          "gold_grid_url": "shopify://collections/merch",
+          "green_grid_url": "shopify://pages/subscribe-save",
+          "gold_grid_cta": "<p>SHOP MERCH<br/></p>",
+          "gold_grid_paragraph": "<p>Show your support for First Cup with our limited edition merch. </p>",
+          "gold_grid_header": "Merch",
+          "brown_grid_cta": "<p>SHOP BUNDLES</p>",
+          "brown_grid_paragraph": "<p>Some of our favorite combinations to help you sample the First Cup catalog.</p>",
+          "brown_grid_header": "Bundles",
+          "red_grid_cta": "<p>JOIN THE FAMILY</p>",
+          "red_grid_paragraph": "<p>Updates & deals you can't see anywhere else. Tag us & you may be featured in our story!</p>",
+          "red_grid_header": "Follow",
+          "green_grid_cta": "<p>SUBSCRIBE AND SAVE</p>",
+          "green_grid_paragraph": "<p>Pick from all of our different roasts, choose a delivery schedule & prep for a coffee adventure.</p>",
+          "green_grid_header": "Subscription Box"
+        }
+      },
+      "home-cta-2": {
+        "type": "home-cta-2",
+        "settings": {
+          "home_cta_2_button_text_2": "<p>ABOUT US</p>",
+          "home_cta_2_button_text_1": "<p>LEARN MORE</p>",
+          "home_cta_2_link_1": "shopify://pages/locations",
+          "home_cta_2_paragraph": "<p>The First Cup Coffee Company has several locations now open to serve you! Online Order Ahead, pass through the Drive-Thru, or come relax in our spacious shop. Check out the First Cup private offices and conference room rentals.</p>",
+          "home_cta_2_header": "FIRST CUP LOCATIONS"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_shop_menu": "main-menu-new-do-not-use-yet",
+          "footer_info_menu": "footer-information",
+          "footer_customer_service_menu": "footer-customer-service"
+        }
+      },
+      "section-subpage-header-1": {
+        "type": "section-subpage-header-1",
+        "settings": {
+          "subheader_text": "<p>We’re growing! New First Cup locations are opening all the time. Find one near you:</p>",
+          "page_title": "Roasted in texas, brewed at the source",
+          "subheader": true
+        }
+      },
+      "section-location-grid": {
+        "type": "section-location-grid",
+        "blocks": {
+          "location_MqjGj6": {
+            "type": "location",
+            "settings": {
+              "location_link": "shopify://pages/pearland-location",
+              "location_name": "Pearland",
+              "location_link_text": "LEARN MORE"
+            }
+          },
+          "location_zKxYYq": {
+            "type": "location",
+            "settings": {
+              "location_thumb": "shopify://shop_images/Rosenberg_square.webp",
+              "location_link": "shopify://pages/rosenberg-location",
+              "location_name": "Rosenberg",
+              "location_link_text": "LEARN MORE"
+            }
+          },
+          "location_c8iiQf": {
+            "type": "location",
+            "settings": {
+              "location_thumb": "shopify://shop_images/woodlands-square_14d30eb6-6086-4141-b360-761ae3dd2509.webp",
+              "location_link": "shopify://pages/woodlands-location",
+              "location_name": "Woodlands",
+              "location_link_text": "LEARN MORE"
+            }
+          }
+        },
+        "block_order": [
+          "location_MqjGj6",
+          "location_zKxYYq",
+          "location_c8iiQf"
+        ],
+        "settings": {}
+      },
+      "location-map": {
+        "type": "location-map",
+        "settings": {
+          "location_latitude": "29.832305075413707",
+          "location_longitude": "-95.82824742880973",
+          "location_name": "Pearland",
+          "location_order_ahead": "https://urldefense.proofpoint.com/v2/url?u=https-3A__order.incentivio.com_c_firstcupcoffee_locations_pearland&d=DwMFaQ&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=Asa0CrMvGqVf990v0psuyiuOXiImAxc_W6FnGYw1cOo&m=fnyqsKSSplB4StLE1uXm3-rg2NduJw91KutK0Rz5e0E-0gRpLIqHoy18IqbjQ-z2&s=Zp19O2SzwoSPpQl9ByjtB59DUisSHArf_r9Dl2q1fPM&e=",
+          "location_reserve": "https://firstcupcoffee.coworksapp.com/book/592?type=rooms",
+          "location_directions": "https://www.google.com/maps?s=web&lqi=ChBmaXJzdCBjdXAgY29mZmVlSMLBmLqQuYCACFIYCOmYne8CEIyMuc3YuJnnIRoCZW4iAlVTWh4QABABEAIYABgBGAIiEGZpcnN0IGN1cCBjb2ZmZWVoAZIBC2NvZmZlZV9zaG9woQHd03u-M0fYxKEBwTXWBSSEXEShAYncos_QMs8YqgFZCgkvbS8wMnZxZm0QASoUIhBmaXJzdCBjdXAgY29mZmVlKAAyHhABIhq4ERYU-I9Z5ALTQ_YXrLi1-fsMt9xoVnRtyjIUEAIiEGZpcnN0IGN1cCBjb2ZmZWXgAQA&phdesc=FXCV9qCutXg&vet=12ahUKEwj6qoLTgaiKAxWRG9AFHevaO6cQ1YkKegQIGBAB..i&cs=1&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KRXENJTPkUCGMW-aJEZCA8s_&daddr=2645+E+Broadway+St,+Pearland,+TX+77581",
+          "location_hours": "<p><strong>S</strong> CLOSED<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM <br/><strong>W</strong> 6 AM-10 PM <br/><strong>T</strong> 6 AM-10 PM <br/><strong>F</strong> 6AM-11 PM <br/><strong>S</strong> 6 AM-11 PM</p>",
+          "location_phone_display": "(832) 736-4028",
+          "location_phone": "tel:(832) 736-4028",
+          "location_address": "<p>2645 E Broadway St, <br/>Pearland, TX <br/>77581</p>",
+          "location_image": "shopify://shop_images/Pearland-wide-min.webp"
+        }
+      },
+      "section-room-rentals": {
+        "type": "section-room-rentals",
+        "blocks": {
+          "room_rental_location_QkLwmX": {
+            "type": "room_rental_location",
+            "settings": {
+              "location_name": "Pearland",
+              "meeting_rooms": "3 Meeting Rooms",
+              "show_meeting_rooms": true
+            }
+          },
+          "room_rental_location_9qTGra": {
+            "type": "room_rental_location",
+            "settings": {
+              "location_name": "Rosenberg",
+              "meeting_rooms": "3 Meeting Rooms",
+              "show_meeting_rooms": true
+            }
+          },
+          "room_rental_location_Fdm4m3": {
+            "type": "room_rental_location",
+            "settings": {
+              "location_name": "Woodlands",
+              "meeting_rooms": "2 Meeting Rooms",
+              "show_meeting_rooms": true
+            }
+          }
+        },
+        "block_order": [
+          "room_rental_location_QkLwmX",
+          "room_rental_location_9qTGra",
+          "room_rental_location_Fdm4m3"
+        ],
+        "settings": {}
+      },
+      "location-map-rosenberg": {
+        "type": "location-map-rosenberg",
+        "settings": {
+          "location_latitude": "29.55436533631979",
+          "location_longitude": "-95.2578368531154",
+          "location_name": "Rosenberg",
+          "location_order_ahead": "https://order.incentivio.com/c/firstcupcoffee/locations/rosenberg",
+          "location_reserve": "https://firstcupcoffeerosenberg.coworksapp.com/book/591?type=Conference",
+          "location_directions": "https://www.google.com/maps/dir/30.6953657,-88.0398912/first+cup+rosenberg/@30.0050086,-97.1911232,6z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x86411d3bf914bc41:0x3753bda7ed5c6262!2m2!1d-95.7516077!2d29.5270052?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D",
+          "location_hours": "<p><strong>S</strong> 8 AM- 4 PM<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM <br/><strong>W</strong> 6 AM-10 PM <br/><strong>T</strong> 6 AM-10 PM <br/><strong>F</strong> 6AM-11 PM <br/><strong>S</strong> 6 AM-11 PM</p>",
+          "location_phone_display": "(832) 675-9499",
+          "location_phone": "tel:(832) 675-9499",
+          "location_address": "<p>1548 Minonite Rd Unit 120, <br/>Rosenberg, TX <br/>77469</p>",
+          "location_image": "shopify://shop_images/rosenberg-wide_8762706a-6187-4c46-9fe2-6bc22d02ccf4.webp"
+        }
+      },
+      "location-map-woodlands": {
+        "type": "location-map-woodlands",
+        "settings": {
+          "location_latitude": "30.144974698299006",
+          "location_longitude": "-95.44928755979282",
+          "location_name": "WOODLANDS",
+          "location_order_ahead": "https://order.incentivio.com/c/firstcupcoffee/locations/woodlandsspring",
+          "location_reserve": "https://firstcupcoffee.coworksapp.com/book/593?type=rooms",
+          "location_directions": "https://www.google.com/maps/dir//First+Cup+Coffee+Co,+26403+Oak+Ridge+Dr,+Spring,+TX+77380/@30.1433068,-95.4713447,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x864737810f1b11f7:0x351686c20f9506cf!2m2!1d-95.4493412!2d30.144817?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D",
+          "location_hours": "<p><strong>S</strong> CLOSED<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM <br/><strong>W</strong> 6 AM-10 PM <br/><strong>T</strong> 6 AM-10 PM <br/><strong>F</strong> 6AM-11 PM <br/><strong>S</strong> 6 AM-11 PM</p>",
+          "location_phone_display": "(832) 510-4291",
+          "location_phone": "tel:8325104291",
+          "location_address": "<p>26403 Oak Ridge Dr,<br/>Spring, TX,<br/>77380</p>",
+          "location_image": "shopify://shop_images/woodlands-wide.webp"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "17151115064775110295": {
+        "type": "shopify://apps/recharge-subscriptions/blocks/recharge-theme/371eed76-0b44-4869-9813-730372ea378e",
+        "disabled": false,
+        "settings": {
+          "color_brand": "#d29f13",
+          "contrast_color": "#ffffff",
+          "color_brand_secondary": "#3d441e",
+          "corners": "0px",
+          "app_background": "#c7ccac",
+          "app_container": 1200,
+          "app_vertical_padding": 32,
+          "images_aspect_ratio": "1",
+          "cards_background": "#fafcf5",
+          "cards_border_color": "rgba(0,0,0,0)"
+        }
+      }
+    }
+  }
+}

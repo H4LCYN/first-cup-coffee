@@ -1,0 +1,25 @@
+{% capture listItems %}
+{% for item in collections[settings.collection_2_home].products limit: settings.collection_2_home_limit %}
+<div role="listitem" class="swiper-slide is-roasts-slider w-dyn-item">
+                    <a href="{{ item.url }}" class="link-block w-inline-block">
+                      <div class="product-container-image is-isolated"><img class="product-image is-isolated" src="{{ item.metafields.custom['isolated_image'].value | img_url: 'master' }}" alt="{{ item.metafields.custom['isolated_image'].value.alt }}" loading="lazy"></div>
+                      <div class="product-container-info is-isolated">
+                        <div class="item-name-small">{{ item.title }}</div>
+                        <div class="roast-profile_wrapper is-centered">
+                          <div fs-cmsfilter-field="Roast">{{ item.metafields.custom['roast_profile'].value }}</div>
+                          <div class="text-block-2">Roast</div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+{%- endfor -%}
+{% endcapture %}
+{% assign items_length = listItems | strip | size %}
+<div class="swiper w-dyn-list" udy-collection="product">
+                {%- unless items_length == 0 -%}<div role="list" class="swiper-wrapper is-product-slider w-dyn-items">
+                  {{ listItems }}
+                </div>{%- endunless -%}
+                {%- if items_length == 0 -%}<div class="w-dyn-empty">
+                  <div>No items found.</div>
+                </div>{%- endif -%}
+              </div>

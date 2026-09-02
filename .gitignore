@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Local dev databases
+*.sqlite
+*.sqlite-journal
+
+# Shopify CLI local state
+.shopify/
+
+# Build output
+build/
+dist/
+.cache/
+
+# macOS
+.DS_Store

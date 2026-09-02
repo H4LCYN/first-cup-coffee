@@ -1,0 +1,94 @@
+
+{%- if section.settings.enabled -%}
+        <div class="padding-global">
+          <div class="container-large">
+            <h2 class="join-community_heading">{{ section.settings.heading }}</h2>
+            <div class="join-community_embed">
+              {%- if section.blocks.size > 0 -%}
+                {%- for block in section.blocks -%}
+                  {%- render block -%}
+                {%- endfor -%}
+              {%- elsif section.settings.embed_code != blank -%}
+                {{ section.settings.embed_code }}
+              {%- else -%}
+                <p class="join-community_placeholder">{{ section.settings.placeholder_text }}</p>
+              {%- endif -%}
+            </div>
+            <div class="join-community_buttons">
+              {%- if section.settings.load_more_link != blank -%}
+                <a href="{{ section.settings.load_more_link }}" class="join-community_button">{{ section.settings.load_more_text }}</a>
+              {%- endif -%}
+              <a href="{{ section.settings.follow_link }}" class="join-community_button" target="_blank" rel="noopener">{{ section.settings.follow_text }}</a>
+            </div>
+          </div>
+        </div>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_join-community");</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Section - Join Community",
+  "tag": "section",
+  "class": "section_join-community",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Show this section",
+      "default": false,
+      "info": "Leave off while testing the Instagram feed block. Turn on when ready to make it visible to shoppers."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "JOIN OUR COMMUNITY"
+    },
+    {
+      "type": "html",
+      "id": "embed_code",
+      "label": "Instagram widget embed code (fallback)",
+      "info": "Only used if no app block is added above. Paste an embed snippet from an Instagram feed widget (e.g. SnapWidget, Elfsight, LightWidget). Leave blank to show the placeholder text below instead."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder text (shown when no embed code is set)",
+      "default": "Follow us on Instagram @firstcupcoffeeco"
+    },
+    {
+      "type": "text",
+      "id": "load_more_text",
+      "label": "Load more button text",
+      "default": "LOAD MORE"
+    },
+    {
+      "type": "url",
+      "id": "load_more_link",
+      "label": "Load more button link (button hidden if blank)"
+    },
+    {
+      "type": "text",
+      "id": "follow_text",
+      "label": "Follow button text",
+      "default": "FOLLOW US"
+    },
+    {
+      "type": "url",
+      "id": "follow_link",
+      "label": "Follow button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section - Join Community"
+    }
+  ]
+}
+{% endschema %}

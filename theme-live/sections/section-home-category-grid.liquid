@@ -1,0 +1,186 @@
+
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-medium">
+              <div class="category-grid">
+                <a id="w-node-c5f6bde4-5e7f-6975-e59c-d1886eba5067-6eba5062" data-w-id="c5f6bde4-5e7f-6975-e59c-d1886eba5067" href="{% if section.settings.green_grid_url %}{{ section.settings.green_grid_url }}{% else %}#{% endif %}" class="home-category_component is-long w-inline-block">
+                  <div class="home-category-grid-background is-long">
+                    <div class="category-grid_background-overlay"></div>{%- if section.settings.green_grid_image == nil -%}<img src="{{ 'bags-in-box-v1-camera-5.webp' | asset_url }}" loading="lazy" alt="" class="category-grid_background-image is-long">{%- else -%}<img src="{{ section.settings.green_grid_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.green_grid_image.alt | escape }}" class="category-grid_background-image is-long">{%- endif -%}
+                  </div>
+                  <div class="category-grid_content">
+                    <h3 class="h3 is-category-grid">{{ section.settings.green_grid_header }}</h3>
+                    <div p-add-class="paragraph is-category-grid text-balance">{{ section.settings.green_grid_paragraph | newline_to_br }}</div>
+                    <div class="category-grid_cta-txt-wrapper">
+                      <div class="category-grid_cta-text p-contents">{{ section.settings.green_grid_cta | newline_to_br }}</div>
+                      <div class="fa-icon is-category-grid">{{ 'tf105' | t }}</div>
+                    </div>
+                  </div>
+                </a>
+                <a id="w-node-c5f6bde4-5e7f-6975-e59c-d1886eba5074-6eba5062" data-w-id="c5f6bde4-5e7f-6975-e59c-d1886eba5074" href="{% if section.settings.red_grid_url %}{{ section.settings.red_grid_url }}{% else %}#{% endif %}" class="home-category_component is-tall w-inline-block">
+                  <div class="home-category-grid-background is-tall">
+                    <div class="category-grid_background-overlay is-red"></div>{%- if section.settings.red_grid_image == nil -%}<img src="{{ 'first-cup-social-mockup.webp' | asset_url }}" loading="lazy" alt="" class="category-grid_background-image is-short">{%- else -%}<img src="{{ section.settings.red_grid_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.red_grid_image.alt | escape }}" class="category-grid_background-image is-short">{%- endif -%}
+                  </div>
+                  <div class="category-grid_content">
+                    <h3 class="h3 is-category-grid">{{ section.settings.red_grid_header }}</h3>
+                    <div p-add-class="paragraph is-category-grid text-balance">{{ section.settings.red_grid_paragraph | newline_to_br }}</div>
+                    <div class="category-grid_cta-txt-wrapper">
+                      <div class="category-grid_cta-text p-contents">{{ section.settings.red_grid_cta | newline_to_br }}</div>
+                      <div class="fa-icon is-category-grid">{{ 'tf105' | t }}</div>
+                    </div>
+                  </div>
+                </a>
+                <a data-w-id="c5f6bde4-5e7f-6975-e59c-d1886eba5081" href="{% if section.settings.brown_grid_url %}{{ section.settings.brown_grid_url }}{% else %}#{% endif %}" class="home-category_component w-inline-block">
+                  <div class="home-category-grid-background is-long">
+                    <div class="category-grid_background-overlay is-gold"></div>{%- if section.settings.brown_grid_image == nil -%}<img src="{{ 'bags-on-table-bundles.webp' | asset_url }}" loading="lazy" alt="" class="category-grid_background-image is-short">{%- else -%}<img src="{{ section.settings.brown_grid_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.brown_grid_image.alt | escape }}" class="category-grid_background-image is-short">{%- endif -%}
+                  </div>
+                  <div class="category-grid_content">
+                    <h3 class="h3 is-category-grid">{{ section.settings.brown_grid_header }}</h3>
+                    <div p-add-class="paragraph is-category-grid text-balance">{{ section.settings.brown_grid_paragraph | newline_to_br }}</div>
+                    <div class="category-grid_cta-txt-wrapper">
+                      <div class="category-grid_cta-text p-contents">{{ section.settings.brown_grid_cta | newline_to_br }}</div>
+                      <div class="fa-icon is-category-grid">{{ 'tf105' | t }}</div>
+                    </div>
+                  </div>
+                </a>
+                <a data-w-id="c5f6bde4-5e7f-6975-e59c-d1886eba508e" href="{% if section.settings.gold_grid_url %}{{ section.settings.gold_grid_url }}{% else %}#{% endif %}" class="home-category_component w-inline-block">
+                  <div class="home-category-grid-background is-long">
+                    <div class="category-grid_background-overlay is-yellow"></div>{%- if section.settings.gold_grid_image == nil -%}<img src="{{ 'first-cup-merch-bkgd.webp' | asset_url }}" loading="lazy" alt="" class="category-grid_background-image is-short">{%- else -%}<img src="{{ section.settings.gold_grid_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.gold_grid_image.alt | escape }}" class="category-grid_background-image is-short">{%- endif -%}
+                  </div>
+                  <div class="category-grid_content">
+                    <h3 class="h3 is-category-grid">{{ section.settings.gold_grid_header }}</h3>
+                    <div p-add-class="paragraph is-category-grid text-balance">{{ section.settings.gold_grid_paragraph | newline_to_br }}</div>
+                    <div class="category-grid_cta-txt-wrapper">
+                      <div class="category-grid_cta-text p-contents">{{ section.settings.gold_grid_cta | newline_to_br }}</div>
+                      <div class="fa-icon is-category-grid">{{ 'tf105' | t }}</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_home-category-grid");</script>
+        
+{% schema %}
+{
+  "name": "Section - Home Category G",
+  "tag": "div",
+  "class": "section_home-category-grid",
+  "settings": [
+    {
+      "id": "red_grid_url",
+      "label": "Red Grid URL",
+      "type": "url"
+    },
+    {
+      "id": "brown_grid_url",
+      "label": "Brown Grid URL",
+      "type": "url"
+    },
+    {
+      "id": "gold_grid_url",
+      "label": " Gold Grid URL",
+      "type": "url"
+    },
+    {
+      "id": "green_grid_url",
+      "label": "Green Grid URL",
+      "type": "url"
+    },
+    {
+      "type": "image_picker",
+      "id": "red_grid_image",
+      "label": "Red Grid Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "green_grid_image",
+      "label": "Green Grid Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "brown_grid_image",
+      "label": "Brown Grid Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "gold_grid_image",
+      "label": "Gold Grid Image"
+    },
+    {
+      "type": "richtext",
+      "id": "gold_grid_cta",
+      "label": "Gold Grid CTA",
+      "default": "<p>SHOP MERCH<br></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "gold_grid_paragraph",
+      "label": "Gold Grid Paragraph",
+      "default": "<p>Show your support for First Cup with our limited edition merch. </p>"
+    },
+    {
+      "type": "text",
+      "id": "gold_grid_header",
+      "label": "Gold Grid Header",
+      "default": "Merch"
+    },
+    {
+      "type": "richtext",
+      "id": "brown_grid_cta",
+      "label": "Brown Grid CTA",
+      "default": "<p>SHOP BUNDLES</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "brown_grid_paragraph",
+      "label": "Brown Grid Paragraph",
+      "default": "<p>Some of our favorite combinations to help you sample the First Cup catalog.</p>"
+    },
+    {
+      "type": "text",
+      "id": "brown_grid_header",
+      "label": "Brown Grid Header",
+      "default": "Bundles"
+    },
+    {
+      "type": "richtext",
+      "id": "red_grid_cta",
+      "label": "Red Grid CTA",
+      "default": "<p>JOIN THE FAMILY</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "red_grid_paragraph",
+      "label": "Red Grid Paragraph",
+      "default": "<p>Updates &amp; deals you can't see anywhere else. Tag us &amp; you may be featured in our story!</p>"
+    },
+    {
+      "type": "text",
+      "id": "red_grid_header",
+      "label": "Red Grid Header",
+      "default": "Follow"
+    },
+    {
+      "type": "richtext",
+      "id": "green_grid_cta",
+      "label": "Green Grid CTA",
+      "default": "<p>SUBSCRIBE AND SAVE</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "green_grid_paragraph",
+      "label": "Green Grid Paragraph",
+      "default": "<p>Pick from all of our different roasts, choose a delivery schedule &amp; prep for a coffee adventure.</p>"
+    },
+    {
+      "type": "text",
+      "id": "green_grid_header",
+      "label": "Green Grid Header",
+      "default": "Subscription Box"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,52 @@
+
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-medium">
+              <div class="featured-slider_component">
+                <div class="slider_top-wrapper">
+                  <div class="slider_top-content">
+                    <h3 class="h3 text-color-white">{{ section.settings.section_header }}</h3>
+                  </div>
+                  <div class="home-dashed-rule_wrapper">
+                    <div class="home-dashed-rule_left"></div>
+                    <div class="home-dashed-rule_right"></div>
+                  </div>
+                </div>
+                {%- if settings.collection_home != blank -%}{%- render "markup_for_collection_home" -%}{%- else -%}{%- render "products_where_name_ne_brew_around_and_find_out" -%}{%- endif -%}
+                <div class="featured-slider_bottom-wrapper">
+                  <div class="featured-slider_button-wrapper">
+                    <a href="#" class="featured-slider_button swiper-prev w-inline-block">
+                      <div class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 13 23" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5001 0.50502L12.4901 1.49497L2.48503 11.5L12.4901 21.505L11.5001 22.495L0.505127 11.5L11.5001 0.50502Z" fill="currentColor"></path>
+                        </svg></div>
+                    </a>
+                    <a href="#" class="featured-slider_button swiper-next w-inline-block">
+                      <div class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 13 23" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.49502 22.495L0.505067 21.505L10.5101 11.5L0.505069 1.49497L1.49502 0.505023L12.49 11.5L1.49502 22.495Z" fill="currentColor"></path>
+                        </svg></div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_featured-home");</script>
+        
+{% schema %}
+{
+  "name": "Section - Featured Home",
+  "tag": "section",
+  "class": "section_featured-home",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_header",
+      "label": "Section Header",
+      "default": "Best Sellers"
+    }
+  ]
+}
+{% endschema %}

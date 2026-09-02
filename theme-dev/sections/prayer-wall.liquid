@@ -1,0 +1,459 @@
+<style>
+.pw-section { background: #171717; padding: 3rem 1rem; min-height: 70vh; }
+.pw-section__inner { max-width: 720px; margin: 0 auto; }
+.pw-section__title { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; font-family: 'Avenirnextltpro Demicn', sans-serif; text-transform: uppercase; letter-spacing: 0.03em; color: #d29f13; }
+.pw-section__intro { color: rgba(255,255,255,0.75); margin-bottom: 2rem; }
+
+.pw__loading { color: rgba(255,255,255,0.5); font-style: italic; }
+.pw__error { color: #e07060; }
+.pw__empty { color: rgba(255,255,255,0.5); font-style: italic; }
+
+/* Toasts — inline ribbon below intro */
+#pw-toasts {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.pw-toast {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  background: rgba(51,51,51,0.7); color: #fff !important; padding: 0.875rem 1.1rem;
+  border-left: 5px solid #333;
+  border-radius: 4px; font-size: 0.9rem; font-family: inherit;
+  line-height: 1.5; width: 100%; box-sizing: border-box;
+  animation: pw-toast-in .2s ease;
+}
+.pw-toast--error { background: rgba(137,48,36,0.5) !important; border-left-color: #893024 !important; }
+.pw-toast--success { background: rgba(45,106,79,0.5) !important; border-left-color: #2d6a4f !important; }
+.pw-toast--info { background: rgba(94,126,41,0.5) !important; border-left-color: #5e7e29 !important; }
+.pw-toast--warning { background: rgba(184,138,16,0.5) !important; border-left-color: #b88a10 !important; }
+.pw-toast__msg { flex: 1; }
+.pw-toast__close {
+  all: unset;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.5rem; height: 1.5rem; flex-shrink: 0;
+  color: #fff !important; opacity: 0.75; cursor: pointer;
+  font-size: 1.25rem; line-height: 1;
+}
+.pw-toast__close:hover { opacity: 1; }
+@keyframes pw-toast-in {
+  from { opacity: 0; transform: translateY(.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Submit form */
+.pw__submit-wrap { background: rgba(255,255,255,0.1); border-radius: 2px; padding: 1.25rem; margin-bottom: 2rem; }
+.pw__submit-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; font-family: 'Avenirnextltpro Demicn', sans-serif; color: #fff; }
+.pw__textarea {
+  display: block; width: 100%; box-sizing: border-box;
+  border: 1px solid #444; border-radius: 6px; padding: 0.6rem 0.75rem;
+  font-size: 1rem; font-family: inherit; resize: vertical;
+  line-height: 1.5; margin-bottom: 0.75rem; background: #fff; color: #171717;
+}
+.pw__textarea:focus { outline: none; border-color: #d29f13; box-shadow: 0 0 0 2px rgba(210,159,19,.2); }
+.pw__textarea--sm { font-size: 0.9rem; }
+.pw__form-footer { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.pw__anon-label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; cursor: pointer; }
+
+
+/* Pending section */
+.pw__pending-wrap { background: rgba(210,159,19,0.12); border: 1px solid rgba(210,159,19,0.3); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 2rem; }
+.pw__pending-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; color: #fff; }
+.pw__pending-note { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem; }
+.pw__pending-list { list-style: none; padding: 0; margin: 0; }
+.pw__pending-item { padding: 0.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+.pw__pending-item:first-child { border-top: none; }
+.pw__pending-text { font-size: 0.9rem; margin-bottom: 0.15rem; color: rgba(255,255,255,0.85); }
+.pw__pending-date { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+/* Cards */
+.pw__list { display: flex; flex-direction: column; gap: 1rem; }
+.pw__card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 1.25rem; }
+.pw__card-text { font-size: 1rem; line-height: 1.55; margin-bottom: 0.4rem; }
+.pw__card-meta { font-size: 0.8rem; color: #888; margin-bottom: 0.75rem; }
+.pw__card-praise { font-size: 0.9rem; color: #2d6a4f; background: #d8f3dc; border-radius: 6px; padding: 0.6rem 0.75rem; margin-bottom: 0.75rem; }
+.pw__card-footer { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+
+/* Praise form */
+.pw__praise-form { margin-top: 0.75rem; border-top: 1px solid #eee; padding-top: 0.75rem; }
+.pw__praise-form-footer { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+
+/* Buttons */
+.pw__btn {
+  border: none; cursor: pointer; font-size: 0.875rem; font-family: inherit;
+  border-radius: 2px; padding: 0.4rem 0.9rem; line-height: 1.4; transition: background .15s;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.pw__btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.pw__btn--primary { background: #d29f13; color: #171717; font-weight: 700; }
+.pw__btn--primary:hover:not(:disabled) { background: #b88a10; }
+.pw__btn--pray { background: #f0f0f0; color: #333; }
+.pw__btn--pray:hover:not(:disabled) { background: #e0e0e0; }
+.pw__btn--pray-active { background: #d29f13; color: #171717; font-weight: 700; }
+.pw__btn--delete { background: none; color: #893024; text-decoration: underline; padding: 0.4rem 0.2rem; text-transform: none; letter-spacing: 0; }
+.pw__btn--delete:hover:not(:disabled) { color: #6a2319; }
+.pw__btn--praise { background: none; color: #5e7e29; text-decoration: underline; padding: 0.4rem 0.2rem; text-transform: none; letter-spacing: 0; }
+.pw__btn--ghost { background: none; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); }
+.pw__anon-label { color: rgba(255,255,255,0.8); }
+
+button#pw-submit-btn {
+    display: flex;
+    height: 40px;
+    padding: 12.75px 54.465px 13.25px 52.535px;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+</style>
+
+<section class="pw-section" id="prayer-wall" data-proxy="/apps/prayer-wall">
+  <div class="pw-section__inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="pw-section__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.intro != blank -%}
+      <p class="pw-section__intro">{{ section.settings.intro | escape }}</p>
+    {%- endif -%}
+
+    <script>
+      window.__PW_CUSTOMER__ = {
+        loggedIn: {% if customer %}true{% else %}false{% endif %},
+        loginUrl: {{ routes.account_login_url | append: '?return_url=' | append: request.path | json }},
+      };
+    </script>
+
+    <div id="pw-toasts"></div>
+
+    <div id="pw-root">
+      <p class="pw__loading" aria-live="polite">Loading prayer requests…</p>
+    </div>
+  </div>
+</section>
+
+<template id="pw-tpl-form">
+  <div class="pw__submit-wrap">
+    <h3 class="pw__submit-title">{{ section.settings.submit_heading | default: 'Share a Prayer Request' | escape }}</h3>
+    <form class="pw__form" id="pw-form" novalidate>
+      <textarea
+        class="pw__textarea"
+        id="pw-request-text"
+        placeholder="{{ section.settings.submit_placeholder | escape }}"
+        rows="4"
+        maxlength="2000"
+        required
+      ></textarea>
+      <div class="pw__form-footer">
+        <label class="pw__anon-label">
+          <input type="checkbox" id="pw-anon"> Post anonymously
+        </label>
+        <button class="pw__btn pw__btn--primary" type="submit" id="pw-submit-btn">Submit Request</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+
+<template id="pw-tpl-pending">
+  <div class="pw__pending-wrap">
+    <h3 class="pw__pending-title">Your Pending Requests</h3>
+    <p class="pw__pending-note">These are awaiting review before appearing on the wall.</p>
+    <ul class="pw__pending-list" id="pw-pending-list"></ul>
+  </div>
+</template>
+
+<template id="pw-tpl-pending-item">
+  <li class="pw__pending-item">
+    <p class="pw__pending-text"></p>
+    <p class="pw__pending-date"></p>
+  </li>
+</template>
+
+<template id="pw-tpl-card">
+  <article class="pw__card">
+    <p class="pw__card-text"></p>
+    <p class="pw__card-meta"></p>
+    <div class="pw__card-praise" hidden></div>
+    <div class="pw__card-footer">
+      <button class="pw__btn pw__btn--pray" type="button" data-action="pray" data-id=""></button>
+      <button class="pw__btn pw__btn--delete" type="button" data-action="delete" data-id="" hidden>Delete my request</button>
+      <button class="pw__btn pw__btn--praise" type="button" data-action="open-praise" data-id="" hidden>Add praise report</button>
+    </div>
+    <form class="pw__praise-form" hidden>
+      <textarea class="pw__textarea pw__textarea--sm" placeholder="Share how God answered this prayer…" rows="3" maxlength="1000" required></textarea>
+      <div class="pw__praise-form-footer">
+        <button class="pw__btn pw__btn--primary" type="submit">Submit</button>
+        <button class="pw__btn pw__btn--ghost" type="button" data-cancel-praise>Cancel</button>
+      </div>
+    </form>
+  </article>
+</template>
+
+<script>
+(function () {
+  const ROOT = document.getElementById('pw-root');
+  const PROXY = document.getElementById('prayer-wall').dataset.proxy;
+  const C = window.__PW_CUSTOMER__;
+
+  async function api(path, options) {
+    const res = await fetch(PROXY + path, {
+      method: options?.method || 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      body: options?.body ? JSON.stringify(options.body) : undefined,
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    return data;
+  }
+
+  function clone(id) {
+    return document.getElementById(id).content.cloneNode(true);
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function prayLabel(count, isPraying) {
+    return (isPraying ? '🙏 Praying' : 'Pray for this') + (count > 0 ? ` (${count})` : '');
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function toProperCase(str) {
+    if (!str) return str;
+    return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function showToast(msg, type = 'error', duration = 5000, id = null) {
+    const container = document.getElementById('pw-toasts');
+    if (!container) return;
+    if (id && document.getElementById(id)) return;
+    const el = document.createElement('div');
+    el.className = 'pw-toast pw-toast--' + type;
+    if (id) el.id = id;
+    const msgEl = document.createElement('span');
+    msgEl.className = 'pw-toast__msg';
+    msgEl.textContent = msg;
+    const closeEl = document.createElement('span');
+    closeEl.className = 'pw-toast__close';
+    closeEl.textContent = '×';
+    closeEl.setAttribute('role', 'button');
+    closeEl.setAttribute('aria-label', 'Dismiss');
+    closeEl.addEventListener('click', () => el.remove());
+    el.appendChild(msgEl);
+    el.appendChild(closeEl);
+    container.appendChild(el);
+    if (duration > 0) setTimeout(() => el.remove(), duration);
+  }
+
+  function buildCard(req) {
+    const frag = clone('pw-tpl-card');
+    const card = frag.querySelector('.pw__card');
+
+    card.querySelector('.pw__card-text').textContent = req.requestText;
+    const name = req.displayName ? toProperCase(req.displayName) : 'Anonymous';
+    card.querySelector('.pw__card-meta').textContent =
+      'Requester: ' + name + (req.postedAt ? ' · ' + formatDate(req.postedAt) : '');
+
+    if (req.praiseReport) {
+      const el = card.querySelector('.pw__card-praise');
+      el.innerHTML = '<strong>Praise Report:</strong> ' + escHtml(req.praiseReport);
+      el.hidden = false;
+    }
+
+    const prayBtn = card.querySelector('[data-action="pray"]');
+    prayBtn.dataset.id = req.id;
+    prayBtn.textContent = prayLabel(req.prayingCount, req.isPrayingByMe);
+    if (req.isPrayingByMe) prayBtn.classList.add('pw__btn--pray-active');
+    if (!C.loggedIn) { prayBtn.disabled = true; prayBtn.title = 'Sign in to pray'; }
+
+    if (req.isMyRequest) {
+      const delBtn = card.querySelector('[data-action="delete"]');
+      delBtn.dataset.id = req.id;
+      delBtn.hidden = false;
+
+      if (!req.praiseReport) {
+        const praiseBtn = card.querySelector('[data-action="open-praise"]');
+        praiseBtn.dataset.id = req.id;
+        praiseBtn.hidden = false;
+      }
+    }
+
+    return card;
+  }
+
+  function render(data) {
+    ROOT.innerHTML = '';
+
+    if (data.canSubmit) {
+      ROOT.appendChild(clone('pw-tpl-form'));
+      const form = ROOT.querySelector('#pw-form');
+      if (!C.loggedIn) {
+        const anonLabel = form.querySelector('.pw__anon-label');
+        if (anonLabel) anonLabel.remove();
+      }
+      form.addEventListener('submit', onSubmit);
+    } else if (data.limitReason) {
+      showToast(data.limitReason, 'info', 0, 'pw-toast-limit');
+    }
+
+    if (data.myPendingRequests?.length) {
+      const frag = clone('pw-tpl-pending');
+      const list = frag.querySelector('#pw-pending-list');
+      data.myPendingRequests.forEach(r => {
+        const itemFrag = clone('pw-tpl-pending-item');
+        itemFrag.querySelector('.pw__pending-text').textContent = r.requestText;
+        itemFrag.querySelector('.pw__pending-date').textContent = 'Submitted ' + formatDate(r.submittedAt);
+        list.appendChild(itemFrag);
+      });
+      ROOT.appendChild(frag);
+    }
+
+    const listEl = document.createElement('div');
+    listEl.className = 'pw__list';
+    if (!data.requests.length) {
+      const p = document.createElement('p');
+      p.className = 'pw__empty';
+      p.textContent = 'No prayer requests yet. Be the first to share.';
+      listEl.appendChild(p);
+    } else {
+      data.requests.forEach(req => listEl.appendChild(buildCard(req)));
+    }
+    ROOT.appendChild(listEl);
+
+    // Wire up card actions after render
+    ROOT.querySelectorAll('[data-action="pray"]').forEach(btn =>
+      btn.addEventListener('click', onPray));
+    ROOT.querySelectorAll('[data-action="delete"]').forEach(btn =>
+      btn.addEventListener('click', onDelete));
+    ROOT.querySelectorAll('[data-action="open-praise"]').forEach(btn =>
+      btn.addEventListener('click', onOpenPraise));
+    ROOT.querySelectorAll('[data-cancel-praise]').forEach(btn =>
+      btn.addEventListener('click', onCancelPraise));
+    ROOT.querySelectorAll('.pw__praise-form').forEach(form =>
+      form.addEventListener('submit', onPraiseSubmit));
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const btn = form.querySelector('#pw-submit-btn');
+    const text = form.querySelector('#pw-request-text').value.trim();
+    const anonEl = form.querySelector('#pw-anon');
+    const anon = anonEl ? anonEl.checked : false;
+    if (!text) return;
+    btn.disabled = true; btn.textContent = 'Submitting…';
+    try {
+      await api('/submit', { method: 'POST', body: { requestText: text, isAnonymous: anon } });
+      await reload();
+    } catch (err) {
+      showToast(err.message);
+      btn.disabled = false; btn.textContent = 'Submit Request';
+    }
+  }
+
+  async function onPray(e) {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    try {
+      const res = await api('/pray', { method: 'POST', body: { id: btn.dataset.id } });
+      btn.classList.toggle('pw__btn--pray-active', res.praying);
+      btn.textContent = prayLabel(res.count, res.praying);
+    } catch (err) { showToast(err.message); }
+    finally { btn.disabled = false; }
+  }
+
+  async function onDelete(e) {
+    if (!confirm('Remove your prayer request from the wall?')) return;
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    try {
+      await api('/delete', { method: 'POST', body: { id: btn.dataset.id } });
+      await reload();
+    } catch (err) { showToast(err.message); btn.disabled = false; }
+  }
+
+  function onOpenPraise(e) {
+    const card = e.currentTarget.closest('.pw__card');
+    e.currentTarget.hidden = true;
+    card.querySelector('.pw__praise-form').hidden = false;
+    card.querySelector('.pw__praise-form textarea').focus();
+  }
+
+  function onCancelPraise(e) {
+    const card = e.currentTarget.closest('.pw__card');
+    card.querySelector('.pw__praise-form').hidden = true;
+    card.querySelector('[data-action="open-praise"]').hidden = false;
+  }
+
+  async function onPraiseSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const card = form.closest('.pw__card');
+    const id = card.querySelector('[data-action="delete"]').dataset.id;
+    const text = form.querySelector('textarea').value.trim();
+    const submitBtn = form.querySelector('[type="submit"]');
+    if (!text) return;
+    submitBtn.disabled = true; submitBtn.textContent = 'Submitting…';
+    try {
+      await api('/update-praise', { method: 'POST', body: { id, praiseReportText: text } });
+      await reload();
+    } catch (err) {
+      showToast(err.message);
+      submitBtn.disabled = false; submitBtn.textContent = 'Submit';
+    }
+  }
+
+  async function reload() {
+    try {
+      render(await api('/'));
+    } catch {
+      ROOT.innerHTML = '<p class="pw__error">Could not load prayer requests. Please refresh the page.</p>';
+    }
+  }
+
+  reload();
+
+  if (!C.loggedIn) {
+    showToast('Subscribe or order to join the community and gain all Prayer Wall features!', 'warning', 0, 'pw-toast-guest');
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Prayer Wall",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section heading",
+      "default": "Prayer Wall"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "We believe in the power of prayer. Share your needs below and our community will stand with you."
+    },
+    {
+      "type": "text",
+      "id": "submit_heading",
+      "label": "Submit form heading",
+      "default": "Share a Prayer Request"
+    },
+    {
+      "type": "text",
+      "id": "submit_placeholder",
+      "label": "Submit form placeholder",
+      "default": "Share what's on your heart…"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prayer Wall"
+    }
+  ]
+}
+{% endschema %}

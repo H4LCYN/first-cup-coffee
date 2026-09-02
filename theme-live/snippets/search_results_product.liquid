@@ -1,0 +1,30 @@
+{% capture listItems %}
+           {%- for item in search.results -%}
+{%- if item.object_type == 'product' -%}
+        <div role="listitem" class="w-dyn-item">
+                    <a href="{{ item.url }}" class="home-product_link w-inline-block">
+                      <div class="product-container-image"><img alt="{{ item.featured_image.alt }}" loading="lazy" src="{{ item.featured_image | img_url: 'master' }}" class="product-image" data-commerce-type="variation-image" srcset="{{ item.featured_image | img_url: '1920x' }} 1920w,{{ item.featured_image | img_url: '1600x' }} 1600w,{{ item.featured_image | img_url: '1366x' }} 1366w,{{ item.featured_image | img_url: '1024x' }} 1024w,{{ item.featured_image | img_url: '768x' }} 768w,{{ item.featured_image | img_url: '640x' }} 640w"></div>
+                      <div class="product-container-info">
+                        <div class="item-name-medium">{{ item.title }}</div>
+                        {%- if product.metafields.custom.roast_profile.value -%}<div class="roast-profile_wrapper">
+                          <div>{{ item.metafields.custom['roast_profile'].value }}</div>
+                          <div class="text-block-2">Roast</div>
+                        </div>{%- endif -%}
+                      </div>
+                      <div data-commerce-type="variation-price" class="p-small is-price">{{ item.price | money }}</div>
+                    </a>
+                  </div>
+{%- endif -%}
+           {%- endfor -%}
+           
+           {% endcapture %}
+           {% assign items_length = listItems | strip | size %}
+           
+    <div class="w-dyn-list" udy-collection="product">
+                {%- unless items_length == 0 -%}<div role="list" class="collection-grid w-dyn-items">
+                  {{ listItems }}
+                </div>{%- endunless -%}
+                {%- if items_length == 0 -%}<div class="empty-state w-dyn-empty">
+                  <div class="p-medium">No items found</div>
+                </div>{%- endif -%}
+              </div>

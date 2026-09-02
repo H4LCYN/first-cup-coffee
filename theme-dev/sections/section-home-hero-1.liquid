@@ -1,0 +1,53 @@
+
+        <div class="container-large">
+          <div class="home-hero-1_content-wrapper">
+            <div class="home-hero-1_content-container">{%- if section.settings.home_hero_1_header_image == nil -%}<img src="{{ 'fcc004_subscribe-and-save_text-lockup-1.webp' | asset_url }}" loading="eager" alt="" class="home-hero-1_header-image">{%- else -%}<img src="{{ section.settings.home_hero_1_header_image.src | img_url: 'master' }}" loading="eager" alt="{{ section.settings.home_hero_1_header_image.alt | escape }}" class="home-hero-1_header-image">{%- endif -%}
+              <div p-add-class="text-size-large is-hero-1">{{ section.settings.home_hero_1_paragraph | newline_to_br }}</div>
+              <div class="spacer-small"></div>
+              <a href="{% if section.settings.button_1_link %}{{ section.settings.button_1_link }}{% else %}#{% endif %}" class="button-1 w-inline-block">
+                <div class="text-block p-contents">{{ section.settings.home_hero_1_cta_button_text | newline_to_br }}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="home-hero-1_background-wrapper">{%- if section.settings.home_hero_1_background_image == nil -%}<img src="{{ 'hero-bags-on-table-v1.1-Camera.webp' | asset_url }}" loading="eager" alt="" class="home-hero-1_background-image">{%- else -%}<img src="{{ section.settings.home_hero_1_background_image.src | img_url: 'master' }}" loading="eager" alt="{{ section.settings.home_hero_1_background_image.alt | escape }}" class="home-hero-1_background-image">{%- endif -%}</div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_home-hero-1");</script>
+        
+{% schema %}
+{
+  "name": "Section - Home Hero 1",
+  "tag": "section",
+  "class": "section_home-hero-1",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "home_hero_1_cta_button_text",
+      "label": "Home Hero 1 CTA Button Text",
+      "default": "<p>SUBSCRIBE&nbsp;NOW</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "home_hero_1_background_image",
+      "label": "Home Hero 1 Background Image"
+    },
+    {
+      "id": "button_1_link",
+      "label": "button-1 - Link",
+      "type": "url"
+    },
+    {
+      "type": "richtext",
+      "id": "home_hero_1_paragraph",
+      "label": "home-hero-1_paragraph",
+      "default": "<p>Save up to 20% off and enjoy free shipping on all subscriptions</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "home_hero_1_header_image",
+      "label": "home-hero-1_header-image "
+    }
+  ]
+}
+{% endschema %}

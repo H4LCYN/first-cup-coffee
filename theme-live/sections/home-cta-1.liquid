@@ -1,0 +1,62 @@
+
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-medium">
+              <div class="home-cta_component">
+                <div class="home-cta_content-wrapper">
+                  <h2 class="h2">{{ section.settings.home_cta_header }}</h2>
+                  <div p-add-class="text-size-medium">{{ section.settings.home_cta_1_paragraph | newline_to_br }}</div>
+                  <div class="spacer-small"></div>
+                  <a href="{% if section.settings.home_cta_1_link %}{{ section.settings.home_cta_1_link }}{% else %}#{% endif %}" class="button-1 w-inline-block">
+                    <div class="text-block p-contents">{{ section.settings.home_cta_1_button_text | newline_to_br }}</div>
+                    <div class="btn-anim"></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="home-cta-1_background">
+          <div class="home-cta-1_background-overlay"></div>{%- if section.settings.home_cta_1_background_image == nil -%}<img src="{{ 'cta-1_background.webp' | asset_url }}" loading="lazy" alt="" class="home-cta-1_background-image">{%- else -%}<img src="{{ section.settings.home_cta_1_background_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.home_cta_1_background_image.alt | escape }}" class="home-cta-1_background-image">{%- endif -%}
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_home-cta-1");</script>
+        
+{% schema %}
+{
+  "name": "Home CTA 1",
+  "tag": "section",
+  "class": "section_home-cta-1",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "home_cta_1_background_image",
+      "label": "Home CTA 1 Background Image"
+    },
+    {
+      "id": "home_cta_1_link",
+      "label": "Home CTA 1 Link",
+      "type": "url"
+    },
+    {
+      "type": "richtext",
+      "id": "home_cta_1_button_text",
+      "label": "Home CTA 1 Button Text",
+      "default": "<p>SUBSCRIBE&nbsp;NOW</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "home_cta_1_paragraph",
+      "label": "Home CTA 1 Paragraph",
+      "default": "<p>Choose your coffee, select delivery times, &amp; get fresh coffee delivered to your door. There’s no contracts so you can cancel anytime.</p>"
+    },
+    {
+      "type": "text",
+      "id": "home_cta_header",
+      "label": "Home CTA Header",
+      "default": "SAVE 20% WHEN YOU SUBSCRIBE"
+    }
+  ]
+}
+{% endschema %}

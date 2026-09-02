@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "section-home-hero-1": {
+      "type": "section-home-hero-1",
+      "settings": {}
+    },
+    "section-featured-home": {
+      "type": "section-featured-home",
+      "settings": {}
+    },
+    "home-cta-1": {
+      "type": "home-cta-1",
+      "settings": {}
+    },
+    "section-products-home": {
+      "type": "section-products-home",
+      "settings": {}
+    },
+    "section-home-category-grid": {
+      "type": "section-home-category-grid",
+      "settings": {}
+    },
+    "home-cta-2": {
+      "type": "home-cta-2",
+      "settings": {}
+    },
+    "section-join-community": {
+      "type": "section-join-community",
+      "settings": {
+        "follow_link": "https://www.instagram.com/firstcupcoffeeco/"
+      }
+    },
+    "section-newsletter": {
+      "type": "section-newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "section-home-hero-1",
+    "section-featured-home",
+    "home-cta-1",
+    "section-products-home",
+    "section-home-category-grid",
+    "home-cta-2",
+    "section-join-community",
+    "section-newsletter"
+  ]
+}

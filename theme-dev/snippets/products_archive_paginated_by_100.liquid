@@ -1,0 +1,43 @@
+{% capture listItems %}
+                        {%- paginate collection.products by 100 -%}
+                        {%- assign pagination = paginate %}
+                        {% for item in collection.products %}
+                        <div role="listitem" class="w-dyn-item">
+                    <a href="{{ item.url }}" class="home-product_link w-inline-block">
+                      <div class="product-container-image"><img class="product-image" src="{{ item.featured_image | img_url: 'master' }}" alt="{{ item.featured_image.alt }}" loading="lazy" data-commerce-type="variation-image" srcset="{{ item.featured_image | img_url: '1920x' }} 1920w,{{ item.featured_image | img_url: '1600x' }} 1600w,{{ item.featured_image | img_url: '1366x' }} 1366w,{{ item.featured_image | img_url: '1024x' }} 1024w,{{ item.featured_image | img_url: '768x' }} 768w,{{ item.featured_image | img_url: '640x' }} 640w"></div>
+                      <div class="product-container-info">
+                        <div fs-cmssort-field="Name" class="item-name-medium">{{ item.title }}</div>
+                        {%- if item.metafields.custom.roast_profile -%}<div class="roast-profile_wrapper">
+                          <div fs-cmsfilter-field="Roast">{{ item.metafields.custom['roast_profile'].value }}</div>
+                          <div class="text-block-2">Roast</div>
+                        </div>{%- endif -%}
+                        <div data-commerce-type="variation-price" fs-cmssort-field="Price" class="p-small is-price">{{ item.price | money }}</div>
+                        <div fs-cmssort-field="Featured" class="hidden-metafield">{{ item.metafields.custom['featured'].value }}</div>
+                        <div fs-cmsfilter-field="Package" class="hidden-metafield">{{ item.metafields.custom['packagetype'].value }}</div>
+                      </div>
+                    </a>
+                  </div>
+                        {% endfor %}
+                        {%- endpaginate -%}
+                        {% endcapture %}
+{% assign items_length = listItems | strip | size %}
+    <div class="w-dyn-list" udy-collection="product">
+                {%- unless items_length == 0 -%}<div fs-cmsfilter-element="list" fs-cmssort-element="list" fs-cmsfilter-showquery="true" fs-cmsfilter-tagformat="category" role="list" class="collection-grid w-dyn-items">
+                  {{ listItems }}
+                </div>{%- endunless -%}
+                {%- if items_length == 0 -%}<div class="w-dyn-empty">
+                  <div>No items found.</div>
+                </div>{%- endif -%}
+                <div role="navigation" aria-label="List" class="w-pagination-wrapper">
+                  {%- if pagination.previous.is_link -%}<a href="{{ pagination.previous.url }}" aria-label="Previous Page" class="w-pagination-previous"><svg class="w-pagination-previous-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" transform="translate(0, 1)">
+                      <path fill="none" stroke="currentColor" fill-rule="evenodd" d="M8 10L4 6l4-4"></path>
+                    </svg>
+                    <div class="w-inline-block">Previous</div>
+                  </a>{%- endif -%}
+                  {%- if pagination.next.is_link -%}<a href="{{ pagination.next.url }}" aria-label="Next Page" class="w-pagination-next">
+                    <div class="w-inline-block">Next</div><svg class="w-pagination-next-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" transform="translate(0, 1)">
+                      <path fill="none" stroke="currentColor" fill-rule="evenodd" d="M4 2l4 4-4 4"></path>
+                    </svg>
+                  </a>{%- endif -%}
+                </div>
+              </div>

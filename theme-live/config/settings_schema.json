@@ -1,0 +1,210 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "first-cup-coffee",
+    "theme_author": "Halcyon",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://www.halcyon.black",
+    "theme_support_email": "support@email.com"
+  },
+  {
+    "name": "Seo Settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon Image",
+        "info": "Will be scaled down to 32x32px"
+      },
+      {
+        "type": "image_picker",
+        "id": "apple_touch_icon",
+        "label": "Apple touch icon image",
+        "info": "Will be scaled down to 120x120px"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter Link"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_product_rich_snippets",
+        "label": "Enable Product Rich Snippets",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_article_rich_snippets",
+        "label": "Enable Article Rich Snippets",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Colors Settings",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_first_cup_white",
+        "label": "Color first cup white",
+        "default": "#fafcf5"
+      },
+      {
+        "type": "color",
+        "id": "color_dark_grey",
+        "label": "Color dark grey",
+        "default": "#232323"
+      },
+      {
+        "type": "color",
+        "id": "color_shadow_5",
+        "label": "Color shadow 5",
+        "default": "#fbf7ed"
+      },
+      {
+        "type": "color",
+        "id": "color_black",
+        "label": "Color black",
+        "default": "#020203"
+      },
+      {
+        "type": "color",
+        "id": "color_uniform_green",
+        "label": "Color uniform green",
+        "default": "#3d441e"
+      },
+      {
+        "type": "color",
+        "id": "color_butterscotch",
+        "label": "Color butterscotch",
+        "default": "#d29f13"
+      },
+      {
+        "type": "color",
+        "id": "color_gray_4",
+        "label": "Color gray 4",
+        "default": "#cccccd"
+      },
+      {
+        "type": "color",
+        "id": "color_first_cup_charcoal",
+        "label": "Color first cup charcoal",
+        "default": "#080808"
+      },
+      {
+        "type": "color",
+        "id": "color_gray_3",
+        "label": "Color gray 3",
+        "default": "#5c5b5b"
+      },
+      {
+        "type": "color",
+        "id": "color_firebrick",
+        "label": "Color firebrick",
+        "default": "#be3a34"
+      },
+      {
+        "type": "color",
+        "id": "color_golden_brown",
+        "label": "Color golden brown",
+        "default": "#a76d11"
+      },
+      {
+        "type": "color",
+        "id": "color_burnt_umber",
+        "label": "Color burnt umber",
+        "default": "#893024"
+      },
+      {
+        "type": "color",
+        "id": "color_olive_green",
+        "label": "Color olive green",
+        "default": "#5e7e29"
+      },
+      {
+        "type": "color",
+        "id": "color_shadow_2",
+        "label": "Color shadow 2",
+        "default": "#ddc47b"
+      },
+      {
+        "type": "color",
+        "id": "color_shadow_3",
+        "label": "Color shadow 3",
+        "default": "#e8d7a7"
+      },
+      {
+        "type": "color",
+        "id": "color_shadow_4",
+        "label": "Color shadow 4",
+        "default": "#f4ebd3"
+      },
+      {
+        "type": "color",
+        "id": "color_error",
+        "label": "Color error",
+        "default": "#e12727"
+      },
+      {
+        "type": "color",
+        "id": "color_accessible_components_dark_grey",
+        "label": "Color accessible components  dark grey",
+        "default": "#9b9b9b"
+      },
+      {
+        "type": "color",
+        "id": "color_accessible_components_dodger_blue",
+        "label": "Color accessible components  dodger blue",
+        "default": "#1378d1"
+      }
+    ]
+  },
+  {
+    "name": "Products Collection Settings",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection_home",
+        "label": "Collection Home"
+      },
+      {
+        "type": "range",
+        "id": "collection_home_limit",
+        "label": "Collection Home limit",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "collection",
+        "id": "collection_2_home",
+        "label": "Collection 2 Home"
+      },
+      {
+        "type": "range",
+        "id": "collection_2_home_limit",
+        "label": "Collection 2 Home limit",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "collection",
+        "id": "collection_collection_all",
+        "label": "Collection Collection All"
+      },
+      {
+        "type": "range",
+        "id": "collection_collection_all_limit",
+        "label": "Collection Collection All limit",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "default": 3
+      }
+    ]
+  }
+]

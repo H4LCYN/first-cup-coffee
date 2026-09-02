@@ -1,0 +1,116 @@
+{%- assign headerSnippetPath = "header-password" -%}{%- assign wfPage = "691fca8965cbeb0af1ec15b6" -%}{%- assign bodyClasses = "" -%}
+  <div class="page-wrapper">
+    {%- render 'google-icons' -%}
+    {%- render 'global-styles' -%}
+    {%- section 'top-ad' -%}
+    {%- section 'navbar' -%}
+    {%- render 'preloader' -%}
+    <main class="main-wrapper">
+      <section class="section_imprint-header">
+        <div class="padding-global padding-section-header1">
+          <div class="container-medium">
+            <div class="imprint-header_content">
+              <div class="left-column">
+                <div class="imprint-header_content-img-wrpr"><img src="{{ 'bafo-flat.png' | asset_url }}" loading="lazy" sizes="(max-width: 800px) 100vw, 800px" srcset="{{ 'bafo-flat-p-500.png' | asset_url }} 500w, {{ 'bafo-flat.png' | asset_url }} 800w" alt=""></div>
+              </div>
+              <div class="right-column">
+                <div class="imprint-header_content-wrpr">
+                  <h1 class="custom-heading1">{{ 't18a3ae52' | t }}<span class="text-span">{{ 't58' | t }}</span><br>{{ 'tn114494a7' | t }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="imprint-header_bkgd-component">
+          <div class="imprint-header_bkgd-wrpr"><img src="{{ 'header-bkgd.avif' | asset_url }}" loading="lazy" sizes="(max-width: 2880px) 100vw, 2880px" srcset="{{ 'header-bkgd-p-500.avif' | asset_url }} 500w, {{ 'header-bkgd-p-800.avif' | asset_url }} 800w, {{ 'header-bkgd-p-1080.avif' | asset_url }} 1080w, {{ 'header-bkgd-p-1600.avif' | asset_url }} 1600w, {{ 'header-bkgd.avif' | asset_url }} 2880w" alt="" class="image-7"></div>
+          <div class="imprint-header_bkgd-overlay"></div>
+          <div class="imprint-header_bkgd-pattern"></div>
+        </div>
+      </section>
+      <section class="section_subscription-selection">
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-medium">
+              <div class="subscribe-selections_wrapper">
+                <h3>{{ 't2474989f' | t }}</h3>
+                <div class="subscribe-selections_component">
+                  <a option:url="Pods Subscription Link" href="https://firstcup.com/products/test-product" class="subscribe-selection is-red w-inline-block"><img src="{{ 'bags-arrangement-1-camera-7-1.webp' | asset_url }}" loading="eager" alt="" class="drop-shadow">
+                    <div class="subscribe-selection_title">{{ 'tn3976fc5b' | t }}</div>
+                  </a>
+                  <a option:url="Bulk Subscription Link" href="https://firstcup.com/products/test-product" class="subscribe-selection is-r w-inline-block"><img src="{{ 'bulk-arrangement-1-cam_studio_black_soft_light_02_front.png' | asset_url }}" loading="eager" alt="" class="drop-shadow">
+                    <div class="subscribe-selection_title">{{ 'tn23c7feef' | t }}</div>
+                  </a>
+                  <a option:url="Pods Subscription Link" href="https://firstcup.com/products/build-a-custom-box-pods" class="subscribe-selection is-green w-inline-block"><img src="{{ 'coffee-capsule-mockup-03-1.webp' | asset_url }}" loading="eager" alt="" class="drop-shadow">
+                    <div class="subscribe-selection_title">{{ 't258ece' | t }}</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="section_subscription-details">
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-medium">
+              <div class="subscription-det_wrapper">
+                <h3>{{ 'tn74023da5' | t }}</h3>
+                <div class="perks-grid">
+                  <div id="w-node-_57bd5d13-e2b7-f597-a7b9-30c8601a4808-f1ec15b6" class="perk_component">
+                    <div class="perk_img-wrapper"><img src="{{ 'perk-shipping.webp' | asset_url }}" loading="lazy" alt="" class="image-5"></div>
+                    <h4 class="h4">{{ 't31c6b4e2' | t }}</h4>
+                    <p>{{ 'tn3fdff380' | t }}</p>
+                  </div>
+                  <div id="w-node-_57bd5d13-e2b7-f597-a7b9-30c8601a480f-f1ec15b6" class="perk_component">
+                    <div class="perk_img-wrapper"><img src="{{ 'perk-delivery.png' | asset_url }}" loading="lazy" alt=""></div>
+                    <h4 class="h4">{{ 't7e3758e7' | t }}</h4>
+                    <p>{{ 'tn1663090' | t }}</p>
+                  </div>
+                  <div id="w-node-_57bd5d13-e2b7-f597-a7b9-30c8601a4816-f1ec15b6" class="perk_component">
+                    <div class="perk_img-wrapper"><img src="{{ 'perk-saving.webp' | asset_url }}" loading="lazy" alt="" class="image-5"></div>
+                    <h4 class="h4">{{ 'tb9f4559' | t }}</h4>
+                    <p>{{ 't2605dee5' | t }}</p>
+                  </div>
+                  <div id="w-node-_57bd5d13-e2b7-f597-a7b9-30c8601a481d-f1ec15b6" class="perk_component">
+                    <div class="perk_img-wrapper"><img src="{{ 'perk-customize.webp' | asset_url }}" loading="lazy" alt="" class="image-5"></div>
+                    <h4 class="h4">{{ 't3ab196cc' | t }}</h4>
+                    <p>{{ 'tn6d4fb50b' | t }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- render 'section-newsletter-signup' -%}
+      {%- section 'footer' -%}
+    </main>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=654ae336a6e86029761320fd" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="{{ 'first-cup-coffee.js' | asset_url }}" type="text/javascript"></script>
+  <script>
+  function megaBack() {
+  var x = document.getElementsByClassName("mega-menu");
+    $('.menu-button').on('click', function(evt) {
+  if (window.getComputedStyle(x).display === "block") {
+    setTimeout(function() {
+        $('.mega-menu_mobile-close').triggerHandler('click');
+    }, 005);
+});
+  }
+}
+</script>
+  <script>
+$('.input-number-increment').click(function() {
+  var $input = $(this).parents('.input-number-group').find('.input-number');
+  var val = parseInt($input.val(), 10);
+  $input.val(val + 1);
+});
+$('.input-number-decrement').click(function() {
+  var $input = $(this).parents('.input-number-group').find('.input-number');
+  var val = parseInt($input.val(), 10);
+  $input.val(Math.max(val - 1, 1));
+})
+</script>
+
+{{ 'udesly-shopify.min.js' | asset_url | script_tag }}

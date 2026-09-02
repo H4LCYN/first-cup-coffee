@@ -1,0 +1,70 @@
+
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="padding-section-medium">
+              <div class="home-cta_component is-left">
+                <div class="home-cta_content-wrapper">
+                  <h2 class="h2">{{ section.settings.home_cta_2_header }}</h2>
+                  <div p-add-class="text-size-medium">{{ section.settings.home_cta_2_paragraph | newline_to_br }}</div>
+                  <div class="spacer-small"></div>
+                  <a href="{% if section.settings.home_cta_2_link_1 %}{{ section.settings.home_cta_2_link_1 }}{% else %}#{% endif %}" class="button-1 button-margin-right w-inline-block">
+                    <div class="text-block p-contents">{{ section.settings.home_cta_2_button_text_1 | newline_to_br }}</div>
+                  </a>
+                  <a href="#" class="button-1 w-inline-block">
+                    <div class="text-block p-contents">{{ section.settings.home_cta_2_button_text_2 | newline_to_br }}</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="home-cta-1_background">
+          <div class="home-cta-2_background-overlay"></div>{%- if section.settings.home_cta_2_background_image == nil -%}<img src="{{ '2q6a9148.jpg' | asset_url }}" loading="lazy" alt="" class="home-cta-1_background-image">{%- else -%}<img src="{{ section.settings.home_cta_2_background_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.home_cta_2_background_image.alt | escape }}" class="home-cta-1_background-image">{%- endif -%}
+        </div>
+      
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_home-cta-2");</script>
+        
+{% schema %}
+{
+  "name": "Home CTA 2",
+  "tag": "section",
+  "class": "section_home-cta-2",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "home_cta_2_background_image",
+      "label": "Home CTA 2 Background Image"
+    },
+    {
+      "type": "richtext",
+      "id": "home_cta_2_button_text_2",
+      "label": "Home CTA 2 Button Text 2",
+      "default": "<p>ORDER&nbsp;AHEAD</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "home_cta_2_button_text_1",
+      "label": "Home CTA 2 Button Text 1",
+      "default": "<p>LEARN&nbsp;MORE</p>"
+    },
+    {
+      "id": "home_cta_2_link_1",
+      "label": "Home CTA 2 Link 1",
+      "type": "url"
+    },
+    {
+      "type": "richtext",
+      "id": "home_cta_2_paragraph",
+      "label": "Home CTA 2 Paragraph",
+      "default": "<p>The First Cup Coffee Company Flagship location is now open to serve you! Online Order Ahead, pass through the Drive-Thru, or come relax in our spacious shop. Check out the First Cup private offices and conference room rentals.</p>"
+    },
+    {
+      "type": "text",
+      "id": "home_cta_2_header",
+      "label": "Home CTA 2 Header",
+      "default": "FLAGSHIP  LOCATION"
+    }
+  ]
+}
+{% endschema %}

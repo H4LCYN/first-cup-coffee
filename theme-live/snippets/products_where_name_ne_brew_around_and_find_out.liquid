@@ -1,0 +1,30 @@
+{% capture listItems %}
+{% paginate collections.all.products by 999 %}
+{%- assign allItems = collections.all.products -%}
+{%- for item in allItems -%}{%- assign condition_value = item.title | strip -%}{% assign condition_0 = false %}                  
+                {% unless condition_value == "Brew Around and Find Out" %}
+                    {% assign condition_0 = true %}
+                {% endunless %}{% if condition_0 %}
+ <div role="listitem" class="swiper-slide is-featured-slider w-dyn-item">
+                      <a href="{{ item.url }}" class="home-product_link w-inline-block">
+                        <div class="product-container-image"><img class="product-image" src="{{ item.featured_image | img_url: 'master' }}" alt="{{ item.featured_image.alt }}" loading="lazy" data-commerce-type="variation-image" srcset="{{ item.featured_image | img_url: '1920x' }} 1920w,{{ item.featured_image | img_url: '1600x' }} 1600w,{{ item.featured_image | img_url: '1366x' }} 1366w,{{ item.featured_image | img_url: '1024x' }} 1024w,{{ item.featured_image | img_url: '768x' }} 768w,{{ item.featured_image | img_url: '640x' }} 640w"></div>
+                        <div class="product-container-info">
+                          <div class="item-name-small">{{ item.title }}</div>
+                          <div data-commerce-type="variation-price" class="p-small is-price">{{ item.price | money }}</div>
+                        </div>
+                      </a>
+                    </div>
+{% endif %}
+{%- endfor -%}
+{% endpaginate %}
+{% endcapture %}
+{% assign items_length = listItems | strip | size %}
+
+<div class="swiper w-dyn-list" udy-collection="product">
+                  {%- unless items_length == 0 -%}<div role="list" class="swiper-wrapper is-featured-slider w-dyn-items">
+                    {{ listItems }}
+                  </div>{%- endunless -%}
+                  {%- if items_length == 0 -%}<div class="w-dyn-empty">
+                    <div>No items found.</div>
+                  </div>{%- endif -%}
+                </div>

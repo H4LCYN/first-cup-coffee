@@ -1,0 +1,63 @@
+
+        <div class="container-full">
+          <div class="padding-section-medium">
+            <div class="product-slider_component">
+              <div class="padding-global">
+                <div class="container-large">
+                  <div class="slider_top-wrapper">
+                    <div class="slider_top-content">
+                      <h3 class="h3 text-color-white">{{ 'tn68ca8e7e' | t }}</h3>
+                      <a href="/collections/coffee" class="button-1 is-1b w-inline-block">
+                        <div class="text-block">{{ 'tn4702174a' | t }}</div>
+                      </a>
+                    </div>
+                    <div class="home-dashed-rule_wrapper">
+                      <div class="home-dashed-rule_left"></div>
+                      <div class="home-dashed-rule_right"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="product-slider_left-button">
+                <div class="featured-slider_button-wrapper">
+                  <a href="#" class="featured-slider_button swiper-prev w-inline-block">
+                    <div class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 13 23" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5001 0.50502L12.4901 1.49497L2.48503 11.5L12.4901 21.505L11.5001 22.495L0.505127 11.5L11.5001 0.50502Z" fill="currentColor"></path>
+                      </svg></div>
+                  </a>
+                </div>
+              </div>
+              <div class="product-slider_right-button">
+                <div class="featured-slider_button-wrapper">
+                  <a href="#" class="featured-slider_button swiper-next w-inline-block">
+                    <div class="icon-embed-custom w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 13 23" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.49502 22.495L0.505067 21.505L10.5101 11.5L0.505069 1.49497L1.49502 0.505023L12.49 11.5L1.49502 22.495Z" fill="currentColor"></path>
+                      </svg></div>
+                  </a>
+                </div>
+              </div>
+              {%- if settings.collection_2_home != blank -%}{%- render "markup_for_collection_2_home" -%}{%- else -%}{%- render "products" -%}{%- endif -%}
+              <div class="padding-global">
+                <div class="container-large">
+                  <div class="featured-slider_bottom-wrapper">
+                    <div class="centered-rule"></div>
+                    <div class="swiper-drag-wrapper is-product-sllider">
+                      <div class="swiper-drag is-product-slider"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_products-home");</script>
+
+{% schema %}
+{
+  "name": "Section - Products Home",
+  "tag": "section",
+  "class": "section_products-home",
+  "settings": []
+}
+{% endschema %}

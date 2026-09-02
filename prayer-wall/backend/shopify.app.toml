@@ -1,0 +1,26 @@
+client_id = "60b780053f4c3c5d2c49e603d605b671"
+name = "First Cup Prayer Wall"
+handle = "first-cup-prayer-wall"
+application_url = "https://prayer-wall-105859123686.us-central1.run.app"
+embedded = false
+
+[access_scopes]
+scopes = "read_customers,read_metaobjects,write_metaobjects"
+
+[auth]
+redirect_urls = [
+  "https://prayer-wall-105859123686.us-central1.run.app/auth/callback",
+  "https://prayer-wall-105859123686.us-central1.run.app/auth/shopify/callback",
+  "https://prayer-wall-105859123686.us-central1.run.app/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2026-04"
+
+[app_proxy]
+url = "https://prayer-wall-105859123686.us-central1.run.app/proxy"
+subpath = "prayer-wall"
+prefix = "apps"
+
+[pos]
+embedded = false
