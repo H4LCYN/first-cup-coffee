@@ -90,19 +90,14 @@
     object-fit: cover;
   }
 
-  /* Grain overlay (Figma node 173:758): the source texture is placed
-     hugely oversized and rotated -90deg, then cropped by the slide's
-     overflow:hidden — not a simple cover-fit background. Percentages
-     are relative to the slide's locked 1440/576 aspect ratio, matching
-     Figma's exact placement at any size (same technique as the
-     torn-edge graphic above). */
+  /* Grain overlay (Figma node 173:758): exported directly from Figma
+     already flattened/composited at the frame's own 1440x576
+     dimensions with its 50% opacity baked into the alpha channel, so
+     this is a plain full-bleed placement — no extra opacity or
+     transform needed. */
   .hero-carousel-2026_grain {
     position: absolute;
-    left: 48.163%;
-    top: 6.842%;
-    width: 229.501%;
-    height: 327.779%;
-    transform: translate(-50%, -50%) rotate(-90deg);
+    inset: 0;
     mix-blend-mode: lighten;
     pointer-events: none;
   }
@@ -112,7 +107,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.5;
   }
 
   .hero-carousel-2026_scrim {
