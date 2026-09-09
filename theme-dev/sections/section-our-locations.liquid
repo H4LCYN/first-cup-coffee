@@ -32,12 +32,11 @@
   }
 
   .our-locations-2026_inner {
-    max-width: 1450px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 57px;
+    gap: 60px;
   }
 
   .our-locations-2026_heading {
@@ -52,6 +51,7 @@
 
   .our-locations-2026_cards {
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
     width: 100%;
     justify-content: center;
@@ -59,8 +59,9 @@
 
   .our-locations-2026_card {
     position: relative;
-    width: 443.33px;
-    height: 443.33px;
+    width: calc(100% / 3 - 26.7);
+    height: 440px;
+    min-width: 440px;
     max-width: 100%;
     background-color: #fff;
     overflow: hidden;
@@ -94,8 +95,8 @@
     bottom: 24px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     padding: 0 12px;
   }
 
@@ -115,6 +116,7 @@
     line-height: 18px;
     color: #fff;
     margin-top: 10px;
+    text-align: left;
   }
 
   .our-locations-2026_card-cta {
@@ -128,11 +130,7 @@
 
   @media screen and (max-width: 991px) {
     .site-redesign-26.our-locations-2026 {
-      padding: 60px 40px;
-    }
-
-    .our-locations-2026_cards {
-      flex-wrap: wrap;
+      padding: 60px 1rem;
     }
   }
 
@@ -140,6 +138,11 @@
     .our-locations-2026_cards {
       flex-direction: column;
       align-items: center;
+    }
+
+    .our-locations-2026_card {
+      width: 100%;
+      min-width: auto;
     }
   }
 </style>
