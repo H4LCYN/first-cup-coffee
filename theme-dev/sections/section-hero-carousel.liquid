@@ -167,26 +167,27 @@
      Desktop only — the mobile image already has its own precise
      per-slide crop and doesn't use the torn-edge treatment. */
   /* This photo is nearly square (~1.06:1) against a 2.5:1 banner, so
-     a plain object-fit: cover is width-bound — it renders at exactly
-     the container's width with zero horizontal slack, meaning
-     object-position-x has nothing to shift. To get a real shift,
-     force the image to render taller (and therefore, at its native
-     aspect ratio, wider) than a plain cover fit would, then anchor it
-     to the LEFT edge so the extra width falls off-screen to the
-     right. Anchoring left reveals more of the image's left side,
-     which pushes the visible subject's on-screen position rightward
-     — away from the torn-edge panel — matching the direction that
-     was actually wanted (anchoring right instead moves the subject
-     left, the wrong way, confirmed by testing). */
+     a plain object-fit: cover is width-bound with zero horizontal
+     slack when covering the FULL frame. But the torn-edge panel
+     already hides the left ~36% of the frame, so the photo only
+     needs to cover the visible ~924px-wide region on the right, not
+     the full 1440px — a much smaller target that needs far less
+     zoom. Sized here to ~984px rendered width (~60px of bleed past
+     the panel's edge) and right-anchored: since the rendered image is
+     narrower than the frame, right-anchoring slides the whole
+     (unclipped) photo rightward, leaving the gap on the left hidden
+     behind the panel — this pushes the subject right without the
+     "reveal more of one side via cropping" logic that caused the
+     wrong-direction result when the image was oversized instead. */
   @media screen and (min-width: 768px) {
     .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_image {
       inset: auto;
       top: 50%;
-      left: 0;
-      right: auto;
+      right: 0;
+      left: auto;
       bottom: auto;
       width: auto;
-      height: 300%;
+      height: 161%;
       max-width: none;
       transform: translateY(-50%);
     }
