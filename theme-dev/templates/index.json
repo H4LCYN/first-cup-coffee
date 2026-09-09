@@ -18,7 +18,12 @@
             "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
             "text_position": "left",
             "button_text": "Get Your First Cup",
-            "fallback_image": "hero-carousel-slide-1.jpg"
+            "fallback_image": "hero-carousel-slide-1.jpg",
+            "mobile_fallback_image": "hero-carousel-slide-1-mobile.jpg",
+            "mobile_text_position": "bottom",
+            "mobile_heading_size": 26,
+            "mobile_scrim": "gradient",
+            "mobile_photo_coverage": 100
           }
         },
         "slide-2": {
@@ -27,7 +32,12 @@
             "heading": "<p>Buzz, Neil, George and now, you.</p>",
             "text_position": "left",
             "button_text": "Get Your First Cup",
-            "fallback_image": "hero-carousel-slide-2.jpg"
+            "fallback_image": "hero-carousel-slide-2.jpg",
+            "mobile_fallback_image": "hero-carousel-slide-2-mobile.jpg",
+            "mobile_text_position": "top",
+            "mobile_heading_size": 45,
+            "mobile_scrim": "none",
+            "mobile_photo_coverage": 100
           }
         },
         "slide-3": {
@@ -36,7 +46,12 @@
             "heading": "<p>Roasted in Texas. Built for America.</p>",
             "text_position": "left",
             "button_text": "Get Your First Cup",
-            "fallback_image": "hero-carousel-slide-3.jpg"
+            "fallback_image": "hero-carousel-slide-3.jpg",
+            "mobile_fallback_image": "hero-carousel-slide-3-mobile.jpg",
+            "mobile_text_position": "bottom",
+            "mobile_heading_size": 40,
+            "mobile_scrim": "panel",
+            "mobile_photo_coverage": 70
           }
         },
         "slide-4": {
@@ -45,7 +60,12 @@
             "heading": "<p>Named for the firsts. Brewed for the next.</p>",
             "text_position": "right",
             "button_text": "Get Your First Cup",
-            "fallback_image": "hero-carousel-slide-4.jpg"
+            "fallback_image": "hero-carousel-slide-4.jpg",
+            "mobile_fallback_image": "hero-carousel-slide-4-mobile.jpg",
+            "mobile_text_position": "top",
+            "mobile_heading_size": 35,
+            "mobile_scrim": "none",
+            "mobile_photo_coverage": 100
           }
         }
       },

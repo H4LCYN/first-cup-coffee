@@ -3,27 +3,40 @@
   <div class="swiper hero-carousel-2026_swiper" data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}">
     <div class="swiper-wrapper">
       {%- for block in section.blocks -%}
-        <div class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }}" {{ block.shopify_attributes }}>
-          {%- if block.settings.image != blank -%}
-            <img
-              src="{{ block.settings.image | img_url: '1920x' }}"
-              srcset="{{ block.settings.image | img_url: '768x' }} 768w, {{ block.settings.image | img_url: '1440x' }} 1440w, {{ block.settings.image | img_url: '1920x' }} 1920w"
-              sizes="100vw"
-              alt="{{ block.settings.image.alt | escape }}"
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              class="hero-carousel-2026_image"
-            >
-          {%- elsif block.settings.fallback_image != blank -%}
-            <img
-              src="{{ block.settings.fallback_image | asset_url }}"
-              alt=""
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              class="hero-carousel-2026_image"
-            >
-          {%- endif -%}
+        <div
+          class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}"
+          style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%;"
+          {{ block.shopify_attributes }}
+        >
+          <div class="hero-carousel-2026_photo">
+            <picture>
+              {%- if block.settings.mobile_image != blank -%}
+                <source media="(max-width: 767px)" srcset="{{ block.settings.mobile_image | img_url: '1200x' }}">
+              {%- elsif block.settings.mobile_fallback_image != blank -%}
+                <source media="(max-width: 767px)" srcset="{{ block.settings.mobile_fallback_image | asset_url }}">
+              {%- endif -%}
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | img_url: '1920x' }}"
+                  srcset="{{ block.settings.image | img_url: '768x' }} 768w, {{ block.settings.image | img_url: '1440x' }} 1440w, {{ block.settings.image | img_url: '1920x' }} 1920w"
+                  sizes="100vw"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  class="hero-carousel-2026_image"
+                >
+              {%- elsif block.settings.fallback_image != blank -%}
+                <img
+                  src="{{ block.settings.fallback_image | asset_url }}"
+                  alt=""
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  class="hero-carousel-2026_image"
+                >
+              {%- endif -%}
+            </picture>
+          </div>
           <div class="hero-carousel-2026_grain"></div>
           <div class="hero-carousel-2026_scrim"></div>
-          <div class="hero-carousel-2026_content">
+          <div class="hero-carousel-2026_content" style="font-size: {{ block.settings.mobile_heading_size }}px;">
             <div class="hero-carousel-2026_heading">{{ block.settings.heading }}</div>
             {%- if block.settings.button_text != blank -%}
               <a href="{{ block.settings.button_link }}" class="hero-carousel-2026_button">{{ block.settings.button_text }}</a>
@@ -51,6 +64,14 @@
     position: relative;
     overflow: hidden;
     background-color: var(--dark-grey);
+  }
+
+  .hero-carousel-2026_photo,
+  .hero-carousel-2026_photo picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .hero-carousel-2026_image {
@@ -107,7 +128,7 @@
   .hero-carousel-2026_heading {
     font-family: Avenirnextltpro, sans-serif;
     font-weight: 700;
-    font-size: 48px;
+    font-size: 1em;
     line-height: 1.1;
     color: #fff;
     text-transform: uppercase;
@@ -156,19 +177,39 @@
     background: var(--butterscotch);
   }
 
+  /* Desktop heading size is fixed at 48px regardless of the mobile
+     inline font-size (that inline value only takes effect below the
+     767px breakpoint, see below). */
+  @media screen and (min-width: 768px) {
+    .hero-carousel-2026_content {
+      font-size: 48px !important;
+    }
+  }
+
   @media screen and (max-width: 767px) {
     .hero-carousel-2026_swiper {
       aspect-ratio: 1 / 1;
       min-height: 320px;
     }
 
-    /* Figma's 600x600 mobile frames center text regardless of the
-       desktop left/right position, and anchor it toward the bottom
-       with a bottom scrim rather than a side scrim. */
-    .hero-carousel-2026_scrim,
-    .hero-carousel-2026_slide.is-text-left .hero-carousel-2026_scrim,
-    .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_scrim {
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0) 55%);
+    /* Figma's 600x600 mobile frames position the photo, text side, and
+       scrim independently per slide, so these are all driven by
+       per-block settings (mobile_text_position / mobile_scrim /
+       mobile_photo_coverage) rather than a single shared treatment. */
+    .hero-carousel-2026_photo {
+      height: var(--mobile-photo-coverage, 100%);
+    }
+
+    .hero-carousel-2026_slide.is-mobile-scrim-none .hero-carousel-2026_scrim {
+      background: none;
+    }
+
+    .hero-carousel-2026_slide.is-mobile-scrim-gradient .hero-carousel-2026_scrim {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.55) 30%, rgba(0, 0, 0, 0) 60%);
+    }
+
+    .hero-carousel-2026_slide.is-mobile-scrim-panel .hero-carousel-2026_scrim {
+      background: linear-gradient(to top, #000 0%, #000 40%, rgba(0, 0, 0, 0) 100%);
     }
 
     .hero-carousel-2026_content,
@@ -177,17 +218,18 @@
       max-width: 100%;
       align-items: center;
       text-align: center;
+      padding: 32px 24px;
       justify-content: flex-end;
-      padding-bottom: 48px;
     }
 
-    .hero-carousel-2026_heading {
-      font-size: 26px;
+    .hero-carousel-2026_slide.is-mobile-text-top .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-mobile-text-top.is-text-right .hero-carousel-2026_content {
+      justify-content: flex-start;
     }
 
     .hero-carousel-2026_button {
-      font-size: 17px;
-      padding: 10px 22px;
+      font-size: 0.42em;
+      padding: 0.24em 0.58em;
     }
   }
 </style>
@@ -216,6 +258,31 @@
       "name": "Slide",
       "settings": [
         {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<p>Quality Coffee. Bettering Lives. Building Community.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Get Your First Cup"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "header",
+          "content": "Desktop"
+        },
+        {
           "type": "image_picker",
           "id": "image",
           "label": "Background image"
@@ -225,12 +292,6 @@
           "id": "fallback_image",
           "label": "Fallback photo filename (asset, used only if no image is picked above)",
           "info": "Advanced: filename of a theme asset, e.g. hero-carousel-slide-1.jpg"
-        },
-        {
-          "type": "richtext",
-          "id": "heading",
-          "label": "Heading",
-          "default": "<p>Quality Coffee. Bettering Lives. Building Community.</p>"
         },
         {
           "type": "select",
@@ -243,15 +304,59 @@
           "default": "left"
         },
         {
-          "type": "text",
-          "id": "button_text",
-          "label": "Button text",
-          "default": "Get Your First Cup"
+          "type": "header",
+          "content": "Mobile (below 768px)"
         },
         {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button link"
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile background image",
+          "info": "If left blank, the desktop image above is used instead."
+        },
+        {
+          "type": "text",
+          "id": "mobile_fallback_image",
+          "label": "Mobile fallback photo filename (asset)",
+          "info": "Advanced: filename of a theme asset, used only if no mobile image is picked above."
+        },
+        {
+          "type": "select",
+          "id": "mobile_text_position",
+          "label": "Mobile text position",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "bottom", "label": "Bottom" }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "range",
+          "id": "mobile_heading_size",
+          "label": "Mobile heading size (px)",
+          "min": 20,
+          "max": 56,
+          "step": 1,
+          "default": 32
+        },
+        {
+          "type": "select",
+          "id": "mobile_scrim",
+          "label": "Mobile text background",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "gradient", "label": "Gradient" },
+            { "value": "panel", "label": "Solid panel" }
+          ],
+          "default": "gradient"
+        },
+        {
+          "type": "range",
+          "id": "mobile_photo_coverage",
+          "label": "Mobile photo height (% of frame)",
+          "min": 50,
+          "max": 100,
+          "step": 5,
+          "default": 100
         }
       ]
     }
@@ -265,7 +370,11 @@
           "settings": {
             "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
             "text_position": "left",
-            "button_text": "Get Your First Cup"
+            "button_text": "Get Your First Cup",
+            "mobile_text_position": "bottom",
+            "mobile_heading_size": 26,
+            "mobile_scrim": "gradient",
+            "mobile_photo_coverage": 100
           }
         },
         {
@@ -273,7 +382,11 @@
           "settings": {
             "heading": "<p>Buzz, Neil, George and now, you.</p>",
             "text_position": "left",
-            "button_text": "Get Your First Cup"
+            "button_text": "Get Your First Cup",
+            "mobile_text_position": "top",
+            "mobile_heading_size": 45,
+            "mobile_scrim": "none",
+            "mobile_photo_coverage": 100
           }
         },
         {
@@ -281,7 +394,11 @@
           "settings": {
             "heading": "<p>Roasted in Texas. Built for America.</p>",
             "text_position": "left",
-            "button_text": "Get Your First Cup"
+            "button_text": "Get Your First Cup",
+            "mobile_text_position": "bottom",
+            "mobile_heading_size": 40,
+            "mobile_scrim": "panel",
+            "mobile_photo_coverage": 70
           }
         },
         {
@@ -289,7 +406,11 @@
           "settings": {
             "heading": "<p>Named for the firsts. Brewed for the next.</p>",
             "text_position": "right",
-            "button_text": "Get Your First Cup"
+            "button_text": "Get Your First Cup",
+            "mobile_text_position": "top",
+            "mobile_heading_size": 35,
+            "mobile_scrim": "none",
+            "mobile_photo_coverage": 100
           }
         }
       ]
