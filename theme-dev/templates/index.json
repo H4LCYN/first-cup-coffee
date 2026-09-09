@@ -19,6 +19,7 @@
             "text_position": "left",
             "button_text": "Get Your First Cup",
             "fallback_image": "hero-carousel-slide-1.jpg",
+            "desktop_torn_edge": true,
             "mobile_fallback_image": "hero-carousel-slide-1-mobile.jpg",
             "mobile_text_position": "bottom",
             "mobile_heading_size": 26,

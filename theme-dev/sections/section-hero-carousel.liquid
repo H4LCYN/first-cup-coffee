@@ -4,7 +4,7 @@
     <div class="swiper-wrapper">
       {%- for block in section.blocks -%}
         <div
-          class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}"
+          class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}{% if block.settings.desktop_torn_edge %} has-torn-edge{% endif %}"
           style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%;"
           {{ block.shopify_attributes }}
         >
@@ -34,6 +34,12 @@
               {%- endif -%}
             </picture>
           </div>
+          {%- if block.settings.desktop_torn_edge -%}
+            <div class="hero-carousel-2026_torn-panel"></div>
+            <div class="hero-carousel-2026_torn-edge">
+              <img src="{{ 'hero-carousel-torn-edge.svg' | asset_url }}" alt="" class="hero-carousel-2026_torn-edge-image">
+            </div>
+          {%- endif -%}
           <div class="hero-carousel-2026_grain"></div>
           <div class="hero-carousel-2026_scrim"></div>
           <div class="hero-carousel-2026_content" style="font-size: {{ block.settings.mobile_heading_size }}px;">
@@ -107,6 +113,49 @@
     background: linear-gradient(to left, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.45) 35%, rgba(0, 0, 0, 0) 70%);
   }
 
+  /* Torn-edge treatment (Figma nodes 173:748/173:750/173:751): a solid
+     black panel with a torn-paper edge graphic transitioning into the
+     photo. Percentages are relative to the slide's locked 1440/576
+     aspect ratio, matching Figma's exact pixel placement at any size.
+     Desktop only — suppressed below 767px in favor of the per-slide
+     mobile treatment. */
+  .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_scrim {
+    background: none;
+  }
+
+  .hero-carousel-2026_torn-panel {
+    position: absolute;
+    left: -15.556%;
+    top: -26.7%;
+    width: 51.374%;
+    height: 227.253%;
+    background: #000;
+    pointer-events: none;
+  }
+
+  .hero-carousel-2026_torn-edge {
+    position: absolute;
+    left: 42.047%;
+    top: 77.578%;
+    width: 105.865%;
+    height: 39.902%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    pointer-events: none;
+  }
+
+  .hero-carousel-2026_torn-edge-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hero-carousel-2026_torn-panel,
+    .hero-carousel-2026_torn-edge {
+      display: none;
+    }
+  }
+
   .hero-carousel-2026_content {
     position: relative;
     z-index: 1;
@@ -128,14 +177,14 @@
   .hero-carousel-2026_heading {
     font-family: Avenirnextltpro, sans-serif;
     font-weight: 700;
-    font-size: 1em;
-    line-height: 1.1;
+    font-size: 58.972px;
     color: #fff;
     text-transform: uppercase;
   }
 
   .hero-carousel-2026_heading p {
     margin: 0;
+    line-height: 90%;
   }
 
   .hero-carousel-2026_button {
@@ -304,6 +353,13 @@
           "default": "left"
         },
         {
+          "type": "checkbox",
+          "id": "desktop_torn_edge",
+          "label": "Show torn-edge panel behind text (desktop)",
+          "default": false,
+          "info": "A solid black panel with a torn-paper edge transitioning into the photo, matching the Figma hero design."
+        },
+        {
           "type": "header",
           "content": "Mobile (below 768px)"
         },
@@ -371,6 +427,7 @@
             "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
             "text_position": "left",
             "button_text": "Get Your First Cup",
+            "desktop_torn_edge": true,
             "mobile_text_position": "bottom",
             "mobile_heading_size": 26,
             "mobile_scrim": "gradient",
