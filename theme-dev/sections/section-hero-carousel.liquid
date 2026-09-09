@@ -159,6 +159,19 @@
     height: 100%;
   }
 
+  /* When the torn-edge panel covers the left ~35.8% of the frame,
+     shift the photo's focal point right by that same amount (minus a
+     small bleed so the photo still slightly underlaps the torn edge,
+     avoiding a seam) so the visible/uncovered portion of the frame
+     shows more of the image instead of its centered default crop.
+     Desktop only — the mobile image already has its own precise
+     per-slide crop and doesn't use the torn-edge treatment. */
+  @media screen and (min-width: 768px) {
+    .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_image {
+      object-position: 84% center;
+    }
+  }
+
   @media screen and (max-width: 767px) {
     .hero-carousel-2026_torn-panel,
     .hero-carousel-2026_torn-edge {
