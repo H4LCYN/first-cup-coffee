@@ -1,16 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "section-home-hero-1": {
       "type": "section-home-hero-1",
-      "settings": {}
+      "settings": {
+        "home_hero_1_cta_button_text": "<p>SUBSCRIBE&nbsp;NOW</p>",
+        "button_1_link": "",
+        "home_hero_1_paragraph": "<p>Save up to 20% off and enjoy free shipping on all subscriptions</p>"
+      }
     },
     "section-featured-home": {
       "type": "section-featured-home",
-      "settings": {}
+      "settings": {
+        "section_header": "Best Sellers"
+      }
     },
     "home-cta-1": {
       "type": "home-cta-1",
-      "settings": {}
+      "settings": {
+        "home_cta_1_link": "",
+        "home_cta_1_button_text": "<p>SUBSCRIBE&nbsp;NOW</p>",
+        "home_cta_1_paragraph": "<p>Choose your coffee, select delivery times, &amp; get fresh coffee delivered to your door. There’s no contracts so you can cancel anytime.</p>",
+        "home_cta_header": "SAVE 20% WHEN YOU SUBSCRIBE"
+      }
     },
     "section-products-home": {
       "type": "section-products-home",
@@ -18,15 +38,68 @@
     },
     "section-home-category-grid": {
       "type": "section-home-category-grid",
-      "settings": {}
+      "settings": {
+        "red_grid_url": "",
+        "brown_grid_url": "",
+        "gold_grid_url": "",
+        "green_grid_url": "",
+        "gold_grid_cta": "<p>SHOP MERCH<br></p>",
+        "gold_grid_paragraph": "<p>Show your support for First Cup with our limited edition merch. </p>",
+        "gold_grid_header": "Merch",
+        "brown_grid_cta": "<p>SHOP BUNDLES</p>",
+        "brown_grid_paragraph": "<p>Some of our favorite combinations to help you sample the First Cup catalog.</p>",
+        "brown_grid_header": "Bundles",
+        "red_grid_cta": "<p>JOIN THE FAMILY</p>",
+        "red_grid_paragraph": "<p>Updates &amp; deals you can't see anywhere else. Tag us &amp; you may be featured in our story!</p>",
+        "red_grid_header": "Follow",
+        "green_grid_cta": "<p>SUBSCRIBE AND SAVE</p>",
+        "green_grid_paragraph": "<p>Pick from all of our different roasts, choose a delivery schedule &amp; prep for a coffee adventure.</p>",
+        "green_grid_header": "Subscription Box"
+      }
     },
     "home-cta-2": {
       "type": "home-cta-2",
-      "settings": {}
+      "settings": {
+        "home_cta_2_button_text_2": "<p>ORDER&nbsp;AHEAD</p>",
+        "home_cta_2_button_text_1": "<p>LEARN&nbsp;MORE</p>",
+        "home_cta_2_link_1": "",
+        "home_cta_2_paragraph": "<p>The First Cup Coffee Company Flagship location is now open to serve you! Online Order Ahead, pass through the Drive-Thru, or come relax in our spacious shop. Check out the First Cup private offices and conference room rentals.</p>",
+        "home_cta_2_header": "FLAGSHIP  LOCATION"
+      }
     },
     "section-join-community": {
       "type": "section-join-community",
+      "blocks": {
+        "instafeed_app_block_9DzjAd": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_9DzjAd"
+      ],
       "settings": {
+        "enabled": true,
+        "heading": "JOIN OUR COMMUNITY",
+        "embed_code": "",
+        "placeholder_text": "Follow us on Instagram @firstcupcoffeeco",
+        "load_more_text": "LOAD MORE",
+        "load_more_link": "",
+        "follow_text": "FOLLOW US",
         "follow_link": "https://www.instagram.com/firstcupcoffeeco/"
       }
     }
