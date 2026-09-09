@@ -1,29 +1,99 @@
 
 {%- if section.settings.enabled -%}
-        <div class="padding-global">
-          <div class="container-large">
-            <h2 class="join-community_heading">{{ section.settings.heading }}</h2>
-            <div class="join-community_embed">
-              {%- if section.blocks.size > 0 -%}
-                {%- for block in section.blocks -%}
-                  {%- render block -%}
-                {%- endfor -%}
-              {%- elsif section.settings.embed_code != blank -%}
-                {{ section.settings.embed_code }}
-              {%- else -%}
-                <p class="join-community_placeholder">{{ section.settings.placeholder_text }}</p>
-              {%- endif -%}
-            </div>
-            <div class="join-community_buttons">
-              {%- if section.settings.load_more_link != blank -%}
-                <a href="{{ section.settings.load_more_link }}" class="join-community_button">{{ section.settings.load_more_text }}</a>
-              {%- endif -%}
-              <a href="{{ section.settings.follow_link }}" class="join-community_button" target="_blank" rel="noopener">{{ section.settings.follow_text }}</a>
-            </div>
-          </div>
-        </div>
+<div class="site-redesign-26 join-community-2026">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <div class="padding-global">
+    <div class="container-large">
+      <h2 class="join-community-2026_heading">{{ section.settings.heading }}</h2>
+      <div class="join-community-2026_embed">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- render block -%}
+          {%- endfor -%}
+        {%- elsif section.settings.embed_code != blank -%}
+          {{ section.settings.embed_code }}
+        {%- else -%}
+          <p class="join-community-2026_placeholder">{{ section.settings.placeholder_text }}</p>
+        {%- endif -%}
+      </div>
+      <div class="join-community-2026_buttons">
+        {%- if section.settings.load_more_link != blank -%}
+          <a href="{{ section.settings.load_more_link }}" class="join-community-2026_button">{{ section.settings.load_more_text }}</a>
+        {%- endif -%}
+        <a href="{{ section.settings.follow_link }}" class="join-community-2026_button" target="_blank" rel="noopener">{{ section.settings.follow_text }}</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_join-community");</script>
+<style>
+  .site-redesign-26.join-community-2026 {
+    background-color: #fff;
+  }
+
+  .join-community-2026_heading {
+    font-family: Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 40px;
+    color: #000;
+    text-align: center;
+    margin: 40px 0 0;
+  }
+
+  .join-community-2026_embed {
+    margin-top: 40px;
+  }
+
+  .join-community-2026_placeholder {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--gray-3);
+    text-align: center;
+    margin: 0;
+  }
+
+  .join-community-2026_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 5px 0 40px;
+  }
+
+  .join-community-2026_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 266px;
+    height: 40px;
+    background-color: var(--firebrick);
+    border-radius: 2px;
+    font-family: "Avenir Next", Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .join-community-2026_button:hover {
+    opacity: 0.85;
+  }
+
+  @media screen and (max-width: 767px) {
+    .join-community-2026_buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_join-community site-redesign-26");</script>
 {%- endif -%}
 
 {% schema %}

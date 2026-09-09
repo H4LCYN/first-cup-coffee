@@ -29,10 +29,6 @@
       "settings": {
         "follow_link": "https://www.instagram.com/firstcupcoffeeco/"
       }
-    },
-    "section-newsletter": {
-      "type": "section-newsletter",
-      "settings": {}
     }
   },
   "order": [
@@ -42,7 +38,6 @@
     "section-products-home",
     "section-home-category-grid",
     "home-cta-2",
-    "section-join-community",
-    "section-newsletter"
+    "section-join-community"
   ]
 }
