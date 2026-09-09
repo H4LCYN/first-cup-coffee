@@ -101,8 +101,9 @@
         "type": "footer",
         "settings": {
           "footer_shop_menu": "main-menu-new-do-not-use-yet",
-          "footer_info_menu": "footer-information",
-          "footer_customer_service_menu": "footer-customer-service"
+          "footer_customer_service_menu": "footer-customer-service",
+          "facebook_url": "https://www.facebook.com/firstcupcoffeecompany/",
+          "instagram_url": "https://www.instagram.com/firstcupcoffeeco/"
         }
       },
       "section-subpage-header-1": {
@@ -159,7 +160,7 @@
           "location_order_ahead": "https://urldefense.proofpoint.com/v2/url?u=https-3A__order.incentivio.com_c_firstcupcoffee_locations_pearland&d=DwMFaQ&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=Asa0CrMvGqVf990v0psuyiuOXiImAxc_W6FnGYw1cOo&m=fnyqsKSSplB4StLE1uXm3-rg2NduJw91KutK0Rz5e0E-0gRpLIqHoy18IqbjQ-z2&s=Zp19O2SzwoSPpQl9ByjtB59DUisSHArf_r9Dl2q1fPM&e=",
           "location_reserve": "https://firstcupcoffee.coworksapp.com/book/592?type=rooms",
           "location_directions": "https://www.google.com/maps?s=web&lqi=ChBmaXJzdCBjdXAgY29mZmVlSMLBmLqQuYCACFIYCOmYne8CEIyMuc3YuJnnIRoCZW4iAlVTWh4QABABEAIYABgBGAIiEGZpcnN0IGN1cCBjb2ZmZWVoAZIBC2NvZmZlZV9zaG9woQHd03u-M0fYxKEBwTXWBSSEXEShAYncos_QMs8YqgFZCgkvbS8wMnZxZm0QASoUIhBmaXJzdCBjdXAgY29mZmVlKAAyHhABIhq4ERYU-I9Z5ALTQ_YXrLi1-fsMt9xoVnRtyjIUEAIiEGZpcnN0IGN1cCBjb2ZmZWXgAQA&phdesc=FXCV9qCutXg&vet=12ahUKEwj6qoLTgaiKAxWRG9AFHevaO6cQ1YkKegQIGBAB..i&cs=1&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KRXENJTPkUCGMW-aJEZCA8s_&daddr=2645+E+Broadway+St,+Pearland,+TX+77581",
-          "location_hours": "<p><strong>S</strong> CLOSED<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM <br/><strong>W</strong> 6 AM-10 PM <br/><strong>T</strong> 6 AM-10 PM <br/><strong>F</strong> 6AM-11 PM <br/><strong>S</strong> 6 AM-11 PM</p>",
+          "location_hours": "<p><strong>S</strong> CLOSED<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM<br/><strong>W</strong> 6 AM-10 PM<br/><strong>T</strong> 6 AM-10 PM<br/><strong>F</strong> 6AM-11 PM<br/><strong>S</strong> 6 AM-11 PM</p>",
           "location_phone_display": "(832) 736-4028",
           "location_phone": "tel:(832) 736-4028",
           "location_address": "<p>2645 E Broadway St, <br/>Pearland, TX <br/>77581</p>",
@@ -210,7 +211,7 @@
           "location_order_ahead": "https://order.incentivio.com/c/firstcupcoffee/locations/rosenberg",
           "location_reserve": "https://firstcupcoffeerosenberg.coworksapp.com/book/591?type=Conference",
           "location_directions": "https://www.google.com/maps/dir/30.6953657,-88.0398912/first+cup+rosenberg/@30.0050086,-97.1911232,6z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x86411d3bf914bc41:0x3753bda7ed5c6262!2m2!1d-95.7516077!2d29.5270052?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D",
-          "location_hours": "<p><strong>S</strong> 8 AM- 4 PM<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM <br/><strong>W</strong> 6 AM-10 PM <br/><strong>T</strong> 6 AM-10 PM <br/><strong>F</strong> 6AM-11 PM <br/><strong>S</strong> 6 AM-11 PM</p>",
+          "location_hours": "<p><strong>S</strong> 8 AM- 4 PM<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM<br/><strong>W</strong> 6 AM-10 PM<br/><strong>T</strong> 6 AM-10 PM<br/><strong>F</strong> 6AM-11 PM<br/><strong>S</strong> 6 AM-11 PM</p>",
           "location_phone_display": "(832) 675-9499",
           "location_phone": "tel:(832) 675-9499",
           "location_address": "<p>1548 Minonite Rd Unit 120, <br/>Rosenberg, TX <br/>77469</p>",
@@ -226,7 +227,7 @@
           "location_order_ahead": "https://order.incentivio.com/c/firstcupcoffee/locations/woodlandsspring",
           "location_reserve": "https://firstcupcoffee.coworksapp.com/book/593?type=rooms",
           "location_directions": "https://www.google.com/maps/dir//First+Cup+Coffee+Co,+26403+Oak+Ridge+Dr,+Spring,+TX+77380/@30.1433068,-95.4713447,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x864737810f1b11f7:0x351686c20f9506cf!2m2!1d-95.4493412!2d30.144817?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D",
-          "location_hours": "<p><strong>S</strong> CLOSED<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM <br/><strong>W</strong> 6 AM-10 PM <br/><strong>T</strong> 6 AM-10 PM <br/><strong>F</strong> 6AM-11 PM <br/><strong>S</strong> 6 AM-11 PM</p>",
+          "location_hours": "<p><strong>S</strong> CLOSED<br/><strong>M</strong> 6 AM- 10 PM<br/><strong>T</strong> 6 AM-10 PM<br/><strong>W</strong> 6 AM-10 PM<br/><strong>T</strong> 6 AM-10 PM<br/><strong>F</strong> 6AM-11 PM<br/><strong>S</strong> 6 AM-11 PM</p>",
           "location_phone_display": "(832) 510-4291",
           "location_phone": "tel:8325104291",
           "location_address": "<p>26403 Oak Ridge Dr,<br/>Spring, TX,<br/>77380</p>",
