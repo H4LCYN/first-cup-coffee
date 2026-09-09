@@ -9,12 +9,54 @@
  */
 {
   "sections": {
-    "section-home-hero-1": {
-      "type": "section-home-hero-1",
+    "section-hero-carousel": {
+      "type": "section-hero-carousel",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
+            "text_position": "left",
+            "button_text": "Get Your First Cup",
+            "fallback_image": "hero-carousel-slide-1.jpg"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Buzz, Neil, George and now, you.</p>",
+            "text_position": "left",
+            "button_text": "Get Your First Cup",
+            "fallback_image": "hero-carousel-slide-2.jpg"
+          }
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Roasted in Texas. Built for America.</p>",
+            "text_position": "left",
+            "button_text": "Get Your First Cup",
+            "fallback_image": "hero-carousel-slide-3.jpg"
+          }
+        },
+        "slide-4": {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Named for the firsts. Brewed for the next.</p>",
+            "text_position": "right",
+            "button_text": "Get Your First Cup",
+            "fallback_image": "hero-carousel-slide-4.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4"
+      ],
       "settings": {
-        "home_hero_1_cta_button_text": "<p>SUBSCRIBE&nbsp;NOW</p>",
-        "button_1_link": "",
-        "home_hero_1_paragraph": "<p>Save up to 20% off and enjoy free shipping on all subscriptions</p>"
+        "autoplay_speed": 6
       }
     },
     "section-featured-home": {
@@ -136,7 +178,7 @@
     }
   },
   "order": [
-    "section-home-hero-1",
+    "section-hero-carousel",
     "section-featured-home",
     "home-cta-1",
     "section-products-home",

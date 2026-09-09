@@ -187,6 +187,19 @@
         slideDuplicateActiveClass: "is-active"
       });
     });
+    document.querySelectorAll(".hero-carousel-2026_swiper").forEach(function (el) {
+      new Swiper(el, {
+        loop: true,
+        autoplay: {
+          delay: parseInt(el.dataset.autoplaySpeed, 10) || 6000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: el.querySelector(".hero-carousel-2026_pagination"),
+          clickable: true
+        }
+      });
+    });
     </script>
     {{ 'udesly-shopify.min.js' | asset_url | script_tag }}
   {% else %}
