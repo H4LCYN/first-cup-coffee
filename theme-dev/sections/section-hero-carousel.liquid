@@ -5,7 +5,7 @@
       {%- for block in section.blocks -%}
         <div
           class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}{% if block.settings.desktop_torn_edge %} has-torn-edge{% endif %}"
-          style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%;"
+          style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%; --desktop-padding-h: {{ block.settings.desktop_padding_horizontal }}px; --desktop-padding-v: {{ block.settings.desktop_padding_vertical }}px; --mobile-padding-h: {{ block.settings.mobile_padding_horizontal }}px; --mobile-padding-v: {{ block.settings.mobile_padding_vertical }}px;"
           {{ block.shopify_attributes }}
         >
           <div class="hero-carousel-2026_photo">
@@ -174,7 +174,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 24px;
-    padding: {{ section.settings.desktop_padding_vertical }}px {{ section.settings.desktop_padding_horizontal }}px;
+    padding: var(--desktop-padding-v, 0) var(--desktop-padding-h, 100px);
     max-width: 740px;
   }
 
@@ -277,7 +277,7 @@
       max-width: 100%;
       align-items: center;
       text-align: center;
-      padding: {{ section.settings.mobile_padding_vertical }}px {{ section.settings.mobile_padding_horizontal }}px;
+      padding: var(--mobile-padding-v, 32px) var(--mobile-padding-h, 24px);
       justify-content: flex-end;
     }
 
@@ -309,50 +309,6 @@
       "max": 12,
       "step": 1,
       "default": 6
-    },
-    {
-      "type": "header",
-      "content": "Content padding — desktop"
-    },
-    {
-      "type": "range",
-      "id": "desktop_padding_horizontal",
-      "label": "Horizontal (px)",
-      "min": 0,
-      "max": 200,
-      "step": 4,
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "desktop_padding_vertical",
-      "label": "Vertical (px)",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Content padding — mobile"
-    },
-    {
-      "type": "range",
-      "id": "mobile_padding_horizontal",
-      "label": "Horizontal (px)",
-      "min": 0,
-      "max": 80,
-      "step": 2,
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "mobile_padding_vertical",
-      "label": "Vertical (px)",
-      "min": 0,
-      "max": 80,
-      "step": 2,
-      "default": 32
     }
   ],
   "blocks": [
@@ -414,6 +370,24 @@
           "info": "A solid black panel with a torn-paper edge transitioning into the photo, matching the Figma hero design."
         },
         {
+          "type": "range",
+          "id": "desktop_padding_horizontal",
+          "label": "Content padding — horizontal (px)",
+          "min": 0,
+          "max": 200,
+          "step": 4,
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "desktop_padding_vertical",
+          "label": "Content padding — vertical (px)",
+          "min": 0,
+          "max": 120,
+          "step": 4,
+          "default": 0
+        },
+        {
           "type": "header",
           "content": "Mobile (below 768px)"
         },
@@ -467,6 +441,24 @@
           "max": 100,
           "step": 5,
           "default": 100
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_horizontal",
+          "label": "Content padding — horizontal (px)",
+          "min": 0,
+          "max": 80,
+          "step": 2,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_vertical",
+          "label": "Content padding — vertical (px)",
+          "min": 0,
+          "max": 80,
+          "step": 2,
+          "default": 32
         }
       ]
     }
