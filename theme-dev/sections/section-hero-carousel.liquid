@@ -40,7 +40,9 @@
               <img src="{{ 'hero-carousel-torn-edge.svg' | asset_url }}" alt="" class="hero-carousel-2026_torn-edge-image">
             </div>
           {%- endif -%}
-          <div class="hero-carousel-2026_grain"></div>
+          <div class="hero-carousel-2026_grain">
+            <img src="{{ 'hero-carousel-grain-overlay.png' | asset_url }}" alt="" class="hero-carousel-2026_grain-image">
+          </div>
           <div class="hero-carousel-2026_scrim"></div>
           <div class="hero-carousel-2026_content" style="font-size: {{ block.settings.mobile_heading_size }}px;">
             <div class="hero-carousel-2026_heading">{{ block.settings.heading }}</div>
@@ -88,15 +90,29 @@
     object-fit: cover;
   }
 
+  /* Grain overlay (Figma node 173:758): the source texture is placed
+     hugely oversized and rotated -90deg, then cropped by the slide's
+     overflow:hidden — not a simple cover-fit background. Percentages
+     are relative to the slide's locked 1440/576 aspect ratio, matching
+     Figma's exact placement at any size (same technique as the
+     torn-edge graphic above). */
   .hero-carousel-2026_grain {
     position: absolute;
-    inset: 0;
-    background-image: url('{{ "hero-carousel-grain-overlay.png" | asset_url }}');
-    background-size: cover;
-    background-position: center;
+    left: 48.163%;
+    top: 6.842%;
+    width: 229.501%;
+    height: 327.779%;
+    transform: translate(-50%, -50%) rotate(-90deg);
     mix-blend-mode: lighten;
-    opacity: 0.5;
     pointer-events: none;
+  }
+
+  .hero-carousel-2026_grain-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
   }
 
   .hero-carousel-2026_scrim {
@@ -164,8 +180,8 @@
     flex-direction: column;
     justify-content: center;
     gap: 24px;
-    padding: 0 6vw;
-    max-width: 640px;
+    padding: 0 100px;
+    max-width: 740px;
   }
 
   .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_content {
@@ -177,14 +193,14 @@
   .hero-carousel-2026_heading {
     font-family: Avenirnextltpro, sans-serif;
     font-weight: 700;
-    font-size: 58.972px;
+    font-size: 44.786px;
     color: #fff;
     text-transform: uppercase;
   }
 
   .hero-carousel-2026_heading p {
     margin: 0;
-    line-height: 90%;
+    line-height: 1.1;
   }
 
   .hero-carousel-2026_button {
