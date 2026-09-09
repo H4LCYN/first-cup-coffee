@@ -158,22 +158,36 @@
 
   @media screen and (max-width: 767px) {
     .hero-carousel-2026_swiper {
-      aspect-ratio: 3 / 4;
-      min-height: 420px;
+      aspect-ratio: 1 / 1;
+      min-height: 320px;
+    }
+
+    /* Figma's 600x600 mobile frames center text regardless of the
+       desktop left/right position, and anchor it toward the bottom
+       with a bottom scrim rather than a side scrim. */
+    .hero-carousel-2026_scrim,
+    .hero-carousel-2026_slide.is-text-left .hero-carousel-2026_scrim,
+    .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_scrim {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0) 55%);
+    }
+
+    .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_content {
+      margin-left: 0;
+      max-width: 100%;
+      align-items: center;
+      text-align: center;
+      justify-content: flex-end;
+      padding-bottom: 48px;
     }
 
     .hero-carousel-2026_heading {
-      font-size: 32px;
+      font-size: 26px;
     }
 
-    .hero-carousel-2026_content {
-      max-width: 100%;
-    }
-
-    .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_content {
-      margin-left: 0;
-      align-items: flex-start;
-      text-align: left;
+    .hero-carousel-2026_button {
+      font-size: 17px;
+      padding: 10px 22px;
     }
   }
 </style>
