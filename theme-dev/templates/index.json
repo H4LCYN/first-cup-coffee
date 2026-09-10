@@ -15,16 +15,21 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
-            "text_position": "left",
+            "heading": "<p>Quality Coffee.</p><p>Bettering Lives.</p><p>Building Community.</p>",
             "button_text": "Get Your First Cup",
+            "button_link": "",
             "fallback_image": "hero-carousel-slide-1.jpg",
+            "text_position": "left",
             "desktop_torn_edge": true,
-            "mobile_fallback_image": "hero-carousel-slide-1-mobile.jpg",
+            "desktop_padding_horizontal": 40,
+            "desktop_padding_vertical": 0,
+            "mobile_fallback_image": "hero-carousel-slide-1-mobile.png",
             "mobile_text_position": "bottom",
             "mobile_heading_size": 26,
             "mobile_scrim": "gradient",
-            "mobile_photo_coverage": 100
+            "mobile_photo_coverage": 100,
+            "mobile_padding_horizontal": 24,
+            "mobile_padding_vertical": 32
           }
         },
         "slide-2": {

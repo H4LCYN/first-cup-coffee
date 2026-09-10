@@ -183,11 +183,11 @@
     .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_image {
       inset: auto;
       top: 50%;
-      right: -6%;
+      right: -20%;
       left: auto;
       bottom: auto;
       width: auto;
-      height: 220%;
+      height: 240%;
       max-width: none;
       transform: translateY(-50%);
     }
@@ -210,6 +210,10 @@
     gap: 24px;
     padding: var(--desktop-padding-v, 0) var(--desktop-padding-h, 100px);
     max-width: 740px;
+  }
+
+  .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content {
+    max-width: 48vw;
   }
 
   .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_content {
@@ -272,10 +276,13 @@
 
   /* Desktop heading size is fixed at 48px regardless of the mobile
      inline font-size (that inline value only takes effect below the
-     767px breakpoint, see below). */
-  @media screen and (min-width: 768px) {
-    .hero-carousel-2026_content {
-      font-size: 48px !important;
+     992px breakpoint, see below). */
+  @media screen and (max-width: 992px) {
+    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content {
+      max-width: 48vw;
+    }
+    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content > .hero-carousel-2026_heading {
+      font-size: 32px;
     }
   }
 
@@ -323,6 +330,10 @@
     .hero-carousel-2026_button {
       font-size: 0.42em;
       padding: 0.24em 0.58em;
+    }
+
+    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content {
+      max-width: 100%;
     }
   }
 </style>
