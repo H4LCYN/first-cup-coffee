@@ -10,10 +10,19 @@
         >
           <div class="hero-carousel-2026_photo">
             <picture>
-              {%- if block.settings.mobile_image != blank -%}
-                <source media="(max-width: 767px)" srcset="{{ block.settings.mobile_image | img_url: '1200x' }}">
+              {%- if block.settings.tablet_image != blank -%}
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.tablet_image | img_url: '1600x' }}">
+              {%- elsif block.settings.tablet_fallback_image != blank -%}
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.tablet_fallback_image | asset_url }}">
+              {%- elsif block.settings.mobile_image != blank -%}
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.mobile_image | img_url: '1600x' }}">
               {%- elsif block.settings.mobile_fallback_image != blank -%}
-                <source media="(max-width: 767px)" srcset="{{ block.settings.mobile_fallback_image | asset_url }}">
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.mobile_fallback_image | asset_url }}">
+              {%- endif -%}
+              {%- if block.settings.mobile_image != blank -%}
+                <source media="(max-width: 600px)" srcset="{{ block.settings.mobile_image | img_url: '1200x' }}">
+              {%- elsif block.settings.mobile_fallback_image != blank -%}
+                <source media="(max-width: 600px)" srcset="{{ block.settings.mobile_fallback_image | asset_url }}">
               {%- endif -%}
               {%- if block.settings.image != blank -%}
                 <img
@@ -44,6 +53,14 @@
             <img src="{{ 'hero-carousel-grain-overlay.png' | asset_url }}" alt="" class="hero-carousel-2026_grain-image">
           </div>
           <div class="hero-carousel-2026_scrim"></div>
+          {%- if block.settings.mobile_scrim == 'gradient' -%}
+            <div class="hero-carousel-2026_fade-overlay">
+              <picture>
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ 'hero-carousel-fade-overlay-tablet.png' | asset_url }}">
+                <img src="{{ 'hero-carousel-fade-overlay-mobile.png' | asset_url }}" alt="" class="hero-carousel-2026_fade-overlay-image">
+              </picture>
+            </div>
+          {%- endif -%}
           <div class="hero-carousel-2026_content" style="font-size: {{ block.settings.mobile_heading_size }}px;">
             <div class="hero-carousel-2026_heading">{{ block.settings.heading }}</div>
             {%- if block.settings.button_text != blank -%}
@@ -179,7 +196,7 @@
      behind the panel — this pushes the subject right without the
      "reveal more of one side via cropping" logic that caused the
      wrong-direction result when the image was oversized instead. */
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 992px) {
     .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_image {
       inset: auto;
       top: 50%;
@@ -193,7 +210,7 @@
     }
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 991px) {
     .hero-carousel-2026_torn-panel,
     .hero-carousel-2026_torn-edge {
       display: none;
@@ -225,9 +242,21 @@
   .hero-carousel-2026_heading {
     font-family: Avenirnextltpro, sans-serif;
     font-weight: 700;
-    font-size: 44.786px;
+    font-size: 1em;
     color: #fff;
     text-transform: uppercase;
+  }
+
+  /* .hero-carousel-2026_content's font-size is set inline per-slide via
+     block.settings.mobile_heading_size, but that's only meant to apply
+     at tablet/mobile widths (<=991px, see below) — pin it to a fixed
+     desktop size here so the heading (font-size: 1em, inheriting from
+     content) isn't accidentally driven by the mobile setting above
+     that breakpoint. */
+  @media screen and (min-width: 992px) {
+    .hero-carousel-2026_content {
+      font-size: 44.786px;
+    }
   }
 
   .hero-carousel-2026_heading p {
@@ -274,28 +303,32 @@
     background: var(--butterscotch);
   }
 
-  /* Desktop heading size is fixed at 48px regardless of the mobile
-     inline font-size (that inline value only takes effect below the
-     992px breakpoint, see below). */
-  @media screen and (max-width: 992px) {
-    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content {
-      max-width: 48vw;
-    }
-    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content > .hero-carousel-2026_heading {
-      font-size: 32px;
-    }
+  .hero-carousel-2026_fade-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
 
-  @media screen and (max-width: 767px) {
+  .hero-carousel-2026_fade-overlay-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Tablet (601-991px) and mobile (<=600px) share the same "compact"
+     treatment — text centered, square-ish photo, per-slide mobile_*
+     settings driving text position/scrim/sizing — since a tablet
+     photo/fade-overlay is optional and falls back to the mobile ones
+     when not set (see the <picture> sources above). Torn-edge is
+     desktop-only (>=992px) and is hidden entirely here. */
+  @media screen and (max-width: 991px) {
     .hero-carousel-2026_swiper {
       aspect-ratio: 1 / 1;
       min-height: 320px;
     }
 
-    /* Figma's 600x600 mobile frames position the photo, text side, and
-       scrim independently per slide, so these are all driven by
-       per-block settings (mobile_text_position / mobile_scrim /
-       mobile_photo_coverage) rather than a single shared treatment. */
     .hero-carousel-2026_photo {
       height: var(--mobile-photo-coverage, 100%);
     }
@@ -304,8 +337,16 @@
       background: none;
     }
 
+    /* The "gradient" scrim option uses an actual fade-overlay image
+       (tablet/mobile-specific PNGs, swapped via <picture> in the
+       markup) instead of a CSS gradient, so suppress the CSS gradient
+       here and show the image element instead. */
     .hero-carousel-2026_slide.is-mobile-scrim-gradient .hero-carousel-2026_scrim {
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.55) 30%, rgba(0, 0, 0, 0) 60%);
+      background: none;
+    }
+
+    .hero-carousel-2026_slide.is-mobile-scrim-gradient .hero-carousel-2026_fade-overlay {
+      display: block;
     }
 
     .hero-carousel-2026_slide.is-mobile-scrim-panel .hero-carousel-2026_scrim {
@@ -330,10 +371,6 @@
     .hero-carousel-2026_button {
       font-size: 0.42em;
       padding: 0.24em 0.58em;
-    }
-
-    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content {
-      max-width: 100%;
     }
   }
 </style>
@@ -434,7 +471,23 @@
         },
         {
           "type": "header",
-          "content": "Mobile (below 768px)"
+          "content": "Tablet (601px-991px)"
+        },
+        {
+          "type": "image_picker",
+          "id": "tablet_image",
+          "label": "Tablet background image",
+          "info": "If left blank, the mobile image below is used instead (and if that's blank too, the desktop image)."
+        },
+        {
+          "type": "text",
+          "id": "tablet_fallback_image",
+          "label": "Tablet fallback photo filename (asset)",
+          "info": "Advanced: filename of a theme asset, used only if no tablet image is picked above."
+        },
+        {
+          "type": "header",
+          "content": "Mobile (600px and below)"
         },
         {
           "type": "image_picker",
