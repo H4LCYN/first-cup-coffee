@@ -5,7 +5,7 @@
       {%- for block in section.blocks -%}
         <div
           class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}{% if block.settings.desktop_torn_edge %} has-torn-edge{% endif %}"
-          style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%; --desktop-padding-h: {{ block.settings.desktop_padding_horizontal }}px; --desktop-padding-v: {{ block.settings.desktop_padding_vertical }}px; --mobile-padding-h: {{ block.settings.mobile_padding_horizontal }}px; --mobile-padding-v: {{ block.settings.mobile_padding_vertical }}px;"
+          style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%; --desktop-padding-h: {{ block.settings.desktop_padding_horizontal }}px; --desktop-padding-v: {{ block.settings.desktop_padding_vertical }}px; --mobile-padding-h: {{ block.settings.mobile_padding_horizontal }}px; --mobile-padding-v: {{ block.settings.mobile_padding_vertical }}px; --desktop-heading-size: {{ block.settings.desktop_heading_size }}px;"
           {{ block.shopify_attributes }}
         >
           <div class="hero-carousel-2026_photo">
@@ -228,7 +228,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 24px;
+    gap: 40px;
     padding: var(--desktop-padding-v, 0) var(--desktop-padding-h, 100px);
     max-width: 740px;
   }
@@ -246,7 +246,6 @@
   .hero-carousel-2026_heading {
     font-family: Avenirnextltpro, sans-serif;
     font-weight: 700;
-    font-size: 44.786px;
     color: #fff;
     text-transform: uppercase;
   }
@@ -259,7 +258,7 @@
     max-width: 100%;
     height: 1px;
     border: none;
-    background-color: #fff;
+    background-color: #ff7800;
     margin: 0;
   }
 
@@ -271,13 +270,13 @@
      that breakpoint. */
   @media screen and (min-width: 992px) {
     .hero-carousel-2026_content {
-      font-size: 44.786px;
+      font-size: var(--desktop-heading-size, 44.786px);
     }
   }
 
   .hero-carousel-2026_heading p {
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.3;
   }
 
   .hero-carousel-2026_button {
@@ -493,6 +492,15 @@
             { "value": "right", "label": "Right" }
           ],
           "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "desktop_heading_size",
+          "label": "Desktop heading size (px)",
+          "min": 24,
+          "max": 72,
+          "step": 1,
+          "default": 45
         },
         {
           "type": "checkbox",
