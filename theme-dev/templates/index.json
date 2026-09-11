@@ -16,6 +16,7 @@
           "type": "slide",
           "settings": {
             "heading": "<p>Quality Coffee.</p><p>Bettering Lives.</p><p>Building Community.</p>",
+            "show_line": true,
             "button_text": "Get Your First Cup",
             "button_link": "",
             "fallback_image": "hero-carousel-slide-1.jpg",
@@ -51,6 +52,7 @@
           "type": "slide",
           "settings": {
             "heading": "<p>Roasted in Texas. Built for America.</p>",
+            "show_line": true,
             "text_position": "left",
             "button_text": "Get Your First Cup",
             "fallback_image": "hero-carousel-slide-3.jpg",

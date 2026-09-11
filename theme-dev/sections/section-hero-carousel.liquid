@@ -62,6 +62,9 @@
             </div>
           {%- endif -%}
           <div class="hero-carousel-2026_content" style="font-size: {{ block.settings.mobile_heading_size }}px;">
+            {%- if block.settings.show_line -%}
+              <hr class="hero-carousel-2026_line">
+            {%- endif -%}
             <div class="hero-carousel-2026_heading">{{ block.settings.heading }}</div>
             {%- if block.settings.button_text != blank -%}
               <a href="{{ block.settings.button_link }}" class="hero-carousel-2026_button">{{ block.settings.button_text }}</a>
@@ -113,6 +116,7 @@
      this is a plain full-bleed placement — no extra opacity or
      transform needed. */
   .hero-carousel-2026_grain {
+    z-index: 1;
     position: absolute;
     inset: 0;
     mix-blend-mode: lighten;
@@ -242,9 +246,21 @@
   .hero-carousel-2026_heading {
     font-family: Avenirnextltpro, sans-serif;
     font-weight: 700;
-    font-size: 1em;
+    font-size: 44.786px;
     color: #fff;
     text-transform: uppercase;
+  }
+
+  /* Thin divider line above the heading (Figma "Line 8" asset, slides
+     1 & 3 only). A plain CSS rule reproduces this fine — it's just a
+     straight 1px line, no need for an SVG asset. */
+  .hero-carousel-2026_line {
+    width: 243px;
+    max-width: 100%;
+    height: 1px;
+    border: none;
+    background-color: #fff;
+    margin: 0;
   }
 
   /* .hero-carousel-2026_content's font-size is set inline per-slide via
@@ -261,7 +277,7 @@
 
   .hero-carousel-2026_heading p {
     margin: 0;
-    line-height: 1.1;
+    line-height: 1.2;
   }
 
   .hero-carousel-2026_button {
@@ -305,15 +321,17 @@
 
   .hero-carousel-2026_fade-overlay {
     display: none;
+    z-index: 0;
     position: absolute;
     inset: 0;
     pointer-events: none;
   }
 
   .hero-carousel-2026_fade-overlay-image {
+    position: absolute;
+    bottom: -27%;
     display: block;
     width: 100%;
-    height: 100%;
     object-fit: cover;
   }
 
@@ -363,14 +381,40 @@
       justify-content: flex-end;
     }
 
+    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content {
+      max-width: 100%;
+      padding: 60px 0;
+    }
+
     .hero-carousel-2026_slide.is-mobile-text-top .hero-carousel-2026_content,
     .hero-carousel-2026_slide.is-mobile-text-top.is-text-right .hero-carousel-2026_content {
       justify-content: flex-start;
     }
 
     .hero-carousel-2026_button {
-      font-size: 0.42em;
-      padding: 0.24em 0.58em;
+      font-size: 18.797px;
+      padding: 7.519px 22.556px;
+    }
+
+    .hero-carousel-2026_line {
+      width: 141px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .hero-carousel-2026_torn-edge ~ .hero-carousel-2026_content {
+      max-width: 100%;
+      padding: 40px 0;
+    }
+
+    .hero-carousel-2026_fade-overlay-image {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .hero-carousel-2026_button {
+      font-size: 17.507px;
+      padding: 7.003px 21.009px;
     }
   }
 </style>
@@ -401,6 +445,12 @@
         {
           "type": "header",
           "content": "Content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_line",
+          "label": "Show divider line above heading",
+          "default": false
         },
         {
           "type": "richtext",
@@ -569,6 +619,7 @@
           "type": "slide",
           "settings": {
             "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
+            "show_line": true,
             "text_position": "left",
             "button_text": "Get Your First Cup",
             "desktop_torn_edge": true,
@@ -594,6 +645,7 @@
           "type": "slide",
           "settings": {
             "heading": "<p>Roasted in Texas. Built for America.</p>",
+            "show_line": true,
             "text_position": "left",
             "button_text": "Get Your First Cup",
             "mobile_text_position": "bottom",
