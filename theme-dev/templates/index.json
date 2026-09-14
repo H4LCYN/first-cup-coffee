@@ -108,6 +108,81 @@
         "autoplay_speed": 6
       }
     },
+    "section-our-blends": {
+      "type": "section-our-blends",
+      "blocks": {
+        "tab-all": {
+          "type": "tab",
+          "settings": { "label": "All Coffee", "roast_value": "" }
+        },
+        "tab-light": {
+          "type": "tab",
+          "settings": { "label": "Light Roast", "roast_value": "light" }
+        },
+        "tab-medium": {
+          "type": "tab",
+          "settings": { "label": "Medium Roast", "roast_value": "medium" }
+        },
+        "tab-dark": {
+          "type": "tab",
+          "settings": { "label": "Dark Roast", "roast_value": "dark" }
+        },
+        "tab-blend": {
+          "type": "tab",
+          "settings": { "label": "Blend Roast", "roast_value": "blend" }
+        },
+        "product-carver": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE CARVER</p>",
+            "details": "<ul><li>Named after The First Crop Rotation Expert and Peanut Pusher</li><li>Nicaraguan</li><li>Medium Roast</li><li>Smooth Tea-Like consistency, Light and Bright, Lemon Zest, Cocoa, and Walnut</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        },
+        "product-buzz-armstrong": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE BUZZ ARMSTRONG</p>",
+            "details": "<ul><li>Named after the First Men to land on the Moon</li><li>Whiskey Aged Guatemalan Antigua</li><li>Medium Roast</li><li>Orange, Apricot, and Peach balanced with warm notes of Cinnamon and Allspice</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        },
+        "product-washington": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE WASHINGTON</p>",
+            "details": "<ul><li>Named after the First President of the United States of America</li><li>Kenyan</li><li>Medium</li><li>Lime Zest, Summer Berry Pulp, and a rich body to balance it out.</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        },
+        "product-boston-tea-party": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE BOSTON TEA PARTY</p>",
+            "details": "<ul><li>The First Revolt</li><li>Decaf Blend</li><li>Medium Roast</li><li>Milk Chocolate, Ripe Fruit, Allspice</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "tab-all",
+        "tab-light",
+        "tab-medium",
+        "tab-dark",
+        "tab-blend",
+        "product-carver",
+        "product-buzz-armstrong",
+        "product-washington",
+        "product-boston-tea-party"
+      ],
+      "settings": {
+        "heading": "OUR BLENDS"
+      }
+    },
     "section-featured-home": {
       "type": "section-featured-home",
       "settings": {
@@ -117,10 +192,11 @@
     "home-cta-1": {
       "type": "home-cta-1",
       "settings": {
-        "home_cta_1_link": "",
-        "home_cta_1_button_text": "<p>SUBSCRIBE&nbsp;NOW</p>",
-        "home_cta_1_paragraph": "<p>Choose your coffee, select delivery times, &amp; get fresh coffee delivered to your door. There’s no contracts so you can cancel anytime.</p>",
-        "home_cta_header": "SAVE 20% WHEN YOU SUBSCRIBE"
+        "eyebrow": "Featured Roast",
+        "heading": "<p>Brew Around and Find Out</p>",
+        "paragraph": "A no-nonsense medium-dark roast for people who wake up with purpose. Build, defend, and don't go soft — start the day with this cup.",
+        "button_text": "Order Now",
+        "button_link": ""
       }
     },
     "section-products-home": {
@@ -189,6 +265,16 @@
         "cta_text": "VISIT NOW"
       }
     },
+    "section-prayer-callout": {
+      "type": "section-prayer-callout",
+      "settings": {
+        "eyebrow": "First Cup Prays First",
+        "heading": "In Need of Prayer?",
+        "text": "<p>We believe in the power of prayer. Share your needs below and our community will stand with you.</p>",
+        "button_text": "Request Prayer Now",
+        "button_link": "shopify://pages/prayer-wall"
+      }
+    },
     "section-join-community": {
       "type": "section-join-community",
       "blocks": {
@@ -228,11 +314,13 @@
   },
   "order": [
     "section-hero-carousel",
+    "section-our-blends",
     "section-featured-home",
     "home-cta-1",
     "section-products-home",
     "section-home-category-grid",
     "section-our-locations",
+    "section-prayer-callout",
     "section-join-community"
   ]
 }

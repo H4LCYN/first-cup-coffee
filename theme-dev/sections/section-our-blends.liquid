@@ -1,0 +1,339 @@
+
+<div class="site-redesign-26 our-blends-2026">
+  <div class="our-blends-2026_inner">
+    <h2 class="our-blends-2026_heading">{{ section.settings.heading }}</h2>
+    <div class="our-blends-2026_tabs" role="tablist">
+      {%- assign first_tab = true -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tab' -%}
+          <button
+            type="button"
+            class="our-blends-2026_tab{% if first_tab %} is-active{% endif %}"
+            data-roast="{{ block.settings.roast_value }}"
+            role="tab"
+            aria-selected="{% if first_tab %}true{% else %}false{% endif %}"
+            {{ block.shopify_attributes }}
+          >{{ block.settings.label }}</button>
+          {%- assign first_tab = false -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="our-blends-2026_products">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product' -%}
+          <a
+            href="{{ block.settings.link }}"
+            class="our-blends-2026_product"
+            data-roast="{{ block.settings.roast_value }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="our-blends-2026_product-name">{{ block.settings.name }}</div>
+            <div class="our-blends-2026_product-media">
+              <ul class="our-blends-2026_product-list">{{ block.settings.details }}</ul>
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.name | strip_html | escape }}" loading="lazy" class="our-blends-2026_product-image">
+              {%- elsif block.settings.fallback_image != blank -%}
+                <img src="{{ block.settings.fallback_image | asset_url }}" alt="{{ block.settings.name | strip_html | escape }}" loading="lazy" class="our-blends-2026_product-image">
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .site-redesign-26.our-blends-2026 {
+    background-color: #fff;
+  }
+
+  .our-blends-2026_inner {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .our-blends-2026_heading {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #212121;
+    text-align: center;
+    margin: 0;
+  }
+
+  .our-blends-2026_tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid #bfbfbf;
+  }
+
+  .our-blends-2026_tab {
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: 4px solid transparent;
+    margin-bottom: -2px;
+    padding: 18px 32px 14px;
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #3e3e3e;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .our-blends-2026_tab.is-active {
+    font-weight: 700;
+    color: #000;
+    border-bottom-color: var(--firebrick);
+  }
+
+  .our-blends-2026_products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .our-blends-2026_product {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .our-blends-2026_product.is-hidden {
+    display: none;
+  }
+
+  .our-blends-2026_product:hover {
+    opacity: 0.85;
+  }
+
+  .our-blends-2026_product-name {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 1.2;
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .our-blends-2026_product-media {
+    position: relative;
+    padding-right: 110px;
+    min-height: 180px;
+  }
+
+  .our-blends-2026_product-list {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc;
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #000;
+  }
+
+  .our-blends-2026_product-list li {
+    margin-bottom: 6px;
+  }
+
+  .our-blends-2026_product-image {
+    position: absolute;
+    right: -10px;
+    top: -35px;
+    width: 130px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 991px) {
+    .our-blends-2026_inner {
+      padding: 60px 24px;
+    }
+
+    .our-blends-2026_tab {
+      padding: 14px 18px 12px;
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .our-blends-2026_products {
+      gap: 60px;
+    }
+
+    .our-blends-2026_product {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var currentSection = document.currentScript.closest('.shopify-section');
+    currentSection.setAttribute('class', 'section_our-blends site-redesign-26');
+    var root = currentSection.querySelector('.our-blends-2026');
+    if (!root) return;
+    var tabs = root.querySelectorAll('.our-blends-2026_tab');
+    var products = root.querySelectorAll('.our-blends-2026_product');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        var roast = tab.getAttribute('data-roast');
+        products.forEach(function (product) {
+          var matches = roast === '' || product.getAttribute('data-roast') === roast;
+          product.classList.toggle('is-hidden', !matches);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Section - Our Blends",
+  "tag": "section",
+  "class": "section_our-blends",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "OUR BLENDS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Roast tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab label",
+          "default": "All Coffee"
+        },
+        {
+          "type": "text",
+          "id": "roast_value",
+          "label": "Roast value",
+          "info": "Must match a product block's \"Roast value\" exactly. Leave blank for the \"show all\" tab."
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "name",
+          "label": "Product name"
+        },
+        {
+          "type": "richtext",
+          "id": "details",
+          "label": "Details (bulleted list)",
+          "info": "Use the bulleted list format in the editor toolbar."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product photo"
+        },
+        {
+          "type": "text",
+          "id": "fallback_image",
+          "label": "Fallback photo filename (asset)",
+          "info": "Advanced: filename of a theme asset, used only if no photo is picked above."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product link"
+        },
+        {
+          "type": "select",
+          "id": "roast_value",
+          "label": "Roast value",
+          "options": [
+            { "value": "light", "label": "Light Roast" },
+            { "value": "medium", "label": "Medium Roast" },
+            { "value": "dark", "label": "Dark Roast" },
+            { "value": "blend", "label": "Blend Roast" }
+          ],
+          "default": "medium"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section - Our Blends",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "All Coffee", "roast_value": "" } },
+        { "type": "tab", "settings": { "label": "Light Roast", "roast_value": "light" } },
+        { "type": "tab", "settings": { "label": "Medium Roast", "roast_value": "medium" } },
+        { "type": "tab", "settings": { "label": "Dark Roast", "roast_value": "dark" } },
+        { "type": "tab", "settings": { "label": "Blend Roast", "roast_value": "blend" } },
+        {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE CARVER</p>",
+            "details": "<ul><li>Named after The First Crop Rotation Expert and Peanut Pusher</li><li>Nicaraguan</li><li>Medium Roast</li><li>Smooth Tea-Like consistency, Light and Bright, Lemon Zest, Cocoa, and Walnut</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE BUZZ ARMSTRONG</p>",
+            "details": "<ul><li>Named after the First Men to land on the Moon</li><li>Whiskey Aged Guatemalan Antigua</li><li>Medium Roast</li><li>Orange, Apricot, and Peach balanced with warm notes of Cinnamon and Allspice</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE WASHINGTON</p>",
+            "details": "<ul><li>Named after the First President of the United States of America</li><li>Kenyan</li><li>Medium</li><li>Lime Zest, Summer Berry Pulp, and a rich body to balance it out.</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE BOSTON TEA PARTY</p>",
+            "details": "<ul><li>The First Revolt</li><li>Decaf Blend</li><li>Medium Roast</li><li>Milk Chocolate, Ripe Fruit, Allspice</li></ul>",
+            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "roast_value": "medium"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

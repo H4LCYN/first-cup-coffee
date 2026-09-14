@@ -1,0 +1,181 @@
+
+<div class="site-redesign-26 prayer-callout-2026">
+  <div class="prayer-callout-2026_photo">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | img_url: '1200x' }}" alt="" loading="lazy" class="prayer-callout-2026_image">
+    {%- else -%}
+      <img src="{{ 'prayer-callout-background.jpg' | asset_url }}" alt="" loading="lazy" class="prayer-callout-2026_image">
+    {%- endif -%}
+  </div>
+  <div class="prayer-callout-2026_content">
+    <p class="prayer-callout-2026_eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2 class="prayer-callout-2026_heading">{{ section.settings.heading }}</h2>
+    <div class="prayer-callout-2026_text">{{ section.settings.text }}</div>
+    {%- if section.settings.button_text != blank -%}
+      <a href="{{ section.settings.button_link }}" class="prayer-callout-2026_button">{{ section.settings.button_text }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .site-redesign-26.prayer-callout-2026 {
+    background-color: var(--uniform-green);
+    display: flex;
+    align-items: stretch;
+  }
+
+  .prayer-callout-2026_photo {
+    flex: 1 1 50%;
+    min-width: 0;
+    aspect-ratio: 710 / 624;
+    overflow: hidden;
+  }
+
+  .prayer-callout-2026_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .prayer-callout-2026_content {
+    flex: 1 1 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 65px 100px 65px 60px;
+  }
+
+  .prayer-callout-2026_eyebrow {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--butterscotch);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .prayer-callout-2026_heading {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.1;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .prayer-callout-2026_text {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.3;
+    color: #fff;
+  }
+
+  .prayer-callout-2026_text p {
+    margin: 0;
+  }
+
+  .prayer-callout-2026_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    background-color: var(--butterscotch);
+    color: var(--uniform-green);
+    border-radius: 2px;
+    padding: 14px 28px;
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .prayer-callout-2026_button:hover {
+    opacity: 0.85;
+  }
+
+  @media screen and (max-width: 767px) {
+    .site-redesign-26.prayer-callout-2026 {
+      flex-direction: column;
+    }
+
+    .prayer-callout-2026_photo {
+      flex: none;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+    }
+
+    .prayer-callout-2026_content {
+      flex: none;
+      padding: 40px 24px;
+    }
+
+    .prayer-callout-2026_heading {
+      font-size: 34px;
+    }
+
+    .prayer-callout-2026_text {
+      font-size: 17px;
+    }
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_prayer-callout site-redesign-26");</script>
+
+{% schema %}
+{
+  "name": "Section - Prayer Callout",
+  "tag": "section",
+  "class": "section_prayer-callout",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "First Cup Prays First"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "In Need of Prayer?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We believe in the power of prayer. Share your needs below and our community will stand with you.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Request Prayer Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section - Prayer Callout",
+      "settings": {
+        "button_link": "shopify://pages/prayer-wall"
+      }
+    }
+  ]
+}
+{% endschema %}
