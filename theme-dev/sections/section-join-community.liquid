@@ -4,26 +4,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-  <div class="padding-global">
-    <div class="container-large">
-      <h2 class="join-community-2026_heading">{{ section.settings.heading }}</h2>
-      <div class="join-community-2026_embed">
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            {%- render block -%}
-          {%- endfor -%}
-        {%- elsif section.settings.embed_code != blank -%}
-          {{ section.settings.embed_code }}
-        {%- else -%}
-          <p class="join-community-2026_placeholder">{{ section.settings.placeholder_text }}</p>
-        {%- endif -%}
-      </div>
-      <div class="join-community-2026_buttons">
-        {%- if section.settings.load_more_link != blank -%}
-          <a href="{{ section.settings.load_more_link }}" class="join-community-2026_button">{{ section.settings.load_more_text }}</a>
-        {%- endif -%}
-        <a href="{{ section.settings.follow_link }}" class="join-community-2026_button" target="_blank" rel="noopener">{{ section.settings.follow_text }}</a>
-      </div>
+  <div class="container-2026">
+    <h2 class="join-community-2026_heading">{{ section.settings.heading }}</h2>
+    <div class="join-community-2026_embed">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- render block -%}
+        {%- endfor -%}
+      {%- elsif section.settings.embed_code != blank -%}
+        {{ section.settings.embed_code }}
+      {%- else -%}
+        <p class="join-community-2026_placeholder">{{ section.settings.placeholder_text }}</p>
+      {%- endif -%}
+    </div>
+    <div class="join-community-2026_buttons">
+      {%- if section.settings.load_more_link != blank -%}
+        <a href="{{ section.settings.load_more_link }}" class="join-community-2026_button">{{ section.settings.load_more_text }}</a>
+      {%- endif -%}
+      <a href="{{ section.settings.follow_link }}" class="join-community-2026_button" target="_blank" rel="noopener">{{ section.settings.follow_text }}</a>
     </div>
   </div>
 </div>

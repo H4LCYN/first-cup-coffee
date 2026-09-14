@@ -15,12 +15,13 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "heading": "<p>Quality Coffee.</p><p>Bettering Lives.</p><p>Building Community.</p>",
             "show_line": true,
+            "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
             "button_text": "Get Your First Cup",
             "button_link": "",
-            "fallback_image": "hero-carousel-slide-1.jpg",
+            "fallback_image": "hero-carousel-slide-1.png",
             "text_position": "left",
+            "desktop_heading_size": 44,
             "desktop_torn_edge": true,
             "desktop_padding_horizontal": 40,
             "desktop_padding_vertical": 0,
@@ -37,30 +38,49 @@
         "slide-2": {
           "type": "slide",
           "settings": {
+            "show_line": false,
             "heading": "<p>Buzz, Neil, George and now, you.</p>",
-            "text_position": "left",
             "button_text": "Get Your First Cup",
-            "fallback_image": "hero-carousel-slide-2.jpg",
-            "mobile_fallback_image": "hero-carousel-slide-2-mobile.jpg",
+            "button_link": "",
+            "fallback_image": "hero-carousel-slide-2.png",
+            "text_position": "left",
+            "desktop_heading_size": 58,
+            "desktop_torn_edge": false,
+            "desktop_padding_horizontal": 55,
+            "desktop_padding_vertical": 0,
+            "tablet_fallback_image": "hero-carousel-slide-2-tablet.png",
+            "tablet_heading_size": 50,
+            "mobile_fallback_image": "hero-carousel-slide-2-mobile.png",
             "mobile_text_position": "top",
-            "mobile_heading_size": 45,
+            "mobile_heading_size": 40,
             "mobile_scrim": "none",
-            "mobile_photo_coverage": 100
+            "mobile_photo_coverage": 100,
+            "mobile_padding_horizontal": 24,
+            "mobile_padding_vertical": 32
           }
         },
         "slide-3": {
           "type": "slide",
           "settings": {
-            "heading": "<p>Roasted in Texas. Built for America.</p>",
+            "heading": "<p>Roasted in Texas.</p><p>Built for America.</p>",
             "show_line": true,
-            "text_position": "left",
             "button_text": "Get Your First Cup",
-            "fallback_image": "hero-carousel-slide-3.jpg",
-            "mobile_fallback_image": "hero-carousel-slide-3-mobile.jpg",
+            "button_link": "",
+            "fallback_image": "hero-carousel-slide-3.png",
+            "text_position": "left",
+            "desktop_heading_size": 54,
+            "desktop_torn_edge": true,
+            "desktop_padding_horizontal": 100,
+            "desktop_padding_vertical": 0,
+            "tablet_fallback_image": "hero-carousel-slide-3-tablet.png",
+            "tablet_heading_size": 50,
+            "mobile_fallback_image": "hero-carousel-slide-3-mobile.png",
             "mobile_text_position": "bottom",
             "mobile_heading_size": 40,
-            "mobile_scrim": "panel",
-            "mobile_photo_coverage": 70
+            "mobile_scrim": "gradient",
+            "mobile_photo_coverage": 100,
+            "mobile_padding_horizontal": 24,
+            "mobile_padding_vertical": 32
           }
         },
         "slide-4": {

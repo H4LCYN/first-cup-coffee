@@ -1,50 +1,47 @@
 
 <div class="site-redesign-26 footer-2026">
   <div class="footer-2026_newsletter-section">
-    <div class="padding-global">
-      <div class="container-large">
-        <div class="footer-2026_newsletter">
-          <h2 class="footer-2026_newsletter-heading">{{ section.settings.newsletter_heading }}</h2>
-          {%- if section.settings.newsletter_subheading != blank -%}
-            <p class="footer-2026_newsletter-subheading">{{ section.settings.newsletter_subheading }}</p>
-          {%- endif -%}
-          <div class="footer-2026_newsletter-form-wrapper w-form">
-            {%- form 'customer', class: 'footer-2026_newsletter-form' -%}
-              <input type="hidden" name="contact[tags]" value="newsletter">
-              <div class="footer-2026_newsletter-input-row">
-                <input
-                  class="footer-2026_newsletter-input"
-                  type="email"
-                  name="contact[email]"
-                  placeholder="{{ section.settings.newsletter_placeholder }}"
-                  required
-                >
-                <button type="submit" class="footer-2026_newsletter-button">
-                  {{ section.settings.newsletter_button_text }}
-                </button>
-              </div>
-              {%- assign form_success = form.posted_successfully? -%}
-              {%- assign form_errors = form.errors -%}
-              {%- render 'form-general-script', form_success: form_success, form_errors: form_errors -%}
-            {%- endform -%}
-            <div class="w-form-done footer-2026_newsletter-message {% if form_success %}form-posted-successfully{% endif %}">
-              <div>{{ section.settings.newsletter_success_text }}</div>
+    <div class="container-2026">
+      <div class="footer-2026_newsletter">
+        <h2 class="footer-2026_newsletter-heading">{{ section.settings.newsletter_heading }}</h2>
+        {%- if section.settings.newsletter_subheading != blank -%}
+          <p class="footer-2026_newsletter-subheading">{{ section.settings.newsletter_subheading }}</p>
+        {%- endif -%}
+        <div class="footer-2026_newsletter-form-wrapper w-form">
+          {%- form 'customer', class: 'footer-2026_newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="footer-2026_newsletter-input-row">
+              <input
+                class="footer-2026_newsletter-input"
+                type="email"
+                name="contact[email]"
+                placeholder="{{ section.settings.newsletter_placeholder }}"
+                required
+              >
+              <button type="submit" class="footer-2026_newsletter-button">
+                {{ section.settings.newsletter_button_text }}
+              </button>
             </div>
-            {%- unless form_success -%}
-              <div class="w-form-fail footer-2026_newsletter-message {% if form.errors %}form-has-errors{% endif %}">
-                <div>{%- render 'form-errors', form_errors: form_errors -%}</div>
-              </div>
-            {%- endunless -%}
+            {%- assign form_success = form.posted_successfully? -%}
+            {%- assign form_errors = form.errors -%}
+            {%- render 'form-general-script', form_success: form_success, form_errors: form_errors -%}
+          {%- endform -%}
+          <div class="w-form-done footer-2026_newsletter-message {% if form_success %}form-posted-successfully{% endif %}">
+            <div>{{ section.settings.newsletter_success_text }}</div>
           </div>
+          {%- unless form_success -%}
+            <div class="w-form-fail footer-2026_newsletter-message {% if form.errors %}form-has-errors{% endif %}">
+              <div>{%- render 'form-errors', form_errors: form_errors -%}</div>
+            </div>
+          {%- endunless -%}
         </div>
       </div>
     </div>
   </div>
 
   <div class="footer-2026_main-section">
-    <div class="padding-global">
-      <div class="container-large">
-        <div class="footer-2026_main">
+    <div class="container-2026">
+      <div class="footer-2026_main">
           <div class="footer-2026_brand">
             <div class="footer-2026_logo w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 215 134" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
                 <path d="M0 107.463H7.36704V96.0702H18.7044V89.8522H7.36704V84.178H19.6538V77.7537H0V107.463Z" fill="currentColor"></path>
@@ -119,7 +116,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <style>
   .site-redesign-26.footer-2026 {
