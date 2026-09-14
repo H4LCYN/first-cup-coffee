@@ -6,13 +6,12 @@
       {%- assign default_roast = section.settings.default_roast_value | default: '' -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'tab' -%}
-          {%- assign tab_is_active = block.settings.roast_value == default_roast -%}
           <button
             type="button"
-            class="our-blends-2026_tab{% if tab_is_active %} is-active{% endif %}"
+            class="our-blends-2026_tab{% if block.settings.roast_value == default_roast %} is-active{% endif %}"
             data-roast="{{ block.settings.roast_value }}"
             role="tab"
-            aria-selected="{% if tab_is_active %}true{% else %}false{% endif %}"
+            aria-selected="{% if block.settings.roast_value == default_roast %}true{% else %}false{% endif %}"
             {{ block.shopify_attributes }}
           >{{ block.settings.label }}</button>
         {%- endif -%}
