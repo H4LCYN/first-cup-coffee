@@ -3,18 +3,18 @@
   <div class="our-blends-2026_inner">
     <h2 class="our-blends-2026_heading">{{ section.settings.heading }}</h2>
     <div class="our-blends-2026_tabs" role="tablist">
-      {%- assign first_tab = true -%}
+      {%- assign default_roast = section.settings.default_roast_value | default: '' -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'tab' -%}
+          {%- assign tab_is_active = block.settings.roast_value == default_roast -%}
           <button
             type="button"
-            class="our-blends-2026_tab{% if first_tab %} is-active{% endif %}"
+            class="our-blends-2026_tab{% if tab_is_active %} is-active{% endif %}"
             data-roast="{{ block.settings.roast_value }}"
             role="tab"
-            aria-selected="{% if first_tab %}true{% else %}false{% endif %}"
+            aria-selected="{% if tab_is_active %}true{% else %}false{% endif %}"
             {{ block.shopify_attributes }}
           >{{ block.settings.label }}</button>
-          {%- assign first_tab = false -%}
         {%- endif -%}
       {%- endfor -%}
     </div>
@@ -23,13 +23,15 @@
         {%- if block.type == 'product' -%}
           <a
             href="{{ block.settings.link }}"
-            class="our-blends-2026_product"
+            class="our-blends-2026_product{% unless default_roast == '' or block.settings.roast_value == default_roast %} is-hidden{% endunless %}"
             data-roast="{{ block.settings.roast_value }}"
             {{ block.shopify_attributes }}
           >
-            <div class="our-blends-2026_product-name">{{ block.settings.name }}</div>
+            <div class="our-blends-2026_info">
+              <div class="our-blends-2026_product-name">{{ block.settings.name }}</div>
+              <ul class="our-blends-2026_product-list">{{ block.settings.details | remove: '<ul>' | remove: '</ul>' }}</ul>
+            </div>
             <div class="our-blends-2026_product-media">
-              <ul class="our-blends-2026_product-list">{{ block.settings.details }}</ul>
               {%- if block.settings.image != blank -%}
                 <img src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.name | strip_html | escape }}" loading="lazy" class="our-blends-2026_product-image">
               {%- elsif block.settings.fallback_image != blank -%}
@@ -71,7 +73,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
     border-bottom: 2px solid #bfbfbf;
   }
 
@@ -107,8 +108,9 @@
 
   .our-blends-2026_product {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 280px;
+    gap: 20px;
     text-decoration: none;
     transition: opacity 0.2s;
   }
@@ -121,6 +123,10 @@
     opacity: 0.85;
   }
 
+  .our-blends-2026_info {
+    max-width: 120px;
+  }
+
   .our-blends-2026_product-name {
     font-family: "Avenir Next Condensed", sans-serif;
     font-weight: 700;
@@ -131,15 +137,18 @@
     margin-bottom: 10px;
   }
 
+  .our-blends-2026_product-name > p {
+    line-height: 1;
+  }
+
   .our-blends-2026_product-media {
     position: relative;
-    padding-right: 110px;
-    min-height: 180px;
+    width: 140px;
   }
 
   .our-blends-2026_product-list {
     margin: 0;
-    padding-left: 18px;
+    padding-left: 20px;
     list-style: disc;
     font-family: "Avenir Next Condensed", sans-serif;
     font-size: 12px;
@@ -148,14 +157,12 @@
   }
 
   .our-blends-2026_product-list li {
-    margin-bottom: 6px;
+    margin-bottom: 0;
   }
 
   .our-blends-2026_product-image {
-    position: absolute;
-    right: -10px;
-    top: -35px;
-    width: 130px;
+    position: relative;
+    width: 140px;
     height: auto;
     object-fit: contain;
   }
@@ -220,6 +227,13 @@
       "id": "heading",
       "label": "Heading",
       "default": "OUR BLENDS"
+    },
+    {
+      "type": "text",
+      "id": "default_roast_value",
+      "label": "Default selected tab's roast value",
+      "info": "Must match a tab block's \"Roast value\" exactly.",
+      "default": "medium"
     }
   ],
   "blocks": [
@@ -301,7 +315,7 @@
           "settings": {
             "name": "<p>THE CARVER</p>",
             "details": "<ul><li>Named after The First Crop Rotation Expert and Peanut Pusher</li><li>Nicaraguan</li><li>Medium Roast</li><li>Smooth Tea-Like consistency, Light and Bright, Lemon Zest, Cocoa, and Walnut</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Carveir-Bag.png",
             "roast_value": "medium"
           }
         },
@@ -310,7 +324,7 @@
           "settings": {
             "name": "<p>THE BUZZ ARMSTRONG</p>",
             "details": "<ul><li>Named after the First Men to land on the Moon</li><li>Whiskey Aged Guatemalan Antigua</li><li>Medium Roast</li><li>Orange, Apricot, and Peach balanced with warm notes of Cinnamon and Allspice</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Buzz-Armstrong-Bag.png",
             "roast_value": "medium"
           }
         },
@@ -319,7 +333,7 @@
           "settings": {
             "name": "<p>THE WASHINGTON</p>",
             "details": "<ul><li>Named after the First President of the United States of America</li><li>Kenyan</li><li>Medium</li><li>Lime Zest, Summer Berry Pulp, and a rich body to balance it out.</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Washington-Bag.png",
             "roast_value": "medium"
           }
         },
@@ -328,7 +342,7 @@
           "settings": {
             "name": "<p>THE BOSTON TEA PARTY</p>",
             "details": "<ul><li>The First Revolt</li><li>Decaf Blend</li><li>Medium Roast</li><li>Milk Chocolate, Ripe Fruit, Allspice</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Boston-Tea-Party-Bag.png",
             "roast_value": "medium"
           }
         }

@@ -136,7 +136,7 @@
           "settings": {
             "name": "<p>THE CARVER</p>",
             "details": "<ul><li>Named after The First Crop Rotation Expert and Peanut Pusher</li><li>Nicaraguan</li><li>Medium Roast</li><li>Smooth Tea-Like consistency, Light and Bright, Lemon Zest, Cocoa, and Walnut</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Carveir-Bag.png",
             "roast_value": "medium"
           }
         },
@@ -145,7 +145,7 @@
           "settings": {
             "name": "<p>THE BUZZ ARMSTRONG</p>",
             "details": "<ul><li>Named after the First Men to land on the Moon</li><li>Whiskey Aged Guatemalan Antigua</li><li>Medium Roast</li><li>Orange, Apricot, and Peach balanced with warm notes of Cinnamon and Allspice</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Buzz-Armstrong-Bag.png",
             "roast_value": "medium"
           }
         },
@@ -154,7 +154,7 @@
           "settings": {
             "name": "<p>THE WASHINGTON</p>",
             "details": "<ul><li>Named after the First President of the United States of America</li><li>Kenyan</li><li>Medium</li><li>Lime Zest, Summer Berry Pulp, and a rich body to balance it out.</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Washington-Bag.png",
             "roast_value": "medium"
           }
         },
@@ -163,7 +163,7 @@
           "settings": {
             "name": "<p>THE BOSTON TEA PARTY</p>",
             "details": "<ul><li>The First Revolt</li><li>Decaf Blend</li><li>Medium Roast</li><li>Milk Chocolate, Ripe Fruit, Allspice</li></ul>",
-            "fallback_image": "the-boston-tea-party-lifestyle-v1.2-Camera-6.webp",
+            "fallback_image": "The-Boston-Tea-Party-Bag.png",
             "roast_value": "medium"
           }
         }
@@ -180,7 +180,8 @@
         "product-boston-tea-party"
       ],
       "settings": {
-        "heading": "OUR BLENDS"
+        "heading": "OUR BLENDS",
+        "default_roast_value": "medium"
       }
     },
     "section-featured-home": {
