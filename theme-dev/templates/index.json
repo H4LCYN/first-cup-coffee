@@ -136,6 +136,15 @@
           "type": "tab",
           "settings": { "label": "Blend Roast", "roast_value": "blend" }
         },
+        "product-rushmore": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE RUSHMORE</p>",
+            "details": "<ul><li>Named after a Monument of Firsts</li><li>Colombian</li><li>Light Roast</li><li><span>Milk Chocolate, Caramel Syrup, Smooth Finish, and Raspberry</span></li></ul>",
+            "fallback_image": "The-Rushmore-Bag.png",
+            "roast_value": "light"
+          }
+        },
         "product-carver": {
           "type": "product",
           "settings": {
@@ -171,6 +180,42 @@
             "fallback_image": "The-Boston-Tea-Party-Bag.png",
             "roast_value": "medium"
           }
+        },
+        "product-farrow": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE FARROW</p>",
+            "details": "<ul><li>Named after the First African-American Revivalist</li><li>Ethiopian Yirgacheffe</li><li>Dark Roast</li><li>Balanced Acidity and Body, with a slight hint of Citrus and Earthy Tones</li></ul>",
+            "fallback_image": "The-Farrow-Bag.png",
+            "roast_value": "dark"
+          }
+        },
+        "product-lexington": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE LEXINGTON</p>",
+            "details": "<ul><li>Named after the First Shot heard around the world at the Battle of Lexington.</li><li>Espresso Roast/Blend</li><li>Dark Roast</li><li>Dark Chocolate Fudge, Velvety Texture, and Orange Zest</li></ul>",
+            "fallback_image": "The-Lexington-Bag.png",
+            "roast_value": "dark"
+          }
+        },
+        "product-boston-common": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE BOSTON COMMON</p>",
+            "details": "<ul><li>Named after the First Park in America</li><li>Brazilian</li><li>Most Common Bean Origin</li><li>Medium Dark Roast</li><li>Heavy in body, Smooth, Sweet, and Nutty</li><li>Blend</li></ul>",
+            "fallback_image": "The-Boston-Common-Bag.png",
+            "roast_value": "blend"
+          }
+        },
+        "product-john-hancock": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE JOHN HANCOCK</p>",
+            "details": "<ul><li>The First Signature on the Declaration of Independence</li><li>Signature Blend</li><li>Roasters Pick</li><li>Medium-Dark Roast</li></ul>",
+            "fallback_image": "The-John-Hancock-Bag.png",
+            "roast_value": "blend"
+          }
         }
       },
       "block_order": [
@@ -182,17 +227,16 @@
         "product-carver",
         "product-buzz-armstrong",
         "product-washington",
-        "product-boston-tea-party"
+        "product-boston-tea-party",
+        "product-farrow",
+        "product-lexington",
+        "product-john-hancock",
+        "product-rushmore",
+        "product-boston-common"
       ],
       "settings": {
         "heading": "OUR BLENDS",
         "default_roast_value": "medium"
-      }
-    },
-    "section-featured-home": {
-      "type": "section-featured-home",
-      "settings": {
-        "section_header": "Best Sellers"
       }
     },
     "home-cta-1": {
@@ -203,31 +247,6 @@
         "paragraph": "A no-nonsense medium-dark roast for people who wake up with purpose. Build, defend, and don't go soft — start the day with this cup.",
         "button_text": "Order Now",
         "button_link": ""
-      }
-    },
-    "section-products-home": {
-      "type": "section-products-home",
-      "settings": {}
-    },
-    "section-home-category-grid": {
-      "type": "section-home-category-grid",
-      "settings": {
-        "red_grid_url": "",
-        "brown_grid_url": "",
-        "gold_grid_url": "",
-        "green_grid_url": "",
-        "gold_grid_cta": "<p>SHOP MERCH<br></p>",
-        "gold_grid_paragraph": "<p>Show your support for First Cup with our limited edition merch. </p>",
-        "gold_grid_header": "Merch",
-        "brown_grid_cta": "<p>SHOP BUNDLES</p>",
-        "brown_grid_paragraph": "<p>Some of our favorite combinations to help you sample the First Cup catalog.</p>",
-        "brown_grid_header": "Bundles",
-        "red_grid_cta": "<p>JOIN THE FAMILY</p>",
-        "red_grid_paragraph": "<p>Updates &amp; deals you can't see anywhere else. Tag us &amp; you may be featured in our story!</p>",
-        "red_grid_header": "Follow",
-        "green_grid_cta": "<p>SUBSCRIBE AND SAVE</p>",
-        "green_grid_paragraph": "<p>Pick from all of our different roasts, choose a delivery schedule &amp; prep for a coffee adventure.</p>",
-        "green_grid_header": "Subscription Box"
       }
     },
     "section-our-locations": {
@@ -321,10 +340,7 @@
   "order": [
     "section-hero-carousel",
     "section-our-blends",
-    "section-featured-home",
     "home-cta-1",
-    "section-products-home",
-    "section-home-category-grid",
     "section-our-locations",
     "section-prayer-callout",
     "section-join-community"

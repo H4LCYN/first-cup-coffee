@@ -66,27 +66,6 @@
           "home_cta_header": "SAVE 20% WHEN YOU SUBSCRIBE"
         }
       },
-      "section-home-category-grid": {
-        "type": "section-home-category-grid",
-        "settings": {
-          "red_grid_url": "shopify://pages/follow",
-          "brown_grid_url": "shopify://collections/coffee-bundles",
-          "gold_grid_url": "shopify://collections/merch",
-          "green_grid_url": "shopify://pages/subscribe-save",
-          "gold_grid_cta": "<p>SHOP MERCH<br/></p>",
-          "gold_grid_paragraph": "<p>Show your support for First Cup with our limited edition merch. </p>",
-          "gold_grid_header": "Merch",
-          "brown_grid_cta": "<p>SHOP BUNDLES</p>",
-          "brown_grid_paragraph": "<p>Some of our favorite combinations to help you sample the First Cup catalog.</p>",
-          "brown_grid_header": "Bundles",
-          "red_grid_cta": "<p>JOIN THE FAMILY</p>",
-          "red_grid_paragraph": "<p>Updates & deals you can't see anywhere else. Tag us & you may be featured in our story!</p>",
-          "red_grid_header": "Follow",
-          "green_grid_cta": "<p>SUBSCRIBE AND SAVE</p>",
-          "green_grid_paragraph": "<p>Pick from all of our different roasts, choose a delivery schedule & prep for a coffee adventure.</p>",
-          "green_grid_header": "Subscription Box"
-        }
-      },
       "home-cta-2": {
         "type": "home-cta-2",
         "settings": {
