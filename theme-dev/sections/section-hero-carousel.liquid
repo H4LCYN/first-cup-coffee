@@ -4,7 +4,7 @@
     <div class="swiper-wrapper">
       {%- for block in section.blocks -%}
         <div
-          class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}{% if block.settings.desktop_torn_edge %} has-torn-edge{% endif %}"
+          class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-tablet-text-{{ block.settings.tablet_text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}{% if block.settings.desktop_torn_edge %} has-torn-edge{% endif %}"
           style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%; --desktop-padding-h: {{ block.settings.desktop_padding_horizontal }}px; --desktop-padding-v: {{ block.settings.desktop_padding_vertical }}px; --mobile-padding-h: {{ block.settings.mobile_padding_horizontal }}px; --mobile-padding-v: {{ block.settings.mobile_padding_vertical }}px; --desktop-heading-size: {{ block.settings.desktop_heading_size }}px; --tablet-heading-size: {{ block.settings.tablet_heading_size }}px; --mobile-heading-size: {{ block.settings.mobile_heading_size }}px;"
           {{ block.shopify_attributes }}
         >
@@ -83,12 +83,14 @@
   }
 
   .hero-carousel-2026_swiper {
-    width: 100%;
+    width: calc(100% - 60px);
     max-width: var(--site-max-width);
     margin-left: auto;
     margin-right: auto;
     aspect-ratio: 1440 / 576;
     min-height: 320px;
+    border-radius: 30px;
+    margin: 60px 30px 0;
   }
 
   .hero-carousel-2026_slide {
@@ -344,6 +346,14 @@
     object-fit: cover;
   }
 
+  .hero-carousel-2026_slide.is-text-left .hero-carousel-2026_content {
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: 0 40px;
+      max-width: 50%;
+    }
+
   /* Tablet (601-991px) and mobile (<=600px) share the same "compact"
      treatment — text centered, square-ish photo, per-slide mobile_*
      settings driving text position/scrim/sizing — since a tablet
@@ -352,8 +362,7 @@
      desktop-only (>=992px) and is hidden entirely here. */
   @media screen and (max-width: 991px) {
     .hero-carousel-2026_swiper {
-      aspect-ratio: 1 / 1;
-      min-height: 320px;
+      aspect-ratio: 1024/585;
     }
 
     .hero-carousel-2026_photo {
@@ -395,9 +404,13 @@
       padding: 60px 10px;
     }
 
-    .hero-carousel-2026_slide.is-mobile-text-top .hero-carousel-2026_content,
-    .hero-carousel-2026_slide.is-mobile-text-top.is-text-right .hero-carousel-2026_content {
-      justify-content: flex-start;
+    .hero-carousel-2026_slide.is-tablet-text-left .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-tablet-text-left.is-text-left .hero-carousel-2026_content {
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: 0 40px;
+      max-width: 53%;
     }
 
     .hero-carousel-2026_button {
@@ -410,13 +423,11 @@
     }
   }
 
-  @media screen and (min-width: 601px) and (max-width: 991px) {
-    .hero-carousel-2026_swiper {
-      aspect-ratio: 1808.78 / 1206;
-    }
-  }
-
   @media screen and (max-width: 600px) {
+    .hero-carousel-2026_swiper {
+      aspect-ratio: 121 / 114;
+    }
+
     .hero-carousel-2026_content {
       font-size: var(--mobile-heading-size, 32px);
       gap: 20px;
@@ -425,6 +436,22 @@
     .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_content {
       max-width: 100%;
       padding: 40px 10px;
+    }
+
+    .hero-carousel-2026_slide.is-tablet-text-left .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-tablet-text-left.is-text-left .hero-carousel-2026_content {
+      max-width: 100%;
+      text-align: center;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .hero-carousel-2026_slide.is-mobile-text-top .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-mobile-text-top.is-text-right .hero-carousel-2026_content {
+      justify-content: flex-start;
+      max-width: 100%;
+      padding: 40px;
     }
 
     .hero-carousel-2026_fade-overlay-image {
@@ -563,6 +590,17 @@
           "id": "tablet_fallback_image",
           "label": "Tablet fallback photo filename (asset)",
           "info": "Advanced: filename of a theme asset, used only if no tablet image is picked above."
+        },
+        {
+          "type": "select",
+          "id": "tablet_text_position",
+          "label": "Tablet Text position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
         },
         {
           "type": "range",

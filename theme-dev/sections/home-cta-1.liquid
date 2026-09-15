@@ -5,7 +5,7 @@
       {%- if section.settings.background_image != blank -%}
         <img src="{{ section.settings.background_image | img_url: '1920x' }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
       {%- else -%}
-        <img src="{{ 'featured-roast-background.jpg' | asset_url }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
+        <img src="{{ 'featured-roast-background.png' | asset_url }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
       {%- endif -%}
     </div>
     <div class="featured-roast-2026_grain">
@@ -29,11 +29,13 @@
 
 <style>
   .site-redesign-26.featured-roast-2026 {
-    background-color: var(--dark-grey);
     padding: 40px 0;
+    background-color: var(--first-cup-white);
   }
 
   .featured-roast-2026_card {
+    display: flex;
+    flex-wrap: wrap;
     position: relative;
     max-width: var(--site-max-width);
     margin: 0 auto;
@@ -102,13 +104,14 @@
 
   .featured-roast-2026_heading p {
     margin: 0;
+    line-height: 1;
   }
 
   .featured-roast-2026_text {
     font-family: Avenirnextltpro, sans-serif;
     font-weight: 400;
     font-size: 16px;
-    line-height: 1.4;
+    line-height: 1.1;
     color: #fff;
     margin: 0;
   }
@@ -136,33 +139,43 @@
   }
 
   .featured-roast-2026_product {
-    position: absolute;
+    position: relative;
+    margin: auto 0;
     z-index: 1;
-    right: 6%;
-    bottom: 0;
     height: 82%;
     width: auto;
     object-fit: contain;
     pointer-events: none;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 601px) {
     .featured-roast-2026_card {
       aspect-ratio: auto;
       border-radius: 16px;
-    }
-
-    .featured-roast-2026_content {
-      max-width: 100%;
-      padding: 32px 24px;
     }
 
     .featured-roast-2026_heading {
       font-size: 30px;
     }
 
+    .featured-roast-2026_content {
+      padding: 32px 24px;
+    }
+
     .featured-roast-2026_product {
-      display: none;
+      width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .featured-roast-2026_content {
+      padding: 32px 24px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .featured-roast-2026_product {
+      width: 100%;
     }
   }
 </style>
