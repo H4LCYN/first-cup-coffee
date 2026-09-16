@@ -59,12 +59,7 @@
       },
       "home-cta-1": {
         "type": "home-cta-1",
-        "settings": {
-          "home_cta_1_link": "shopify://pages/subscribe-save",
-          "home_cta_1_button_text": "<p>SUBSCRIBE NOW</p>",
-          "home_cta_1_paragraph": "<p>Choose your coffee, select delivery times, & get fresh coffee delivered to your door. There’s no contracts so you can cancel anytime.</p>",
-          "home_cta_header": "SAVE 20% WHEN YOU SUBSCRIBE"
-        }
+        "settings": {}
       },
       "home-cta-2": {
         "type": "home-cta-2",
@@ -79,10 +74,10 @@
       "footer": {
         "type": "footer",
         "settings": {
-          "footer_shop_menu": "main-menu-new-do-not-use-yet",
-          "footer_customer_service_menu": "footer-customer-service",
           "facebook_url": "https://www.facebook.com/firstcupcoffeecompany/",
-          "instagram_url": "https://www.instagram.com/firstcupcoffeeco/"
+          "instagram_url": "https://www.instagram.com/firstcupcoffeeco/",
+          "footer_shop_menu": "main-menu-new-do-not-use-yet",
+          "footer_customer_service_menu": "footer-customer-service"
         }
       },
       "section-subpage-header-1": {
