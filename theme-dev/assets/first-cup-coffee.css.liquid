@@ -191,6 +191,10 @@
   --site-max-width: 1440px;
   --desktop-v-spacing: 60px;
   --desktop-x-spacing: 30px;
+  --tablet-v-spacing: 60px;
+  --tablet-x-spacing: 30px;
+  --mobile-v-spacing: 30px;
+  --mobile-x-spacing: 15px;
   --desktop-border-radius: 30px;
   --twenty-six-white: #fff;
 }
@@ -3139,6 +3143,18 @@ label {
    content" container */
 section.site-redesign-26 {
   padding: var(--desktop-v-spacing) var(--desktop-x-spacing) 0;
+}
+
+@media screen and (max-width: 991px) {
+  section.site-redesign-26 {
+    padding: var(--tablet-v-spacing) var(--tablet-x-spacing) 0;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  section.site-redesign-26 {
+    padding: var(--mobile-v-spacing) var(--mobile-x-spacing) 0;
+  }
 }
 
 .container-2026 {
