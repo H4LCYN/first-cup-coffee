@@ -2,6 +2,16 @@
   {%- assign headerSnippetPath = "header-index" -%}
   {%- assign wfPage = "654d36a6d6abfe3772908289" -%}
   {%- assign bodyClasses = "body" -%}
+{%- elsif template == 'collection' and headerSnippetPath == blank -%}
+  {%- comment -%}
+    templates/collection.json is a JSON template, so it can't set these the way
+    the old collection-template.liquid did. header-collection also loads the
+    Finsweet filter/sort scripts the PLP depends on. Matched exactly so the
+    legacy collection.all template keeps rendering its own shell.
+  {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-collection" -%}
+  {%- assign wfPage = "654d36a6d6abfe37729082ab" -%}
+  {%- assign bodyClasses = "" -%}
 {%- endif -%}
 <!DOCTYPE html>
 
@@ -19,7 +29,7 @@
 </head>
 <body class="{{ bodyClasses }} {{ "template-" | append: request.page_type | handle }}">
 {% if headerSnippetPath %}
-  {% if template == 'index' %}
+  {% if template == 'index' or template == 'collection' %}
     <div class="page-wrapper">
       {%- render 'google-icons' -%}
       {%- render 'global-styles' -%}
