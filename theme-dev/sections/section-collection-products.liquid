@@ -84,13 +84,14 @@
 
     {%- paginate collection.products by section.settings.products_per_page -%}
       {%- if collection.products.size > 0 -%}
+        <div class="plp-2026_list w-dyn-list">
         <div
           fs-cmsfilter-element="list"
           fs-cmssort-element="list"
           fs-cmsfilter-showquery="true"
           fs-cmsfilter-tagformat="category"
           role="list"
-          class="plp-2026_grid"
+          class="plp-2026_grid w-dyn-items"
         >
           {%- for item in collection.products -%}
             {%- assign roast = item.metafields.custom.roast_profile.value -%}
@@ -109,15 +110,22 @@
               </div>
               <div class="plp-2026_card-info">
                 {%- if roast != blank -%}
-                  <span fs-cmsfilter-field="Roast" class="plp-2026_card-roast">{{ roast }} {{ section.settings.roast_suffix }}</span>
+                  <span class="plp-2026_card-roast">{{ roast }} {{ section.settings.roast_suffix }}</span>
                 {%- endif -%}
                 <span fs-cmssort-field="Name" class="plp-2026_card-title">{{ item.title }}</span>
                 <span fs-cmssort-field="Price" class="plp-2026_card-price">{{ item.price | money }}</span>
               </div>
+              {%- comment -%}
+                Finsweet matches the facet checkbox text against these values
+                exactly, so they carry the bare metafield value — the visible
+                label above appends "Roast" for display and must stay separate.
+              {%- endcomment -%}
+              <span fs-cmsfilter-field="Roast" class="plp-2026_card-hidden">{{ roast }}</span>
               <span fs-cmssort-field="Featured" class="plp-2026_card-hidden">{{ item.metafields.custom.featured.value }}</span>
               <span fs-cmsfilter-field="Package" class="plp-2026_card-hidden">{{ item.metafields.custom.packagetype.value }}</span>
             </a>
           {%- endfor -%}
+        </div>
         </div>
       {%- else -%}
         <p class="plp-2026_empty">{{ section.settings.empty_text }}</p>
@@ -219,14 +227,18 @@
     transform: rotate(180deg);
   }
 
+  /* Base stays display:none so Webflow's w--open toggle still controls
+     visibility — .w-dropdown-list is display:none by default and this
+     block loads after components.css, so setting display here would
+     pin the panel open. */
   .plp-2026_facet-panel {
     background-color: var(--dark-grey);
     border: 2.47px solid var(--butterscotch);
     border-radius: 24.7px;
     padding: 30px 21px;
     min-width: 211px;
-    display: flex;
     gap: 8px;
+    z-index: 5;
   }
 
   .plp-2026_facet-panel.w--open {
@@ -594,7 +606,7 @@
       "name": "Section - Collection Products",
       "blocks": [
         { "type": "facet", "settings": { "label": "Roast", "field": "Roast", "options": "Light, Medium, Dark, Blend" } },
-        { "type": "facet", "settings": { "label": "Package", "field": "Package", "options": "12oz Bags, 16oz Bags, 5lb Bags" } }
+        { "type": "facet", "settings": { "label": "Package", "field": "Package", "options": "16 oz Bags, 5 lb Bulk, Pods" } }
       ]
     }
   ]
