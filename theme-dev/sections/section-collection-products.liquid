@@ -223,7 +223,9 @@
     transition: transform 0.2s;
   }
 
-  .plp-2026_facet.w--open .plp-2026_facet-chevron {
+  /* Webflow adds w--open to the toggle and the list, never to the
+     .w-dropdown wrapper — so the chevron rule has to hang off the toggle. */
+  .plp-2026_facet-toggle.w--open .plp-2026_facet-chevron {
     transform: rotate(180deg);
   }
 
@@ -332,6 +334,11 @@
     height: 6px;
     display: block;
     margin-left: 12px;
+    transition: transform 0.2s;
+  }
+
+  .plp-2026_sort-toggle.w--open .plp-2026_sort-chevron {
+    transform: rotate(180deg);
   }
 
   .plp-2026_sort-panel {
