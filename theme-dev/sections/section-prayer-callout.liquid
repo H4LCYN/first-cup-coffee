@@ -9,8 +9,8 @@
   </div>
   <div class="prayer-callout-2026_content">
     <p class="cta-eyebrow-2026 prayer-callout-2026_eyebrow">{{ section.settings.eyebrow }}</p>
-    <h2 class="prayer-callout-2026_heading">{{ section.settings.heading }}</h2>
-    <div class="prayer-callout-2026_text">{{ section.settings.text }}</div>
+    <h2 class="cta-heading-2026 prayer-callout-2026_heading">{{ section.settings.heading }}</h2>
+    <div class="cta-text-2026 prayer-callout-2026_text">{{ section.settings.text }}</div>
     {%- if section.settings.button_text != blank -%}
       <a href="{{ section.settings.button_link }}" class="prayer-callout-2026_button">{{ section.settings.button_text }}</a>
     {%- endif -%}
@@ -50,27 +50,8 @@
     padding: 65px 100px 65px 60px;
   }
 
-  /* Eyebrow type comes from .cta-eyebrow-2026 in first-cup-coffee.css.liquid.
-     Heading and text intentionally keep their own larger treatment below. */
-
-  .prayer-callout-2026_heading {
-    font-family: Avenirnextltpro, sans-serif;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 1.1;
-    color: #fff;
-    text-transform: uppercase;
-    margin: 0;
-  }
-
-  .prayer-callout-2026_text {
-    font-family: Roboto, sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 1.3;
-    color: #fff;
-  }
-
+  /* Eyebrow, heading and text type all come from the .cta-*-2026 classes in
+     first-cup-coffee.css.liquid; only the overrides below live here. */
   .prayer-callout-2026_text p {
     margin: 0;
   }
