@@ -8,7 +8,7 @@
     {%- endif -%}
   </div>
   <div class="prayer-callout-2026_content">
-    <p class="prayer-callout-2026_eyebrow">{{ section.settings.eyebrow }}</p>
+    <p class="cta-eyebrow-2026 prayer-callout-2026_eyebrow">{{ section.settings.eyebrow }}</p>
     <h2 class="prayer-callout-2026_heading">{{ section.settings.heading }}</h2>
     <div class="prayer-callout-2026_text">{{ section.settings.text }}</div>
     {%- if section.settings.button_text != blank -%}
@@ -50,14 +50,8 @@
     padding: 65px 100px 65px 60px;
   }
 
-  .prayer-callout-2026_eyebrow {
-    font-family: Avenirnextltpro, sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--butterscotch);
-    text-transform: uppercase;
-    margin: 0;
-  }
+  /* Eyebrow type comes from .cta-eyebrow-2026 in first-cup-coffee.css.liquid.
+     Heading and text intentionally keep their own larger treatment below. */
 
   .prayer-callout-2026_heading {
     font-family: Avenirnextltpro, sans-serif;

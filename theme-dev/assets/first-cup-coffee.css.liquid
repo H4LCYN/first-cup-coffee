@@ -3164,6 +3164,39 @@ section.site-redesign-26 {
   padding: 0;
 }
 
+/* Shared CTA type styles for the site-redesign-26 sections. Sections still
+   own their layout; these only carry the repeated type treatment. A section
+   can override any of it — its inline <style> loads after this file, so at
+   equal specificity the section rule wins (that's how the mobile sizes
+   keep working). */
+.cta-eyebrow-2026 {
+  margin: 0;
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--butterscotch);
+  text-transform: uppercase;
+}
+
+.cta-heading-2026 {
+  margin: 0;
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.cta-text-2026 {
+  margin: 0;
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.1;
+  color: #fff;
+}
+
 .padding-section-medium {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -4018,6 +4051,10 @@ section.site-redesign-26 {
   background-color: var(--uniform-green);
 }
 
+.section_collection-products.site-redesign-26 {
+  background-color: var(--twenty-six-white);
+}
+
 .collection-grid {
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
@@ -4032,10 +4069,10 @@ section.site-redesign-26 {
   margin-left: 0;
 }
 
-.fs-dropdown_list.w--open {
+.plp-2026_facets .fs-dropdown_list.w--open {
   background-color: var(--dark-grey);
-  border: 1px solid #9d9d9d;
-  border-radius: .1rem;
+  border: 2.5px solid var(--twenty-six-yellow);
+  border-radius: 25px;
   margin-top: .5rem;
   padding: 1rem;
 }

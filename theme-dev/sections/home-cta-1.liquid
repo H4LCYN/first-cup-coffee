@@ -12,9 +12,9 @@
       <img src="{{ 'hero-carousel-grain-overlay.png' | asset_url }}" alt="" class="featured-roast-2026_grain-image">
     </div>
     <div class="featured-roast-2026_content">
-      <p class="featured-roast-2026_eyebrow">{{ section.settings.eyebrow }}</p>
-      <div class="featured-roast-2026_heading">{{ section.settings.heading }}</div>
-      <p class="featured-roast-2026_text">{{ section.settings.paragraph }}</p>
+      <p class="cta-eyebrow-2026 featured-roast-2026_eyebrow">{{ section.settings.eyebrow }}</p>
+      <div class="cta-heading-2026 featured-roast-2026_heading">{{ section.settings.heading }}</div>
+      <p class="cta-text-2026 featured-roast-2026_text">{{ section.settings.paragraph }}</p>
       {%- if section.settings.button_text != blank -%}
         <a href="{{ section.settings.button_link }}" class="featured-roast-2026_button">{{ section.settings.button_text }}</a>
       {%- endif -%}
@@ -84,36 +84,11 @@
     padding: 40px 24px 40px 64px;
   }
 
-  .featured-roast-2026_eyebrow {
-    font-family: Avenirnextltpro, sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--butterscotch);
-    text-transform: uppercase;
-    margin: 0;
-  }
-
-  .featured-roast-2026_heading {
-    font-family: Avenirnextltpro, sans-serif;
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 1.1;
-    color: #fff;
-    text-transform: uppercase;
-  }
-
+  /* Type comes from .cta-eyebrow-2026 / .cta-heading-2026 / .cta-text-2026
+     in first-cup-coffee.css.liquid; only the overrides live here. */
   .featured-roast-2026_heading p {
     margin: 0;
     line-height: 1;
-  }
-
-  .featured-roast-2026_text {
-    font-family: Avenirnextltpro, sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.1;
-    color: #fff;
-    margin: 0;
   }
 
   .featured-roast-2026_button {
