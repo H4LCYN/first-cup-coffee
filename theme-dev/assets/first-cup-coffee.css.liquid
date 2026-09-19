@@ -3655,10 +3655,9 @@ section.site-redesign-26 {
   display: flex;
 }
 
-.section_product {
-  background-color: var(--uniform-green);
-}
-
+/* Base product layout. Still used by the partner layout in
+   templates/product.liquid, which has no .section_product wrapper — leave
+   these in place or that variant loses its layout entirely. */
 .product_component-wrapper {
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
@@ -3702,6 +3701,169 @@ section.site-redesign-26 {
 
 .product_description-text {
   line-height: 1.4;
+}
+
+/* PDP hero — 2026 redesign (Figma node 225:337).
+   Styling only: the markup in templates/product.liquid is left alone so the
+   Webflow add-to-cart form, option pills and Recharge wiring keep working.
+   Scoped to .section_product so it overrides the base above by specificity
+   without touching the partner layout. */
+.section_product {
+  background-color: #fff;
+}
+
+.section_product .product_component-wrapper {
+  grid-column-gap: 46px;
+  grid-row-gap: 46px;
+  max-width: var(--site-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+.section_product .product_column.is-product-description {
+  width: 44%;
+  padding-top: 15.892px;
+  position: relative;
+}
+
+.section_product .product_column.is-product-image {
+  width: 56%;
+}
+
+.section_product .product-image.is-product-page {
+  border-radius: var(--desktop-border-radius);
+  aspect-ratio: 658 / 698;
+  object-fit: cover;
+}
+
+.section_product .product_name {
+  font-family: "Avenir Next Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 44.497px;
+  line-height: 1;
+  color: #000;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.section_product .product_type {
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 400;
+  font-size: 15.892px;
+  line-height: 1;
+  color: var(--butterscotch);
+  margin-bottom: 4.768px;
+}
+
+.section_product .product_price {
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 400;
+  font-size: 22.249px;
+  line-height: 1;
+  color: #000;
+  margin-top: 15.892px;
+  margin-bottom: 0;
+}
+
+.section_product .product_description-component {
+  color: #000;
+  position: sticky;
+  top: 3.9rem;
+}
+
+.section_product .product-description_wrapper {
+  margin-top: 31.784px;
+  margin-bottom: 0;
+}
+
+.section_product .product_description-text {
+  font-family: "Avenir Next Condensed", sans-serif;
+  font-size: 16px;
+  line-height: 1.39;
+  color: #000;
+}
+
+/* The description is merchant HTML (Shogun) whose bullet list carries the
+   roast details; the design renders those larger than the prose below. */
+.section_product .product_description-text ul {
+  margin: 0;
+  padding-left: 40px;
+  list-style: none;
+}
+
+.section_product .product_description-text ul li {
+  font-size: 18px;
+  line-height: 1.236;
+}
+
+.section_product .product_description-text p {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+/* Option pills — Texture / Deliver Every / Bag Count */
+.section_product .w-commerce-commerceaddtocartoptionpill,
+.section_product .button-1 {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.7px;
+  min-width: 106px;
+  height: 39px;
+  padding: 6px 15px;
+  border: 2px solid #000;
+  border-radius: 2px;
+  background-color: #0000;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.section_product .w-commerce-commerceaddtocartoptionpill.w--ecommerce-pill-selected,
+.section_product .button-1.w--ecommerce-pill-selected {
+  border-color: var(--butterscotch);
+  background-color: var(--butterscotch);
+  color: #fff;
+}
+
+.section_product .field-label {
+  font-family: "Avenir Next Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  color: #000;
+  margin-top: 17px;
+  margin-bottom: 11px;
+}
+
+.section_product .add-to-cart-button,
+.section_product .subscription-add-to-cart {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  border-radius: 2px;
+  min-height: 55px;
+}
+
+@media screen and (max-width: 991px) {
+  .section_product .product_component-wrapper {
+    flex-direction: column;
+  }
+
+  .section_product .product_column.is-product-description,
+  .section_product .product_column.is-product-image {
+    width: 100%;
+  }
+
+  .section_product .product_name {
+    font-size: 34px;
+  }
 }
 
 .add-to-cart_wrapper {
@@ -3866,10 +4028,6 @@ section.site-redesign-26 {
 .product-features_heading {
   font-family: Avenirnextltpro Demicn, sans-serif;
   font-size: 3rem;
-}
-
-.section_related-products {
-  background-color: var(--dark-grey);
 }
 
 .related-products_component {
