@@ -2214,6 +2214,7 @@ label {
   object-position: 50% 0%;
   width: 100%;
   height: 100%;
+  border-radius: 30px;
 }
 
 .product-image.is-isolated {
@@ -2238,6 +2239,28 @@ label {
 
 .product-container-info.is-isolated {
   text-align: center;
+}
+
+.product-container-info .p-medium {
+  color: #000;
+  text-align: center;
+  font-family: "Avenir Next Condensed";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.product-container-info .p-small {
+  color: #000;
+  text-align: center;
+  font-family: "Avenir Next";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.4;
+  text-transform: uppercase;
 }
 
 .product-collection-list {
@@ -4026,8 +4049,13 @@ section.site-redesign-26 {
 }
 
 .product-features_heading {
-  font-family: Avenirnextltpro Demicn, sans-serif;
-  font-size: 3rem;
+  color: #212121;
+  text-align: center;
+  font-family: "Avenir Next Condensed";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 33px;
 }
 
 .related-products_component {
@@ -4211,6 +4239,8 @@ section.site-redesign-26 {
 
 .section_collection-products.site-redesign-26 {
   background-color: var(--twenty-six-white);
+  display: flex;
+  justify-content: center;
 }
 
 .collection-grid {
@@ -4884,10 +4914,16 @@ section.site-redesign-26 {
   display: grid;
 }
 
+.subscription-product {
+  padding-top: 30px;
+}
+
 .sub-prod-sel_tab {
   border: .13rem solid var(--first-cup-white);
-  color: var(--first-cup-white);
-  background-color: #fafcf500;
+  color: #000;
+  border-radius: 2px;
+  border: 2px solid #000;
+  background-color: var(--twenty-six-white);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -4899,10 +4935,10 @@ section.site-redesign-26 {
 
 .sub-prod-sel_tab.w--current {
   background-color: var(--butterscotch);
+  color: var(--twenty-six-white);
   opacity: 1;
-  color: var(--first-cup-charcoal);
-  border-style: solid;
-  border-color: #fafcf5;
+  border-radius: 2px;
+  border-style: none;
 }
 
 .sub-prod-sel_tab.is-right {
@@ -4910,25 +4946,12 @@ section.site-redesign-26 {
   padding-right: 2.075rem;
 }
 
-.sub-prod-sel_tab.is-right.w--current {
-  border-style: solid;
-  border-color: #ffd000;
-}
-
-.sub-prod-sel_tab.is-left {
-  border-right-style: none;
-}
-
-.sub-prod-sel_tab.is-left.w--current {
-  border-style: solid;
-  border-color: #ffd000;
-}
-
 .tabs-menu {
   align-items: center;
   margin-bottom: 1.9rem;
   padding-right: 1.9rem;
   display: flex;
+  gap: 15px;
 }
 
 .sub-prod-sel_price-wrapper {
@@ -4940,16 +4963,20 @@ section.site-redesign-26 {
 .free-shipping-badge {
   border: 1px solid var(--butterscotch);
   background-color: var(--firebrick);
-  color: var(--first-cup-white);
+  text-transform: uppercase;
+  color: #FFF;
   text-align: center;
+  font-family: "Avenir Next Condensed";
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.9;
   border-radius: .35rem;
   justify-content: center;
   align-items: center;
   margin-top: -1.1rem;
   margin-right: -1.8rem;
   padding: .3rem;
-  font-family: Avenirnextltpro Cn, sans-serif;
-  font-size: 1rem;
   display: flex;
   position: absolute;
   inset: 0% 0% auto auto;
@@ -4962,8 +4989,8 @@ section.site-redesign-26 {
 }
 
 .fs_radio-2_button {
-  border-style: none;
-  border-radius: 0;
+  border-radius: 2px;
+  border: 2px solid #000;
   width: 100%;
   height: 100%;
   margin-top: 0;
@@ -5007,6 +5034,19 @@ section.site-redesign-26 {
   background-color: var(--butterscotch);
   color: var(--first-cup-charcoal);
   max-width: 100%;
+}
+
+.fs_radio-2_field.is-active-inputactive .fs_radio-2_button {
+  border: 0;
+}
+
+.fs_radio-2_field.is-active-inputactive .fs_radio-2_label {
+  color: var(--twenty-six-white);
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: .7px;
 }
 
 .fs_radio-2_group {
