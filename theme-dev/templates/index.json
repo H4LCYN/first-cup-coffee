@@ -118,23 +118,38 @@
       "blocks": {
         "tab-all": {
           "type": "tab",
-          "settings": { "label": "All Coffee", "roast_value": "" }
+          "settings": {
+            "label": "All Coffee",
+            "roast_value": ""
+          }
         },
         "tab-light": {
           "type": "tab",
-          "settings": { "label": "Light Roast", "roast_value": "light" }
+          "settings": {
+            "label": "Light Roast",
+            "roast_value": "light"
+          }
         },
         "tab-medium": {
           "type": "tab",
-          "settings": { "label": "Medium Roast", "roast_value": "medium" }
+          "settings": {
+            "label": "Medium Roast",
+            "roast_value": "medium"
+          }
         },
         "tab-dark": {
           "type": "tab",
-          "settings": { "label": "Dark Roast", "roast_value": "dark" }
+          "settings": {
+            "label": "Dark Roast",
+            "roast_value": "dark"
+          }
         },
         "tab-blend": {
           "type": "tab",
-          "settings": { "label": "Blend Roast", "roast_value": "blend" }
+          "settings": {
+            "label": "Blend Roast",
+            "roast_value": "blend"
+          }
         },
         "product-rushmore": {
           "type": "product",
@@ -142,7 +157,8 @@
             "name": "<p>THE RUSHMORE</p>",
             "details": "<ul><li>Named after a Monument of Firsts</li><li>Colombian</li><li>Light Roast</li><li><span>Milk Chocolate, Caramel Syrup, Smooth Finish, and Raspberry</span></li></ul>",
             "fallback_image": "The-Rushmore-Bag.png",
-            "roast_value": "light"
+            "roast_value": "light",
+            "link": "shopify://products/the-rushmore"
           }
         },
         "product-carver": {
@@ -151,7 +167,8 @@
             "name": "<p>THE CARVER</p>",
             "details": "<ul><li>Named after The First Crop Rotation Expert and Peanut Pusher</li><li>Nicaraguan</li><li>Medium Roast</li><li>Smooth Tea-Like consistency, Light and Bright, Lemon Zest, Cocoa, and Walnut</li></ul>",
             "fallback_image": "The-Carver-Bag.png",
-            "roast_value": "medium"
+            "roast_value": "medium",
+            "link": "shopify://products/the-carver"
           }
         },
         "product-buzz-armstrong": {
@@ -160,7 +177,8 @@
             "name": "<p>THE BUZZ ARMSTRONG</p>",
             "details": "<ul><li>Named after the First Men to land on the Moon</li><li>Whiskey Aged Guatemalan Antigua</li><li>Medium Roast</li><li>Orange, Apricot, and Peach balanced with warm notes of Cinnamon and Allspice</li></ul>",
             "fallback_image": "The-Buzz-Armstrong-Bag.png",
-            "roast_value": "medium"
+            "roast_value": "medium",
+            "link": "shopify://products/the-buzz-armstrong"
           }
         },
         "product-washington": {
@@ -169,7 +187,8 @@
             "name": "<p>THE WASHINGTON</p>",
             "details": "<ul><li>Named after the First President of the United States of America</li><li>Kenyan</li><li>Medium</li><li>Lime Zest, Summer Berry Pulp, and a rich body to balance it out.</li></ul>",
             "fallback_image": "The-Washington-Bag.png",
-            "roast_value": "medium"
+            "roast_value": "medium",
+            "link": "shopify://products/the-washington"
           }
         },
         "product-boston-tea-party": {
@@ -178,7 +197,8 @@
             "name": "<p>THE BOSTON TEA PARTY</p>",
             "details": "<ul><li>The First Revolt</li><li>Decaf Blend</li><li>Medium Roast</li><li>Milk Chocolate, Ripe Fruit, Allspice</li></ul>",
             "fallback_image": "The-Boston-Tea-Party-Bag.png",
-            "roast_value": "medium"
+            "roast_value": "medium",
+            "link": "shopify://products/the-boston-tea-party"
           }
         },
         "product-farrow": {
@@ -187,7 +207,8 @@
             "name": "<p>THE FARROW</p>",
             "details": "<ul><li>Named after the First African-American Revivalist</li><li>Ethiopian Yirgacheffe</li><li>Dark Roast</li><li>Balanced Acidity and Body, with a slight hint of Citrus and Earthy Tones</li></ul>",
             "fallback_image": "The-Farrow-Bag.png",
-            "roast_value": "dark"
+            "roast_value": "dark",
+            "link": "shopify://products/the-farrow"
           }
         },
         "product-lexington": {
@@ -196,7 +217,8 @@
             "name": "<p>THE LEXINGTON</p>",
             "details": "<ul><li>Named after the First Shot heard around the world at the Battle of Lexington.</li><li>Espresso Roast/Blend</li><li>Dark Roast</li><li>Dark Chocolate Fudge, Velvety Texture, and Orange Zest</li></ul>",
             "fallback_image": "The-Lexington-Bag.png",
-            "roast_value": "dark"
+            "roast_value": "dark",
+            "link": "shopify://products/the-lexington"
           }
         },
         "product-boston-common": {
@@ -205,7 +227,8 @@
             "name": "<p>THE BOSTON COMMON</p>",
             "details": "<ul><li>Named after the First Park in America</li><li>Brazilian</li><li>Most Common Bean Origin</li><li>Medium Dark Roast</li><li>Heavy in body, Smooth, Sweet, and Nutty</li><li>Blend</li></ul>",
             "fallback_image": "The-Boston-Common-Bag.png",
-            "roast_value": "blend"
+            "roast_value": "blend",
+            "link": "shopify://products/the-boston-common"
           }
         },
         "product-john-hancock": {
@@ -214,7 +237,8 @@
             "name": "<p>THE JOHN HANCOCK</p>",
             "details": "<ul><li>The First Signature on the Declaration of Independence</li><li>Signature Blend</li><li>Roasters Pick</li><li>Medium-Dark Roast</li></ul>",
             "fallback_image": "The-John-Hancock-Bag.png",
-            "roast_value": "blend"
+            "roast_value": "blend",
+            "link": "shopify://products/hancock-signature-roast"
           }
         }
       },

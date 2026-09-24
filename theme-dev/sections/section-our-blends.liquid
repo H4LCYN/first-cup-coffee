@@ -20,8 +20,12 @@
     <div class="our-blends-2026_products">
       {%- for block in section.blocks -%}
         {%- if block.type == 'product' -%}
+          {%- comment -%}
+            Emit href only when set. A blank one renders href="" which points
+            at the current page, so the card looks clickable but goes nowhere.
+          {%- endcomment -%}
           <a
-            href="{{ block.settings.link }}"
+            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
             class="our-blends-2026_product{% unless default_roast == '' or block.settings.roast_value == default_roast %} is-hidden{% endunless %}"
             data-roast="{{ block.settings.roast_value }}"
             {{ block.shopify_attributes }}
@@ -315,7 +319,8 @@
             "name": "<p>THE CARVER</p>",
             "details": "<ul><li>Named after The First Crop Rotation Expert and Peanut Pusher</li><li>Nicaraguan</li><li>Medium Roast</li><li>Smooth Tea-Like consistency, Light and Bright, Lemon Zest, Cocoa, and Walnut</li></ul>",
             "fallback_image": "The-Carveir-Bag.png",
-            "roast_value": "medium"
+            "roast_value": "medium",
+            "link": "https://firstcup.com/products/the-carver?variant=43327923814622"
           }
         },
         {
@@ -324,7 +329,8 @@
             "name": "<p>THE BUZZ ARMSTRONG</p>",
             "details": "<ul><li>Named after the First Men to land on the Moon</li><li>Whiskey Aged Guatemalan Antigua</li><li>Medium Roast</li><li>Orange, Apricot, and Peach balanced with warm notes of Cinnamon and Allspice</li></ul>",
             "fallback_image": "The-Buzz-Armstrong-Bag.png",
-            "roast_value": "medium"
+            "roast_value": "medium",
+            "link": "https://firstcup.com/products/the-buzz-armstrong?variant=43406231830750"
           }
         },
         {
@@ -333,7 +339,8 @@
             "name": "<p>THE WASHINGTON</p>",
             "details": "<ul><li>Named after the First President of the United States of America</li><li>Kenyan</li><li>Medium</li><li>Lime Zest, Summer Berry Pulp, and a rich body to balance it out.</li></ul>",
             "fallback_image": "The-Washington-Bag.png",
-            "roast_value": "medium"
+            "roast_value": "medium",
+            "link": "https://firstcup.com/products/the-washington?variant=43328144867550"
           }
         },
         {
