@@ -1,11 +1,11 @@
 ---
 name: ship-dev
-description: Commit all uncommitted work and push it to the First Cup dev theme. Use when the user says "ship it", "commit and push", "push to dev", "deploy to dev", or otherwise asks to get current local changes onto the dev theme.
+description: Commit all uncommitted work and push code (sections, assets, layout, snippets) to the First Cup dev theme, leaving merchant content files alone. Use when the user says "ship it", "commit and push", "push to dev", "deploy to dev", or otherwise asks to get current local changes onto the dev theme.
 ---
 
-# Ship to dev theme
+# Ship to dev theme (code only)
 
-Commit everything outstanding, then push **only the changed files** to the **dev** theme. Never the live theme.
+Commit everything outstanding, then push **only the changed code files** to the **dev** theme. Never the live theme, and never the content files.
 
 ## Hard rules
 
@@ -13,6 +13,10 @@ Commit everything outstanding, then push **only the changed files** to the **dev
 - **Never push the whole directory.** `theme push` deletes remote files absent locally. Always scope with `--only=<path>` per file, or use `--nodelete`. This has wiped entire themes twice before.
 - **Theme IDs change** (backups get promoted). Resolve the current ID with `shopify theme list` rather than trusting a remembered one. As of 2026-09-15 dev was `157059580126`.
 - **`theme-live/` is never pushed** by this skill. Commit changes there if present, but say so and leave them local.
+- **Never push content files.** `templates/*.json` and `config/settings_data.json` hold merchant content — which sections exist, their order, and the text/images inside them. The theme editor is their source of truth; the repo copy is only a snapshot. Pushing them overwrites whatever the user changed in admin since the last pull, which has repeatedly wiped their homepage settings.
+  - Still **commit** them, so git keeps a backup of that content.
+  - Do **not** add them to the `--only` list.
+  - If any are in the diff, say so plainly and point at `/ship-dev-content`, which exists for exactly that case.
 
 ## Steps
 
@@ -65,6 +69,36 @@ print('schemas checked')
 
 Known pre-existing failure: `sections/section-location-grid.liquid` has a bad schema. Ignore it unless it's in the current diff.
 
+Shopify also caps a section's schema `name` at **25 characters** and rejects the
+file outright past that — which then cascades into "section type does not refer
+to an existing section file" on any JSON template using it. Check it:
+
+```bash
+cd theme-dev && python3 -c "
+import re, json, glob
+for f in sorted(glob.glob('sections/*.liquid')):
+    m = re.search(r'{%\s*schema\s*%}(.*?){%\s*endschema\s*%}', open(f).read(), re.S)
+    if not m: continue
+    try: n = json.loads(m.group(1)).get('name','')
+    except Exception: continue
+    if len(n) > 25: print('NAME TOO LONG', len(n), f, repr(n))
+print('name lengths checked')
+"
+```
+
+A bare selector with no declaration block is another silent one — CSS joins it
+to the next rule, so that rule quietly stops applying where it used to:
+
+```bash
+cd theme-dev && python3 -c "
+import re
+for i, l in enumerate(open('assets/first-cup-coffee.css.liquid'), 1):
+    s = l.strip()
+    if re.match(r'^\.[A-Za-z0-9_.\- ]+$', s) and not s.endswith((',', '{')):
+        print(f'bare selector, line {i}: {s!r}')
+"
+```
+
 Also grep for Liquid that parses locally but fails on Shopify:
 
 ```bash
@@ -73,16 +107,15 @@ grep -rn "assign.*==" theme-dev/sections/ || echo "clean"
 
 `{% assign x = a == b %}` is **not** valid Liquid — inline the comparison into the `{% if %}` instead.
 
-### 4. Check living files for remote drift
+### 4. Content files — commit, don't push
 
-`templates/*.json` and `config/settings_data.json` are rewritten server-side whenever anyone touches the theme editor. If either is in the diff, compare against the server before pushing, or you'll silently clobber merchant-entered content (app blocks, section copy):
+No drift check is needed here, because this skill never pushes content files. Just note which are in the diff:
 
 ```bash
-cd theme-dev && shopify theme pull --theme=<DEV_ID> --only=templates/index.json --path=/tmp/drift-check
-diff /tmp/drift-check/templates/index.json templates/index.json
+git status --porcelain -- theme-dev/templates/*.json theme-dev/config/settings_data.json
 ```
 
-If the remote has content the local copy lacks, stop and ask how to reconcile. Do not push over it.
+Commit them (git is the backup), exclude them from the push, and tell the user they were held back. If the change is structural — a section added, removed or reordered in code — that's what `/ship-dev-content` is for.
 
 ### 5. Commit
 
@@ -94,11 +127,20 @@ Build the `--only` list from the files actually changed in the commit(s) being s
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-git diff --name-only <last_pushed_sha> HEAD -- theme-dev | sed 's#^theme-dev/##' > /tmp/push_files.txt
+git diff --name-only --no-renames <last_pushed_sha> HEAD -- theme-dev \
+  | sed 's#^theme-dev/##' \
+  | grep -vE '^(templates/.*\.json|config/settings_data\.json)$' \
+  > /tmp/push_files.txt
+cat /tmp/push_files.txt          # eyeball it before pushing
 cd theme-dev
 ONLY=$(sed 's/^/--only=/' /tmp/push_files.txt | tr '\n' ' ')
 eval "shopify theme push --theme=<DEV_ID> $ONLY"
 ```
+
+The `grep -v` is the guard that keeps content files out of the push. The
+`--no-renames` matters: without it git reports only the new path of a rename,
+so the old filename never lands in `--only` and its deletion doesn't propagate
+(that left an orphaned `The-Farrowr-Bag.png` on the dev theme).
 
 Include deleted paths in the list too — scoped delete-sync is how renames propagate.
 
