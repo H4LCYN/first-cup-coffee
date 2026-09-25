@@ -1,0 +1,97 @@
+
+<div class="site-redesign-26 vimeo-video-2026">
+  {%- if section.settings.video_id != blank -%}
+    {%- capture vimeo_src -%}https://player.vimeo.com/video/{{ section.settings.video_id | strip }}?{% if section.settings.video_hash != blank %}h={{ section.settings.video_hash | strip }}&{% endif %}badge=0&autopause=0&player_id=0&app_id=58479{%- endcapture -%}
+    <div class="vimeo-video-2026_frame" style="padding-top: {{ section.settings.aspect_ratio }}%;">
+      <iframe
+        src="{{ vimeo_src }}"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        loading="lazy"
+        title="{{ section.settings.title | escape }}"
+        class="vimeo-video-2026_iframe"
+      ></iframe>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  .vimeo-video-2026 {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .vimeo-video-2026_frame {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 2px;
+    background-color: #000;
+  }
+
+  .vimeo-video-2026_iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_vimeo-video site-redesign-26");</script>
+
+{% schema %}
+{
+  "name": "Vimeo Video",
+  "tag": "section",
+  "class": "section_vimeo-video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_id",
+      "label": "Vimeo video ID",
+      "info": "The number in the Vimeo link, e.g. 1230101474"
+    },
+    {
+      "type": "text",
+      "id": "video_hash",
+      "label": "Private link hash",
+      "info": "The h= value for unlisted videos, e.g. 76946f1f17"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Video title (for screen readers)"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        { "value": "56.25", "label": "16:9 (landscape)" },
+        { "value": "75", "label": "4:3" },
+        { "value": "100", "label": "1:1 (square)" },
+        { "value": "125", "label": "4:5 (portrait)" },
+        { "value": "177.78", "label": "9:16 (vertical)" }
+      ],
+      "default": "75"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 400,
+      "max": 1440,
+      "step": 20,
+      "unit": "px",
+      "default": 960
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vimeo Video"
+    }
+  ]
+}
+{% endschema %}
