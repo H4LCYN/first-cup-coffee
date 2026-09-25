@@ -1,5 +1,8 @@
 
 <div class="site-redesign-26 vimeo-video-2026">
+  {%- if section.settings.heading != blank -%}
+    <h2 class="vimeo-video-2026_heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
   {%- if section.settings.video_id != blank -%}
     {%- capture vimeo_src -%}https://player.vimeo.com/video/{{ section.settings.video_id | strip }}?{% if section.settings.video_hash != blank %}h={{ section.settings.video_hash | strip }}&{% endif %}badge=0&autopause=0&player_id=0&app_id=58479{%- endcapture -%}
     <div class="vimeo-video-2026_frame" style="padding-top: {{ section.settings.aspect_ratio }}%;">
@@ -20,6 +23,20 @@
 <style>
   .vimeo-video-2026 {
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  /* Matches .our-locations-2026_heading */
+  .vimeo-video-2026_heading {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #212121;
+    text-align: center;
+    margin: 0;
   }
 
   .vimeo-video-2026_frame {
@@ -52,6 +69,12 @@
   "tag": "section",
   "class": "section_vimeo-video",
   "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THE STORY"
+    },
     {
       "type": "text",
       "id": "video_id",

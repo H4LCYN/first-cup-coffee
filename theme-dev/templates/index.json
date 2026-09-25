@@ -374,6 +374,7 @@
     "section-vimeo-video": {
       "type": "section-vimeo-video",
       "settings": {
+        "heading": "THE STORY",
         "video_id": "1230101474",
         "video_hash": "76946f1f17",
         "title": "Story 1 - Elijah",
