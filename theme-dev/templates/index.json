@@ -377,8 +377,9 @@
         "video_id": "1230101474",
         "video_hash": "76946f1f17",
         "title": "Story 1 - Elijah",
-        "aspect_ratio": "75",
-        "max_width": 960
+        "aspect_ratio": "42.55",
+        "max_width": 960,
+        "video_ratio": "16 / 9"
       }
     }
   },

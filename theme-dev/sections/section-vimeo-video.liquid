@@ -11,6 +11,7 @@
         loading="lazy"
         title="{{ section.settings.title | escape }}"
         class="vimeo-video-2026_iframe"
+        style="aspect-ratio: {{ section.settings.video_ratio }};"
       ></iframe>
     </div>
   {%- endif -%}
@@ -18,7 +19,6 @@
 
 <style>
   .vimeo-video-2026 {
-    max-width: {{ section.settings.max_width }}px;
     margin: 0 auto;
   }
 
@@ -31,11 +31,16 @@
     background-color: #000;
   }
 
+  /* The player keeps the video file's own shape and is centred in the frame.
+     When the frame is wider than the file (e.g. a 2.35:1 frame around a 16:9
+     file with letterboxing baked in), the frame's overflow crops those bars. */
   .vimeo-video-2026_iframe {
     position: absolute;
-    inset: 0;
+    top: 50%;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
+    transform: translateY(-50%);
   }
 </style>
 
@@ -67,8 +72,12 @@
     {
       "type": "select",
       "id": "aspect_ratio",
-      "label": "Aspect ratio",
+      "label": "Frame shape",
+      "info": "Pick a wider shape than the video to crop black bars built into it",
       "options": [
+        { "value": "41.84", "label": "2.39:1 (cinematic)" },
+        { "value": "42.55", "label": "2.35:1 (cinematic)" },
+        { "value": "50", "label": "2:1" },
         { "value": "56.25", "label": "16:9 (landscape)" },
         { "value": "75", "label": "4:3" },
         { "value": "100", "label": "1:1 (square)" },
@@ -76,6 +85,20 @@
         { "value": "177.78", "label": "9:16 (vertical)" }
       ],
       "default": "75"
+    },
+    {
+      "type": "select",
+      "id": "video_ratio",
+      "label": "Video file shape",
+      "info": "Shape of the uploaded file, including any black bars in it",
+      "options": [
+        { "value": "16 / 9", "label": "16:9 (landscape)" },
+        { "value": "4 / 3", "label": "4:3" },
+        { "value": "1 / 1", "label": "1:1 (square)" },
+        { "value": "4 / 5", "label": "4:5 (portrait)" },
+        { "value": "9 / 16", "label": "9:16 (vertical)" }
+      ],
+      "default": "16 / 9"
     },
     {
       "type": "range",
