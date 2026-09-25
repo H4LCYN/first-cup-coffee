@@ -1454,7 +1454,7 @@
 }
 
 body {
-  color: var(--first-cup-white);
+  color: #000;
   white-space: normal;
   padding-bottom: 0;
   font-family: Avenirnextltpro, sans-serif;
@@ -1919,6 +1919,12 @@ label {
 
 .rich-text h2 {
   margin-bottom: .5rem;
+}
+
+/* Page content written for the old dark theme carries an inline off-white
+   (#fafcf5) from the admin editor, which vanishes on the new white pages. */
+.rich-text [style*="#fafcf5" i] {
+  color: #000 !important;
 }
 
 .h3 {

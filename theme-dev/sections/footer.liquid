@@ -107,7 +107,9 @@
 
         <div class="footer-2026_bottom">
           <div class="footer-2026_bottom-links">
-            {%- for link in section.settings.footer_bottom_menu.links -%}
+            {%- comment -%} A link_list default can only be main-menu or footer, so the footer-information fallback lives here {%- endcomment -%}
+            {%- assign bottom_menu = section.settings.footer_bottom_menu | default: linklists['footer-information'] -%}
+            {%- for link in bottom_menu.links -%}
               <a href="{{ link.url }}" class="footer-2026_bottom-link">{{ link.title }}</a>
             {%- endfor -%}
           </div>
@@ -504,8 +506,7 @@
       "type": "link_list",
       "id": "footer_bottom_menu",
       "label": "Bottom bar menu",
-      "default": "main-menu",
-      "info": "E.g. Location, Privacy Policy, Terms of Service, Refund Policy"
+      "info": "Leave empty to use the footer-information menu"
     },
     {
       "type": "text",

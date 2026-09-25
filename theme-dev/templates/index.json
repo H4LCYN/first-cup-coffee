@@ -269,7 +269,7 @@
         "product-boston-common"
       ],
       "settings": {
-        "heading": "OUR BLENDS",
+        "heading": "YOUR ROAST OPTIONS",
         "default_roast_value": "medium"
       }
     },
@@ -320,7 +320,7 @@
         "location-woodlands"
       ],
       "settings": {
-        "heading": "OUR LOCATIONS",
+        "heading": "TEXAS LOCATIONS",
         "cta_text": "VISIT NOW"
       }
     },
@@ -362,7 +362,7 @@
       ],
       "settings": {
         "enabled": true,
-        "heading": "JOIN OUR COMMUNITY",
+        "heading": "JOIN THE COMMUNITY",
         "embed_code": "",
         "placeholder_text": "Follow us on Instagram @firstcupcoffeeco",
         "load_more_text": "LOAD MORE",
@@ -374,7 +374,7 @@
     "section-vimeo-video": {
       "type": "section-vimeo-video",
       "settings": {
-        "heading": "THE STORY",
+        "heading": "THE FIRST CUP STORY",
         "video_id": "1230101474",
         "video_hash": "76946f1f17",
         "title": "Story 1 - Elijah",
