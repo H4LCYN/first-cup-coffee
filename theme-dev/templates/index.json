@@ -265,7 +265,7 @@
           "type": "product",
           "settings": {
             "name": "<p>BREW AROUND AND FIND OUT</p>",
-            "details": "<ul><li>Collaboration with Nick Freitas</li><li><li>Medium Dark</li><li>Black tea, orange rind, dark chocolate, fresh black pepper and apple</li></ul>",
+            "details": "<ul><li>Collaboration with Nick Freitas</li><li>Medium Dark</li><li>Black tea, orange rind, dark chocolate, fresh black pepper and apple</li></ul>",
             "fallback_image": "The-BAFO-Bag.png",
             "link": "shopify://products/brew-around-and-find-out",
             "roast_value": "dark"
