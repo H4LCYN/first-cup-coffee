@@ -250,6 +250,26 @@
             "link": "shopify://products/the-boston-common",
             "roast_value": "blend"
           }
+        },
+        "product-frankford": {
+          "type": "product",
+          "settings": {
+            "name": "<p>THE FRANKFORD</p>",
+            "details": "<ul><li>Named after the First Bridge in America</li><li>Panamanian</li><li>Medium</li><li>Smooth and Silky Body with notes of Brown Sugar, and Fudge.</li></ul>",
+            "fallback_image": "The-Frankford-Bag.png",
+            "link": "shopify://products/the-frankford",
+            "roast_value": "medium"
+          }
+        },
+        "product-brew-around": {
+          "type": "product",
+          "settings": {
+            "name": "<p>BREW AROUND AND FIND OUT</p>",
+            "details": "<ul><li>Collaboration with Nick Freitas</li><li><li>Medium Dark</li><li>Black tea, orange rind, dark chocolate, fresh black pepper and apple</li></ul>",
+            "fallback_image": "The-BAFO-Bag.png",
+            "link": "shopify://products/brew-around-and-find-out",
+            "roast_value": "dark"
+          }
         }
       },
       "block_order": [
@@ -266,11 +286,13 @@
         "product-lexington",
         "product-john-hancock",
         "product-rushmore",
-        "product-boston-common"
+        "product-boston-common",
+        "product-frankford",
+        "product-brew-around"
       ],
       "settings": {
         "heading": "YOUR ROAST OPTIONS",
-        "default_roast_value": "medium"
+        "default_roast_value": ""
       }
     },
     "home-cta-1": {
