@@ -8,7 +8,7 @@ function adminEntryUrl(shop, metaobjectGid) {
   return `https://${shop}/admin/content/entries/prayer_request/${numericId}`;
 }
 
-export async function notifyModeratorOfNewRequest({ shop, metaobjectId, requestText, displayName, isAnonymous }) {
+export async function notifyModeratorOfNewRequest({ shop, metaobjectId, title, requestText, displayName, isAnonymous }) {
   if (!resend) {
     console.warn("RESEND_API_KEY not set — skipping moderator email. Set it in .env to enable notifications.");
     return;
@@ -20,6 +20,7 @@ export async function notifyModeratorOfNewRequest({ shop, metaobjectId, requestT
     subject: "New prayer request posted to the wall",
     text: `A new prayer request has been posted live on the Prayer Wall.\n\n` +
       `From: ${isAnonymous ? "Anonymous" : displayName || "(no name given)"}\n\n` +
+      (title ? `Title: ${title}\n\n` : "") +
       `Request:\n${requestText}\n\n` +
       `View it in Shopify Admin:\n${url}`,
   });

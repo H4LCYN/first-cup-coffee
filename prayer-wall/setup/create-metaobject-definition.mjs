@@ -24,6 +24,8 @@ const mutation = `
       displayNameKey: "request_text"
       access: { storefront: PUBLIC_READ }
       fieldDefinitions: [
+        { key: "title", name: "Title", type: "single_line_text_field",
+          validations: [{ name: "max", value: "80" }] }
         { key: "request_text", name: "Request Text", type: "multi_line_text_field", required: true }
         { key: "display_name", name: "Display Name", type: "single_line_text_field" }
         { key: "is_anonymous", name: "Anonymous", type: "boolean" }

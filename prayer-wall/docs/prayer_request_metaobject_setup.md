@@ -6,7 +6,8 @@ Merchant-owned metaobject (created via Admin GraphQL, editable afterward in Shop
 
 | Key | Type | Notes |
 |---|---|---|
-| `request_text` | `multi_line_text_field` | Required. The prayer request itself. |
+| `title` | `single_line_text_field` | Optional, max 80 chars. Short headline shown above the request on the card. |
+| `request_text` | `multi_line_text_field` | Required. The prayer request itself (the card body). |
 | `display_name` | `single_line_text_field` | Optional. Blank when `is_anonymous` is true. |
 | `is_anonymous` | `boolean` | Default `false`. |
 | `customer_id` | `single_line_text_field` | Hidden/internal. Stores the Shopify customer GID. Drives ownership checks (inline controls, delete, praise-report updates) — set once at submission, never edited by the moderator. |

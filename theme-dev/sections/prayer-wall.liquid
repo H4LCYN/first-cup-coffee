@@ -69,12 +69,12 @@
 .pw__pending-item:first-child { border-top: none; }
 .pw__pending-text { margin: 0 0 2px; font-size: 14px; line-height: 1.4; color: #000; }
 .pw__pending-date { margin: 0; font-size: 13px; color: #888; }
-.pw__textarea {
+.pw__input, .pw__textarea {
   display: block; width: 100%; box-sizing: border-box; margin-bottom: 12px; padding: 10px 12px;
   border: 1px solid #ccc; border-radius: 6px; background: #fff; color: #171717;
   font-size: 16px; font-family: inherit; line-height: 1.5; resize: vertical;
 }
-.pw__textarea:focus { outline: none; border-color: #d29f13; box-shadow: 0 0 0 2px rgba(210,159,19,.2); }
+.pw__input:focus, .pw__textarea:focus { outline: none; border-color: #d29f13; box-shadow: 0 0 0 2px rgba(210,159,19,.2); }
 .pw__textarea--sm { font-size: 14px; }
 .pw__form-footer { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .pw__anon-label { display: flex; align-items: center; gap: 6px; font-size: 14px; color: #333; cursor: pointer; }
@@ -175,6 +175,13 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
   <div class="pw__submit-wrap" id="pw-form-panel" hidden>
     <h3 class="pw__submit-title">{{ section.settings.submit_heading | default: 'Share a Prayer Request' | escape }}</h3>
     <form class="pw__form" id="pw-form" novalidate>
+      <input
+        class="pw__input"
+        type="text"
+        id="pw-request-title"
+        placeholder="Title (optional)"
+        maxlength="80"
+      >
       <textarea
         class="pw__textarea"
         id="pw-request-text"
@@ -315,8 +322,8 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
     if (duration > 0) setTimeout(() => el.remove(), duration);
   }
 
-  // Requests are a single free-text field. The design shows a short title over
-  // a body, so use the first sentence/line as the title when it is short enough.
+  // Requests posted before the `title` field existed are a single free-text field,
+  // so use the first sentence/line as the title when it is short enough.
   function splitRequest(text) {
     const t = String(text || '').trim();
     const line = t.split('\n')[0];
@@ -331,7 +338,8 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
     const frag = clone('pw-tpl-card');
     const card = frag.querySelector('.pw__card');
 
-    const parts = splitRequest(req.requestText);
+    // Prefer the explicit title; older requests without one fall back to the first sentence.
+    const parts = req.title ? { title: req.title, body: req.requestText } : splitRequest(req.requestText);
     if (parts.title) {
       const titleEl = card.querySelector('.pw__card-title');
       titleEl.textContent = parts.title;
@@ -449,12 +457,13 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
     const form = e.currentTarget;
     const btn = form.querySelector('#pw-submit-btn');
     const text = form.querySelector('#pw-request-text').value.trim();
+    const title = form.querySelector('#pw-request-title').value.trim();
     const anonEl = form.querySelector('#pw-anon');
     const anon = anonEl ? anonEl.checked : false;
     if (!text) return;
     btn.disabled = true; btn.textContent = 'Submitting…';
     try {
-      await api('/submit', { method: 'POST', body: { requestText: text, isAnonymous: anon } });
+      await api('/submit', { method: 'POST', body: { title, requestText: text, isAnonymous: anon } });
       await reload();
     } catch (err) {
       showToast(err.message);

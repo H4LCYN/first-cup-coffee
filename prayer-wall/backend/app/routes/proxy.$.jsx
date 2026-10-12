@@ -46,6 +46,7 @@ export const action = async ({ request, params }) => {
 
   switch (actionName) {
     case "submit": {
+      const title = String(body.title || "").trim().slice(0, 80);
       const requestText = (body.requestText || "").trim();
       if (!requestText) return json({ error: "Prayer request text is required." }, { status: 400 });
       const isAnonymous = !customerId || !!body.isAnonymous;
@@ -61,6 +62,7 @@ export const action = async ({ request, params }) => {
       const displayName = isAnonymous ? "" : body.displayName || (await getCustomerDisplayName(admin, customerId));
 
       const metaobject = await createRequest(admin, {
+        title,
         requestText,
         displayName,
         isAnonymous,
@@ -70,6 +72,7 @@ export const action = async ({ request, params }) => {
       await notifyModeratorOfNewRequest({
         shop,
         metaobjectId: metaobject.id,
+        title,
         requestText,
         displayName,
         isAnonymous,
@@ -158,6 +161,7 @@ export const loader = async ({ request }) => {
   return json({
     requests: published.map((r) => ({
       id: r.id,
+      title: r.title || null,
       requestText: r.requestText,
       displayName: r.isAnonymous ? null : r.displayName,
       postedAt: r.postedAt,

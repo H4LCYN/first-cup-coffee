@@ -9,6 +9,7 @@
 const METAOBJECT_TYPE = "prayer_request";
 
 const FIELD_KEYS = [
+  "title",
   "request_text",
   "display_name",
   "is_anonymous",
@@ -52,6 +53,7 @@ export async function listAllPrayerRequests(admin) {
   const nodes = json.data?.metaobjects?.nodes ?? [];
   return nodes.map((n) => ({
     id: n.id,
+    title: n.title?.jsonValue,
     requestText: n.requestText?.jsonValue,
     displayName: n.displayName?.jsonValue,
     isAnonymous: n.isAnonymous?.jsonValue === true || n.isAnonymous?.jsonValue === "true",
@@ -85,7 +87,7 @@ function toFieldInputs(values) {
     }));
 }
 
-export async function createRequest(admin, { requestText, displayName, isAnonymous, customerId }) {
+export async function createRequest(admin, { title, requestText, displayName, isAnonymous, customerId }) {
   const now = new Date().toISOString();
   const response = await admin.graphql(
     `#graphql
@@ -100,6 +102,9 @@ export async function createRequest(admin, { requestText, displayName, isAnonymo
         metaobject: {
           type: METAOBJECT_TYPE,
           fields: toFieldInputs({
+            // Only sent when set, so submissions still work before the `title`
+            // field exists on the definition (see setup/add-title-field.mjs).
+            title: title || undefined,
             request_text: requestText,
             display_name: isAnonymous ? "" : displayName,
             is_anonymous: String(!!isAnonymous),
