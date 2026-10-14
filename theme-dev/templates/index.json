@@ -270,6 +270,16 @@
             "link": "shopify://products/brew-around-and-find-out",
             "roast_value": "dark"
           }
+        },
+        "product-trigger-fuel": {
+          "type": "product",
+          "settings": {
+            "name": "<p>TRIGGER FUEL</p>",
+            "details": "<ul><li>Named after a Monument of Firsts</li><li>Brazilian/Nicaraguan Blend</li><li>Medium Dark Roast</li></ul>",
+            "fallback_image": "trigger-fuel-bag.png",
+            "link": "shopify://products/trigger-fuel",
+            "roast_value": "dark"
+          }
         }
       },
       "block_order": [
@@ -288,7 +298,8 @@
         "product-rushmore",
         "product-boston-common",
         "product-frankford",
-        "product-brew-around"
+        "product-brew-around",
+        "product-trigger-fuel"
       ],
       "settings": {
         "heading": "YOUR ROAST OPTIONS",
