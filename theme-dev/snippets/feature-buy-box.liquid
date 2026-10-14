@@ -91,6 +91,7 @@
     {%- endif -%}
 
     <div class="fbb__options">
+      {%- unless product.has_only_default_variant -%}
       {%- for option in product.options_with_values -%}
         {%- assign opt_index = forloop.index0 -%}
         {%- assign default_value = current.options[opt_index] -%}
@@ -106,6 +107,7 @@
           </div>
         </fieldset>
       {%- endfor -%}
+      {%- endunless -%}
 
       {%- if has_bundle -%}
         <fieldset class="fbb__group" data-fbb-subscribe-only{% unless subscribe_default %} hidden{% endunless %}>

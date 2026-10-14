@@ -30,6 +30,8 @@
     }
 
     function selectedVariant() {
+      // A product with no options has a single default variant.
+      if (cfg.variants.length === 1) return cfg.variants[0];
       var chosen = cfg.options.map(function (_, i) { return checked('option_' + i); });
       return cfg.variants.filter(function (v) {
         return v.options.every(function (o, i) { return o === chosen[i]; });
