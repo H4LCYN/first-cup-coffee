@@ -11,6 +11,7 @@
  *   SHOPIFY_API_SECRET   — client_secret from Partners app
  *   SHOPIFY_STORE_DOMAIN — e.g. first-cup-coffee-co.myshopify.com
  *   REDIRECT_URI         — the tunnel URL + /callback, e.g. https://abc.loca.lt/callback
+ *   SCOPES (optional)    — comma-separated scopes to request; defaults to write_metaobjects
  */
 
 import http from "http";
@@ -24,7 +25,8 @@ if (!SHOPIFY_API_KEY || !SHOPIFY_API_SECRET || !SHOPIFY_STORE_DOMAIN || !REDIREC
 }
 
 const state = randomBytes(16).toString("hex");
-const scope = "write_metaobjects";
+// Override with e.g. SCOPES=read_products,write_products. Must be scopes the app is configured with.
+const scope = process.env.SCOPES || "write_metaobjects";
 
 const authorizeUrl =
   `https://${SHOPIFY_STORE_DOMAIN}/admin/oauth/authorize` +
