@@ -48,6 +48,18 @@
       root.classList.toggle('is-subscribe', subscribing);
       root.querySelectorAll('[data-fbb-subscribe-only]').forEach(function (el) { el.hidden = !subscribing; });
 
+      var saving = root.querySelector('[data-fbb-saving]');
+      var bagVariant = subscribing && cfg.bundle
+        ? cfg.bundle.variants.filter(function (v) { return v.bags === (parseInt(checked('bags'), 10) || 1); })[0]
+        : null;
+      if (saving) {
+        var show = !!(bagVariant && bagVariant.pct > 0);
+        saving.hidden = !show;
+        saving.textContent = show
+          ? cfg.savingLabel.replace('{amount}', bagVariant.save).replace('{pct}', bagVariant.pct)
+          : '';
+      }
+
       var variant = selectedVariant();
       var soldOut = !variant || !variant.available;
       addBtn.disabled = soldOut;

@@ -104,7 +104,6 @@
   .fpf__bullets {
     margin: 32px 0 0;
     padding: 0 0 0 40px;
-    list-style: none;
     font-family: "Avenir Next Condensed", sans-serif;
     font-size: 18px;
     line-height: 22.25px;
@@ -158,6 +157,11 @@
   .fbb__discount {
     font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 15.1px; line-height: 15.1px;
     color: var(--fpf-discount); white-space: nowrap;
+  }
+
+  .fbb__saving {
+    margin: 4px 0 0; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 16px; line-height: 1.2;
+    color: var(--fpf-discount);
   }
 
   .fbb__add {
@@ -374,6 +378,7 @@
     { "type": "text", "id": "days_label", "label": "Days", "default": "Days" },
     { "type": "text", "id": "bag_count_label", "label": "Bag count heading", "default": "Bag Count" },
     { "type": "text", "id": "off_label", "label": "Discount suffix", "default": "OFF" },
+    { "type": "text", "id": "saving_label", "label": "Subscriber saving line", "info": "Use {amount} and {pct}. Shown under Bag Count when subscribing.", "default": "You save {amount} ({pct}%)" },
     { "type": "text", "id": "popular_label", "label": "Most popular tag", "default": "Most popular" },
     { "type": "text", "id": "add_to_cart_label", "label": "Add to cart button", "default": "Add to cart" },
     { "type": "text", "id": "adding_label", "label": "Adding to cart", "default": "Adding to cart…" },
