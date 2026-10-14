@@ -52,18 +52,11 @@
           "collectionId": {{ collection_id | default: 0 }},
           "variants": [
             {%- for bv in bundle.variants -%}
-              {%- assign bv_save = 0 -%}
-              {%- assign bv_pct = 0 -%}
-              {%- if bv.compare_at_price > bv.price -%}
-                {%- assign bv_save = bv.compare_at_price | minus: bv.price -%}
-                {%- assign bv_pct = bv_save | times: 100.0 | divided_by: bv.compare_at_price | round -%}
-              {%- endif -%}
-              {"id": {{ bv.id }}, "bags": {{ bv.option1 | split: ' ' | first | plus: 0 }}, "save": {{ bv_save | money | json }}, "pct": {{ bv_pct }}}{% unless forloop.last %},{% endunless %}
+              {"id": {{ bv.id }}, "bags": {{ bv.option1 | split: ' ' | first | plus: 0 }}}{% unless forloop.last %},{% endunless %}
             {%- endfor -%}
           ]
         }
       {%- else -%}null{%- endif %},
-      "savingLabel": {{ s.saving_label | default: 'You save {amount} ({pct}%)' | json }},
       "addLabel": {{ s.add_to_cart_label | default: 'Add to cart' | json }},
       "addingLabel": {{ s.adding_label | default: 'Adding to cart…' | json }},
       "soldOutLabel": {{ s.sold_out_label | default: 'Sold out' | json }},
@@ -176,7 +169,6 @@
             {%- endfor -%}
           {%- endif -%}
         </div>
-        <p class="fbb__saving" data-fbb-saving hidden></p>
       </fieldset>
     </div>
 
