@@ -1,0 +1,447 @@
+{%- liquid
+  assign s = section.settings
+  assign bundle = s.bundle_product
+  assign bundle_collection_id = s.bundle_collection.id
+
+  assign banner = nil
+  assign banner_mobile = nil
+  for block in section.blocks
+    if block.type == 'banner_image' and banner == nil
+      if block.settings.image != blank
+        assign banner = block.settings.image | image_url: width: 2000
+      elsif block.settings.image_asset != blank
+        assign banner = block.settings.image_asset | asset_url
+      endif
+      if block.settings.mobile_image != blank
+        assign banner_mobile = block.settings.mobile_image | image_url: width: 1000
+      elsif block.settings.mobile_image_asset != blank
+        assign banner_mobile = block.settings.mobile_image_asset | asset_url
+      endif
+    endif
+  endfor
+-%}
+
+<style>
+  .fpf {
+    --fpf-bg: {{ s.panel_bg }};
+    --fpf-accent: {{ s.accent_color }};
+    --fpf-text: {{ s.text_color }};
+    --fpf-tag: {{ s.tag_color }};
+    --fpf-discount: {{ s.discount_color }};
+    --fpf-radius: {{ s.panel_radius }}px;
+    margin: var(--desktop-y-spacing) var(--desktop-x-spacing) 0;
+    color: var(--fpf-text);
+  }
+
+  .fpf__panel {
+    max-width: 1292px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: var(--fpf-radius);
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--fpf-bg);
+  }
+
+  /* Product image + info */
+  .fpf__top {
+    display: grid;
+    grid-template-columns: 658px 571px;
+    gap: 46px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fpf__media {
+    height: 698px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: var(--fpf-radius);
+  }
+
+  .fpf__media img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: 665px;
+    object-fit: contain;
+  }
+
+  .fpf__info {
+    min-height: 698px;
+    box-sizing: border-box;
+    padding-top: 16px;
+  }
+
+  .fpf__eyebrow {
+    margin: 0;
+    font-family: Avenirnextltpro, sans-serif;
+    font-size: 15.9px;
+    line-height: 1;
+    color: var(--fpf-accent);
+  }
+
+  .fpf__title {
+    margin: 0;
+    padding-top: 4.8px;
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 44.5px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--fpf-text);
+  }
+
+  .fpf__price {
+    margin: 16px 0 0;
+    font-family: Avenirnextltpro, sans-serif;
+    font-size: 22.25px;
+    line-height: 1;
+    color: var(--fpf-text);
+  }
+
+  .fpf__bullets {
+    margin: 32px 0 0;
+    padding: 0 0 0 40px;
+    list-style: none;
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-size: 18px;
+    line-height: 22.25px;
+    color: var(--fpf-text);
+  }
+
+  .fpf__bullets:empty { display: none; }
+
+  .fpf .fbb { margin-top: 30px; }
+
+  /* Buy box */
+  .fbb__form { display: flex; flex-direction: column; gap: 30px; }
+  .fbb__options { display: flex; flex-direction: column; gap: 17px; }
+  .fbb__group { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: 11px; }
+  .fbb__group--toggle { flex-direction: row; gap: 14px; flex-wrap: wrap; }
+  .fbb__group[hidden], .fbb [hidden] { display: none !important; }
+  .fbb__label {
+    padding: 0; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700;
+    font-size: 15px; line-height: 15.9px; color: var(--fpf-text);
+  }
+  .fbb__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .fbb__row { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+  .fbb__bag { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+
+  .fbb__opt { position: relative; display: block; cursor: pointer; }
+  .fbb__opt input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+  .fbb__btn {
+    display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+    min-width: 106px; height: 39px; padding: 6px 15px;
+    border: 2px solid var(--fpf-text); border-radius: 2px; background: transparent; color: var(--fpf-text);
+    font-family: Roboto, sans-serif; font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.7px;
+    text-align: center; white-space: nowrap;
+    transition: background-color .15s, border-color .15s;
+  }
+  .fbb__opt--big .fbb__btn {
+    width: 183px; height: 55px; text-transform: uppercase; white-space: normal;
+  }
+  .fbb__opt:hover .fbb__btn { border-color: var(--fpf-accent); }
+  .fbb__opt input:checked + .fbb__btn { background: var(--fpf-accent); border-color: var(--fpf-accent); }
+  .fbb__opt input:focus-visible + .fbb__btn { outline: 2px solid #fff; outline-offset: 3px; }
+
+  .fbb__tag {
+    position: absolute; z-index: 1; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+    border-radius: 6.4px; background: var(--fpf-tag); color: #fff; text-align: center; text-transform: uppercase;
+    font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 9.5px; line-height: 8.75px;
+    pointer-events: none;
+  }
+  .fbb__tag--top { left: 50%; bottom: calc(100% + 4px); transform: translateX(-50%); width: 70px; height: 23px; }
+  .fbb__tag--corner { top: -15px; left: calc(100% - 16px); padding: 7px; white-space: nowrap; }
+
+  .fbb__discount {
+    font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 15.1px; line-height: 15.1px;
+    color: var(--fpf-discount); white-space: nowrap;
+  }
+
+  .fbb__add {
+    box-sizing: border-box; width: 100%; max-width: 468px; padding: 7.7px 23px; border: 0; border-radius: 2.2px;
+    background: var(--fpf-accent); color: #fff; cursor: pointer;
+    font-family: Avenirnextltpro, sans-serif; font-weight: 700; font-size: 18px; line-height: 38px; text-transform: uppercase;
+    transition: background-color .15s;
+  }
+  .fbb__add:hover:not(:disabled) { filter: brightness(0.9); }
+  .fbb__add:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .fbb__add:disabled { opacity: .5; cursor: not-allowed; }
+  .fbb__error { margin: 12px 0 0; font-family: Avenirnextltpro, sans-serif; font-size: 14px; color: #ff6b61; }
+
+  /* Feature area */
+  .fpf__feature {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    min-height: 727px; box-sizing: border-box; padding: 105px 108px 56px;
+    background-color: var(--fpf-bg); background-image: var(--fpf-banner, none); background-size: cover; background-position: center;
+  }
+  .fpf__quote { max-width: 935px; margin: 0 0 10px; }
+  .fpf__quote-text {
+    margin: 0; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 44.5px; line-height: 49px; color: var(--fpf-text);
+  }
+  .fpf__quote-by {
+    margin: 0; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 24px; line-height: 49px; text-transform: uppercase; color: var(--fpf-text);
+  }
+  .fpf__logo { display: block; width: var(--fpf-logo-w-set, 321px); max-width: 100%; height: auto; margin: 0 auto 56px; }
+  .fpf__body {
+    max-width: 1027px; margin: 0 0 56px; font-family: "Avenir Next Condensed", sans-serif; font-size: 27px; line-height: 34px; color: var(--fpf-text);
+  }
+  .fpf__body p { margin: 0 0 1em; }
+  .fpf__body p:last-child { margin-bottom: 0; }
+
+  @media screen and (max-width: 991px) {
+    .fpf__top { grid-template-columns: 1fr; gap: 0; padding: 24px 24px 40px; }
+    .fpf__media { height: auto; padding: 24px 0; }
+    .fpf__media img { height: auto; max-height: 520px; }
+    .fpf__info { min-height: 0; }
+    .fpf__bullets { padding-left: 24px; }
+    .fbb__opt--big .fbb__btn { width: 100%; }
+    .fbb__group--toggle > .fbb__opt { flex: 1 1 183px; }
+    .fbb__tag--corner { left: auto; right: -6px; }
+    .fbb__add { max-width: none; }
+    .fpf__feature { min-height: 0; padding: 56px 24px 40px; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
+    .fpf__quote-text { font-size: 28px; line-height: 1.15; }
+    .fpf__quote-by { font-size: 18px; line-height: 1.6; }
+    .fpf__logo { width: min(var(--fpf-logo-w-set, 321px), 220px); margin-bottom: 32px; }
+    .fpf__body { font-size: 19px; line-height: 1.4; margin-bottom: 24px; }
+  }
+</style>
+
+<section class="fpf" id="fpf-{{ section.id }}">
+  <div class="fpf__panel">
+    <div class="fpf__top">
+      <div class="fpf__media">
+        {%- liquid
+          assign product_img = nil
+          if s.product_image != blank
+            assign product_img = s.product_image | image_url: width: 1000
+          elsif s.product_image_asset != blank
+            assign product_img = s.product_image_asset | asset_url
+          elsif product.featured_image != blank
+            assign product_img = product.featured_image | image_url: width: 1000
+          endif
+        -%}
+        {%- if product_img != nil -%}
+          <img src="{{ product_img }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="401" height="665" loading="eager">
+        {%- endif -%}
+      </div>
+
+      <div class="fpf__info">
+        {%- if s.eyebrow_text != blank -%}
+          <p class="fpf__eyebrow">{{ s.eyebrow_text }}</p>
+        {%- endif -%}
+        <h1 class="fpf__title">{{ product.title }}</h1>
+        <p class="fpf__price">{{ product.selected_or_first_available_variant.price | money }}</p>
+
+        <ul class="fpf__bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bullet' -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        {%- render 'feature-buy-box', product: product, section: section, bundle: bundle, collection_id: bundle_collection_id -%}
+      </div>
+    </div>
+
+    <div
+      class="fpf__feature"
+      style="{% if banner != nil %}--fpf-banner: url('{{ banner }}');{% endif %}{% if banner_mobile != nil %} --fpf-banner-m: url('{{ banner_mobile }}');{% endif %}"
+    >
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'quote' -%}
+            <div class="fpf__quote" {{ block.shopify_attributes }}>
+              {%- if block.settings.quote != blank -%}
+                <p class="fpf__quote-text">{{ block.settings.quote | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.attribution != blank -%}
+                <p class="fpf__quote-by">{{ block.settings.attribution | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- when 'partner_logo' -%}
+            {%- liquid
+              assign logo = nil
+              if block.settings.image != blank
+                assign logo = block.settings.image | image_url: width: 700
+              elsif block.settings.image_asset != blank
+                assign logo = block.settings.image_asset | asset_url
+              endif
+            -%}
+            {%- if logo != nil -%}
+              <img
+                class="fpf__logo"
+                src="{{ logo }}"
+                alt="{{ block.settings.alt | escape }}"
+                width="{{ block.settings.max_width }}"
+                height="{{ block.settings.max_width }}"
+                loading="lazy"
+                style="--fpf-logo-w-set: {{ block.settings.max_width }}px;"
+                {{ block.shopify_attributes }}
+              >
+            {%- endif -%}
+          {%- when 'rich_text' -%}
+            <div class="fpf__body" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- if s.show_related -%}
+  <div class="section_related-products">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="padding-section-medium">
+          <div class="related-products_component">
+            <h2 class="product-features_heading">{{ s.related_heading }}</h2>
+            <div class="related-products_wrapper">
+              <div class="w-dyn-list" shopify-recommended="{{ product.id }}">
+                <div role="list" class="collection-list-2 w-dyn-items"></div>
+                <div class="w-dyn-empty" style="display: none;"><div>No items found.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Main - Product Feature",
+  "tag": "div",
+  "class": "section_product-feature",
+  "settings": [
+    { "type": "header", "content": "Panel" },
+    { "type": "color", "id": "panel_bg", "label": "Panel background", "default": "#000000" },
+    { "type": "color", "id": "accent_color", "label": "Accent (selected buttons, add to cart)", "default": "#d29f13" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#ffffff" },
+    { "type": "color", "id": "tag_color", "label": "Tag background", "default": "#be3a34" },
+    { "type": "color", "id": "discount_color", "label": "Discount text", "default": "#ff4949" },
+    { "type": "range", "id": "panel_radius", "label": "Corner radius", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 30 },
+
+    { "type": "header", "content": "Product" },
+    { "type": "text", "id": "eyebrow_text", "label": "Eyebrow", "default": "Coffee" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image", "info": "Leave empty to use the first image on the product." },
+    { "type": "text", "id": "product_image_asset", "label": "Fallback image filename (theme asset)", "info": "Advanced: used only if no image is picked above." },
+
+    { "type": "header", "content": "Subscribe & Save" },
+    { "type": "product", "id": "bundle_product", "label": "Bundle product", "info": "The Recharge bundle product. Its variants set the bag counts and prices; its selling plans set the delivery intervals." },
+    { "type": "collection", "id": "bundle_collection", "label": "Bundle collection", "info": "The collection the bundle draws coffees from." },
+    {
+      "type": "select", "id": "default_purchase_type", "label": "Selected by default",
+      "options": [
+        { "value": "subscribe", "label": "Subscribe & Save" },
+        { "value": "single", "label": "Single purchase" }
+      ],
+      "default": "subscribe"
+    },
+    { "type": "checkbox", "id": "show_free_shipping_tag", "label": "Show free shipping tag", "default": true },
+    { "type": "text", "id": "free_shipping_label", "label": "Free shipping tag text", "default": "Free shipping" },
+    {
+      "type": "select", "id": "popular_interval", "label": "\"Most popular\" delivery interval",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "14", "label": "14 days" },
+        { "value": "21", "label": "21 days" },
+        { "value": "30", "label": "30 days" },
+        { "value": "60", "label": "60 days" }
+      ],
+      "default": "30"
+    },
+    {
+      "type": "select", "id": "popular_bag_count", "label": "\"Most popular\" bag count",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "1", "label": "1 bag" },
+        { "value": "2", "label": "2 bags" },
+        { "value": "3", "label": "3 bags" },
+        { "value": "4", "label": "4 bags" }
+      ],
+      "default": "2"
+    },
+
+    { "type": "header", "content": "Labels" },
+    { "type": "text", "id": "single_label", "label": "Single purchase", "default": "Single purchase" },
+    { "type": "text", "id": "subscribe_label", "label": "Subscribe", "default": "Subscribe & save" },
+    { "type": "text", "id": "per_item_label", "label": "Per item", "default": "per item" },
+    { "type": "text", "id": "deliver_every_label", "label": "Delivery heading", "default": "Deliver every" },
+    { "type": "text", "id": "days_label", "label": "Days", "default": "Days" },
+    { "type": "text", "id": "bag_count_label", "label": "Bag count heading", "default": "Bag count" },
+    { "type": "text", "id": "off_label", "label": "Discount suffix", "default": "OFF" },
+    { "type": "text", "id": "popular_label", "label": "Most popular tag", "default": "Most popular" },
+    { "type": "text", "id": "add_to_cart_label", "label": "Add to cart button", "default": "Add to cart" },
+    { "type": "text", "id": "adding_label", "label": "Adding to cart", "default": "Adding to cart…" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold out", "default": "Sold out" },
+    { "type": "text", "id": "error_label", "label": "Error message", "default": "Something went wrong. Please try again." },
+    { "type": "text", "id": "purchase_type_legend", "label": "Purchase type (screen reader)", "default": "Purchase type" },
+
+    { "type": "header", "content": "Related products" },
+    { "type": "checkbox", "id": "show_related", "label": "Show related products", "default": true },
+    { "type": "text", "id": "related_heading", "label": "Heading", "default": "Related Products" }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "banner_image",
+      "name": "Banner image",
+      "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Banner image" },
+        { "type": "text", "id": "image_asset", "label": "Fallback filename (theme asset)" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile banner image" },
+        { "type": "text", "id": "mobile_image_asset", "label": "Mobile fallback filename (theme asset)" }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Pull quote",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "attribution", "label": "Attribution" }
+      ]
+    },
+    {
+      "type": "partner_logo",
+      "name": "Partner logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "text", "id": "image_asset", "label": "Fallback filename (theme asset)" },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "range", "id": "max_width", "label": "Width", "min": 80, "max": 500, "step": 10, "unit": "px", "default": 320 }
+      ]
+    },
+    {
+      "type": "rich_text",
+      "name": "Body copy",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main - Product Feature",
+      "blocks": [
+        { "type": "bullet" },
+        { "type": "bullet" },
+        { "type": "bullet" },
+        { "type": "banner_image" },
+        { "type": "quote" },
+        { "type": "partner_logo" },
+        { "type": "rich_text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,180 @@
+{%- comment -%}
+  Buy box for the partner/feature product page.
+
+  Params:
+    product       the coffee being sold
+    section       the calling section (labels and "most popular" settings)
+    bundle        the Recharge bundle product (bag-count variants + delivery plans); blank hides Subscribe & Save
+    collection_id numeric id of the collection the bundle draws from
+
+  Bag-count discounts are read from the bundle variants (compare-at vs price), so the
+  "% OFF" label always matches what is charged. Delivery intervals come from the
+  bundle's own selling plans. Behaviour lives in assets/feature-buy-box.js.
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign current = product.selected_or_first_available_variant
+  assign single_price = current.price
+  assign subscribe_price = current.price
+  assign has_bundle = false
+  if bundle != blank and bundle.variants.size > 0
+    assign has_bundle = true
+    for bv in bundle.variants
+      assign bv_bags = bv.option1 | split: ' ' | first | plus: 0
+      if bv_bags == 1
+        assign subscribe_price = bv.price
+      endif
+    endfor
+  endif
+  assign pop_days = s.popular_interval | plus: 0
+  assign pop_bags = s.popular_bag_count | plus: 0
+  assign subscribe_default = false
+  if has_bundle and s.default_purchase_type == 'subscribe'
+    assign subscribe_default = true
+  endif
+-%}
+
+<div class="fbb{% if subscribe_default %} is-subscribe{% endif %}" data-fbb>
+  <script type="application/json" data-fbb-config>
+    {
+      "productId": {{ product.id }},
+      "productTitle": {{ product.title | json }},
+      "options": {{ product.options | json }},
+      "variants": [
+        {%- for v in product.variants -%}
+          {"id": {{ v.id }}, "available": {{ v.available }}, "options": {{ v.options | json }}}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ],
+      "bundle": {% if has_bundle -%}
+        {
+          "productId": {{ bundle.id }},
+          "collectionId": {{ collection_id | default: 0 }},
+          "variants": [
+            {%- for bv in bundle.variants -%}
+              {"id": {{ bv.id }}, "bags": {{ bv.option1 | split: ' ' | first | plus: 0 }}}{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ]
+        }
+      {%- else -%}null{%- endif %},
+      "addLabel": {{ s.add_to_cart_label | default: 'Add to cart' | json }},
+      "addingLabel": {{ s.adding_label | default: 'Adding to cart…' | json }},
+      "soldOutLabel": {{ s.sold_out_label | default: 'Sold out' | json }},
+      "errorLabel": {{ s.error_label | default: 'Something went wrong. Please try again.' | json }}
+    }
+  </script>
+
+  <form class="fbb__form" data-fbb-form novalidate>
+    {%- if has_bundle -%}
+      <fieldset class="fbb__group fbb__group--toggle">
+        <legend class="fbb__sr">{{ s.purchase_type_legend | default: 'Purchase type' }}</legend>
+        <label class="fbb__opt fbb__opt--big">
+          <input type="radio" name="purchase_type" value="single"{% unless subscribe_default %} checked{% endunless %}>
+          <span class="fbb__btn">
+            {{ s.single_label | default: 'Single purchase' }}<br>
+            {{ single_price | money }} {{ s.per_item_label | default: 'per item' }}
+          </span>
+        </label>
+        <label class="fbb__opt fbb__opt--big">
+          {%- if s.show_free_shipping_tag -%}
+            <span class="fbb__tag fbb__tag--corner">{{ s.free_shipping_label | default: 'Free shipping' }}</span>
+          {%- endif -%}
+          <input type="radio" name="purchase_type" value="subscribe"{% if subscribe_default %} checked{% endif %}>
+          <span class="fbb__btn">
+            {{ s.subscribe_label | default: 'Subscribe & save' }}<br>
+            {{ subscribe_price | money }} {{ s.per_item_label | default: 'per item' }}
+          </span>
+        </label>
+      </fieldset>
+    {%- else -%}
+      <input type="hidden" name="purchase_type" value="single">
+    {%- endif -%}
+
+    <div class="fbb__options">
+      {%- for option in product.options_with_values -%}
+        {%- assign opt_index = forloop.index0 -%}
+        {%- assign default_value = current.options[opt_index] -%}
+        <fieldset class="fbb__group">
+          <legend class="fbb__label">{{ option.name }}</legend>
+          <div class="fbb__row">
+            {%- for value in option.values -%}
+              <label class="fbb__opt">
+                <input type="radio" name="option_{{ opt_index }}" value="{{ value | escape }}"{% if value == default_value %} checked{% endif %}>
+                <span class="fbb__btn">{{ value }}</span>
+              </label>
+            {%- endfor -%}
+          </div>
+        </fieldset>
+      {%- endfor -%}
+
+      {%- if has_bundle -%}
+        <fieldset class="fbb__group" data-fbb-subscribe-only{% unless subscribe_default %} hidden{% endunless %}>
+          <legend class="fbb__label">{{ s.deliver_every_label | default: 'Deliver every' }}</legend>
+          <div class="fbb__row">
+            {%- assign plan_count = 0 -%}
+            {%- for group in bundle.selling_plan_groups -%}
+              {%- for plan in group.selling_plans -%}
+                {%- assign days = plan.options[0] | split: ' ' | first | plus: 0 -%}
+                {%- assign plan_count = plan_count | plus: 1 -%}
+                <label class="fbb__opt">
+                  {%- if pop_days > 0 and days == pop_days -%}
+                    <span class="fbb__tag fbb__tag--top">{{ s.popular_label | default: 'Most popular' }}</span>
+                  {%- endif -%}
+                  <input type="radio" name="selling_plan" value="{{ plan.id }}"
+                    {%- if pop_days > 0 and days == pop_days %} checked
+                    {%- elsif plan_count == 1 and pop_days == 0 %} checked{% endif %}>
+                  <span class="fbb__btn">{{ days }} {{ s.days_label | default: 'Days' }}</span>
+                </label>
+              {%- endfor -%}
+            {%- endfor -%}
+          </div>
+        </fieldset>
+      {%- endif -%}
+
+      <fieldset class="fbb__group">
+        <legend class="fbb__label">{{ s.bag_count_label | default: 'Bag count' }}</legend>
+        <div class="fbb__row fbb__row--top">
+          {%- if has_bundle -%}
+            {%- for bv in bundle.variants -%}
+              {%- assign bags = bv.option1 | split: ' ' | first | plus: 0 -%}
+              {%- assign pct = 0 -%}
+              {%- if bv.compare_at_price > bv.price -%}
+                {%- assign pct = bv.compare_at_price | minus: bv.price | times: 100.0 | divided_by: bv.compare_at_price | round -%}
+              {%- endif -%}
+              <div class="fbb__bag">
+                <label class="fbb__opt">
+                  {%- if pop_bags > 0 and bags == pop_bags -%}
+                    <span class="fbb__tag fbb__tag--top">{{ s.popular_label | default: 'Most popular' }}</span>
+                  {%- endif -%}
+                  <input type="radio" name="bags" value="{{ bags }}"
+                    {%- if pop_bags > 0 and bags == pop_bags %} checked
+                    {%- elsif forloop.first and pop_bags == 0 %} checked{% endif %}>
+                  <span class="fbb__btn">{{ bv.title }}</span>
+                </label>
+                {%- if pct > 0 -%}
+                  <span class="fbb__discount" data-fbb-subscribe-only{% unless subscribe_default %} hidden{% endunless %}>{{ pct }}% {{ s.off_label | default: 'OFF' }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for bags in (1..4) -%}
+              <div class="fbb__bag">
+                <label class="fbb__opt">
+                  <input type="radio" name="bags" value="{{ bags }}"{% if forloop.first %} checked{% endif %}>
+                  <span class="fbb__btn">{{ bags }} {% if bags == 1 %}Bag{% else %}Bags{% endif %}</span>
+                </label>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </fieldset>
+    </div>
+
+    <button type="button" class="fbb__add" data-fbb-add aria-busy="false">
+      <span data-fbb-add-label>{{ s.add_to_cart_label | default: 'Add to cart' }}</span>
+    </button>
+    <p class="fbb__error" data-fbb-error role="alert" hidden></p>
+  </form>
+</div>
+
+<script src="{{ 'feature-buy-box.js' | asset_url }}" defer></script>

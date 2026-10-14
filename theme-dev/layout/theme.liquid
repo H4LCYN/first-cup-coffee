@@ -2,6 +2,16 @@
   {%- assign headerSnippetPath = "header-index" -%}
   {%- assign wfPage = "654d36a6d6abfe3772908289" -%}
   {%- assign bodyClasses = "body" -%}
+{%- elsif template.name == 'product' and template.suffix != blank and template.suffix != 'recharge-bundle' and headerSnippetPath == blank -%}
+  {%- comment -%}
+    JSON product templates (product.trigger-fuel.json, etc.) can't set these the way
+    the legacy product.liquid does, so they get the same shell here. recharge-bundle
+    is a bare app-block page and stays outside it.
+  {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-product" -%}
+  {%- assign wfPage = "654d36a6d6abfe37729082ad" -%}
+  {%- assign bodyClasses = "body" -%}
+  {%- assign useJsonShell = true -%}
 {%- elsif template == 'collection' and headerSnippetPath == blank -%}
   {%- comment -%}
     templates/collection.json is a JSON template, so it can't set these the way
@@ -29,7 +39,7 @@
 </head>
 <body class="{{ bodyClasses }} {{ "template-" | append: request.page_type | handle }}">
 {% if headerSnippetPath %}
-  {% if template == 'index' or template == 'collection' %}
+  {% if template == 'index' or template == 'collection' or useJsonShell %}
     <div class="page-wrapper">
       {%- render 'google-icons' -%}
       {%- render 'global-styles' -%}
