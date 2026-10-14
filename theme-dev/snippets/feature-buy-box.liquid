@@ -109,12 +109,12 @@
 
       {%- if has_bundle -%}
         <fieldset class="fbb__group" data-fbb-subscribe-only{% unless subscribe_default %} hidden{% endunless %}>
-          <legend class="fbb__label">{{ s.deliver_every_label | default: 'Deliver every' }}</legend>
+          <legend class="fbb__label">{{ s.deliver_every_label | default: 'Deliver Every' }}</legend>
           <div class="fbb__row">
             {%- assign plan_count = 0 -%}
             {%- for group in bundle.selling_plan_groups -%}
               {%- for plan in group.selling_plans -%}
-                {%- assign days = plan.options[0] | split: ' ' | first | plus: 0 -%}
+                {%- assign days = plan.options[0].value | split: ' ' | first | plus: 0 -%}
                 {%- assign plan_count = plan_count | plus: 1 -%}
                 <label class="fbb__opt">
                   {%- if pop_days > 0 and days == pop_days -%}
@@ -132,7 +132,7 @@
       {%- endif -%}
 
       <fieldset class="fbb__group">
-        <legend class="fbb__label">{{ s.bag_count_label | default: 'Bag count' }}</legend>
+        <legend class="fbb__label">{{ s.bag_count_label | default: 'Bag Count' }}</legend>
         <div class="fbb__row fbb__row--top">
           {%- if has_bundle -%}
             {%- for bv in bundle.variants -%}
