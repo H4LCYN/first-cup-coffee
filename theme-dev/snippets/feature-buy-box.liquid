@@ -63,7 +63,7 @@
           ]
         }
       {%- else -%}null{%- endif %},
-      "savingLabel": {{ s.saving_label | default: 'You save {amount} ({pct}%)' | json }},
+      "savingLabel": {{ s.saving_label | default: 'You save [amount] ([pct]%)' | json }},
       "addLabel": {{ s.add_to_cart_label | default: 'Add to cart' | json }},
       "addingLabel": {{ s.adding_label | default: 'Adding to cart…' | json }},
       "soldOutLabel": {{ s.sold_out_label | default: 'Sold out' | json }},
