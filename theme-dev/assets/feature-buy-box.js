@@ -56,7 +56,7 @@
         var show = !!(bagVariant && bagVariant.pct > 0);
         saving.hidden = !show;
         saving.textContent = show
-          ? cfg.savingLabel.replace('[amount]', bagVariant.save).replace('[pct]', bagVariant.pct)
+          ? cfg.savingLabel.replace('{amount}', bagVariant.save).replace('{pct}', bagVariant.pct)
           : '';
       }
 
