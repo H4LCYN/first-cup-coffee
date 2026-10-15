@@ -132,6 +132,23 @@
 
   .fpf .fbb { margin-top: 30px; }
 
+  /* Format (size) switcher: links to the sibling products */
+  .fpf__formats { margin-top: 30px; display: flex; flex-direction: column; gap: 11px; }
+  .fpf__formats-label { margin: 0; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 15px; line-height: 15.9px; color: var(--fpf-text); }
+  .fpf__formats-label:empty { display: none; }
+  .fpf__formats-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .fpf__format {
+    display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+    min-width: 106px; height: 39px; padding: 6px 15px;
+    border: 2px solid var(--fpf-text); border-radius: 2px; background: transparent; color: var(--fpf-text);
+    font-family: Roboto, sans-serif; font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.7px;
+    text-align: center; text-decoration: none; white-space: nowrap; transition: background-color .15s, border-color .15s;
+  }
+  a.fpf__format:hover { border-color: var(--fpf-accent); color: var(--fpf-text); }
+  .fpf__format.is-current { background: var(--fpf-accent); border-color: var(--fpf-accent); }
+  a.fpf__format:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .fpf__formats + .fbb { margin-top: 30px; }
+
   /* Buy box */
   .fbb__form { display: flex; flex-direction: column; gap: 30px; }
   .fbb__options { display: flex; flex-direction: column; gap: 17px; }
@@ -265,6 +282,33 @@
           </ul>
         {%- endif -%}
 
+        {%- liquid
+          assign format_count = 0
+          for block in section.blocks
+            if block.type == 'format' and block.settings.product != blank
+              assign format_count = format_count | plus: 1
+            endif
+          endfor
+        -%}
+        {%- if format_count > 1 -%}
+          <div class="fpf__formats">
+            <p class="fpf__formats-label">{{ s.formats_label }}</p>
+            <div class="fpf__formats-row">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'format' and block.settings.product != blank -%}
+                  {%- assign format_product = block.settings.product -%}
+                  {%- assign format_name = block.settings.label | default: format_product.title -%}
+                  {%- if format_product.handle == product.handle -%}
+                    <span class="fpf__format is-current" aria-current="page" {{ block.shopify_attributes }}>{{ format_name }}</span>
+                  {%- else -%}
+                    <a class="fpf__format" href="{{ format_product.url }}" {{ block.shopify_attributes }}>{{ format_name }}</a>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
         {%- render 'feature-buy-box', product: product, section: section, bundle: bundle, collection_id: bundle_collection_id -%}
       </div>
     </div>
@@ -355,6 +399,8 @@
     { "type": "image_picker", "id": "product_image", "label": "Product image", "info": "Leave empty to use the product's own featured image." },
     { "type": "text", "id": "product_image_asset", "label": "Fallback image filename (theme asset)", "info": "Advanced: used only if the product has no image." },
 
+    { "type": "text", "id": "formats_label", "label": "Size switcher heading", "info": "Shown above the size buttons when two or more Size blocks are added.", "default": "Size" },
+
     { "type": "header", "content": "Subscribe & Save" },
     { "type": "product", "id": "bundle_product", "label": "Bundle product", "info": "The Recharge bundle product. Its variants set the bag counts and prices; its selling plans set the delivery intervals." },
     { "type": "collection", "id": "bundle_collection", "label": "Bundle collection", "info": "The collection the bundle draws coffees from." },
@@ -416,6 +462,14 @@
       "name": "Bullet (fallback)",
       "settings": [
         { "type": "text", "id": "text", "label": "Text", "info": "Only shown if the product description has no bullet list." }
+      ]
+    },
+    {
+      "type": "format",
+      "name": "Size link",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Add one per size, including this product. The current product is highlighted; the others link to their pages." },
+        { "type": "text", "id": "label", "label": "Button label", "info": "Leave blank to use the product title." }
       ]
     },
     {
