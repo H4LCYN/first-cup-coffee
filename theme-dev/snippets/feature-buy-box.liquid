@@ -121,7 +121,13 @@
             {%- assign plan_count = 0 -%}
             {%- for group in bundle.selling_plan_groups -%}
               {%- for plan in group.selling_plans -%}
-                {%- assign days = plan.options[0].value | split: ' ' | first | plus: 0 -%}
+                {%- comment -%}Read the interval from the plan name ("Delivery every 14 days"); option order differs between bundles.{%- endcomment -%}
+                {%- assign days = 0 -%}
+                {%- assign name_tokens = plan.name | split: ' ' -%}
+                {%- for token in name_tokens -%}
+                  {%- assign token_number = token | plus: 0 -%}
+                  {%- if token_number > 0 and days == 0 -%}{%- assign days = token_number -%}{%- endif -%}
+                {%- endfor -%}
                 {%- assign plan_count = plan_count | plus: 1 -%}
                 <label class="fbb__opt">
                   {%- if pop_days > 0 and days == pop_days -%}

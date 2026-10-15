@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product-feature",
+      "blocks": {
+        "banner": {
+          "type": "banner_image",
+          "settings": {
+            "image_asset": "trigger-fuel-banner.jpg"
+          }
+        },
+        "quote": {
+          "type": "quote",
+          "settings": {
+            "quote": "\"Get the coffee we use at the TRIGGERnometry studio - we refuse to drink anything else!\"",
+            "attribution": "— Konstantin & Francis"
+          }
+        },
+        "logo": {
+          "type": "partner_logo",
+          "settings": {
+            "image_asset": "trigger-fuel-logo.png",
+            "alt": "Triggernometry",
+            "max_width": 320
+          }
+        },
+        "body": {
+          "type": "rich_text",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "banner",
+        "quote",
+        "logo",
+        "body"
+      ],
+      "settings": {
+        "bundle_product": "build-a-custom-box-bulk",
+        "bundle_collection": "bulk-subscriptions",
+        "default_purchase_type": "subscribe",
+        "popular_interval": "30",
+        "popular_bag_count": "2"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
