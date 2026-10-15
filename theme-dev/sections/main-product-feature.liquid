@@ -3,6 +3,20 @@
   assign bundle = s.bundle_product
   assign bundle_collection_id = s.bundle_collection.id
 
+  comment
+    The product description drives the page: its first <ul> becomes the bullets in the
+    info column and everything else becomes the partnership copy at the bottom.
+  endcomment
+  assign desc = product.description
+  assign list_html = ''
+  assign copy_html = desc
+  if desc contains '<ul'
+    assign desc_pre = desc | split: '<ul' | first
+    assign desc_rest = desc | remove_first: desc_pre
+    assign list_html = desc_rest | split: '</ul>' | first | append: '</ul>'
+    assign copy_html = desc_pre | append: desc_rest | remove_first: list_html
+  endif
+
   assign banner = nil
   assign banner_mobile = nil
   for block in section.blocks
@@ -103,7 +117,7 @@
 
   .fpf__bullets {
     margin: 32px 0 0;
-    padding: 0 0 0 40px;
+    padding: 0;
     font-family: "Avenir Next Condensed", sans-serif;
     font-size: 18px;
     line-height: 22.25px;
@@ -111,6 +125,10 @@
   }
 
   .fpf__bullets:empty { display: none; }
+  .fpf__bullets--blocks { padding-left: 40px; }
+  .fpf__bullets ul { margin: 0; padding: 0 0 0 40px; }
+  .fpf__bullets li { margin: 0; }
+  .fpf__bullets p { margin: 0 0 12px; }
 
   .fpf .fbb { margin-top: 30px; }
 
@@ -195,7 +213,7 @@
     .fpf__media { height: auto; padding: 24px 0; }
     .fpf__media img { height: auto; max-height: 520px; }
     .fpf__info { min-height: 0; }
-    .fpf__bullets { padding-left: 24px; }
+    .fpf__bullets--blocks, .fpf__bullets ul { padding-left: 24px; }
     .fbb__opt--big .fbb__btn { width: 100%; }
     .fbb__group--toggle > .fbb__opt { flex: 1 1 183px; }
     .fbb__tag--corner { left: auto; right: -6px; }
@@ -228,19 +246,24 @@
       </div>
 
       <div class="fpf__info">
-        {%- if s.eyebrow_text != blank -%}
-          <p class="fpf__eyebrow">{{ s.eyebrow_text }}</p>
+        {%- assign eyebrow = s.eyebrow_text | default: product.type -%}
+        {%- if eyebrow != blank -%}
+          <p class="fpf__eyebrow">{{ eyebrow }}</p>
         {%- endif -%}
         <h1 class="fpf__title">{{ product.title }}</h1>
         <p class="fpf__price">{{ product.selected_or_first_available_variant.price | money }}</p>
 
-        <ul class="fpf__bullets">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'bullet' -%}
-              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
+        {%- if list_html != blank -%}
+          <div class="fpf__bullets">{{ list_html }}</div>
+        {%- else -%}
+          <ul class="fpf__bullets fpf__bullets--blocks">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'bullet' -%}
+                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
 
         {%- render 'feature-buy-box', product: product, section: section, bundle: bundle, collection_id: bundle_collection_id -%}
       </div>
@@ -283,7 +306,10 @@
               >
             {%- endif -%}
           {%- when 'rich_text' -%}
-            <div class="fpf__body" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {%- assign body_html = block.settings.text | default: copy_html -%}
+            {%- if body_html != blank -%}
+              <div class="fpf__body" {{ block.shopify_attributes }}>{{ body_html }}</div>
+            {%- endif -%}
         {%- endcase -%}
       {%- endfor -%}
     </div>
@@ -325,7 +351,7 @@
     { "type": "range", "id": "panel_radius", "label": "Corner radius", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 30 },
 
     { "type": "header", "content": "Product" },
-    { "type": "text", "id": "eyebrow_text", "label": "Eyebrow", "default": "Coffee" },
+    { "type": "text", "id": "eyebrow_text", "label": "Eyebrow", "info": "Leave blank to use the product type." },
     { "type": "image_picker", "id": "product_image", "label": "Product image", "info": "Leave empty to use the first image on the product." },
     { "type": "text", "id": "product_image_asset", "label": "Fallback image filename (theme asset)", "info": "Advanced: used only if no image is picked above." },
 
@@ -387,9 +413,9 @@
   "blocks": [
     {
       "type": "bullet",
-      "name": "Bullet",
+      "name": "Bullet (fallback)",
       "settings": [
-        { "type": "text", "id": "text", "label": "Text" }
+        { "type": "text", "id": "text", "label": "Text", "info": "Only shown if the product description has no bullet list." }
       ]
     },
     {
@@ -425,7 +451,7 @@
       "type": "rich_text",
       "name": "Body copy",
       "settings": [
-        { "type": "richtext", "id": "text", "label": "Text" }
+        { "type": "richtext", "id": "text", "label": "Text", "info": "Leave blank to use the product description (without its bullet list)." }
       ]
     }
   ],

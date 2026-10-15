@@ -3,21 +3,11 @@
     "main": {
       "type": "main-product-feature",
       "blocks": {
-        "bullet-1": {
-          "type": "bullet",
-          "settings": { "text": "Named after a Monument of Firsts" }
-        },
-        "bullet-2": {
-          "type": "bullet",
-          "settings": { "text": "Brazilian/Nicaraguan Blend" }
-        },
-        "bullet-3": {
-          "type": "bullet",
-          "settings": { "text": "Medium Dark Roast" }
-        },
         "banner": {
           "type": "banner_image",
-          "settings": { "image_asset": "trigger-fuel-banner.jpg" }
+          "settings": {
+            "image_asset": "trigger-fuel-banner.jpg"
+          }
         },
         "quote": {
           "type": "quote",
@@ -36,14 +26,16 @@
         },
         "body": {
           "type": "rich_text",
-          "settings": {
-            "text": "<p>Triggernometry has teamed up with First Cup to bring you Trigger Fuel, a delicious roasted-to-order coffee designed for long conversations. Created in Texas to the exact specifications of Konstantin Kisin and Francis Foster, Trigger Fuel will fuel your day the way it fuels our honest conversations with fascinating people.</p>"
-          }
+          "settings": {}
         }
       },
-      "block_order": ["bullet-1", "bullet-2", "bullet-3", "banner", "quote", "logo", "body"],
+      "block_order": [
+        "banner",
+        "quote",
+        "logo",
+        "body"
+      ],
       "settings": {
-        "eyebrow_text": "Coffee",
         "product_image_asset": "trigger-fuel-bag.png",
         "bundle_product": "test-product",
         "bundle_collection": "1-lb-bag-subscription",
@@ -53,5 +45,7 @@
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
