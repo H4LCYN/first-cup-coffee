@@ -95,6 +95,10 @@
       {%- for option in product.options_with_values -%}
         {%- assign opt_index = forloop.index0 -%}
         {%- assign default_value = current.options[opt_index] -%}
+        {%- if option.values.size < 2 -%}
+          {%- comment -%}A single value leaves nothing to choose; keep it selected so the variant still resolves.{%- endcomment -%}
+          <input class="fbb__sr" type="radio" name="option_{{ opt_index }}" value="{{ option.values.first | escape }}" checked tabindex="-1" aria-hidden="true">
+        {%- else -%}
         <fieldset class="fbb__group">
           <legend class="fbb__label">{{ option.name }}</legend>
           <div class="fbb__row">
@@ -106,6 +110,7 @@
             {%- endfor -%}
           </div>
         </fieldset>
+        {%- endif -%}
       {%- endfor -%}
       {%- endunless -%}
 
