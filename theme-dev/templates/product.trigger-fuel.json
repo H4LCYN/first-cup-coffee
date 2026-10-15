@@ -36,7 +36,6 @@
         "body"
       ],
       "settings": {
-        "product_image_asset": "trigger-fuel-bag.png",
         "bundle_product": "test-product",
         "bundle_collection": "1-lb-bag-subscription",
         "default_purchase_type": "subscribe",

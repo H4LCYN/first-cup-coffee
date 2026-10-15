@@ -234,10 +234,10 @@
           assign product_img = nil
           if s.product_image != blank
             assign product_img = s.product_image | image_url: width: 1000
-          elsif s.product_image_asset != blank
-            assign product_img = s.product_image_asset | asset_url
           elsif product.featured_image != blank
             assign product_img = product.featured_image | image_url: width: 1000
+          elsif s.product_image_asset != blank
+            assign product_img = s.product_image_asset | asset_url
           endif
         -%}
         {%- if product_img != nil -%}
@@ -352,8 +352,8 @@
 
     { "type": "header", "content": "Product" },
     { "type": "text", "id": "eyebrow_text", "label": "Eyebrow", "info": "Leave blank to use the product type." },
-    { "type": "image_picker", "id": "product_image", "label": "Product image", "info": "Leave empty to use the first image on the product." },
-    { "type": "text", "id": "product_image_asset", "label": "Fallback image filename (theme asset)", "info": "Advanced: used only if no image is picked above." },
+    { "type": "image_picker", "id": "product_image", "label": "Product image", "info": "Leave empty to use the product's own featured image." },
+    { "type": "text", "id": "product_image_asset", "label": "Fallback image filename (theme asset)", "info": "Advanced: used only if the product has no image." },
 
     { "type": "header", "content": "Subscribe & Save" },
     { "type": "product", "id": "bundle_product", "label": "Bundle product", "info": "The Recharge bundle product. Its variants set the bag counts and prices; its selling plans set the delivery intervals." },
