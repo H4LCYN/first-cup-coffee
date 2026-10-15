@@ -275,9 +275,9 @@
           "type": "product",
           "settings": {
             "name": "<p>TRIGGER FUEL</p>",
-            "details": "<ul><li>Named after a Monument of Firsts</li><li>Brazilian/Nicaraguan Blend</li><li>Medium Dark Roast</li></ul>",
+            "details": "<ul><li>In Collaboration with Triggernometry</li><li>Medium Dark</li><li>Black tea, orange rind, dark chocolate, fresh black pepper and apple</li></ul>",
             "fallback_image": "trigger-fuel-bag.png",
-            "link": "shopify://products/trigger-fuel",
+            "link": "shopify://products/trigger",
             "roast_value": "dark"
           }
         }
@@ -412,8 +412,8 @@
         "video_hash": "76946f1f17",
         "title": "Story 1 - Elijah",
         "aspect_ratio": "42.55",
-        "max_width": 960,
-        "video_ratio": "16 / 9"
+        "video_ratio": "16 / 9",
+        "max_width": 960
       }
     }
   },
