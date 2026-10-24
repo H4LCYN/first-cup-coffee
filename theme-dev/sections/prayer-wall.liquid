@@ -307,7 +307,15 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
         target = document.getElementById('pw-toasts');
       }
     } else {
-      target = document.getElementById('pw-list');
+      // Land on the top of the first card, not the middle of the (tall) list,
+      // and clear the sticky navbar so the card isn't hidden behind it.
+      const first = document.querySelector('#pw-list .pw__card') || document.getElementById('pw-list');
+      if (!first) return;
+      const nav = document.querySelector('.navbar');
+      const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+      const top = first.getBoundingClientRect().top + window.scrollY - navHeight - 24;
+      window.scrollTo({ top, behavior: 'smooth' });
+      return;
     }
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }));
