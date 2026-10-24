@@ -28,3 +28,15 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+// One row per guest (logged-out) submission, used only to throttle guest posting.
+// ipHash is a salted SHA-256 of the visitor's IP, never the IP itself; null when the
+// App Proxy didn't forward one.
+model GuestSubmission {
+  id        Int      @id @default(autoincrement())
+  ipHash    String?
+  createdAt DateTime @default(now())
+
+  @@index([ipHash, createdAt])
+  @@index([createdAt])
+}

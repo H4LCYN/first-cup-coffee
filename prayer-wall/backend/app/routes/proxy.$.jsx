@@ -20,6 +20,7 @@ import {
   notifyModeratorOfSpamReport,
 } from "../lib/email.server";
 import { checkSubmissionAllowed } from "../lib/submission-limits.server";
+import { checkGuestAllowed, clientIpHash, recordGuestSubmission } from "../lib/guest-throttle.server";
 
 function json(data, init = {}) {
   return new Response(JSON.stringify(data), {
@@ -39,24 +40,54 @@ export const action = async ({ request, params }) => {
 
   const body = await request.json().catch(() => ({}));
 
-  // Submit, pray, delete, and praise updates require a logged-in customer
-  if (!customerId && ["submit", "pray", "delete", "update-praise"].includes(actionName)) {
+  // Pray, delete, and praise updates require a logged-in customer. Guests can submit,
+  // but their requests go to the moderation queue (see "submit" below).
+  if (!customerId && ["pray", "delete", "update-praise"].includes(actionName)) {
     return json({ error: "You must be logged in to do that." }, { status: 401 });
   }
 
   switch (actionName) {
     case "submit": {
       const title = String(body.title || "").trim().slice(0, 80);
-      const requestText = (body.requestText || "").trim();
+      const requestText = (body.requestText || "").trim().slice(0, 2000);
       if (!requestText) return json({ error: "Prayer request text is required." }, { status: 400 });
-      const isAnonymous = !customerId || !!body.isAnonymous;
 
-      if (customerId) {
-        const existing = await findByCustomer(admin, customerId);
-        const limitCheck = checkSubmissionAllowed(existing);
-        if (!limitCheck.allowed) {
-          return json({ error: limitCheck.reason }, { status: 429 });
-        }
+      if (!customerId) {
+        // Honeypot: the field is hidden from real visitors, so anything filling it is a bot.
+        // Pretend it worked so the bot has nothing to adapt to.
+        if (body.website) return json({ ok: true, status: "pending" });
+
+        const ipHash = clientIpHash(request);
+        const guestCheck = await checkGuestAllowed(ipHash);
+        if (!guestCheck.allowed) return json({ error: guestCheck.reason }, { status: 429 });
+
+        const metaobject = await createRequest(admin, {
+          title,
+          requestText,
+          isAnonymous: true,
+          customerId: null,
+          status: "pending",
+        });
+        await recordGuestSubmission(ipHash);
+
+        await notifyModeratorOfNewRequest({
+          shop,
+          metaobjectId: metaobject.id,
+          title,
+          requestText,
+          isAnonymous: true,
+          pending: true,
+        });
+
+        return json({ ok: true, status: "pending" });
+      }
+
+      const isAnonymous = !!body.isAnonymous;
+
+      const existing = await findByCustomer(admin, customerId);
+      const limitCheck = checkSubmissionAllowed(existing);
+      if (!limitCheck.allowed) {
+        return json({ error: limitCheck.reason }, { status: 429 });
       }
 
       const displayName = isAnonymous ? "" : body.displayName || (await getCustomerDisplayName(admin, customerId));
@@ -148,7 +179,8 @@ export const loader = async ({ request }) => {
 
   const published = all
     .filter((r) => r.status === "active")
-    .sort((a, b) => new Date(b.postedAt || 0) - new Date(a.postedAt || 0));
+    // Guest posts approved in Admin have no posted_at, so fall back to submitted_at.
+    .sort((a, b) => new Date(b.postedAt || b.submittedAt || 0) - new Date(a.postedAt || a.submittedAt || 0));
 
   const myRequests = customerId
     ? all.filter((r) => r.customerId === customerId && r.status !== "deleted")
@@ -164,17 +196,21 @@ export const loader = async ({ request }) => {
       title: r.title || null,
       requestText: r.requestText,
       displayName: r.isAnonymous ? null : r.displayName,
-      postedAt: r.postedAt,
+      postedAt: r.postedAt || r.submittedAt,
       prayingCount: (r.prayingCustomerIds ?? []).length,
       prayingNames: r.prayingNames ?? [],
       isPrayingByMe: customerId ? (r.prayingCustomerIds ?? []).includes(customerId) : false,
       praiseReport: r.praiseReport || null,
-      isMyRequest: r.customerId === customerId,
+      // Guests have no customerId, and neither do anonymous/legacy rows — don't let null match null.
+      isMyRequest: !!customerId && r.customerId === customerId,
     })),
     myPendingRequests: myRequests
       .filter((r) => r.status === "pending")
       .map((r) => ({ id: r.id, requestText: r.requestText, submittedAt: r.submittedAt })),
     canSubmit: submitCheck.allowed,
+    // Separate flag so the older live section (which has no guest modal) keeps hiding the
+    // form from guests; only the new section reads this. Guest throttling happens on submit.
+    guestCanSubmit: !customerId,
     limitReason: submitCheck.allowed ? null : submitCheck.reason,
     loggedIn: !!customerId,
   });

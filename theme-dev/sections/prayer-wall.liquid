@@ -125,6 +125,27 @@
 .pw__more[hidden] { display: none; }
 button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-content: center; align-items: center; line-height: 1; }
 
+/* Honeypot: off-screen, not display:none, so naive bots still fill it */
+.pw__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Guest submit modal */
+.pw-modal {
+  position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(0,0,0,0.55);
+}
+.pw-modal__box {
+  position: relative; width: 100%; max-width: 480px; box-sizing: border-box; padding: 36px;
+  border: 2px solid #d29f13; border-radius: 24px; background: #fff;
+}
+.pw-modal__title { margin: 0 0 12px; padding-right: 28px; font-weight: 600; font-size: 24px; line-height: 1.11; color: #333; }
+.pw-modal__text { margin: 0 0 24px; font-size: 15.5px; line-height: 1.5; color: #000; }
+.pw-modal__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.pw-modal__actions .pw__btn { flex: 1 1 140px; height: 44px; }
+.pw-modal__close {
+  position: absolute; top: 14px; right: 16px; padding: 4px; border: 0; background: none;
+  color: #333; font-size: 26px; line-height: 1; cursor: pointer;
+}
+
 @media (max-width: 991px) {
   .pw-hero { min-height: 480px; }
   .pw-hero__content { gap: 24px; max-width: none; padding-right: 24px; }
@@ -132,7 +153,7 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
   .pw-hero__btn { min-width: 0; flex: 1 1 160px; }
   .pw-body { padding-top: 40px; padding-bottom: 64px; gap: 40px; }
   #pw-root { gap: 40px; }
-  .pw__submit-wrap, .pw__pending-wrap, .pw__card { padding: 24px; border-radius: 20px; }
+  .pw__submit-wrap, .pw__pending-wrap, .pw__card, .pw-modal__box { padding: 24px; border-radius: 20px; }
 }
 </style>
 
@@ -156,10 +177,12 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
   </div>
 
   <div class="pw-body">
+    {%- comment -%} New customer accounts: /account/login doesn't apply; return_to must be relative. {%- endcomment -%}
+    {%- assign pw_return = request.path | url_encode -%}
     <script>
       window.__PW_CUSTOMER__ = {
         loggedIn: {% if customer %}true{% else %}false{% endif %},
-        loginUrl: {{ routes.account_login_url | append: '?return_url=' | append: request.path | json }},
+        loginUrl: {{ '/customer_authentication/login?return_to=' | append: pw_return | json }},
       };
     </script>
 
@@ -169,6 +192,20 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
       <p class="pw__loading" aria-live="polite">Loading prayer requests…</p>
     </div>
   </div>
+
+  {%- unless customer -%}
+    <div class="pw-modal" id="pw-guest-modal" hidden>
+      <div class="pw-modal__box" role="dialog" aria-modal="true" aria-labelledby="pw-guest-modal-title" aria-describedby="pw-guest-modal-text">
+        <button type="button" class="pw-modal__close" data-pw-modal-close aria-label="Close">×</button>
+        <h2 class="pw-modal__title" id="pw-guest-modal-title">{{ section.settings.guest_modal_heading | escape }}</h2>
+        <p class="pw-modal__text" id="pw-guest-modal-text">{{ section.settings.guest_modal_text | escape }}</p>
+        <div class="pw-modal__actions">
+          <button type="button" class="pw__btn pw__btn--primary" data-pw-modal-login>Login</button>
+          <button type="button" class="pw__btn pw__btn--ghost" data-pw-modal-guest>Post Anyway</button>
+        </div>
+      </div>
+    </div>
+  {%- endunless -%}
 </section>
 
 <template id="pw-tpl-form">
@@ -190,6 +227,9 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
         maxlength="2000"
         required
       ></textarea>
+      <div class="pw__hp" aria-hidden="true">
+        <label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
       <div class="pw__form-footer">
         <label class="pw__anon-label">
           <input type="checkbox" id="pw-anon"> Post anonymously
@@ -244,6 +284,11 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
   const PROXY = document.getElementById('prayer-wall').dataset.proxy;
   const C = window.__PW_CUSTOMER__;
   const PAGE_SIZE = 8;
+  // localStorage, not sessionStorage: Sign in with Shop can finish in a new tab.
+  const DRAFT_KEY = 'pw-draft';
+  const DRAFT_MAX_AGE = 60 * 60 * 1000;
+  const MODAL = document.getElementById('pw-guest-modal');
+  let modalForm = null;
   const TWO_COLS = window.matchMedia('(min-width: 992px)');
   let listEl = null, moreBtn = null, cards = [], shown = PAGE_SIZE;
   TWO_COLS.addEventListener('change', () => { if (listEl && cards.length) layout(); });
@@ -389,7 +434,7 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
   function render(data) {
     ROOT.innerHTML = '';
 
-    if (data.canSubmit) {
+    if (data.canSubmit || data.guestCanSubmit) {
       ROOT.appendChild(clone('pw-tpl-form'));
       const form = ROOT.querySelector('#pw-form');
       if (!C.loggedIn) {
@@ -397,6 +442,7 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
         if (anonLabel) anonLabel.remove();
       }
       form.addEventListener('submit', onSubmit);
+      if (C.loggedIn) restoreDraft(form);
     } else if (data.limitReason) {
       showToast(data.limitReason, 'info', 0, 'pw-toast-limit');
     }
@@ -452,23 +498,97 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
     if (moreBtn) moreBtn.hidden = shown >= cards.length;
   }
 
-  async function onSubmit(e) {
+  // Guests choose between logging in and posting for review before anything is sent.
+  function onSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget;
+    const textEl = form.querySelector('#pw-request-text');
+    if (!textEl.value.trim()) { textEl.focus(); return; }
+    if (C.loggedIn) submitRequest(form);
+    else openGuestModal(form);
+  }
+
+  async function submitRequest(form) {
     const btn = form.querySelector('#pw-submit-btn');
     const text = form.querySelector('#pw-request-text').value.trim();
     const title = form.querySelector('#pw-request-title').value.trim();
     const anonEl = form.querySelector('#pw-anon');
     const anon = anonEl ? anonEl.checked : false;
-    if (!text) return;
+    const website = form.querySelector('[name="website"]').value;
     btn.disabled = true; btn.textContent = 'Submitting…';
     try {
-      await api('/submit', { method: 'POST', body: { title, requestText: text, isAnonymous: anon } });
-      await reload();
+      const res = await api('/submit', { method: 'POST', body: { title, requestText: text, isAnonymous: anon, website } });
+      if (res.status === 'pending') {
+        form.reset();
+        btn.disabled = false; btn.textContent = 'Submit Request';
+        showToast("Thanks — your request will appear once it's reviewed.", 'success', 0, 'pw-toast-pending');
+        document.getElementById('pw-toasts').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        await reload();
+      }
     } catch (err) {
       showToast(err.message);
       btn.disabled = false; btn.textContent = 'Submit Request';
     }
+  }
+
+  function openGuestModal(form) {
+    modalForm = form;
+    MODAL.hidden = false;
+    MODAL.querySelector('[data-pw-modal-login]').focus();
+    document.addEventListener('keydown', onModalKey);
+  }
+
+  // Esc, ✕ and backdrop close without posting; focus goes back to Submit.
+  function closeGuestModal() {
+    MODAL.hidden = true;
+    document.removeEventListener('keydown', onModalKey);
+    if (modalForm) modalForm.querySelector('#pw-submit-btn').focus();
+  }
+
+  function onModalKey(e) {
+    if (e.key === 'Escape') { e.preventDefault(); closeGuestModal(); return; }
+    if (e.key !== 'Tab') return;
+    const focusable = MODAL.querySelectorAll('button');
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (!MODAL.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  if (MODAL) {
+    MODAL.querySelector('[data-pw-modal-close]').addEventListener('click', closeGuestModal);
+    MODAL.addEventListener('click', e => { if (e.target === MODAL) closeGuestModal(); });
+    MODAL.querySelector('[data-pw-modal-guest]').addEventListener('click', () => {
+      closeGuestModal();
+      submitRequest(modalForm);
+    });
+    MODAL.querySelector('[data-pw-modal-login]').addEventListener('click', () => {
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify({
+          title: modalForm.querySelector('#pw-request-title').value,
+          requestText: modalForm.querySelector('#pw-request-text').value,
+          savedAt: Date.now(),
+        }));
+      } catch {}
+      window.location.href = C.loginUrl;
+    });
+  }
+
+  // After the login round-trip, refill the form with what the guest had typed.
+  function restoreDraft(form) {
+    let draft = null;
+    try {
+      draft = JSON.parse(localStorage.getItem(DRAFT_KEY));
+      localStorage.removeItem(DRAFT_KEY);
+    } catch {}
+    if (!draft || !draft.requestText || Date.now() - draft.savedAt > DRAFT_MAX_AGE) return;
+    form.querySelector('#pw-request-title').value = draft.title || '';
+    form.querySelector('#pw-request-text').value = draft.requestText;
+    const panel = document.getElementById('pw-form-panel');
+    panel.hidden = false;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showToast('Welcome back! Your request is ready to submit.', 'success', 8000);
   }
 
   async function onPray(e) {
@@ -566,6 +686,22 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
       "id": "submit_placeholder",
       "label": "Submit form placeholder",
       "default": "Share what's on your heart…"
+    },
+    {
+      "type": "header",
+      "content": "Guest submit popup"
+    },
+    {
+      "type": "text",
+      "id": "guest_modal_heading",
+      "label": "Heading",
+      "default": "Your request will be subject to review."
+    },
+    {
+      "type": "textarea",
+      "id": "guest_modal_text",
+      "label": "Text",
+      "default": "To post immediately, log in and become a part of the First Cup Community!"
     }
   ],
   "presets": [

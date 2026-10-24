@@ -87,7 +87,7 @@ function toFieldInputs(values) {
     }));
 }
 
-export async function createRequest(admin, { title, requestText, displayName, isAnonymous, customerId }) {
+export async function createRequest(admin, { title, requestText, displayName, isAnonymous, customerId, status = "active" }) {
   const now = new Date().toISOString();
   const response = await admin.graphql(
     `#graphql
@@ -108,10 +108,12 @@ export async function createRequest(admin, { title, requestText, displayName, is
             request_text: requestText,
             display_name: isAnonymous ? "" : displayName,
             is_anonymous: String(!!isAnonymous),
-            customer_id: customerId,
-            status: "active",
+            // Omitted for guests: JSON.stringify(null) would store the literal string "null".
+            customer_id: customerId || undefined,
+            status,
             submitted_at: now,
-            posted_at: now,
+            // Pending (guest) rows have no posted_at until approved; the wall falls back to submitted_at.
+            posted_at: status === "active" ? now : undefined,
             praying_names: [],
             praying_customer_ids: [],
           }),

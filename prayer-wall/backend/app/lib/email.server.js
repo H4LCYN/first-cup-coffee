@@ -8,7 +8,7 @@ function adminEntryUrl(shop, metaobjectGid) {
   return `https://${shop}/admin/content/entries/prayer_request/${numericId}`;
 }
 
-export async function notifyModeratorOfNewRequest({ shop, metaobjectId, title, requestText, displayName, isAnonymous }) {
+export async function notifyModeratorOfNewRequest({ shop, metaobjectId, title, requestText, displayName, isAnonymous, pending = false }) {
   if (!resend) {
     console.warn("RESEND_API_KEY not set — skipping moderator email. Set it in .env to enable notifications.");
     return;
@@ -17,12 +17,14 @@ export async function notifyModeratorOfNewRequest({ shop, metaobjectId, title, r
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL,
     to: process.env.MODERATOR_EMAIL,
-    subject: "New prayer request posted to the wall",
-    text: `A new prayer request has been posted live on the Prayer Wall.\n\n` +
+    subject: pending ? "Prayer request awaiting review" : "New prayer request posted to the wall",
+    text: (pending
+      ? `A guest submitted a prayer request. It won't appear on the wall until you change its status to "active" in Shopify Admin.\n\n`
+      : `A new prayer request has been posted live on the Prayer Wall.\n\n`) +
       `From: ${isAnonymous ? "Anonymous" : displayName || "(no name given)"}\n\n` +
       (title ? `Title: ${title}\n\n` : "") +
       `Request:\n${requestText}\n\n` +
-      `View it in Shopify Admin:\n${url}`,
+      `${pending ? "Review it" : "View it"} in Shopify Admin:\n${url}`,
   });
 }
 
