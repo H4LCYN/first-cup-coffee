@@ -13,14 +13,15 @@
 <!--
 Initialize Recharge SDK
 -->
-<script src="https://static.rechargecdn.com/assets/storefront/recharge-client-1.16.3.min.js"></script>
+<script defer src="https://static.rechargecdn.com/assets/storefront/recharge-client-1.16.3.min.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function () {
 recharge.init({
 storeIdentifier: '{{shop.permanent_domain}}', // On Shopify this should be your myshopify.com domain
 // required for Storefront API access
 storefrontAccessToken: 'strfnt_199ea1f9e156e55fe616eaccc114f4aec5a23faa71b5f80813d1dda81920bb72',
 });
+});
 </script>
-<script src="https://static.rechargecdn.com/assets/storefront/recharge-client-1.16.3.min.js"></script>
 {{
 'udesly-common.min.css' | asset_url | stylesheet_tag }}

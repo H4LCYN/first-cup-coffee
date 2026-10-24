@@ -5516,22 +5516,6 @@ footer.section_footer.site-redesign-26 {
   inset: 0%;
 }
 
-/* Webflow only switches the preloader on once first-cup-coffee.js runs at the
-   end of <body>, so the page painted before it appeared. The head's inline
-   script adds w-mod-js synchronously, so cover from first paint instead;
-   Webflow's PAGE_FINISH fade still hides it. The animation is a fail-safe
-   so a script error can't leave the page covered. */
-html.w-mod-js .preloader {
-  display: flex;
-  animation: preloader-failsafe 0s 6s forwards;
-}
-
-@keyframes preloader-failsafe {
-  to {
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
 
 .top-ad {
   z-index: 999;

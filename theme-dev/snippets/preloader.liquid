@@ -1,1 +1,8 @@
-<div data-w-id="2f215737-aeb6-9eca-aedc-1e245e9cd343" class="preloader"></div>
+{%- comment -%}
+  Preloader disabled for performance. It was a full-screen white overlay (z-index 998,
+  below the navbar's 999) shown from first paint and only faded on Webflow's PAGE_FINISH,
+  i.e. after window load (every image + GTM/Facebook/Recharge/Omnisend). That kept the
+  main content blank for seconds while the nav showed. Render calls left in place so
+  this can be restored by putting back:
+  <div data-w-id="2f215737-aeb6-9eca-aedc-1e245e9cd343" class="preloader"></div>
+{%- endcomment -%}

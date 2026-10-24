@@ -31,6 +31,7 @@
                   sizes="100vw"
                   alt="{{ block.settings.image.alt | escape }}"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% endif %}
                   class="hero-carousel-2026_image"
                 >
               {%- elsif block.settings.fallback_image != blank -%}
@@ -38,6 +39,7 @@
                   src="{{ block.settings.fallback_image | asset_url }}"
                   alt=""
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% endif %}
                   class="hero-carousel-2026_image"
                 >
               {%- endif -%}
