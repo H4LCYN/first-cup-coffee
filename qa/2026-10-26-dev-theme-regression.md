@@ -121,6 +121,16 @@ These appear on live and are gone on dev:
 - **Not covered by this release:** the Prayer Wall backend deploy (missing card titles, guest posting) is separate and still pending.
 - **Not tested:** checkout, logged-in customer flows, the theme editor and real devices. Mobile was tested with Chrome device emulation.
 
+## Go-live record (2026-10-26)
+
+1. **Rollback copy:** live was duplicated as `rollback-live-10-23-pre-nav-2026` **#159932383454**. A full pull confirmed it's identical to pre-release live (291 files). To roll back, publish that theme.
+2. **Push:** the 76 files were pushed to live #157059580126, each named explicitly, with deletions off. A recheck just before the push confirmed live hadn't changed since the comparison.
+3. **Verified:** a full pull of live afterwards is byte-identical to the tested dev theme (322 files).
+4. **Production re-run on firstcup.com** (real domain, no preview):
+   - All 56 page loads gave the expected status (200, or 404 for `/blogs/news` and the test URL).
+   - There were 76 JavaScript errors in total, against 73 on dev and 135 before the release. Every error is from the known-issues list.
+   - All interaction checks passed: search, cart drawer, add to cart on The Carver and Trigger Fuel, Prayer Wall cards and form, and the mobile menu.
+
 ## Re-running
 
 Scripts are in [`qa/scripts/`](scripts/). They need Google Chrome and Node 22+.
