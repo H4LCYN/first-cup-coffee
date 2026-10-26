@@ -1,0 +1,621 @@
+
+{%- comment -%}
+  PLP grid + filters. Filtering/sorting is Finsweet Attributes (cmsfilter /
+  cmssort / selectcustom), loaded in snippets/header-collection.liquid — the
+  fs-* attributes below are load-bearing, not decorative. Webflow's w-dropdown
+  classes drive the open/close behavior via first-cup-coffee.js, so they stay
+  too; the 2026 styling is layered on through the plp-2026_* classes.
+{%- endcomment -%}
+
+<div class="site-redesign-26 plp-2026">
+  <div class="plp-2026_inner">
+    {%- if section.settings.show_filters -%}
+      <div class="plp-2026_filter-wrap">
+        <div fs-cmsfilter-element="filters" fs-cmsfilter-tagformat="list" class="plp-2026_filter-form w-form">
+          <form action="https://" method="get" class="plp-2026_filter-bar">
+            <p class="plp-2026_filter-label">{{ section.settings.filter_label }}</p>
+
+            <div class="plp-2026_facets">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'facet' -%}
+                  <div data-delay="0" data-hover="false" class="plp-2026_facet fs-dropdown-1 w-dropdown" {{ block.shopify_attributes }}>
+                    <div class="plp-2026_facet-toggle fs-dropdown_toggle-1 w-dropdown-toggle">
+                      <span class="plp-2026_facet-label">{{ block.settings.label }}</span>
+                      <img src="{{ 'plp-chevron.svg' | asset_url }}" alt="" class="plp-2026_facet-chevron">
+                    </div>
+                    <nav class="plp-2026_facet-panel fs-dropdown_list w-dropdown-list">
+                      <div class="plp-2026_facet-options">
+                        {%- assign options = block.settings.options | split: ',' -%}
+                        {%- for option in options -%}
+                          {%- assign option_label = option | strip -%}
+                          <label class="plp-2026_check w-checkbox">
+                            <div class="plp-2026_check-box w-checkbox-input w-checkbox-input--inputType-custom"></div>
+                            <input
+                              type="checkbox"
+                              name="{{ block.settings.field | handle }}-{{ forloop.index }}"
+                              style="opacity:0;position:absolute;z-index:-1"
+                            >
+                            <span fs-cmsfilter-field="{{ block.settings.field }}" class="plp-2026_check-label w-form-label">{{ option_label }}</span>
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                      <a
+                        fs-cmsfilter-element="clear"
+                        fs-cmsfilter-clear="{{ block.settings.field }}"
+                        href="#"
+                        class="plp-2026_facet-reset"
+                      >{{ section.settings.reset_label }}</a>
+                    </nav>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+
+            <div data-delay="0" data-hover="false" fs-selectcustom-element="dropdown" class="plp-2026_sort fs-select w-dropdown">
+              <div class="plp-2026_sort-toggle w-dropdown-toggle">
+                <span class="plp-2026_sort-label">{{ section.settings.sort_label }}</span>
+                <span fs-selectcustom-element="label" class="plp-2026_sort-value">{{ section.settings.sort_default }}</span>
+                <img src="{{ 'plp-chevron-sort.svg' | asset_url }}" alt="" class="plp-2026_sort-chevron">
+              </div>
+              <nav class="plp-2026_sort-panel fs-dropdown_list w-dropdown-list">
+                <select name="sort-by" fs-cmssort-element="trigger" class="fs-select_field w-select">
+                  <option value="Featured-desc">Featured</option>
+                  <option value="Name-asc">Name (A-Z)</option>
+                  <option value="Name-desc">Name (Z-A)</option>
+                  <option value="Price-asc">Price (low to high)</option>
+                  <option value="Price-desc">Price (high to low)</option>
+                </select>
+                <a href="#" fs-cmssort-field="Featured-desc" class="plp-2026_sort-link w-dropdown-link">Featured</a>
+              </nav>
+            </div>
+          </form>
+        </div>
+
+        <div class="plp-2026_tags">
+          <a fs-cmsfilter-element="tag-template" href="#" class="plp-2026_tag w-inline-block">
+            <span fs-cmsfilter-element="tag-text" class="plp-2026_tag-text">Tag</span>
+            <span fs-cmsfilter-element="tag-remove" class="plp-2026_tag-remove">
+              <img src="{{ 'plp-tag-close.svg' | asset_url }}" alt="Remove filter" class="plp-2026_tag-close">
+            </span>
+          </a>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- if collection.products.size > 0 -%}
+        <div class="plp-2026_list w-dyn-list">
+        <div
+          fs-cmsfilter-element="list"
+          fs-cmssort-element="list"
+          fs-cmsfilter-showquery="true"
+          fs-cmsfilter-tagformat="category"
+          role="list"
+          class="plp-2026_grid w-dyn-items"
+        >
+          {%- for item in collection.products -%}
+            {%- assign roast = item.metafields.custom.roast_profile.value -%}
+            <a href="{{ item.url }}" role="listitem" class="plp-2026_card w-dyn-item">
+              <div class="plp-2026_card-media">
+                {%- if item.featured_image != blank -%}
+                  <img
+                    src="{{ item.featured_image | img_url: '600x' }}"
+                    srcset="{{ item.featured_image | img_url: '300x' }} 300w, {{ item.featured_image | img_url: '600x' }} 600w, {{ item.featured_image | img_url: '900x' }} 900w"
+                    sizes="227px"
+                    alt="{{ item.featured_image.alt | default: item.title | escape }}"
+                    loading="lazy"
+                    class="plp-2026_card-image"
+                  >
+                {%- endif -%}
+              </div>
+              <div class="plp-2026_card-info">
+                {%- if roast != blank -%}
+                  <span class="plp-2026_card-roast">{{ roast }} {{ section.settings.roast_suffix }}</span>
+                {%- endif -%}
+                <span fs-cmssort-field="Name" class="plp-2026_card-title">{{ item.title }}</span>
+                <span fs-cmssort-field="Price" class="plp-2026_card-price">{{ item.price | money }}</span>
+              </div>
+              {%- comment -%}
+                Finsweet matches the facet checkbox text against these values
+                exactly, so they carry the bare metafield value — the visible
+                label above appends "Roast" for display and must stay separate.
+              {%- endcomment -%}
+              <span fs-cmsfilter-field="Roast" class="plp-2026_card-hidden">{{ roast }}</span>
+              <span fs-cmssort-field="Featured" class="plp-2026_card-hidden">{{ item.metafields.custom.featured.value }}</span>
+              <span fs-cmsfilter-field="Package" class="plp-2026_card-hidden">{{ item.metafields.custom.packagetype.value }}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+        </div>
+      {%- else -%}
+        <p class="plp-2026_empty">{{ section.settings.empty_text }}</p>
+      {%- endif -%}
+
+      {%- if paginate.pages > 1 -%}
+        <nav role="navigation" aria-label="Pagination" class="plp-2026_pagination">
+          {%- if paginate.previous.is_link -%}
+            <a href="{{ paginate.previous.url }}" class="plp-2026_page-link">Previous</a>
+          {%- endif -%}
+          {%- if paginate.next.is_link -%}
+            <a href="{{ paginate.next.url }}" class="plp-2026_page-link">Next</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+<style>
+  .site-redesign-26.plp-2026 {
+    background-color: #fff;
+  }
+
+  .plp-2026_inner {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+  }
+
+  /* Filter bar ---------------------------------------------------------- */
+
+  .plp-2026_filter-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .plp-2026_filter-form {
+    margin: 0;
+  }
+
+  .plp-2026_filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 0;
+  }
+
+  .plp-2026_filter-label {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #000;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .plp-2026_facets {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .plp-2026_facet {
+    position: relative;
+    margin: 0;
+  }
+
+  .plp-2026_facet-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+    color: #000;
+    cursor: pointer;
+  }
+
+  .plp-2026_facet-label {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #000;
+  }
+
+  .plp-2026_facet-chevron {
+    width: 14.76px;
+    height: 9.41px;
+    display: block;
+    transition: transform 0.2s;
+  }
+
+  /* Webflow adds w--open to the toggle and the list, never to the
+     .w-dropdown wrapper — so the chevron rule has to hang off the toggle. */
+  .plp-2026_facet-toggle.w--open .plp-2026_facet-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Base stays display:none so Webflow's w--open toggle still controls
+     visibility — .w-dropdown-list is display:none by default and this
+     block loads after components.css, so setting display here would
+     pin the panel open. */
+  .plp-2026_facet-panel {
+    background-color: var(--dark-grey);
+    border: 2.47px solid var(--butterscotch);
+    border-radius: 24.7px;
+    padding: 30px 21px;
+    min-width: 211px;
+    gap: 8px;
+    z-index: 5;
+  }
+
+  .plp-2026_facet-panel.w--open {
+    display: flex;
+  }
+
+  .plp-2026_facet-options {
+    display: flex;
+    flex-direction: column;
+    gap: 11.5px;
+    flex: 1;
+  }
+
+  .plp-2026_check {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .plp-2026_check-box {
+    flex-shrink: 0;
+    width: 18.11px;
+    height: 18.11px;
+    margin: 0;
+    border: 0.823px solid #fff;
+    border-radius: 0;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 12.35px 11.53px;
+  }
+
+  .plp-2026_check-box.w--redirected-checked {
+    background-color: transparent;
+    border-color: #fff;
+    background-image: url({{ 'plp-check.svg' | asset_url }});
+  }
+
+  .plp-2026_check-label {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 600;
+    font-size: 19.76px;
+    line-height: 1;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .plp-2026_facet-reset {
+    align-self: flex-start;
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 500;
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .plp-2026_sort {
+    margin: 0 0 0 auto;
+  }
+
+  .plp-2026_sort-toggle {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 6px;
+    border: 2px solid var(--butterscotch);
+    cursor: pointer;
+  }
+
+  .plp-2026_sort-label,
+  .plp-2026_sort-value {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+  }
+
+  .plp-2026_sort-value {
+    color: var(--butterscotch);
+    margin-left: 4px;
+  }
+
+  .plp-2026_sort-chevron {
+    width: 10px;
+    height: 6px;
+    display: block;
+    margin-left: 12px;
+    transition: transform 0.2s;
+  }
+
+  .plp-2026_sort-toggle.w--open .plp-2026_sort-chevron {
+    transform: rotate(180deg);
+  }
+
+  .plp-2026_sort-panel {
+    background-color: var(--dark-grey);
+    border: 2.5px solid var(--butterscotch);
+    border-radius: 25px;
+  }
+
+  .plp-2026_sort-link {
+    color: #fff;
+    font-family: Avenirnextltpro, sans-serif;
+    font-size: 15px;
+    padding: 8px 12px;
+  }
+
+  /* Active filter tags -------------------------------------------------- */
+
+  .plp-2026_tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    min-height: 28px;
+  }
+
+  .plp-2026_tag {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    border: 2px solid var(--butterscotch);
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  .plp-2026_tag-text {
+    padding: 0 6px;
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+    white-space: nowrap;
+  }
+
+  .plp-2026_tag-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--butterscotch);
+    padding: 6px;
+    align-self: stretch;
+  }
+
+  .plp-2026_tag-close {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  /* Product grid -------------------------------------------------------- */
+
+  .plp-2026_grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 227px));
+    gap: 40px 60px;
+  }
+
+  .plp-2026_card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .plp-2026_card-media {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: var(--gray-4);
+  }
+
+  .plp-2026_card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .plp-2026_card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 4.768px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .plp-2026_card-roast {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.1;
+    color: var(--butterscotch);
+  }
+
+  .plp-2026_card-title {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    color: #000;
+  }
+
+  .plp-2026_card-price {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: #000;
+  }
+
+  .plp-2026_card-hidden {
+    display: none;
+  }
+
+  .plp-2026_empty {
+    font-family: Avenirnextltpro, sans-serif;
+    font-size: 18px;
+    color: var(--gray-3);
+    text-align: center;
+    margin: 0;
+  }
+
+  .plp-2026_pagination {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .plp-2026_page-link {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 2px solid var(--butterscotch);
+    padding-bottom: 2px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .plp-2026_grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+    }
+
+    .plp-2026_filter-bar {
+      flex-wrap: wrap;
+    }
+
+    .plp-2026_sort {
+      margin-left: 0;
+    }
+  }
+
+  @media screen and (max-width: 660px) {
+    .plp-2026_grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .plp-2026_filter-label {
+      font-size: 24px;
+    }
+
+    .plp-2026_card-title {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_collection-products site-redesign-26");</script>
+
+{% schema %}
+{
+  "name": "Section - PLP Products",
+  "tag": "section",
+  "class": "section_collection-products",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show filter bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "filter_label",
+      "label": "Filter label",
+      "default": "FILTER"
+    },
+    {
+      "type": "text",
+      "id": "sort_label",
+      "label": "Sort label",
+      "default": "Sort By:"
+    },
+    {
+      "type": "text",
+      "id": "sort_default",
+      "label": "Default sort value shown",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "reset_label",
+      "label": "Reset link label",
+      "default": "RESET"
+    },
+    {
+      "type": "text",
+      "id": "roast_suffix",
+      "label": "Word appended to the roast label on cards",
+      "default": "Roast",
+      "info": "Card shows the product's custom.roast_profile metafield followed by this word, e.g. \"Dark Roast\"."
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty state text",
+      "default": "No products found."
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 12,
+      "max": 100,
+      "step": 4,
+      "default": 100,
+      "info": "Finsweet filters only what is rendered on the page, so keep this high enough to cover the collection."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "facet",
+      "name": "Filter facet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Facet label",
+          "default": "Roast"
+        },
+        {
+          "type": "text",
+          "id": "field",
+          "label": "Finsweet field name",
+          "info": "Must match the fs-cmsfilter-field on the product card, e.g. Roast or Package."
+        },
+        {
+          "type": "text",
+          "id": "options",
+          "label": "Options (comma separated)",
+          "info": "Each must match a product's metafield value exactly, e.g. Light, Medium, Dark, Blend."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section - Collection Products",
+      "blocks": [
+        { "type": "facet", "settings": { "label": "Roast", "field": "Roast", "options": "Light, Medium, Dark, Blend" } },
+        { "type": "facet", "settings": { "label": "Package", "field": "Package", "options": "16 oz Bags, 5 lb Bulk, Pods" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,28 +1,162 @@
 
-        <div class="padding-global">
-          <div class="container-large">
-            <div class="padding-section-medium">
-              <div class="home-cta_component">
-                <div class="home-cta_content-wrapper">
-                  <h2 class="h2">{{ section.settings.home_cta_header }}</h2>
-                  <div p-add-class="text-size-medium">{{ section.settings.home_cta_1_paragraph | newline_to_br }}</div>
-                  <div class="spacer-small"></div>
-                  <a href="{% if section.settings.home_cta_1_link %}{{ section.settings.home_cta_1_link }}{% else %}#{% endif %}" class="button-1 w-inline-block">
-                    <div class="text-block p-contents">{{ section.settings.home_cta_1_button_text | newline_to_br }}</div>
-                    <div class="btn-anim"></div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="home-cta-1_background">
-          <div class="home-cta-1_background-overlay"></div>{%- if section.settings.home_cta_1_background_image == nil -%}<img src="{{ 'cta-1_background.webp' | asset_url }}" loading="lazy" alt="" class="home-cta-1_background-image">{%- else -%}<img src="{{ section.settings.home_cta_1_background_image.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.home_cta_1_background_image.alt | escape }}" class="home-cta-1_background-image">{%- endif -%}
-        </div>
-      
+<div class="site-redesign-26 featured-roast-2026">
+  <div class="featured-roast-2026_card">
+    <div class="featured-roast-2026_photo">
+      {%- if section.settings.background_image != blank -%}
+        <img src="{{ section.settings.background_image | img_url: '1920x' }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
+      {%- else -%}
+        <img src="{{ 'featured-roast-background.png' | asset_url }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
+      {%- endif -%}
+    </div>
+    <div class="featured-roast-2026_grain">
+      <img src="{{ 'hero-carousel-grain-overlay.png' | asset_url }}" alt="" class="featured-roast-2026_grain-image">
+    </div>
+    <div class="featured-roast-2026_content">
+      <p class="cta-eyebrow-2026 featured-roast-2026_eyebrow">{{ section.settings.eyebrow }}</p>
+      <div class="cta-heading-2026 featured-roast-2026_heading">{{ section.settings.heading }}</div>
+      <p class="cta-text-2026 featured-roast-2026_text">{{ section.settings.paragraph }}</p>
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_link }}" class="featured-roast-2026_button">{{ section.settings.button_text }}</a>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.product_image != blank -%}
+      <img src="{{ section.settings.product_image | img_url: '600x' }}" alt="" loading="lazy" class="featured-roast-2026_product">
+    {%- else -%}
+      <img src="{{ 'bafo-flat.png' | asset_url }}" alt="" loading="lazy" class="featured-roast-2026_product">
+    {%- endif -%}
+  </div>
+</div>
 
-<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_home-cta-1");</script>
-        
+<style>
+  .site-redesign-26.featured-roast-2026 {
+    padding: 0;
+    background-color: var(--first-cup-white);
+  }
+
+  .featured-roast-2026_card {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    aspect-ratio: 1220 / 524;
+    min-height: 340px;
+    border-radius: var(--desktop-border-radius);
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  .featured-roast-2026_photo,
+  .featured-roast-2026_photo-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .featured-roast-2026_photo-image {
+    object-fit: cover;
+  }
+
+  .featured-roast-2026_grain {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: lighten;
+    pointer-events: none;
+  }
+
+  .featured-roast-2026_grain-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .featured-roast-2026_content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 40px 24px 40px 64px;
+  }
+
+  /* Type comes from .cta-eyebrow-2026 / .cta-heading-2026 / .cta-text-2026
+     in first-cup-coffee.css.liquid; only the overrides live here. */
+  .featured-roast-2026_heading p {
+    margin: 0;
+    line-height: 1;
+  }
+
+  .featured-roast-2026_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    background-color: var(--butterscotch);
+    color: #fff;
+    border-radius: 3px;
+    padding: 12px 28px;
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: opacity 0.2s;
+  }
+
+  .featured-roast-2026_button:hover {
+    opacity: 0.85;
+  }
+
+  .featured-roast-2026_product {
+    position: relative;
+    margin: auto 0;
+    z-index: 1;
+    height: 82%;
+    width: auto;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 601px) {
+    .featured-roast-2026_card {
+      aspect-ratio: auto;
+      border-radius: 16px;
+    }
+
+    .featured-roast-2026_heading {
+      font-size: 30px;
+    }
+
+    .featured-roast-2026_content {
+      padding: 32px 24px;
+    }
+
+    .featured-roast-2026_product {
+      width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .featured-roast-2026_content {
+      padding: 32px 24px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .featured-roast-2026_product {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_home-cta-1 site-redesign-26");</script>
+
 {% schema %}
 {
   "name": "Home CTA 1",
@@ -31,31 +165,42 @@
   "settings": [
     {
       "type": "image_picker",
-      "id": "home_cta_1_background_image",
-      "label": "Home CTA 1 Background Image"
+      "id": "background_image",
+      "label": "Background photo"
     },
     {
-      "id": "home_cta_1_link",
-      "label": "Home CTA 1 Link",
-      "type": "url"
-    },
-    {
-      "type": "richtext",
-      "id": "home_cta_1_button_text",
-      "label": "Home CTA 1 Button Text",
-      "default": "<p>SUBSCRIBE&nbsp;NOW</p>"
-    },
-    {
-      "type": "richtext",
-      "id": "home_cta_1_paragraph",
-      "label": "Home CTA 1 Paragraph",
-      "default": "<p>Choose your coffee, select delivery times, &amp; get fresh coffee delivered to your door. There’s no contracts so you can cancel anytime.</p>"
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product photo (floats on the right)"
     },
     {
       "type": "text",
-      "id": "home_cta_header",
-      "label": "Home CTA Header",
-      "default": "SAVE 20% WHEN YOU SUBSCRIBE"
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Featured Roast"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Brew Around and Find Out</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph",
+      "label": "Paragraph",
+      "default": "A no-nonsense medium-dark roast for people who wake up with purpose. Build, defend, and don't go soft — start the day with this cup."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Order Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
     }
   ]
 }

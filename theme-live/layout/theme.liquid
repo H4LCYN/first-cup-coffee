@@ -1,3 +1,28 @@
+{%- if template == 'index' and headerSnippetPath == blank -%}
+  {%- assign headerSnippetPath = "header-index" -%}
+  {%- assign wfPage = "654d36a6d6abfe3772908289" -%}
+  {%- assign bodyClasses = "body" -%}
+{%- elsif template.name == 'product' and template.suffix != blank and template.suffix != 'recharge-bundle' and headerSnippetPath == blank -%}
+  {%- comment -%}
+    JSON product templates (product.trigger-fuel.json, etc.) can't set these the way
+    the legacy product.liquid does, so they get the same shell here. recharge-bundle
+    is a bare app-block page and stays outside it.
+  {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-product" -%}
+  {%- assign wfPage = "654d36a6d6abfe37729082ad" -%}
+  {%- assign bodyClasses = "body" -%}
+  {%- assign useJsonShell = true -%}
+{%- elsif template == 'collection' and headerSnippetPath == blank -%}
+  {%- comment -%}
+    templates/collection.json is a JSON template, so it can't set these the way
+    the old collection-template.liquid did. header-collection also loads the
+    Finsweet filter/sort scripts the PLP depends on. Matched exactly so the
+    legacy collection.all template keeps rendering its own shell.
+  {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-collection" -%}
+  {%- assign wfPage = "654d36a6d6abfe37729082ab" -%}
+  {%- assign bodyClasses = "" -%}
+{%- endif -%}
 <!DOCTYPE html>
 
 <html data-wf-page="{{ wfPage }}" data-wf-site="654ae336a6e86029761320fd" lang="{{ request.locale.iso_code }}" data-money-format="{{ shop.money_format | escape }}"><!--Last Published: 2025-11-24T18:58:35.945Z--><head>{%- liquid
@@ -14,7 +39,192 @@
 </head>
 <body class="{{ bodyClasses }} {{ "template-" | append: request.page_type | handle }}">
 {% if headerSnippetPath %}
+  {% if template == 'index' or template == 'collection' or useJsonShell %}
+    <div class="page-wrapper">
+      {%- render 'google-icons' -%}
+      {%- render 'global-styles' -%}
+      {%- section 'top-ad' -%}
+      {%- section 'navbar' -%}
+      {%- render 'preloader' -%}
+      <main class="main-wrapper">
+        {{ content_for_layout }}
+      </main>
+      {%- section 'footer' -%}
+    </div>
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=654ae336a6e86029761320fd" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="{{ 'first-cup-coffee.js' | asset_url }}" type="text/javascript"></script>
+    <script>
+    function megaBack() {
+    var x = document.getElementsByClassName("mega-menu");
+      $('.menu-button').on('click', function(evt) {
+    if (window.getComputedStyle(x).display === "block") {
+      setTimeout(function() {
+          $('.mega-menu_mobile-close').triggerHandler('click');
+      }, 005);
+    });
+    }
+    }
+    </script>
+    <script>
+    $('.input-number-increment').click(function() {
+      var $input = $(this).parents('.input-number-group').find('.input-number');
+      var val = parseInt($input.val(), 10);
+      $input.val(val + 1);
+    });
+    $('.input-number-decrement').click(function() {
+      var $input = $(this).parents('.input-number-group').find('.input-number');
+      var val = parseInt($input.val(), 10);
+      $input.val(Math.max(val - 1, 1));
+    })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+    $(".featured-slider_component").each(function (index) {
+      let loopMode = false;
+      if ($(this).attr("loop-mode") === "true") {
+        loopMode = true;
+      }
+      let sliderDuration = 300;
+      if ($(this).attr("slider-duration") !== undefined) {
+        sliderDuration = +$(this).attr("slider-duration");
+      }
+      const swiper = new Swiper($(this).find(".swiper")[0], {
+        speed: sliderDuration,
+        loop: loopMode,
+        autoHeight: false,
+        centeredSlides: loopMode,
+        followFinger: true,
+        freeMode: false,
+        slideToClickedSlide: false,
+        slidesPerView: 1,
+        spaceBetween: "4%",
+        rewind: false,
+        mousewheel: {
+          forceToAxis: true
+        },
+        keyboard: {
+          enabled: true,
+          onlyInViewport: true
+        },
+        breakpoints: {
+          480: {
+            slidesPerView: 1,
+            spaceBetween: "4%"
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: "4%"
+          },
+          992: {
+            slidesPerView: 3.5,
+            spaceBetween: "2%"
+          }
+        },
+        pagination: {
+          el: $(this).find(".swiper-bullet-wrapper")[0],
+          bulletActiveClass: "is-active",
+          bulletClass: "swiper-bullet",
+          bulletElement: "button",
+          clickable: true
+        },
+        navigation: {
+          nextEl: $(this).find(".swiper-next")[0],
+          prevEl: $(this).find(".swiper-prev")[0],
+          disabledClass: "is-disabled"
+        },
+        scrollbar: {
+          el: $(this).find(".swiper-drag-wrapper")[0],
+          draggable: true,
+          dragClass: "swiper-drag",
+          snapOnRelease: true
+        },
+        slideActiveClass: "is-active",
+        slideDuplicateActiveClass: "is-active"
+      });
+    });
+    $(".product-slider_component").each(function (index) {
+      let loopMode = false;
+      if ($(this).attr("loop-mode") === "true") {
+        loopMode = true;
+      }
+      let sliderDuration = 300;
+      if ($(this).attr("slider-duration") !== undefined) {
+        sliderDuration = +$(this).attr("slider-duration");
+      }
+      const swiper = new Swiper($(this).find(".swiper")[0], {
+        speed: sliderDuration,
+        loop: loopMode,
+        autoHeight: false,
+        centeredSlides: loopMode,
+        initialSlide: 5,
+        centeredSlides: true,
+        followFinger: true,
+        freeMode: false,
+        slideToClickedSlide: false,
+        slidesPerView: 1,
+        spaceBetween: "4%",
+        rewind: false,
+        mousewheel: {
+          forceToAxis: true
+        },
+        keyboard: {
+          enabled: true,
+          onlyInViewport: true
+        },
+        breakpoints: {
+          480: {
+            slidesPerView: 1,
+            spaceBetween: "4%"
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: "3%"
+          },
+          992: {
+            slidesPerView: 6,
+            spaceBetween: "4%"
+          }
+        },
+        pagination: {
+          el: $(this).find(".swiper-bullet-wrapper")[0],
+          bulletActiveClass: "is-active",
+          bulletClass: "swiper-bullet",
+          bulletElement: "button",
+          clickable: true
+        },
+        navigation: {
+          nextEl: $(this).find(".swiper-next")[0],
+          prevEl: $(this).find(".swiper-prev")[0],
+          disabledClass: "is-disabled"
+        },
+        scrollbar: {
+          el: $(this).find(".swiper-drag-wrapper")[0],
+          draggable: true,
+          dragClass: "swiper-drag",
+          snapOnRelease: true
+        },
+        slideActiveClass: "is-active",
+        slideDuplicateActiveClass: "is-active"
+      });
+    });
+    document.querySelectorAll(".hero-carousel-2026_swiper").forEach(function (el) {
+      new Swiper(el, {
+        loop: true,
+        autoplay: {
+          delay: parseInt(el.dataset.autoplaySpeed, 10) || 6000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: el.querySelector(".hero-carousel-2026_pagination"),
+          clickable: true
+        }
+      });
+    });
+    </script>
+    {{ 'udesly-shopify.min.js' | asset_url | script_tag }}
+  {% else %}
     {{ content_for_layout }}
+  {% endif %}
 {% else %}
     {% include "backup-layout" %}
 {% endif %}

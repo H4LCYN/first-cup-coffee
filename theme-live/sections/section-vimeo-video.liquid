@@ -1,0 +1,363 @@
+
+<div class="site-redesign-26 vimeo-video-2026">
+  {%- if section.settings.heading != blank -%}
+    <h2 class="vimeo-video-2026_heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+  {%- if section.settings.video_id != blank -%}
+    {%- capture vimeo_src -%}https://player.vimeo.com/video/{{ section.settings.video_id | strip }}?{% if section.settings.video_hash != blank %}h={{ section.settings.video_hash | strip }}&{% endif %}badge=0&autopause=0&controls=0&player_id=0&app_id=58479{%- endcapture -%}
+    <div class="vimeo-video-2026_frame" data-vimeo-frame style="padding-top: {{ section.settings.aspect_ratio }}%;">
+      <iframe
+        src="{{ vimeo_src }}"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        loading="lazy"
+        title="{{ section.settings.title | escape }}"
+        class="vimeo-video-2026_iframe"
+        style="aspect-ratio: {{ section.settings.video_ratio }};"
+      ></iframe>
+      {%- comment -%}
+        Vimeo's own control bar sits along the bottom of the player, which the
+        frame crops away, so the player is embedded with controls=0 and these
+        controls are drawn inside the visible area instead.
+      {%- endcomment -%}
+      <button type="button" class="vimeo-video-2026_overlay" data-vimeo-toggle aria-label="Play video">
+        <span class="vimeo-video-2026_big-play" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        </span>
+      </button>
+      <div class="vimeo-video-2026_controls">
+        <button type="button" class="vimeo-video-2026_control" data-vimeo-toggle aria-label="Play video">
+          <svg class="vimeo-video-2026_icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          <svg class="vimeo-video-2026_icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z" fill="currentColor"/></svg>
+        </button>
+        <div class="vimeo-video-2026_progress" data-vimeo-progress role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="vimeo-video-2026_progress-fill" data-vimeo-fill></div>
+        </div>
+        <span class="vimeo-video-2026_time" data-vimeo-time>0:00</span>
+        <button type="button" class="vimeo-video-2026_control" data-vimeo-mute aria-label="Mute">
+          <svg class="vimeo-video-2026_icon-sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" fill="currentColor"/></svg>
+          <svg class="vimeo-video-2026_icon-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4z" fill="currentColor"/></svg>
+        </button>
+        <button type="button" class="vimeo-video-2026_control" data-vimeo-fullscreen aria-label="Full screen">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  .vimeo-video-2026 {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    border-radius: 30px;
+    overflow: auto;
+  }
+
+  /* Matches .our-locations-2026_heading */
+  .vimeo-video-2026_heading {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #212121;
+    text-align: center;
+    margin: 0;
+  }
+
+  .vimeo-video-2026_frame {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 30px;
+  }
+
+  /* The player keeps the video file's own shape and is centred in the frame.
+     When the frame is wider than the file (e.g. a 2.35:1 frame around a 16:9
+     file with letterboxing baked in), the frame's overflow crops those bars. */
+  .vimeo-video-2026_iframe {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    transform: translateY(-50%);
+  }
+
+  .vimeo-video-2026_overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .vimeo-video-2026_big-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .vimeo-video-2026_big-play svg {
+    width: 38px;
+    height: 38px;
+    margin-left: 4px;
+  }
+
+  .vimeo-video-2026_overlay:hover .vimeo-video-2026_big-play {
+    transform: scale(1.06);
+  }
+
+  .vimeo-video-2026_frame.is-playing .vimeo-video-2026_big-play {
+    opacity: 0;
+  }
+
+  .vimeo-video-2026_controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 14px 10px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    color: #fff;
+    transition: opacity 0.25s;
+  }
+
+  /* While playing, get out of the way until the viewer hovers or tabs in.
+     Touch screens have no hover, so the bar stays up there. */
+  @media (hover: hover) {
+    .vimeo-video-2026_frame.is-playing:not(:hover):not(:focus-within) .vimeo-video-2026_controls {
+      opacity: 0;
+    }
+  }
+
+  .vimeo-video-2026_control {
+    display: flex;
+    flex: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .vimeo-video-2026_control svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .vimeo-video-2026_icon-pause,
+  .vimeo-video-2026_icon-muted,
+  .vimeo-video-2026_frame.is-playing .vimeo-video-2026_icon-play,
+  .vimeo-video-2026_frame.is-muted .vimeo-video-2026_icon-sound {
+    display: none;
+  }
+
+  .vimeo-video-2026_frame.is-playing .vimeo-video-2026_icon-pause,
+  .vimeo-video-2026_frame.is-muted .vimeo-video-2026_icon-muted {
+    display: block;
+  }
+
+  .vimeo-video-2026_progress {
+    position: relative;
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+  }
+
+  /* Taller hit area than the visible 4px track */
+  .vimeo-video-2026_progress::before {
+    content: "";
+    position: absolute;
+    inset: -10px 0;
+  }
+
+  .vimeo-video-2026_progress-fill {
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--butterscotch);
+  }
+
+  .vimeo-video-2026_time {
+    flex: none;
+    font-family: Roboto, sans-serif;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<script>
+  (function () {
+    var section = document.currentScript.closest('.shopify-section');
+    var frame = section && section.querySelector('[data-vimeo-frame]');
+    if (!frame) return;
+
+    function format(seconds) {
+      var s = Math.floor(seconds || 0);
+      return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+    }
+
+    function init() {
+      var player = new Vimeo.Player(frame.querySelector('iframe'));
+      var fill = frame.querySelector('[data-vimeo-fill]');
+      var progress = frame.querySelector('[data-vimeo-progress]');
+      var time = frame.querySelector('[data-vimeo-time]');
+      var toggles = frame.querySelectorAll('[data-vimeo-toggle]');
+      var duration = 0;
+
+      function setPlaying(playing) {
+        frame.classList.toggle('is-playing', playing);
+        toggles.forEach(function (b) { b.setAttribute('aria-label', playing ? 'Pause video' : 'Play video'); });
+      }
+
+      player.getDuration().then(function (d) { duration = d; time.textContent = format(d); });
+      player.on('play', function () { setPlaying(true); });
+      player.on('pause', function () { setPlaying(false); });
+      player.on('ended', function () { setPlaying(false); });
+      player.on('timeupdate', function (e) {
+        duration = e.duration;
+        fill.style.width = (e.percent * 100) + '%';
+        progress.setAttribute('aria-valuenow', Math.round(e.percent * 100));
+        time.textContent = format(e.seconds) + ' / ' + format(e.duration);
+      });
+
+      toggles.forEach(function (b) {
+        b.addEventListener('click', function () {
+          player.getPaused().then(function (paused) { return paused ? player.play() : player.pause(); });
+        });
+      });
+
+      progress.addEventListener('click', function (e) {
+        var r = progress.getBoundingClientRect();
+        player.setCurrentTime(duration * Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1));
+      });
+      progress.addEventListener('keydown', function (e) {
+        var step = e.key === 'ArrowRight' ? 5 : e.key === 'ArrowLeft' ? -5 : 0;
+        if (!step) return;
+        e.preventDefault();
+        player.getCurrentTime().then(function (t) { player.setCurrentTime(Math.min(Math.max(t + step, 0), duration)); });
+      });
+
+      frame.querySelector('[data-vimeo-mute]').addEventListener('click', function () {
+        var muted = !frame.classList.contains('is-muted');
+        player.setVolume(muted ? 0 : 1);
+        frame.classList.toggle('is-muted', muted);
+        this.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
+      });
+
+      frame.querySelector('[data-vimeo-fullscreen]').addEventListener('click', function () {
+        player.requestFullscreen();
+      });
+    }
+
+    if (window.Vimeo && window.Vimeo.Player) return init();
+    var api = document.querySelector('script[src="https://player.vimeo.com/api/player.js"]');
+    if (!api) {
+      api = document.createElement('script');
+      api.src = 'https://player.vimeo.com/api/player.js';
+      document.head.appendChild(api);
+    }
+    api.addEventListener('load', init);
+  })();
+</script>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_vimeo-video site-redesign-26");</script>
+
+{% schema %}
+{
+  "name": "Vimeo Video",
+  "tag": "section",
+  "class": "section_vimeo-video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THE FIRST CUP STORY"
+    },
+    {
+      "type": "text",
+      "id": "video_id",
+      "label": "Vimeo video ID",
+      "info": "The number in the Vimeo link, e.g. 1230101474"
+    },
+    {
+      "type": "text",
+      "id": "video_hash",
+      "label": "Private link hash",
+      "info": "The h= value for unlisted videos, e.g. 76946f1f17"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Video title (for screen readers)"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Frame shape",
+      "info": "Pick a wider shape than the video to crop black bars built into it",
+      "options": [
+        { "value": "41.84", "label": "2.39:1 (cinematic)" },
+        { "value": "42.55", "label": "2.35:1 (cinematic)" },
+        { "value": "50", "label": "2:1" },
+        { "value": "56.25", "label": "16:9 (landscape)" },
+        { "value": "75", "label": "4:3" },
+        { "value": "100", "label": "1:1 (square)" },
+        { "value": "125", "label": "4:5 (portrait)" },
+        { "value": "177.78", "label": "9:16 (vertical)" }
+      ],
+      "default": "75"
+    },
+    {
+      "type": "select",
+      "id": "video_ratio",
+      "label": "Video file shape",
+      "info": "Shape of the uploaded file, including any black bars in it",
+      "options": [
+        { "value": "16 / 9", "label": "16:9 (landscape)" },
+        { "value": "4 / 3", "label": "4:3" },
+        { "value": "1 / 1", "label": "1:1 (square)" },
+        { "value": "4 / 5", "label": "4:5 (portrait)" },
+        { "value": "9 / 16", "label": "9:16 (vertical)" }
+      ],
+      "default": "16 / 9"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 400,
+      "max": 1440,
+      "step": 20,
+      "unit": "px",
+      "default": 960
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vimeo Video"
+    }
+  ]
+}
+{% endschema %}

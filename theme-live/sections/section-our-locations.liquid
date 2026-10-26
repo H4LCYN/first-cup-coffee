@@ -1,0 +1,242 @@
+
+<div class="site-redesign-26 our-locations-2026">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+  <div class="our-locations-2026_inner">
+    <h2 class="our-locations-2026_heading">{{ section.settings.heading }}</h2>
+    <div class="our-locations-2026_cards">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link }}" class="our-locations-2026_card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt | default: block.settings.name | escape }}" loading="lazy" class="our-locations-2026_card-image">
+          {%- elsif block.settings.fallback_image != blank -%}
+            <img src="{{ block.settings.fallback_image | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy" class="our-locations-2026_card-image">
+          {%- endif -%}
+          <div class="our-locations-2026_card-scrim"></div>
+          <div class="our-locations-2026_card-content">
+            <div class="our-locations-2026_card-name">{{ block.settings.name }}</div>
+            <div class="our-locations-2026_card-address">{{ block.settings.address }}</div>
+            <div class="our-locations-2026_card-cta">{{ section.settings.cta_text }} &gt;</div>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .site-redesign-26.our-locations-2026 {
+    background-color: #fff;
+  }
+
+  .our-locations-2026_inner {
+    padding-top: 0;
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .our-locations-2026_heading {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #212121;
+    text-align: center;
+    margin: 0;
+  }
+
+  .our-locations-2026_cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .our-locations-2026_card {
+    position: relative;
+    width: calc(100% / 3 - 27px);
+    height: 392px;
+    min-width: 392px;
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: var(--desktop-border-radius);
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .our-locations-2026_card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .our-locations-2026_card-scrim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60%;
+    background: linear-gradient(to top, var(--dark-grey), transparent);
+    pointer-events: none;
+  }
+
+  .our-locations-2026_card-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0 12px;
+  }
+
+  .our-locations-2026_card-name {
+    font-family: "Avenir Next Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.05;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .our-locations-2026_card-address {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #fff;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .our-locations-2026_card-cta {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.15;
+    color: var(--butterscotch);
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .our-locations-2026_inner {
+      padding: 60px 1rem;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .our-locations-2026_cards {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .our-locations-2026_card {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_our-locations site-redesign-26");</script>
+
+{% schema %}
+{
+  "name": "Section - Our Locations",
+  "tag": "section",
+  "class": "section_our-locations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "OUR LOCATIONS"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Card link text",
+      "default": "VISIT NOW"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "location",
+      "name": "Location",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Location name",
+          "default": "Location Name"
+        },
+        {
+          "type": "richtext",
+          "id": "address",
+          "label": "Address"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "fallback_image",
+          "label": "Fallback photo filename (asset, used only if no photo is picked above)",
+          "info": "Advanced: filename of a theme asset, e.g. pearland-square-1.avif"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section - Our Locations",
+      "blocks": [
+        {
+          "type": "location",
+          "settings": {
+            "name": "Pearland",
+            "address": "<p>2645 E Broadway St,<br>Pearland, TX  77581</p>",
+            "link": "shopify://pages/location",
+            "fallback_image": "pearland-square-1.avif"
+          }
+        },
+        {
+          "type": "location",
+          "settings": {
+            "name": "Rosenberg",
+            "address": "<p>1548 Minonite Rd Unit 120,<br>Rosenberg, TX  77469</p>",
+            "link": "shopify://pages/location-rosenberg",
+            "fallback_image": "rosenberg-square-1.jpg"
+          }
+        },
+        {
+          "type": "location",
+          "settings": {
+            "name": "Woodlands",
+            "address": "<p>26403 Oak Ridge Dr,<br>Spring, TX, 77380</p>",
+            "link": "shopify://pages/location-woodlands",
+            "fallback_image": "woodlands-square-1.png"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

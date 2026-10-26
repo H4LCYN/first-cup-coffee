@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product-feature",
+      "blocks": {
+        "banner": {
+          "type": "banner_image",
+          "settings": {
+            "image_asset": "trigger-fuel-banner.jpg"
+          }
+        },
+        "quote": {
+          "type": "quote",
+          "settings": {
+            "quote": "\"Get the coffee we use at the TRIGGERnometry studio - we refuse to drink anything else!\"",
+            "attribution": "— Konstantin & Francis"
+          }
+        },
+        "logo": {
+          "type": "partner_logo",
+          "settings": {
+            "image_asset": "trigger-fuel-logo.png",
+            "alt": "Triggernometry",
+            "max_width": 320
+          }
+        },
+        "body": {
+          "type": "rich_text",
+          "settings": {}
+        },
+        "format-16oz": {
+          "type": "format",
+          "settings": {
+            "product": "trigger",
+            "label": "16 oz Bag"
+          }
+        },
+        "format-5lb": {
+          "type": "format",
+          "settings": {
+            "product": "trigger-fuel-5-lb-bag",
+            "label": "5 lb Bag"
+          }
+        },
+        "format-pods": {
+          "type": "format",
+          "settings": {
+            "product": "trigger-fuel-pods-24-count",
+            "label": "Pods (24 Count)"
+          }
+        }
+      },
+      "block_order": [
+        "format-16oz",
+        "format-5lb",
+        "format-pods",
+        "banner",
+        "quote",
+        "logo",
+        "body"
+      ],
+      "settings": {
+        "bundle_product": "test-product",
+        "bundle_collection": "1-lb-bag-subscription",
+        "default_purchase_type": "subscribe",
+        "popular_interval": "30",
+        "popular_bag_count": "2"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

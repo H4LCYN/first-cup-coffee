@@ -189,6 +189,15 @@
   --accessible-components--dark-grey: {{settings.color_accessible_components_dark_grey}};
   --accessible-components--dodger-blue: {{settings.color_accessible_components_dodger_blue}};
   --site-max-width: 1440px;
+  --desktop-y-spacing: 60px;
+  --desktop-x-spacing: 30px;
+  --tablet-y-spacing: 60px;
+  --tablet-x-spacing: 30px;
+  --mobile-y-spacing: 30px;
+  --mobile-x-spacing: 15px;
+  --desktop-border-radius: 30px;
+  --twenty-six-white: #fff;
+  --twenty-six-yellow: #D29F13;
 }
 
 .w-commerce-commercecartwrapper {
@@ -1445,7 +1454,7 @@
 }
 
 body {
-  color: #333;
+  color: #000;
   white-space: normal;
   padding-bottom: 0;
   font-family: Avenirnextltpro, sans-serif;
@@ -1898,8 +1907,10 @@ label {
 }
 
 .main-wrapper {
-  background-color: var(--uniform-green);
+  background-color: var(--twenty-six-white);
   min-height: 100vh;
+  max-width: var(--site-max-width);
+  margin: 0 auto;
 }
 
 .page-title {
@@ -1908,6 +1919,12 @@ label {
 
 .rich-text h2 {
   margin-bottom: .5rem;
+}
+
+/* Page content written for the old dark theme carries an inline off-white
+   (#fafcf5) from the admin editor, which vanishes on the new white pages. */
+.rich-text [style*="#fafcf5" i] {
+  color: #000 !important;
 }
 
 .h3 {
@@ -2008,10 +2025,6 @@ label {
 
 .p-extra-small.text-color-gray4 {
   color: var(--gray-4);
-}
-
-.body {
-  background-color: var(--uniform-green);
 }
 
 .btn {
@@ -2207,6 +2220,7 @@ label {
   object-position: 50% 0%;
   width: 100%;
   height: 100%;
+  border-radius: 30px;
 }
 
 .product-image.is-isolated {
@@ -2231,6 +2245,28 @@ label {
 
 .product-container-info.is-isolated {
   text-align: center;
+}
+
+.product-container-info .p-medium {
+  color: #000;
+  text-align: center;
+  font-family: "Avenir Next Condensed";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.product-container-info .p-small {
+  color: #000;
+  text-align: center;
+  font-family: "Avenir Next";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.4;
+  text-transform: uppercase;
 }
 
 .product-collection-list {
@@ -2464,6 +2500,10 @@ label {
 
 .text-color-white {
   color: var(--first-cup-white);
+}
+
+.text-color-black {
+  color: #000;
 }
 
 .footer-credits {
@@ -2967,7 +3007,7 @@ label {
 }
 
 .nav_container {
-  max-width: 87.5rem;
+  max-width: var(--site-max-width);
   margin-left: auto;
   margin-right: auto;
 }
@@ -3129,14 +3169,82 @@ label {
 }
 
 .container-large {
-  max-width: 87.5rem;
   margin-left: auto;
   margin-right: auto;
 }
 
+/* Site-redesign-26 sections' shared "full-bleed background, capped
+   content" container */
+section.site-redesign-26 {
+  padding: var(--desktop-y-spacing) var(--desktop-x-spacing) 0;
+}
+
+footer.section_footer.site-redesign-26 {
+  padding: var(--desktop-y-spacing) 0 0;
+}
+
+@media screen and (max-width: 991px) {
+  section.site-redesign-26 {
+    padding: var(--tablet-y-spacing) var(--tablet-x-spacing) 0;
+  }
+
+  footer.section_footer.site-redesign-26 {
+    padding: var(--desktop-y-spacing) 0 0;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  section.site-redesign-26 {
+    padding: var(--mobile-y-spacing) var(--mobile-x-spacing) 0;
+  }
+
+  footer.section_footer.site-redesign-26 {
+    padding: var(--desktop-y-spacing) 0 0;
+  }
+}
+
+.container-2026 {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+/* Shared CTA type styles for the site-redesign-26 sections. Sections still
+   own their layout; these only carry the repeated type treatment. A section
+   can override any of it — its inline <style> loads after this file, so at
+   equal specificity the section rule wins (that's how the mobile sizes
+   keep working). */
+.cta-eyebrow-2026 {
+  margin: 0;
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--butterscotch);
+  text-transform: uppercase;
+}
+
+.cta-heading-2026 {
+  margin: 0;
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.cta-text-2026 {
+  margin: 0;
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.1;
+  color: #fff;
+}
+
 .padding-section-medium {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: var(--desktop-y-spacing);
+  padding-bottom: 0;
 }
 
 .slider_top-wrapper {
@@ -3504,7 +3612,7 @@ label {
 }
 
 .section_footer {
-  background-color: var(--uniform-green);
+  background-color: var(--twenty-six-white);
 }
 
 .footer_content-wrapper {
@@ -3592,10 +3700,9 @@ label {
   display: flex;
 }
 
-.section_product {
-  background-color: var(--uniform-green);
-}
-
+/* Base product layout. Still used by the partner layout in
+   templates/product.liquid, which has no .section_product wrapper — leave
+   these in place or that variant loses its layout entirely. */
 .product_component-wrapper {
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
@@ -3639,6 +3746,171 @@ label {
 
 .product_description-text {
   line-height: 1.4;
+}
+
+/* PDP hero — 2026 redesign (Figma node 225:337).
+   Styling only: the markup in templates/product.liquid is left alone so the
+   Webflow add-to-cart form, option pills and Recharge wiring keep working.
+   Scoped to .section_product so it overrides the base above by specificity
+   without touching the partner layout. */
+.section_product {
+  background-color: #fff;
+}
+
+.section_product .product_component-wrapper {
+  grid-column-gap: 46px;
+  grid-row-gap: 46px;
+  max-width: var(--site-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+.section_product .product_column.is-product-description {
+  width: 44%;
+  padding-top: 15.892px;
+  position: relative;
+}
+
+.section_product .product_column.is-product-image {
+  width: 56%;
+}
+
+.section_product .product-image.is-product-page {
+  border-radius: var(--desktop-border-radius);
+  aspect-ratio: 658 / 698;
+  object-fit: cover;
+}
+
+.section_product .product_name {
+  font-family: "Avenir Next Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 44.497px;
+  line-height: 1;
+  color: #000;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.section_product .product_type {
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 400;
+  font-size: 15.892px;
+  line-height: 1;
+  color: var(--butterscotch);
+  margin-bottom: 4.768px;
+}
+
+.section_product .product_price {
+  font-family: Avenirnextltpro, sans-serif;
+  font-weight: 400;
+  font-size: 22.249px;
+  line-height: 1;
+  color: #000;
+  margin-top: 15.892px;
+  margin-bottom: 0;
+}
+
+.section_product .product_description-component {
+  color: #000;
+  position: sticky;
+  top: 3.9rem;
+}
+
+.section_product .product-description_wrapper {
+  margin-top: 31.784px;
+  margin-bottom: 0;
+}
+
+.section_product .product_description-text {
+  font-family: "Avenir Next Condensed", sans-serif;
+  font-size: 16px;
+  line-height: 1.39;
+  color: #000;
+}
+
+/* The description is merchant HTML (Shogun) whose bullet list carries the
+   roast details; the design renders those larger than the prose below. */
+.section_product .product_description-text ul {
+  margin: 0;
+  padding-left: 40px;
+}
+
+.section_product .product_description-text ul li {
+  font-size: 18px;
+  line-height: 1.236;
+}
+
+.section_product .product_description-text p {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+/* Option pills — Texture / Deliver Every / Bag Count */
+.section_product .w-commerce-commerceaddtocartoptionpill,
+.section_product .button-1 {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.7px;
+  min-width: 106px;
+  height: 39px;
+  padding: 6px 15px;
+  border: 2px solid #000;
+  border-radius: 2px;
+  background-color: #0000;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.section_product .w-commerce-commerceaddtocartoptionpill.w--ecommerce-pill-selected,
+.section_product .button-1.w--ecommerce-pill-selected {
+  border-color: var(--butterscotch);
+  background-color: var(--butterscotch);
+  color: #fff;
+}
+
+.section_product .field-label {
+  font-family: "Avenir Next Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  color: #000;
+  margin-top: 17px;
+  margin-bottom: 11px;
+}
+
+.section_product .add-to-cart-button,
+.section_product .subscription-add-to-cart {
+  color: var(--twenty-six-white);
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  min-height: 55px;
+}
+
+@media screen and (max-width: 991px) {
+  .section_product .product_component-wrapper {
+    flex-direction: column;
+  }
+
+  .section_product .product_column.is-product-description,
+  .section_product .product_column.is-product-image {
+    width: 100%;
+  }
+
+  .section_product .product_name {
+    font-size: 34px;
+  }
 }
 
 .add-to-cart_wrapper {
@@ -3801,12 +4073,13 @@ label {
 }
 
 .product-features_heading {
-  font-family: Avenirnextltpro Demicn, sans-serif;
-  font-size: 3rem;
-}
-
-.section_related-products {
-  background-color: var(--dark-grey);
+  color: #212121;
+  text-align: center;
+  font-family: "Avenir Next Condensed";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 33px;
 }
 
 .related-products_component {
@@ -3988,6 +4261,12 @@ label {
   background-color: var(--uniform-green);
 }
 
+.section_collection-products.site-redesign-26 {
+  background-color: var(--twenty-six-white);
+  display: flex;
+  justify-content: center;
+}
+
 .collection-grid {
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
@@ -4002,10 +4281,10 @@ label {
   margin-left: 0;
 }
 
-.fs-dropdown_list.w--open {
+.plp-2026_facets .fs-dropdown_list.w--open {
   background-color: var(--dark-grey);
-  border: 1px solid #9d9d9d;
-  border-radius: .1rem;
+  border: 2.5px solid var(--twenty-six-yellow);
+  border-radius: 25px;
   margin-top: .5rem;
   padding: 1rem;
 }
@@ -4641,7 +4920,7 @@ label {
 .subscription-det_wrapper {
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
-  color: var(--first-cup-white);
+  color: #000;
   text-align: center;
   flex-direction: column;
   justify-content: center;
@@ -4659,10 +4938,16 @@ label {
   display: grid;
 }
 
+.subscription-product {
+  padding-top: 30px;
+}
+
 .sub-prod-sel_tab {
   border: .13rem solid var(--first-cup-white);
-  color: var(--first-cup-white);
-  background-color: #fafcf500;
+  color: #000;
+  border-radius: 2px;
+  border: 2px solid #000;
+  background-color: var(--twenty-six-white);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -4674,10 +4959,10 @@ label {
 
 .sub-prod-sel_tab.w--current {
   background-color: var(--butterscotch);
+  color: var(--twenty-six-white);
   opacity: 1;
-  color: var(--first-cup-charcoal);
-  border-style: solid;
-  border-color: #000;
+  border-radius: 2px;
+  border-style: none;
 }
 
 .sub-prod-sel_tab.is-right {
@@ -4685,25 +4970,12 @@ label {
   padding-right: 2.075rem;
 }
 
-.sub-prod-sel_tab.is-right.w--current {
-  border-style: solid;
-  border-color: #ffd000;
-}
-
-.sub-prod-sel_tab.is-left {
-  border-right-style: none;
-}
-
-.sub-prod-sel_tab.is-left.w--current {
-  border-style: solid;
-  border-color: #ffd000;
-}
-
 .tabs-menu {
   align-items: center;
   margin-bottom: 1.9rem;
   padding-right: 1.9rem;
   display: flex;
+  gap: 15px;
 }
 
 .sub-prod-sel_price-wrapper {
@@ -4715,16 +4987,20 @@ label {
 .free-shipping-badge {
   border: 1px solid var(--butterscotch);
   background-color: var(--firebrick);
-  color: var(--first-cup-white);
+  text-transform: uppercase;
+  color: #FFF;
   text-align: center;
+  font-family: "Avenir Next Condensed";
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.9;
   border-radius: .35rem;
   justify-content: center;
   align-items: center;
   margin-top: -1.1rem;
   margin-right: -1.8rem;
   padding: .3rem;
-  font-family: Avenirnextltpro Cn, sans-serif;
-  font-size: 1rem;
   display: flex;
   position: absolute;
   inset: 0% 0% auto auto;
@@ -4737,8 +5013,8 @@ label {
 }
 
 .fs_radio-2_button {
-  border-style: none;
-  border-radius: 0;
+  border-radius: 2px;
+  border: 2px solid #000;
   width: 100%;
   height: 100%;
   margin-top: 0;
@@ -4784,6 +5060,19 @@ label {
   max-width: 100%;
 }
 
+.fs_radio-2_field.is-active-inputactive .fs_radio-2_button {
+  border: 0;
+}
+
+.fs_radio-2_field.is-active-inputactive .fs_radio-2_label {
+  color: var(--twenty-six-white);
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: .7px;
+}
+
 .fs_radio-2_group {
   grid-column-gap: .5rem;
   grid-row-gap: .5rem;
@@ -4815,14 +5104,18 @@ label {
 .most-popular-badge {
   border: 1px solid var(--butterscotch);
   background-color: var(--firebrick);
-  color: var(--first-cup-white);
+  text-transform: uppercase;
+  color: #FFF;
   text-align: center;
-  border-radius: .35rem;
+  font-family: "Avenir Next Condensed";
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.9;
   justify-content: center;
   align-items: center;
-  padding: .3rem .4rem .1rem;
-  font-family: Avenirnextltpro Cn, sans-serif;
-  font-size: .7rem;
+  padding: .3rem;
+  border-radius: .35rem;
   display: flex;
   position: absolute;
   inset: -39% auto auto;
@@ -5217,11 +5510,12 @@ label {
 
 .preloader {
   z-index: 998;
-  background-color: var(--uniform-green);
+  background-color: var(--twenty-six-white);
   display: none;
   position: fixed;
   inset: 0%;
 }
+
 
 .top-ad {
   z-index: 999;
@@ -5303,13 +5597,18 @@ label {
 .subscription-add-to-cart {
   border: 1px solid var(--butterscotch);
   background-color: var(--butterscotch);
-  color: var(--black);
+  color: var(--twenty-six-white);
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 14px;
+  letter-spacing: .7px;
   border-radius: 1px;
   justify-content: center;
   width: 100%;
   padding-top: 1.05rem;
   padding-bottom: .7125rem;
-  font-weight: 500;
   transition: color .2s, background-color .2s;
 }
 
@@ -5347,7 +5646,12 @@ label {
   border-style: solid;
   border-color: var(--butterscotch);
   background-color: var(--butterscotch);
-  color: var(--black);
+  color: var(--twenty-six-white);
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: .7px;
 }
 
 .button-3.is-1b {
@@ -5400,6 +5704,20 @@ label {
 
 .section_location-map {
   color: var(--first-cup-white);
+  padding: var(--desktop-y-spacing) var(--desktop-x-spacing);
+  overflow: auto;
+}
+
+@media screen and (max-width: 991px) {
+  .section_location-map {
+    padding: var(--tablet-y-spacing) var(--tablet-x-spacing);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .section_location-map {
+    padding: var(--mobile-y-spacing) var(--mobile-x-spacing);
+  }
 }
 
 .supage-header-1_paragraph {
@@ -5417,7 +5735,7 @@ label {
 }
 
 ._4grid-item {
-  color: var(--first-cup-white);
+  color: #000;
   text-align: center;
 }
 
@@ -5455,6 +5773,8 @@ label {
 ._2-column-wrapper.is-location-map {
   background-color: var(--dark-grey);
   min-height: 90vh;
+  border-radius: 30px;
+  overflow: hidden;
 }
 
 ._2-column-wrapper.padding-top-medium {
@@ -5734,6 +6054,21 @@ label {
 
 .section_imprint-header {
   position: relative;
+  border-radius: 30px 30px 0 0;
+  overflow: auto;
+  margin: var(--desktop-y-spacing) var(--desktop-x-spacing) 0;
+}
+
+@media screen and (max-width: 991px) {
+  .section_imprint-header {
+    margin: 0 var(--tablet-x-spacing);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .section_imprint-header {
+    margin: 0 var(--mobile-x-spacing);
+  }
 }
 
 .imprint-header_bkgd-component {
@@ -5905,6 +6240,20 @@ label {
 
 .section_partner {
   background-color: var(--dark-grey);
+  border-radius: 0 0 30px 30px;
+  margin: 0 var(--desktop-x-spacing);
+}
+
+@media screen and (max-width: 991px) {
+  .section_partner {
+    margin: 0 var(--tablet-x-spacing);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .section_partner {
+    margin: 0 var(--mobile-x-spacing);
+  }
 }
 
 @media screen and (min-width: 1280px) {

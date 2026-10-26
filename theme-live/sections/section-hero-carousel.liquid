@@ -1,0 +1,767 @@
+
+<div class="site-redesign-26 hero-carousel-2026">
+  <div class="swiper hero-carousel-2026_swiper" data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        <div
+          class="swiper-slide hero-carousel-2026_slide is-text-{{ block.settings.text_position }} is-tablet-text-{{ block.settings.tablet_text_position }} is-mobile-text-{{ block.settings.mobile_text_position }} is-mobile-scrim-{{ block.settings.mobile_scrim }}{% if block.settings.desktop_torn_edge %} has-torn-edge{% endif %}"
+          style="--mobile-photo-coverage: {{ block.settings.mobile_photo_coverage }}%; --desktop-padding-h: {{ block.settings.desktop_padding_horizontal }}px; --desktop-padding-v: {{ block.settings.desktop_padding_vertical }}px; --mobile-padding-h: {{ block.settings.mobile_padding_horizontal }}px; --mobile-padding-v: {{ block.settings.mobile_padding_vertical }}px; --desktop-heading-size: {{ block.settings.desktop_heading_size }}px; --tablet-heading-size: {{ block.settings.tablet_heading_size }}px; --mobile-heading-size: {{ block.settings.mobile_heading_size }}px;"
+          {{ block.shopify_attributes }}
+        >
+          <div class="hero-carousel-2026_photo">
+            <picture>
+              {%- if block.settings.tablet_image != blank -%}
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.tablet_image | img_url: '1600x' }}">
+              {%- elsif block.settings.tablet_fallback_image != blank -%}
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.tablet_fallback_image | asset_url }}">
+              {%- elsif block.settings.mobile_image != blank -%}
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.mobile_image | img_url: '1600x' }}">
+              {%- elsif block.settings.mobile_fallback_image != blank -%}
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ block.settings.mobile_fallback_image | asset_url }}">
+              {%- endif -%}
+              {%- if block.settings.mobile_image != blank -%}
+                <source media="(max-width: 600px)" srcset="{{ block.settings.mobile_image | img_url: '1200x' }}">
+              {%- elsif block.settings.mobile_fallback_image != blank -%}
+                <source media="(max-width: 600px)" srcset="{{ block.settings.mobile_fallback_image | asset_url }}">
+              {%- endif -%}
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | img_url: '1920x' }}"
+                  srcset="{{ block.settings.image | img_url: '768x' }} 768w, {{ block.settings.image | img_url: '1440x' }} 1440w, {{ block.settings.image | img_url: '1920x' }} 1920w"
+                  sizes="100vw"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% endif %}
+                  class="hero-carousel-2026_image"
+                >
+              {%- elsif block.settings.fallback_image != blank -%}
+                <img
+                  src="{{ block.settings.fallback_image | asset_url }}"
+                  alt=""
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% endif %}
+                  class="hero-carousel-2026_image"
+                >
+              {%- endif -%}
+            </picture>
+          </div>
+          {%- if block.settings.desktop_torn_edge -%}
+            <div class="hero-carousel-2026_torn-panel"></div>
+            <div class="hero-carousel-2026_torn-edge">
+              <img src="{{ 'hero-carousel-torn-edge.svg' | asset_url }}" alt="" class="hero-carousel-2026_torn-edge-image">
+            </div>
+          {%- endif -%}
+          <div class="hero-carousel-2026_grain">
+            <img src="{{ 'hero-carousel-grain-overlay.png' | asset_url }}" alt="" class="hero-carousel-2026_grain-image">
+          </div>
+          <div class="hero-carousel-2026_scrim"></div>
+          {%- if block.settings.mobile_scrim == 'gradient' -%}
+            <div class="hero-carousel-2026_fade-overlay">
+              <picture>
+                <source media="(min-width: 601px) and (max-width: 991px)" srcset="{{ 'hero-carousel-fade-overlay-tablet.png' | asset_url }}">
+                <img src="{{ 'hero-carousel-fade-overlay-mobile.png' | asset_url }}" alt="" class="hero-carousel-2026_fade-overlay-image">
+              </picture>
+            </div>
+          {%- endif -%}
+          <div class="hero-carousel-2026_content">
+            {%- if block.settings.show_line -%}
+              <hr class="hero-carousel-2026_line">
+            {%- endif -%}
+            <div class="hero-carousel-2026_heading">{{ block.settings.heading }}</div>
+            {%- if block.settings.button_text != blank -%}
+              <a href="{{ block.settings.button_link }}" class="hero-carousel-2026_button">{{ block.settings.button_text }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="swiper-pagination hero-carousel-2026_pagination"></div>
+  </div>
+</div>
+
+<style>
+  .site-redesign-26.hero-carousel-2026 {
+    position: relative;
+  }
+
+  .hero-carousel-2026_swiper {
+    width: 100%;
+    max-width: var(--site-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 1440 / 576;
+    min-height: 320px;
+    border-radius: var(--desktop-border-radius);
+  }
+
+  .hero-carousel-2026_slide {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--dark-grey);
+  }
+
+  .hero-carousel-2026_photo,
+  .hero-carousel-2026_photo picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-carousel-2026_image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Grain overlay (Figma node 173:758): exported directly from Figma
+     already flattened/composited at the frame's own 1440x576
+     dimensions with its 50% opacity baked into the alpha channel, so
+     this is a plain full-bleed placement — no extra opacity or
+     transform needed. */
+  .hero-carousel-2026_grain {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: lighten;
+    pointer-events: none;
+  }
+
+  .hero-carousel-2026_grain-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-carousel-2026_scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-carousel-2026_slide.is-text-left .hero-carousel-2026_scrim {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.45) 35%, rgba(0, 0, 0, 0) 70%);
+  }
+
+  .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_scrim {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.45) 35%, rgba(0, 0, 0, 0) 70%);
+  }
+
+  /* Torn-edge treatment (Figma nodes 173:748/173:750/173:751): a solid
+     black panel with a torn-paper edge graphic transitioning into the
+     photo. Percentages are relative to the slide's locked 1440/576
+     aspect ratio, matching Figma's exact pixel placement at any size.
+     Desktop only — suppressed below 767px in favor of the per-slide
+     mobile treatment. */
+  .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_scrim {
+    background: none;
+  }
+
+  .hero-carousel-2026_torn-panel {
+    position: absolute;
+    left: -15.556%;
+    top: -26.7%;
+    width: 51.374%;
+    height: 227.253%;
+    background: #000;
+    pointer-events: none;
+  }
+
+  .hero-carousel-2026_torn-edge {
+    position: absolute;
+    left: 42.047%;
+    top: 77.578%;
+    width: 105.865%;
+    height: 39.902%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    pointer-events: none;
+  }
+
+  .hero-carousel-2026_torn-edge-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* When the torn-edge panel covers the left ~35.8% of the frame,
+     shift the photo's focal point right by that same amount (minus a
+     small bleed so the photo still slightly underlaps the torn edge,
+     avoiding a seam) so the visible/uncovered portion of the frame
+     shows more of the image instead of its centered default crop.
+     Desktop only — the mobile image already has its own precise
+     per-slide crop and doesn't use the torn-edge treatment. */
+  /* This photo is nearly square (~1.06:1) against a 2.5:1 banner, so
+     a plain object-fit: cover is width-bound with zero horizontal
+     slack when covering the FULL frame. But the torn-edge panel
+     already hides the left ~36% of the frame, so the photo only
+     needs to cover the visible ~924px-wide region on the right, not
+     the full 1440px — a much smaller target that needs far less
+     zoom. Sized here to ~984px rendered width (~60px of bleed past
+     the panel's edge) and right-anchored: since the rendered image is
+     narrower than the frame, right-anchoring slides the whole
+     (unclipped) photo rightward, leaving the gap on the left hidden
+     behind the panel — this pushes the subject right without the
+     "reveal more of one side via cropping" logic that caused the
+     wrong-direction result when the image was oversized instead. */
+  @media screen and (min-width: 992px) {
+    .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_image {
+      inset: auto;
+      top: 50%;
+      right: 0;
+      left: auto;
+      bottom: auto;
+      width: auto;
+      height: 100%;
+      max-width: none;
+      transform: translateY(-50%);
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    .hero-carousel-2026_torn-panel,
+    .hero-carousel-2026_torn-edge {
+      display: none;
+    }
+  }
+
+  .hero-carousel-2026_content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    padding: var(--desktop-padding-v, 0) var(--desktop-padding-h, 100px);
+    max-width: 740px;
+  }
+
+  .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_content {
+    max-width: 48%;
+  }
+
+  .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_content {
+    margin-left: auto;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .hero-carousel-2026_heading {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* Thin divider line above the heading (Figma "Line 8" asset, slides
+     1 & 3 only). A plain CSS rule reproduces this fine — it's just a
+     straight 1px line, no need for an SVG asset. */
+  .hero-carousel-2026_line {
+    display: none;
+    width: 243px;
+    max-width: 100%;
+    height: 1px;
+    border: none;
+    background-color: #ff7800;
+    margin: 0;
+  }
+
+  /* .hero-carousel-2026_content's font-size is set per breakpoint via
+     --desktop-heading-size / --tablet-heading-size / --mobile-heading-size
+     (see the matching media queries below), so each range is pinned to
+     its own setting instead of inheriting one from a neighboring
+     breakpoint. */
+  @media screen and (min-width: 992px) {
+    .hero-carousel-2026_content {
+      font-size: var(--desktop-heading-size, 44.786px);
+      gap: 30px;
+    }
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 991px) {
+    .hero-carousel-2026_content {
+      font-size: var(--tablet-heading-size, 38px);
+      gap: 20px;
+    }
+  }
+
+  .hero-carousel-2026_heading p {
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .hero-carousel-2026_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    background-color: var(--twenty-six-yellow);
+    border-radius: 3px;
+    padding: 12px 28px;
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--twenty-six-white);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .hero-carousel-2026_pagination {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .hero-carousel-2026 .swiper-pagination-bullet {
+    background: #fff;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+    margin: 0 !important;
+  }
+
+  .hero-carousel-2026 .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--butterscotch);
+  }
+
+  .hero-carousel-2026_fade-overlay {
+    display: none;
+    z-index: 0;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-carousel-2026_fade-overlay-image {
+    position: absolute;
+    bottom: -27%;
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .hero-carousel-2026_slide.is-text-left .hero-carousel-2026_content {
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: 0 40px;
+      max-width: 50%;
+    }
+
+  /* Tablet (601-991px) and mobile (<=600px) share the same "compact"
+     treatment — text centered, square-ish photo, per-slide mobile_*
+     settings driving text position/scrim/sizing — since a tablet
+     photo/fade-overlay is optional and falls back to the mobile ones
+     when not set (see the <picture> sources above). Torn-edge is
+     desktop-only (>=992px) and is hidden entirely here. */
+  @media screen and (max-width: 991px) {
+    .hero-carousel-2026_swiper {
+      aspect-ratio: 1024/585;
+    }
+
+    .hero-carousel-2026_photo {
+      height: var(--mobile-photo-coverage, 100%);
+    }
+
+    .hero-carousel-2026_slide.is-mobile-scrim-none .hero-carousel-2026_scrim {
+      background: none;
+    }
+
+    /* The "gradient" scrim option uses an actual fade-overlay image
+       (tablet/mobile-specific PNGs, swapped via <picture> in the
+       markup) instead of a CSS gradient, so suppress the CSS gradient
+       here and show the image element instead. */
+    .hero-carousel-2026_slide.is-mobile-scrim-gradient .hero-carousel-2026_scrim {
+      background: none;
+    }
+
+    .hero-carousel-2026_slide.is-mobile-scrim-gradient .hero-carousel-2026_fade-overlay {
+      display: block;
+    }
+
+    .hero-carousel-2026_slide.is-mobile-scrim-panel .hero-carousel-2026_scrim {
+      background: linear-gradient(to top, #000 0%, #000 40%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-text-right .hero-carousel-2026_content {
+      margin-left: 0;
+      max-width: 100%;
+      align-items: center;
+      text-align: center;
+      padding: var(--mobile-padding-v, 32px) var(--mobile-padding-h, 24px);
+      justify-content: flex-end;
+    }
+
+    .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_content {
+      max-width: 100%;
+      padding: 60px 10px;
+    }
+
+    .hero-carousel-2026_slide.is-tablet-text-left .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-tablet-text-left.is-text-left .hero-carousel-2026_content {
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: 40px;
+      max-width: 53%;
+    }
+
+    .hero-carousel-2026_slide.is-tablet-text-top-left .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-tablet-text-top-left.is-text-left .hero-carousel-2026_content {
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+      padding: 40px;
+      max-width: 53%;
+    }
+
+    .hero-carousel-2026_button {
+      font-size: 18.797px;
+      padding: 10.519px 22.556px 7.519px;
+    }
+
+    .hero-carousel-2026_line {
+      width: 141px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .hero-carousel-2026_swiper {
+      aspect-ratio: 121 / 114;
+    }
+
+    .hero-carousel-2026_content {
+      font-size: var(--mobile-heading-size, 32px);
+      gap: 20px;
+    }
+
+    .hero-carousel-2026_slide.has-torn-edge .hero-carousel-2026_content {
+      max-width: 100%;
+      padding: 40px 10px;
+    }
+
+    .hero-carousel-2026_slide.is-tablet-text-left .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-tablet-text-left.is-text-left .hero-carousel-2026_content {
+      max-width: 100%;
+      text-align: center;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .hero-carousel-2026_slide.is-mobile-text-top .hero-carousel-2026_content,
+    .hero-carousel-2026_slide.is-mobile-text-top.is-text-right .hero-carousel-2026_content {
+      justify-content: flex-start;
+      max-width: 100%;
+      padding: 40px;
+    }
+
+    .hero-carousel-2026_fade-overlay-image {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .hero-carousel-2026_button {
+      font-size: 17.507px;
+      padding: 7.76px 21.009px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .hero-carousel-2026_photo {
+      filter: brightness(0.7);
+    }
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_hero-carousel site-redesign-26");</script>
+
+{% schema %}
+{
+  "name": "Section - Hero Carousel",
+  "tag": "section",
+  "class": "section_hero-carousel",
+  "settings": [
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Seconds per slide",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_line",
+          "label": "Show divider line above heading",
+          "default": false
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<p>Quality Coffee. Bettering Lives. Building Community.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Get Your First Cup"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "header",
+          "content": "Desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_image",
+          "label": "Fallback photo filename (asset, used only if no image is picked above)",
+          "info": "Advanced: filename of a theme asset, e.g. hero-carousel-slide-1.jpg"
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Text position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "desktop_heading_size",
+          "label": "Desktop heading size (px)",
+          "min": 24,
+          "max": 72,
+          "step": 1,
+          "default": 45
+        },
+        {
+          "type": "checkbox",
+          "id": "desktop_torn_edge",
+          "label": "Show torn-edge panel behind text (desktop)",
+          "default": false,
+          "info": "A solid black panel with a torn-paper edge transitioning into the photo, matching the Figma hero design."
+        },
+        {
+          "type": "range",
+          "id": "desktop_padding_horizontal",
+          "label": "Content padding — horizontal (px)",
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "desktop_padding_vertical",
+          "label": "Content padding — vertical (px)",
+          "min": 0,
+          "max": 120,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Tablet (601px-991px)"
+        },
+        {
+          "type": "image_picker",
+          "id": "tablet_image",
+          "label": "Tablet background image",
+          "info": "If left blank, the mobile image below is used instead (and if that's blank too, the desktop image)."
+        },
+        {
+          "type": "text",
+          "id": "tablet_fallback_image",
+          "label": "Tablet fallback photo filename (asset)",
+          "info": "Advanced: filename of a theme asset, used only if no tablet image is picked above."
+        },
+        {
+          "type": "select",
+          "id": "tablet_text_position",
+          "label": "Tablet Text position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "top-left", "label": "Top Left" },
+            { "value": "top-right", "label": "Top Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "tablet_heading_size",
+          "label": "Tablet heading size (px)",
+          "min": 20,
+          "max": 64,
+          "step": 1,
+          "default": 38
+        },
+        {
+          "type": "header",
+          "content": "Mobile (600px and below)"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile background image",
+          "info": "If left blank, the desktop image above is used instead."
+        },
+        {
+          "type": "text",
+          "id": "mobile_fallback_image",
+          "label": "Mobile fallback photo filename (asset)",
+          "info": "Advanced: filename of a theme asset, used only if no mobile image is picked above."
+        },
+        {
+          "type": "select",
+          "id": "mobile_text_position",
+          "label": "Mobile text position",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "bottom", "label": "Bottom" }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "range",
+          "id": "mobile_heading_size",
+          "label": "Mobile heading size (px)",
+          "min": 20,
+          "max": 56,
+          "step": 1,
+          "default": 32
+        },
+        {
+          "type": "select",
+          "id": "mobile_scrim",
+          "label": "Mobile text background",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "gradient", "label": "Gradient" },
+            { "value": "panel", "label": "Solid panel" }
+          ],
+          "default": "gradient"
+        },
+        {
+          "type": "range",
+          "id": "mobile_photo_coverage",
+          "label": "Mobile photo height (% of frame)",
+          "min": 50,
+          "max": 100,
+          "step": 5,
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_horizontal",
+          "label": "Content padding — horizontal (px)",
+          "min": 0,
+          "max": 80,
+          "step": 2,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_vertical",
+          "label": "Content padding — vertical (px)",
+          "min": 0,
+          "max": 80,
+          "step": 2,
+          "default": 32
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section - Hero Carousel",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Quality Coffee. Bettering Lives. Building Community.</p>",
+            "show_line": true,
+            "text_position": "left",
+            "button_text": "Get Your First Cup",
+            "desktop_torn_edge": true,
+            "mobile_text_position": "bottom",
+            "mobile_heading_size": 26,
+            "mobile_scrim": "gradient",
+            "mobile_photo_coverage": 100
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Buzz, Neil, George and now, you.</p>",
+            "text_position": "left",
+            "button_text": "Get Your First Cup",
+            "mobile_text_position": "top",
+            "mobile_heading_size": 45,
+            "mobile_scrim": "none",
+            "mobile_photo_coverage": 100
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Roasted in Texas. Built for America.</p>",
+            "show_line": true,
+            "text_position": "left",
+            "button_text": "Get Your First Cup",
+            "mobile_text_position": "bottom",
+            "mobile_heading_size": 40,
+            "mobile_scrim": "panel",
+            "mobile_photo_coverage": 70
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Named for the firsts. Brewed for the next.</p>",
+            "text_position": "right",
+            "button_text": "Get Your First Cup",
+            "mobile_text_position": "top",
+            "mobile_heading_size": 35,
+            "mobile_scrim": "none",
+            "mobile_photo_coverage": 100
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -56,11 +56,16 @@
                     <div class="w-commerce-commercecheckoutsummarytextspacingondiv">{{ order.transactions[0].payment_details.credit_card_company }}</div>
                     <div class="w-commerce-commercecheckoutsummarytextspacingondiv">{{ order.transactions[0].payment_details.credit_card_number }}</div>
                   </div>
-                  <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
-                    
-                    {%- if order. -%}<div>{{ 't7df1' | t }}</div>{%- endif -%}
-                    
-                  </div>
+                  {%- comment -%}
+                    A card-expiry row (MM / YY) stood here in the Webflow
+                    original. Shopify's order.transactions[].payment_details
+                    exposes only credit_card_company, credit_card_number and
+                    credit_card_wallet, so the converter dropped the values it
+                    could not map and left an orphaned separator behind a
+                    truncated if-condition, which was a Liquid syntax error
+                    that broke this whole template. Removed rather than
+                    patched: there is no expiry data to render.
+                  {%- endcomment -%}
                 </div>
               </div>
               <div class="w-commerce-commercecheckoutcolumn">
