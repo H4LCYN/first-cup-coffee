@@ -3278,18 +3278,6 @@
 ></script>
 <script src="{{ 'first-cup-coffee.js' | asset_url }}" type="text/javascript"></script>
 <script>
-    function megaBack() {
-    var x = document.getElementsByClassName("mega-menu");
-      $('.menu-button').on('click', function(evt) {
-    if (window.getComputedStyle(x).display === "block") {
-      setTimeout(function() {
-          $('.mega-menu_mobile-close').triggerHandler('click');
-      }, 005);
-  });
-    }
-  }
-</script>
-<script>
   $('.input-number-increment').click(function () {
     var $input = $(this).parents('.input-number-group').find('.input-number');
     var val = parseInt($input.val(), 10);

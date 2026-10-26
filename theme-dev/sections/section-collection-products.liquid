@@ -103,7 +103,8 @@
                     srcset="{{ item.featured_image | img_url: '300x' }} 300w, {{ item.featured_image | img_url: '600x' }} 600w, {{ item.featured_image | img_url: '900x' }} 900w"
                     sizes="227px"
                     alt="{{ item.featured_image.alt | default: item.title | escape }}"
-                    loading="lazy"
+                    {% if forloop.index <= 4 %}loading="eager"{% if forloop.first %} fetchpriority="high"{% endif %}{% else %}loading="lazy"{% endif %}
+                    decoding="async"
                     class="plp-2026_card-image"
                   >
                 {%- endif -%}
