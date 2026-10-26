@@ -17,8 +17,14 @@
     assign copy_html = desc_pre | append: desc_rest | remove_first: list_html
   endif
 
+  assign is_split = false
+  if s.feature_layout == 'split'
+    assign is_split = true
+  endif
+
   assign banner = nil
   assign banner_mobile = nil
+  assign banner_fg = nil
   for block in section.blocks
     if block.type == 'banner_image' and banner == nil
       if block.settings.image != blank
@@ -30,6 +36,11 @@
         assign banner_mobile = block.settings.mobile_image | image_url: width: 1000
       elsif block.settings.mobile_image_asset != blank
         assign banner_mobile = block.settings.mobile_image_asset | asset_url
+      endif
+      if block.settings.foreground_image != blank
+        assign banner_fg = block.settings.foreground_image | image_url: width: 1100
+      elsif block.settings.foreground_image_asset != blank
+        assign banner_fg = block.settings.foreground_image_asset | asset_url
       endif
     endif
   endfor
@@ -225,6 +236,44 @@
   .fpf__body p { margin: 0 0 1em; }
   .fpf__body p:last-child { margin-bottom: 0; }
 
+  .fpf__heading {
+    margin: 0 0 24px; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700;
+    font-size: 55px; line-height: 49px; text-transform: uppercase; color: var(--fpf-text);
+  }
+
+  /* Split feature layout: logo left, heading + copy right, banner anchored to the bottom */
+  .fpf__feature--split {
+    min-height: 0; padding: 10px 50px 0; align-items: stretch; text-align: left; background: transparent;
+    --fpf-fade: color-mix(in srgb, var(--fpf-bg) 80%, #000);
+  }
+  .fpf__split { position: relative; z-index: 1; display: flex; gap: 48px; align-items: center; justify-content: center; }
+  .fpf__split-logo { flex: 0 0 auto; }
+  .fpf__split-logo .fpf__logo { width: var(--fpf-logo-w-set, 284px); margin: 0; border-radius: 50%; }
+  .fpf__split-text { flex: 0 1 678px; display: flex; flex-direction: column; gap: 14px; }
+  .fpf__split-text .fpf__heading { max-width: 557px; margin: 0; }
+  .fpf__split-text .fpf__quote { max-width: none; margin: 0; }
+  .fpf__split-text .fpf__body { max-width: none; margin: 0; font-size: 22px; line-height: 31px; }
+  .fpf__scene {
+    position: relative; height: 419px; margin: -4px -50px 0;
+    background-color: var(--fpf-fade); background-image: var(--fpf-banner, none); background-size: cover; background-position: center top;
+  }
+  .fpf__scene::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 270px;
+    background: linear-gradient(to bottom, var(--fpf-fade) 10.236%, transparent);
+  }
+  .fpf__scene-fg { position: absolute; left: 90px; bottom: 0; display: block; width: 517px; max-width: 45%; height: auto; }
+
+  @media screen and (max-width: 991px) {
+    .fpf__heading { font-size: 34px; line-height: 1.05; margin-bottom: 16px; }
+    .fpf__feature--split { padding: 16px 24px 0; }
+    .fpf__split { flex-direction: column; gap: 24px; }
+    .fpf__split-logo .fpf__logo { width: min(var(--fpf-logo-w-set, 284px), 200px); }
+    .fpf__split-text .fpf__body { font-size: 19px; line-height: 1.4; }
+    .fpf__scene { height: 280px; margin: 24px -24px 0; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
+    .fpf__scene::before { height: 160px; }
+    .fpf__scene-fg { left: 12px; width: 62%; max-width: 340px; }
+  }
+
   @media screen and (max-width: 991px) {
     .fpf__top { grid-template-columns: 1fr; gap: 0; padding: 24px 24px 40px; }
     .fpf__media { height: auto; padding: 24px 0; }
@@ -313,12 +362,84 @@
       </div>
     </div>
 
+    {%- capture banner_vars -%}{% if banner != nil %}--fpf-banner: url('{{ banner }}');{% endif %}{% if banner_mobile != nil %} --fpf-banner-m: url('{{ banner_mobile }}');{% endif %}{%- endcapture -%}
+    {%- capture logo_html -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'partner_logo' -%}
+          {%- liquid
+            assign logo = nil
+            if block.settings.image != blank
+              assign logo = block.settings.image | image_url: width: 700
+            elsif block.settings.image_asset != blank
+              assign logo = block.settings.image_asset | asset_url
+            endif
+          -%}
+          {%- if logo != nil -%}
+            <img
+              class="fpf__logo"
+              src="{{ logo }}"
+              alt="{{ block.settings.alt | escape }}"
+              width="{{ block.settings.max_width }}"
+              height="{{ block.settings.max_width }}"
+              loading="lazy"
+              style="--fpf-logo-w-set: {{ block.settings.max_width }}px;"
+              {{ block.shopify_attributes }}
+            >
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- if is_split -%}
+      <div class="fpf__feature fpf__feature--split">
+        <div class="fpf__split">
+          {%- if logo_html != blank -%}
+            <div class="fpf__split-logo">{{ logo_html }}</div>
+          {%- endif -%}
+          <div class="fpf__split-text">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'heading' -%}
+                  {%- if block.settings.text != blank -%}
+                    <h2 class="fpf__heading" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</h2>
+                  {%- endif -%}
+                {%- when 'quote' -%}
+                  <div class="fpf__quote" {{ block.shopify_attributes }}>
+                    {%- if block.settings.quote != blank -%}
+                      <p class="fpf__quote-text">{{ block.settings.quote | escape }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.attribution != blank -%}
+                      <p class="fpf__quote-by">{{ block.settings.attribution | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                {%- when 'rich_text' -%}
+                  {%- assign body_html = block.settings.text | default: copy_html -%}
+                  {%- if body_html != blank -%}
+                    <div class="fpf__body" {{ block.shopify_attributes }}>{{ body_html }}</div>
+                  {%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- if banner != nil or banner_fg != nil -%}
+          <div class="fpf__scene" style="{{ banner_vars }}">
+            {%- if banner_fg != nil -%}
+              <img class="fpf__scene-fg" src="{{ banner_fg }}" alt="" width="517" height="406" loading="lazy">
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
     <div
       class="fpf__feature"
-      style="{% if banner != nil %}--fpf-banner: url('{{ banner }}');{% endif %}{% if banner_mobile != nil %} --fpf-banner-m: url('{{ banner_mobile }}');{% endif %}"
+      style="{{ banner_vars }}"
     >
       {%- for block in section.blocks -%}
         {%- case block.type -%}
+          {%- when 'heading' -%}
+            {%- if block.settings.text != blank -%}
+              <h2 class="fpf__heading" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</h2>
+            {%- endif -%}
           {%- when 'quote' -%}
             <div class="fpf__quote" {{ block.shopify_attributes }}>
               {%- if block.settings.quote != blank -%}
@@ -329,26 +450,7 @@
               {%- endif -%}
             </div>
           {%- when 'partner_logo' -%}
-            {%- liquid
-              assign logo = nil
-              if block.settings.image != blank
-                assign logo = block.settings.image | image_url: width: 700
-              elsif block.settings.image_asset != blank
-                assign logo = block.settings.image_asset | asset_url
-              endif
-            -%}
-            {%- if logo != nil -%}
-              <img
-                class="fpf__logo"
-                src="{{ logo }}"
-                alt="{{ block.settings.alt | escape }}"
-                width="{{ block.settings.max_width }}"
-                height="{{ block.settings.max_width }}"
-                loading="lazy"
-                style="--fpf-logo-w-set: {{ block.settings.max_width }}px;"
-                {{ block.shopify_attributes }}
-              >
-            {%- endif -%}
+            {{ logo_html }}
           {%- when 'rich_text' -%}
             {%- assign body_html = block.settings.text | default: copy_html -%}
             {%- if body_html != blank -%}
@@ -357,6 +459,7 @@
         {%- endcase -%}
       {%- endfor -%}
     </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -393,6 +496,14 @@
     { "type": "color", "id": "tag_color", "label": "Tag background", "default": "#be3a34" },
     { "type": "color", "id": "discount_color", "label": "Discount text", "default": "#ff4949" },
     { "type": "range", "id": "panel_radius", "label": "Corner radius", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 30 },
+    {
+      "type": "select", "id": "feature_layout", "label": "Feature area layout",
+      "options": [
+        { "value": "stacked", "label": "Stacked (banner behind, centered)" },
+        { "value": "split", "label": "Split (logo left, copy right, banner at bottom)" }
+      ],
+      "default": "stacked"
+    },
 
     { "type": "header", "content": "Product" },
     { "type": "text", "id": "eyebrow_text", "label": "Eyebrow", "info": "Leave blank to use the product type." },
@@ -480,7 +591,16 @@
         { "type": "image_picker", "id": "image", "label": "Banner image" },
         { "type": "text", "id": "image_asset", "label": "Fallback filename (theme asset)" },
         { "type": "image_picker", "id": "mobile_image", "label": "Mobile banner image" },
-        { "type": "text", "id": "mobile_image_asset", "label": "Mobile fallback filename (theme asset)" }
+        { "type": "text", "id": "mobile_image_asset", "label": "Mobile fallback filename (theme asset)" },
+        { "type": "image_picker", "id": "foreground_image", "label": "Foreground cut-out (split layout)", "info": "Transparent PNG shown over the bottom-left of the banner." },
+        { "type": "text", "id": "foreground_image_asset", "label": "Foreground fallback filename (theme asset)" }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Heading" }
       ]
     },
     {
