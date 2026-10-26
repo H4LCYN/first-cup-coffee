@@ -197,7 +197,7 @@
     font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 9.5px; line-height: 8.75px;
     pointer-events: none;
   }
-  .fbb__tag--top { left: 50%; bottom: calc(100% + 4px); transform: translateX(-50%); width: 70px; height: 23px; }
+  .fbb__tag--top { left: 50%; bottom: calc(100% - 8px); transform: translateX(-50%); width: 70px; height: 23px; }
   .fbb__tag--corner { top: -15px; left: calc(100% - 16px); padding: 7px; white-space: nowrap; }
 
   .fbb__discount {
@@ -284,7 +284,9 @@
     .fbb__group--toggle > .fbb__opt { flex: 1 1 183px; }
     .fbb__tag--corner { left: auto; right: -6px; }
     .fbb__add { max-width: none; }
-    .fpf__feature { min-height: 0; padding: 56px 24px 40px; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
+    .fpf__split-text { flex: auto }
+    .fpf__feature { min-height: 0; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
+    .fpf__feature:not(.fpf__feature--split) { padding: 56px 24px 40px; }
     .fpf__quote-text { font-size: 28px; line-height: 1.15; }
     .fpf__quote-by { font-size: 18px; line-height: 1.6; }
     .fpf__logo { width: min(var(--fpf-logo-w-set, 321px), 220px); margin-bottom: 32px; }
