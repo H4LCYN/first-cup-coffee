@@ -35,10 +35,7 @@
             </div>
             <div id="w-node-a39490a8-b5f0-903b-4b49-2d852812f920-2812f90c" class="nav_utility-wrapper">
               <div class="nav_divider" aria-hidden="true"></div>
-              {%- comment -%} Featured Blend: a product picked in the theme editor; Trigger Fuel until one is chosen. {%- endcomment -%}
-              {%- assign featured_blend = section.settings.featured_blend_product -%}
-              {%- if featured_blend == blank -%}{%- assign featured_blend = all_products['trigger'] -%}{%- endif -%}
-              <a href="{% if featured_blend != blank %}{{ featured_blend.url }}{% else %}/collections/coffee{% endif %}" class="nav_feature-link"><span>{{ section.settings.featured_blend_text | escape }}</span></a>
+              <a href="{% if section.settings.featured_blend_link %}{{ section.settings.featured_blend_link }}{% else %}/collections/featured-blends{% endif %}" class="nav_feature-link"><span>{{ section.settings.featured_blend_text | escape }}</span></a>
               <a href="{% if section.settings.pray_first_link %}{{ section.settings.pray_first_link }}{% else %}/pages/prayer-wall{% endif %}" class="nav_feature-link"><span>{{ section.settings.pray_first_text | escape }}</span></a>
               <a href="{% if section.settings.account_portal %}{{ section.settings.account_portal }}{% else %}https://firstcup.com/tools/recurring/get-subscription-access{% endif %}" class="nav-link is-utility w-inline-block"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon text-color-white">
                   <path d="M0 0h24v24H0V0z" fill="none"></path>
@@ -184,10 +181,10 @@
       "default": "Featured Blend"
     },
     {
-      "type": "product",
-      "id": "featured_blend_product",
-      "label": "Featured Blend product",
-      "info": "Leave empty to use Trigger Fuel."
+      "type": "url",
+      "id": "featured_blend_link",
+      "label": "Featured Blend link",
+      "info": "Leave empty to use the Featured Blends collection."
     },
     {
       "type": "text",
