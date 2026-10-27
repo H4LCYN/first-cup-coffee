@@ -1,4 +1,4 @@
-# Regression report: dev theme vs live, 2026-10-26 (locations rebuild)
+# Regression report: dev theme vs live, 2026-10-26 (locations rebuild + Featured Blend link)
 
 **Result: PASS. No regressions found. The dev theme is cleared to go live.**
 
@@ -7,20 +7,21 @@
 | Tested | `first-cup-coffee-benny-dev` #159869010142 (dev) |
 | Baseline | `first-cup-coffee-live-10-23` #157059580126 (live) |
 | Store | first-cup-coffee-co.myshopify.com |
-| Branch | `nav-2026-design` (theme code at 83f388b) |
+| Branch | `nav-2026-design` (theme code at 64928aa) |
 | Method | Headless Chrome via the DevTools protocol, cache disabled, real mouse input for interactions (`/regression`) |
 | Viewports | Desktop 1420×900, mobile 390×844 (touch emulation) |
 
 ## What changed on dev since the last go-live
 
 - **Locations page and the three location pages** (Pearland, Rosenberg, Woodlands) rebuilt from the 2026 Figma designs as JSON templates, using the new `section-page-hero`, `section-split-cta` and `section-location-info` sections. Location maps now use the Google Maps Embed API, searched by address.
+- **Featured Blend nav link** now goes to `/collections/featured-blends` (6 products) instead of `/products/trigger`. The theme editor's product picker is replaced by a link setting.
 - **JOMO partner product templates** (`product.jomo*.json`) and their mobile padding fixes. These products are still drafts, so they aren't in the page list.
 
 ## Summary
 
 | Check | Dev | Live |
 |---|---|---|
-| Page loads tested | 56 (28 pages × 2 viewports) | 56 |
+| Page loads tested | 56 (28 pages × 2 viewports), plus `/collections/featured-blends` | 56 |
 | HTTP status differences | none | |
 | JavaScript errors, all loads | **70** | 76 |
 | New JS errors on dev | **0** | |
@@ -73,6 +74,7 @@ Every page loaded at both widths on both themes. "New issues" means a JS error, 
 | `/cart` | 200 | 1 / 1 | 1 / 1 | None |
 | `/search?q=coffee` | 200 | 1 / 1 | 1 / 1 | None |
 | `/this-page-does-not-exist` | 404 | 1 / 1 | 1 / 1 | None (expected 404) |
+| `/collections/featured-blends` (extra, new nav target) | 200 | 1 / 1 | 1 / 1 | None |
 
 ## Interaction checks
 
@@ -83,6 +85,7 @@ Real mouse clicks; each result was the same on both themes.
 | Search opens from the nav icon | Pass | Pass |
 | Cart drawer opens | Pass | Pass |
 | Nav links | 4 | 4 |
+| Featured Blend link | `/collections/featured-blends` | `/products/trigger` |
 | Add to cart, The Carver (standard product form) | Pass (0 → 1) | Pass (0 → 1) |
 | Trigger Fuel buy box renders | Pass | Pass |
 | Add to cart, Trigger Fuel buy box | Pass (1 → 2) | Pass (1 → 2) |
@@ -93,3 +96,15 @@ Real mouse clicks; each result was the same on both themes.
 ## Before going live
 
 The live theme still has `templates/page.locations.liquid`, `page.location.liquid`, `page.location-rosenberg.liquid` and `page.location-woodlands.liquid`. Shopify won't keep a `.liquid` and a `.json` template with the same name, so the go-live push must delete those four in the same push that uploads the new `.json` templates.
+
+## Go-live record (2026-10-26, evening)
+
+1. **Rollback copy:** live was duplicated as `rollback-live-2026-10-26-pre-locations` **#159947292894**. Shopify fills a duplicate in the background, so it took several pulls to reach all 329 files. Once complete, every file matched live except `settings_data.json`, where Shopify dropped 15 old navbar settings that the current navbar code no longer declares (leftover mega-menu links). Nothing reads them. To roll back, publish that theme.
+2. **Recheck:** live was re-pulled just before the push and hadn't changed since the comparison.
+3. **Push:** from a fresh pull of dev #159869010142 (commit 64928aa) to live #157059580126, in three scoped pushes: 10 code files with deletions off; deletion of the 4 old `page.location*.liquid` templates; then the 4 new `page.location*.json` templates. Settings, existing templates and all other live files were left alone.
+   - The first attempt silently changed nothing. In zsh an unquoted `$ONLY` isn't split into words, so all the `--only=` flags reached the CLI as one pattern that matched no file, and the CLI still reported success. The push was redone with each flag passed separately, checking the CLI's "Files to be uploaded" and "Files to be deleted" lists each time. `/go-live` now requires that check.
+4. **Verified:** a full pull of live afterwards is byte-identical to the tested dev theme (337 files). The 4 old templates are gone.
+5. **Production re-run** (new live vs the rollback as the before-release baseline):
+   - All 56 page loads gave the expected status. No new JS errors, failed requests, broken images or overflow.
+   - firstcup.com serves the new Locations page and all three location pages with their maps. Featured Blend links to `/collections/featured-blends`.
+   - All interaction checks passed. In the first run, which shared the machine with two page-load runs, the Prayer Wall showed 0 cards. It passed on a standalone re-run on both live and the rollback, and its code wasn't part of this release.
