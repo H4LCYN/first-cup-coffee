@@ -1,0 +1,87 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product-feature",
+      "blocks": {
+        "format-16oz": {
+          "type": "format",
+          "settings": {
+            "product": "brew-around-and-find-out",
+            "label": "16 oz Bag"
+          }
+        },
+        "format-5lb": {
+          "type": "format",
+          "settings": {
+            "product": "brew-around-and-find-out-5-lb-bag",
+            "label": "5 lb Bag"
+          }
+        },
+        "format-pods": {
+          "type": "format",
+          "settings": {
+            "product": "brew-around-and-find-out-pods-24-count",
+            "label": "Pods (24 Count)"
+          }
+        },
+        "banner": {
+          "type": "banner_image",
+          "settings": {
+            "image_asset": "bafo-backdrop.webp",
+            "foreground_image_asset": "bafo-nick-freitas.webp"
+          }
+        },
+        "video": {
+          "type": "video",
+          "settings": {
+            "title": "Brew Around & Find Out with Nick Freitas",
+            "video_url": "https://vimeo.com/1239827145/3bfeed0828"
+          }
+        },
+        "logo": {
+          "type": "partner_logo",
+          "settings": {
+            "image_asset": "bafo-ugly-mug-logo.svg",
+            "alt": "Nick's Ugly Mug Coffee",
+            "max_width": 150
+          }
+        },
+        "body": {
+          "type": "rich_text",
+          "settings": {
+            "text": "<p>Nick Freitas is a Green Beret veteran, father, husband, and one of the most respected voices for faith, family, and personal responsibility in America today.</p><p>By teaming up with Nick, we’re bringing together his no-nonsense approach to life with our belief that great coffee should serve great people.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "format-16oz",
+        "format-5lb",
+        "format-pods",
+        "banner",
+        "video",
+        "logo",
+        "body"
+      ],
+      "settings": {
+        "bundle_product": "test-product",
+        "bundle_collection": "1-lb-bag-subscription",
+        "default_purchase_type": "subscribe",
+        "popular_interval": "30",
+        "popular_bag_count": "2",
+        "feature_layout": "backdrop"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

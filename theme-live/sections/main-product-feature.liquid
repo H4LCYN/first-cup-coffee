@@ -21,6 +21,10 @@
   if s.feature_layout == 'split'
     assign is_split = true
   endif
+  assign is_backdrop = false
+  if s.feature_layout == 'backdrop'
+    assign is_backdrop = true
+  endif
 
   assign banner = nil
   assign banner_mobile = nil
@@ -263,6 +267,65 @@
   }
   .fpf__scene-fg { position: absolute; left: 90px; bottom: 0; display: block; width: 517px; max-width: 45%; height: auto; }
 
+  /* Backdrop layout (BAFO, Figma 500:354): the banner photo sits behind the lower part of the
+     whole panel, left-aligned at 2448px wide on a 1292px panel; the product description's
+     paragraph moves up under the bullets; the feature area is an optional video, then the
+     cut-out photo beside the logo and copy, flush with the panel's bottom edge. */
+  .fpf__panel--backdrop { position: relative; isolation: isolate; }
+  .fpf__backdrop {
+    position: absolute; z-index: -1; left: 0; bottom: 0; width: 189.5%; aspect-ratio: 16 / 9;
+    background-image: var(--fpf-banner, none); background-size: cover; background-position: left top;
+    pointer-events: none;
+  }
+  .fpf__summary {
+    margin-top: 14px; padding-top: 10px; font-family: "Avenir Next Condensed", sans-serif;
+    font-size: 16px; line-height: 22.25px; color: var(--fpf-text);
+  }
+  .fpf__summary p { margin: 0 0 12px; }
+  .fpf__summary p:last-child { margin-bottom: 0; }
+  .fpf__feature--backdrop {
+    min-height: 0; padding: 63px 0 0; align-items: stretch; text-align: left; background: transparent;
+  }
+  .fpf__video { position: relative; width: 888px; max-width: calc(100% - 100px); margin: 0 auto 49px; aspect-ratio: 16 / 9; background: #000; }
+  .fpf__video video, .fpf__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+  /* Play button: matches .vimeo-video-2026_big-play on the homepage */
+  .fpf__video-toggle {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    padding: 0; border: 0; background: transparent; cursor: pointer;
+  }
+  .fpf__video-play {
+    display: flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.55); color: #fff; transition: opacity 0.2s, transform 0.2s;
+  }
+  .fpf__video-play svg { width: 38px; height: 38px; margin-left: 4px; }
+  .fpf__video-toggle:hover .fpf__video-play { transform: scale(1.06); }
+  .fpf__video-toggle:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+  .fpf__video.is-playing .fpf__video-play { opacity: 0; }
+  .fpf__story { display: flex; align-items: center; gap: 34px; padding-left: 33px; }
+  .fpf__story-fg { flex: 0 0 573px; align-self: flex-end; display: block; width: 573px; height: auto; }
+  .fpf__story-text { flex: 0 1 606px; display: flex; flex-direction: column; align-items: center; gap: 48px; padding: 40px 0; }
+  .fpf__story-text .fpf__logo { width: var(--fpf-logo-w-set, 150px); margin: 0; }
+  .fpf__story-text .fpf__heading,
+  .fpf__story-text .fpf__quote { align-self: stretch; margin: 0; }
+  .fpf__story-text .fpf__body { align-self: stretch; max-width: none; margin: 0; font-size: 31px; line-height: 35px; }
+  .fpf__story-text .fpf__body p { margin-bottom: 35px; }
+  .fpf__story-text .fpf__body p:last-child { margin-bottom: 0; }
+
+  @media screen and (max-width: 991px) {
+    .fpf__backdrop { width: 300%; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
+    /* The bio sits over the photo's top edge on narrow screens: fade that edge into the panel and lift the text off it. */
+    .fpf__backdrop::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 30%; background: linear-gradient(to bottom, var(--fpf-bg), transparent); }
+    .fpf__story-text .fpf__body { text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85); }
+    .fpf__feature--backdrop { padding-top: 16px; }
+    .fpf__video { max-width: calc(100% - 48px); margin-bottom: 32px; }
+    .fpf__story { flex-direction: column-reverse; align-items: center; gap: 24px; padding: 0 24px; }
+    .fpf__story-fg { flex: none; align-self: center; width: 85%; max-width: 420px; }
+    .fpf__story-text { flex: none; gap: 24px; padding: 0; }
+    .fpf__story-text .fpf__logo { width: min(var(--fpf-logo-w-set, 150px), 120px); }
+    .fpf__story-text .fpf__body { font-size: 20px; line-height: 1.35; }
+    .fpf__story-text .fpf__body p { margin-bottom: 20px; }
+  }
+
   @media screen and (max-width: 991px) {
     .fpf__heading { font-size: 34px; line-height: 1.05; margin-bottom: 16px; }
     .fpf__feature--split { padding: 16px 24px 0; }
@@ -286,7 +349,7 @@
     .fbb__add { max-width: none; }
     .fpf__split-text { flex: auto }
     .fpf__feature { min-height: 0; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
-    .fpf__feature:not(.fpf__feature--split) { padding: 56px 24px 40px; }
+    .fpf__feature:not(.fpf__feature--split):not(.fpf__feature--backdrop) { padding: 56px 24px 40px; }
     .fpf__quote-text { font-size: 28px; line-height: 1.15; }
     .fpf__quote-by { font-size: 18px; line-height: 1.6; }
     .fpf__logo { width: min(var(--fpf-logo-w-set, 321px), 220px); margin-bottom: 32px; }
@@ -295,7 +358,10 @@
 </style>
 
 <section class="fpf" id="fpf-{{ section.id }}">
-  <div class="fpf__panel">
+  <div class="fpf__panel{% if is_backdrop %} fpf__panel--backdrop{% endif %}">
+    {%- if is_backdrop and banner != nil -%}
+      <div class="fpf__backdrop" style="--fpf-banner: url('{{ banner }}');{% if banner_mobile != nil %} --fpf-banner-m: url('{{ banner_mobile }}');{% endif %}" aria-hidden="true"></div>
+    {%- endif -%}
     <div class="fpf__top">
       <div class="fpf__media">
         {%- liquid
@@ -331,6 +397,10 @@
               {%- endif -%}
             {%- endfor -%}
           </ul>
+        {%- endif -%}
+
+        {%- if is_backdrop and copy_html != blank -%}
+          <div class="fpf__summary">{{ copy_html }}</div>
         {%- endif -%}
 
         {%- liquid
@@ -392,7 +462,75 @@
       {%- endfor -%}
     {%- endcapture -%}
 
-    {%- if is_split -%}
+    {%- if is_backdrop -%}
+      <div class="fpf__feature fpf__feature--backdrop">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'video' -%}
+            {%- assign v = block.settings -%}
+            {%- if v.video != blank -%}
+              <div class="fpf__video" {{ block.shopify_attributes }}>
+                {{ v.video | video_tag: image_size: '1100x', controls: true, playsinline: true, preload: 'metadata' }}
+              </div>
+            {%- elsif v.video_url != blank -%}
+              <div class="fpf__video" {{ block.shopify_attributes }}>
+                {%- if v.video_url.type == 'youtube' -%}
+                  <iframe src="https://www.youtube-nocookie.com/embed/{{ v.video_url.id }}?rel=0" title="{{ v.title | default: product.title | escape }}" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                {%- elsif v.video_url.type == 'vimeo' -%}
+                  {%- comment -%} Unlisted Vimeo links carry a privacy hash after the ID (vimeo.com/ID/HASH or ?h=HASH); the player needs it. {%- endcomment -%}
+                  {%- liquid
+                    assign vimeo_raw = v.video_url | append: ''
+                    assign vimeo_hash = ''
+                    if vimeo_raw contains 'h='
+                      assign vimeo_hash = vimeo_raw | split: 'h=' | last | split: '&' | first
+                    else
+                      assign vimeo_after = vimeo_raw | split: v.video_url.id | last | split: '?' | first | remove_first: '/'
+                      assign vimeo_hash = vimeo_after | split: '/' | first
+                    endif
+                  -%}
+                  {%- comment -%} Same treatment as the homepage video (section-vimeo-video): Vimeo's own UI is off and a single round play button sits on top. {%- endcomment -%}
+                  <iframe src="https://player.vimeo.com/video/{{ v.video_url.id }}?{% if vimeo_hash != blank %}h={{ vimeo_hash }}&amp;{% endif %}badge=0&amp;autopause=0&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" title="{{ v.title | default: product.title | escape }}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen data-fpf-vimeo></iframe>
+                  <button type="button" class="fpf__video-toggle" data-fpf-video-toggle aria-label="Play video">
+                    <span class="fpf__video-play" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                    </span>
+                  </button>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        <div class="fpf__story">
+          {%- if banner_fg != nil -%}
+            <img class="fpf__story-fg" src="{{ banner_fg }}" alt="" width="573" height="573" loading="lazy">
+          {%- endif -%}
+          <div class="fpf__story-text">
+            {{ logo_html }}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'heading' -%}
+                  {%- if block.settings.text != blank -%}
+                    <h2 class="fpf__heading" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</h2>
+                  {%- endif -%}
+                {%- when 'quote' -%}
+                  <div class="fpf__quote" {{ block.shopify_attributes }}>
+                    {%- if block.settings.quote != blank -%}
+                      <p class="fpf__quote-text">{{ block.settings.quote | escape }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.attribution != blank -%}
+                      <p class="fpf__quote-by">{{ block.settings.attribution | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                {%- when 'rich_text' -%}
+                  {%- comment -%} The description's paragraph is already under the bullets, so only explicit copy shows here. {%- endcomment -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="fpf__body" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+                  {%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- elsif is_split -%}
       <div class="fpf__feature fpf__feature--split">
         <div class="fpf__split">
           {%- if logo_html != blank -%}
@@ -465,6 +603,39 @@
   </div>
 </section>
 
+<script>
+  (function () {
+    var section = document.getElementById('fpf-{{ section.id }}');
+    var iframe = section && section.querySelector('[data-fpf-vimeo]');
+    if (!iframe) return;
+    var frame = iframe.parentNode;
+    var toggle = frame.querySelector('[data-fpf-video-toggle]');
+
+    function init() {
+      var player = new Vimeo.Player(iframe);
+      function setPlaying(playing) {
+        frame.classList.toggle('is-playing', playing);
+        toggle.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+      }
+      player.on('play', function () { setPlaying(true); });
+      player.on('pause', function () { setPlaying(false); });
+      player.on('ended', function () { setPlaying(false); });
+      toggle.addEventListener('click', function () {
+        player.getPaused().then(function (paused) { return paused ? player.play() : player.pause(); });
+      });
+    }
+
+    if (window.Vimeo && window.Vimeo.Player) return init();
+    var api = document.querySelector('script[src="https://player.vimeo.com/api/player.js"]');
+    if (!api) {
+      api = document.createElement('script');
+      api.src = 'https://player.vimeo.com/api/player.js';
+      document.head.appendChild(api);
+    }
+    api.addEventListener('load', init);
+  })();
+</script>
+
 {%- if s.show_related -%}
   <div class="section_related-products">
     <div class="padding-global">
@@ -502,7 +673,8 @@
       "type": "select", "id": "feature_layout", "label": "Feature area layout",
       "options": [
         { "value": "stacked", "label": "Stacked (banner behind, centered)" },
-        { "value": "split", "label": "Split (logo left, copy right, banner at bottom)" }
+        { "value": "split", "label": "Split (logo left, copy right, banner at bottom)" },
+        { "value": "backdrop", "label": "Backdrop (banner behind panel, video, cut-out)" }
       ],
       "default": "stacked"
     },
@@ -594,8 +766,18 @@
         { "type": "text", "id": "image_asset", "label": "Fallback filename (theme asset)" },
         { "type": "image_picker", "id": "mobile_image", "label": "Mobile banner image" },
         { "type": "text", "id": "mobile_image_asset", "label": "Mobile fallback filename (theme asset)" },
-        { "type": "image_picker", "id": "foreground_image", "label": "Foreground cut-out (split layout)", "info": "Transparent PNG shown over the bottom-left of the banner." },
+        { "type": "image_picker", "id": "foreground_image", "label": "Foreground cut-out (split and backdrop layouts)", "info": "Transparent PNG shown at the bottom-left of the panel." },
         { "type": "text", "id": "foreground_image_asset", "label": "Foreground fallback filename (theme asset)" }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video (backdrop layout)",
+      "limit": 1,
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video", "info": "Uploaded to Shopify. Leave empty to use the link below." },
+        { "type": "video_url", "id": "video_url", "label": "Or a YouTube / Vimeo link", "accept": ["youtube", "vimeo"] },
+        { "type": "text", "id": "title", "label": "Video title (screen readers)" }
       ]
     },
     {
