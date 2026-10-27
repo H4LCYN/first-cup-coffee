@@ -1,9 +1,47 @@
+      <div class="top-ad_inner">
+        <div class="top-ad_message text-balance p-contents">{{ section.settings.top_ad_text | newline_to_br }}</div>
+        <a class="top-ad_account" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+          {%- if customer -%}My Account{%- else -%}Sign In / Create an Account{%- endif -%}
+        </a>
+      </div>
 
-      <div class="text-balance p-contents">{{ section.settings.top_ad_text | newline_to_br }}</div>
-    
+<style>
+  /* Red utility strip from the 2026 nav design: promo message left, account link right. */
+  .top-ad {
+    background-color: var(--firebrick);
+    color: #fff;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .top-ad_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1450px;
+    min-height: 30px;
+    margin: 0 auto;
+    padding: 4px 20px 4px 15px;
+  }
+  .top-ad_message { text-align: left; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em; }
+  .top-ad_message p { margin: 0; }
+  .top-ad_account { flex-shrink: 0; color: #fff; line-height: 14px; text-decoration: none; }
+  .top-ad_account:hover { color: #fff; text-decoration: underline; }
+
+  /* Phones: no room for both, and the nav already has an account icon. */
+  @media screen and (max-width: 767px) {
+    .top-ad_inner { justify-content: center; padding: 6px 16px; }
+    .top-ad_message { text-align: center; font-size: 12px; }
+    .top-ad_account { display: none; }
+  }
+</style>
 
 <script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","top-ad");</script>
-        
+
 {% schema %}
 {
   "name": "top-ad",

@@ -2,7 +2,7 @@
       <div class="navbar__container w-container">
         <div class="col md-no-padding">
           <div class="flex">
-            <a href="{{ routes.root_url }}" class="brand-link w-nav-brand">{%- if section.settings.brand_logo == nil -%}<img src="{{ 'e-coffee-logo.svg' | asset_url }}" loading="lazy" alt="" class="brand-image">{%- else -%}<img src="{{ section.settings.brand_logo.src | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.brand_logo.alt | escape }}" class="brand-image">{%- endif -%}</a>
+            <a href="{{ routes.root_url }}" class="brand-link w-nav-brand">{%- if section.settings.brand_logo == nil -%}<img src="{{ 'e-coffee-logo.svg' | asset_url }}" loading="eager" alt="" class="brand-image">{%- else -%}<img src="{{ section.settings.brand_logo | image_url: width: 400 }}" loading="eager" alt="{{ section.settings.brand_logo.alt | escape }}" class="brand-image">{%- endif -%}</a>
           </div>
         </div>
         <nav role="navigation" class="col md-no-padding w-nav-menu">

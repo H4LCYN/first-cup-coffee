@@ -1,0 +1,346 @@
+
+{%- assign services = 'pickup,digital_drive_thru,delivery,dine_in,room_reservations,catering' | split: ',' -%}
+<div class="site-redesign-26 location-info-2026">
+  <div class="location-info-2026_row">
+    <div class="location-info-2026_photo" style="--photo-height: {{ section.settings.image_height }}px;">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | img_url: '1400x' }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy" decoding="async" class="location-info-2026_image" style="object-position: 50% {{ section.settings.image_position_y }}%;">
+      {%- elsif section.settings.fallback_image != blank -%}
+        <img src="{{ section.settings.fallback_image | asset_url }}" alt="" loading="lazy" decoding="async" class="location-info-2026_image" style="object-position: 50% {{ section.settings.image_position_y }}%;">
+      {%- endif -%}
+    </div>
+    <div class="location-info-2026_details">
+      <div class="location-info-2026_column">
+        <div class="location-info-2026_group">
+          <h2 class="location-info-2026_label">{{ 'tn199cd82c' | t }}</h2>
+          {%- if section.settings.directions_link != blank -%}
+            <a href="{{ section.settings.directions_link }}" target="_blank" rel="noopener" class="location-info-2026_value location-info-2026_link">{{ section.settings.address }}</a>
+          {%- else -%}
+            <div class="location-info-2026_value">{{ section.settings.address }}</div>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.phone != blank -%}
+          <div class="location-info-2026_group">
+            <h2 class="location-info-2026_label">{{ 't489454e' | t }}</h2>
+            <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}" class="location-info-2026_value location-info-2026_link">{{ section.settings.phone }}</a>
+          </div>
+        {%- endif -%}
+        <div class="location-info-2026_group">
+          <h2 class="location-info-2026_label">{{ 't41bceef' | t }}</h2>
+          <div class="location-info-2026_value location-info-2026_hours">{{ section.settings.hours }}</div>
+        </div>
+      </div>
+      <div class="location-info-2026_column is-services">
+        <h2 class="location-info-2026_label">Services</h2>
+        <ul class="location-info-2026_services">
+          {%- for service in services -%}
+            {%- assign show_key = 'show_' | append: service -%}
+            {%- if section.settings[show_key] -%}
+              {%- case service -%}
+                {%- when 'pickup' -%}{%- assign icon = 'pickup.svg' -%}{%- assign label = 'Pickup' -%}
+                {%- when 'digital_drive_thru' -%}{%- assign icon = 'digital-drive-thru.svg' -%}{%- assign label = 'Digital Drive Thru' -%}
+                {%- when 'delivery' -%}{%- assign icon = 'delivery.svg' -%}{%- assign label = 'Delivery' -%}
+                {%- when 'dine_in' -%}{%- assign icon = 'dine-in.svg' -%}{%- assign label = 'Dine In' -%}
+                {%- when 'room_reservations' -%}{%- assign icon = 'reservations.svg' -%}{%- assign label = 'Room Reservations' -%}
+                {%- when 'catering' -%}{%- assign icon = 'catering.svg' -%}{%- assign label = 'Catering' -%}
+              {%- endcase -%}
+              <li class="location-info-2026_service is-{{ service | replace: '_', '-' }}">
+                <span class="location-info-2026_service-icon"><img src="{{ icon | asset_url }}" alt="" loading="lazy"></span>
+                <span>{{ label }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {%- if section.settings.map_query != blank -%}
+    <div class="location-info-2026_map">
+      <iframe
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB7G0jq9Ytdbrm7-shdmUH-aj51vSpUsZw&q={{ section.settings.map_query | url_encode }}&zoom=15"
+        title="Map of {{ section.settings.map_query | escape }}"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="location-info-2026_map-frame"
+      ></iframe>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  /* Photo + address/hours/services row and the map strip under it (Figma
+     "LOCATION INFO" and "Frame 339", e.g. nodes 236:1324 / 236:1354 on the
+     Woodlands page). */
+  section.site-redesign-26.section_location-info {
+    padding-bottom: 100px;
+  }
+
+  .location-info-2026 {
+    max-width: 1296px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 69px;
+  }
+
+  .location-info-2026_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 25px;
+  }
+
+  .location-info-2026_photo {
+    position: relative;
+    flex: 0 1 696px;
+    height: var(--photo-height, 395px);
+    border-radius: var(--desktop-border-radius);
+    overflow: hidden;
+  }
+
+  .location-info-2026_image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .location-info-2026_details {
+    flex: 0 1 571px;
+    display: flex;
+    gap: 23px;
+  }
+
+  .location-info-2026_column {
+    flex: 0 0 229px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .location-info-2026_column.is-services {
+    flex: 0 0 280px;
+    gap: 12px;
+  }
+
+  .location-info-2026_label {
+    margin: 0;
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+    text-transform: uppercase;
+  }
+
+  .location-info-2026_value,
+  .location-info-2026_services {
+    font-family: Avenirnextltpro, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+  }
+
+  .location-info-2026_value p {
+    margin: 0;
+  }
+
+  .location-info-2026_link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .location-info-2026_link:hover {
+    color: var(--butterscotch);
+  }
+
+  .location-info-2026_hours strong,
+  .location-info-2026_hours b {
+    font-weight: 600;
+  }
+
+  .location-info-2026_services {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .location-info-2026_service {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 32px;
+  }
+
+  .location-info-2026_service-icon {
+    flex: 0 0 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Icon sizes from the Figma services column. */
+  .location-info-2026_service-icon img { display: block; height: auto; }
+  .location-info-2026_service.is-pickup img { width: 22px; }
+  .location-info-2026_service.is-digital-drive-thru img { width: 22px; }
+  .location-info-2026_service.is-delivery img { width: 40px; }
+  .location-info-2026_service.is-dine-in img { width: 29px; }
+  .location-info-2026_service.is-room-reservations img { width: 29px; }
+  .location-info-2026_service.is-catering img { width: 22px; }
+
+  .location-info-2026_map {
+    height: 306px;
+    overflow: hidden;
+    background-color: #f2f1ea;
+  }
+
+  .location-info-2026_map-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media screen and (max-width: 991px) {
+    .location-info-2026_row {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .location-info-2026_photo {
+      flex: none;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 696 / 395;
+    }
+
+    .location-info-2026_details {
+      flex: none;
+      width: 100%;
+      justify-content: flex-start;
+      gap: 40px;
+    }
+
+    .location-info-2026 {
+      gap: 48px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    section.site-redesign-26.section_location-info {
+      padding-bottom: 60px;
+    }
+
+    .location-info-2026_photo {
+      border-radius: 16px;
+    }
+
+    .location-info-2026_details {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .location-info-2026_column,
+    .location-info-2026_column.is-services {
+      flex: none;
+    }
+
+    .location-info-2026_map {
+      height: 260px;
+    }
+  }
+</style>
+
+<script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("class","section_location-info site-redesign-26");</script>
+
+{% schema %}
+{
+  "name": "Section - Location Info",
+  "tag": "section",
+  "class": "section_location-info",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo"
+    },
+    {
+      "type": "text",
+      "id": "fallback_image",
+      "label": "Fallback photo filename (asset, used only if no photo is picked above)",
+      "info": "Advanced: filename of a theme asset, e.g. woodlands-wide.webp"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Photo height (desktop)",
+      "min": 300,
+      "max": 500,
+      "step": 2,
+      "unit": "px",
+      "default": 396
+    },
+    {
+      "type": "range",
+      "id": "image_position_y",
+      "label": "Photo focal point (vertical)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "richtext",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "url",
+      "id": "directions_link",
+      "label": "Directions link",
+      "info": "The address links here."
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    },
+    {
+      "type": "richtext",
+      "id": "hours",
+      "label": "Hours",
+      "info": "Bold the day letters."
+    },
+    {
+      "type": "header",
+      "content": "Services"
+    },
+    { "type": "checkbox", "id": "show_pickup", "label": "Pickup", "default": true },
+    { "type": "checkbox", "id": "show_digital_drive_thru", "label": "Digital Drive Thru", "default": true },
+    { "type": "checkbox", "id": "show_delivery", "label": "Delivery", "default": true },
+    { "type": "checkbox", "id": "show_dine_in", "label": "Dine In", "default": true },
+    { "type": "checkbox", "id": "show_room_reservations", "label": "Room Reservations", "default": true },
+    { "type": "checkbox", "id": "show_catering", "label": "Catering", "default": true },
+    {
+      "type": "header",
+      "content": "Map"
+    },
+    {
+      "type": "text",
+      "id": "map_query",
+      "label": "Map search",
+      "info": "What Google Maps searches for, e.g. First Cup Coffee Co, 26403 Oak Ridge Dr, Spring, TX 77380. Leave blank to hide the map."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section - Location Info"
+    }
+  ]
+}
+{% endschema %}

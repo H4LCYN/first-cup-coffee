@@ -12,6 +12,18 @@
   {%- assign wfPage = "654d36a6d6abfe37729082ad" -%}
   {%- assign bodyClasses = "body" -%}
   {%- assign useJsonShell = true -%}
+{%- elsif template.name == 'page' and template.suffix == 'locations' and headerSnippetPath == blank -%}
+  {%- comment -%} templates/page.locations.json — same shell the old page.locations.liquid set up. {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-pagelocations" -%}
+  {%- assign wfPage = "673ff2c099025305de391b27" -%}
+  {%- assign bodyClasses = "body" -%}
+  {%- assign useJsonShell = true -%}
+{%- elsif template.name == 'page' and template.suffix contains 'location' and headerSnippetPath == blank -%}
+  {%- comment -%} templates/page.location*.json — the individual location pages (Pearland, Rosenberg, Woodlands). {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-pageabout" -%}
+  {%- assign wfPage = "6753b5ff85557b7a32414ca4" -%}
+  {%- assign bodyClasses = "body" -%}
+  {%- assign useJsonShell = true -%}
 {%- elsif template == 'collection' and headerSnippetPath == blank -%}
   {%- comment -%}
     templates/collection.json is a JSON template, so it can't set these the way
@@ -51,20 +63,11 @@
       </main>
       {%- section 'footer' -%}
     </div>
+    {%- comment -%} Legacy .liquid templates already load jQuery + Webflow JS; don't load them twice {%- endcomment -%}
+    {%- unless content_for_layout contains 'jquery-3.5.1' -%}
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=654ae336a6e86029761320fd" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="{{ 'first-cup-coffee.js' | asset_url }}" type="text/javascript"></script>
-    <script>
-    function megaBack() {
-    var x = document.getElementsByClassName("mega-menu");
-      $('.menu-button').on('click', function(evt) {
-    if (window.getComputedStyle(x).display === "block") {
-      setTimeout(function() {
-          $('.mega-menu_mobile-close').triggerHandler('click');
-      }, 005);
-    });
-    }
-    }
-    </script>
+    {%- endunless -%}
     <script>
     $('.input-number-increment').click(function() {
       var $input = $(this).parents('.input-number-group').find('.input-number');
@@ -77,7 +80,7 @@
       $input.val(Math.max(val - 1, 1));
     })
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}"></script>
     <script>
     $(".featured-slider_component").each(function (index) {
       let loopMode = false;

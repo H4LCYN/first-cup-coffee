@@ -1,0 +1,106 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-hero": {
+      "type": "section-page-hero",
+      "settings": {
+        "fallback_image": "locations-hero.webp",
+        "image_position_x": 0,
+        "image_position_y": 59,
+        "heading": "Roasted in Texas, Brewed at the Source",
+        "text": "We’re growing! New First Cup locations are opening all the time. Find one near you:",
+        "text_max_width": 470,
+        "button_1_text": "Order Ahead",
+        "button_1_link": "https://order.incentivio.com/c/firstcupcoffee/",
+        "button_2_text": "Reserve a Room",
+        "button_2_link": "shopify://pages/room-rentals"
+      }
+    },
+    "our-locations": {
+      "type": "section-our-locations",
+      "blocks": {
+        "location-pearland": {
+          "type": "location",
+          "settings": {
+            "name": "Pearland",
+            "address": "<p>2645 E Broadway St,<br>Pearland, TX  77581</p>",
+            "link": "shopify://pages/pearland-location",
+            "fallback_image": "pearland-square-1.avif"
+          }
+        },
+        "location-rosenberg": {
+          "type": "location",
+          "settings": {
+            "name": "Rosenberg",
+            "address": "<p>1548 Minonite Rd Unit 120,<br>Rosenberg, TX  77469</p>",
+            "link": "shopify://pages/rosenberg-location",
+            "fallback_image": "rosenberg-square-1.jpg"
+          }
+        },
+        "location-woodlands": {
+          "type": "location",
+          "settings": {
+            "name": "Woodlands",
+            "address": "<p>26403 Oak Ridge Dr,<br>Spring, TX, 77380</p>",
+            "link": "shopify://pages/woodlands-location",
+            "fallback_image": "woodlands-square-1.png"
+          }
+        }
+      },
+      "block_order": [
+        "location-pearland",
+        "location-rosenberg",
+        "location-woodlands"
+      ],
+      "settings": {
+        "heading": "OUR LOCATIONS",
+        "cta_text": "VISIT NOW"
+      }
+    },
+    "split-cta": {
+      "type": "section-split-cta",
+      "blocks": {
+        "order-ahead": {
+          "type": "panel",
+          "settings": {
+            "fallback_image": "2q6a8648-1.webp",
+            "color": "green",
+            "heading": "Order Ahead",
+            "text": "Skip the line! Order your favorite coffee online. Quick, easy, ready on arrival. Order Now!",
+            "button_text": "Order Now",
+            "button_link": "https://order.incentivio.com/c/firstcupcoffee/"
+          }
+        },
+        "reserve-room": {
+          "type": "panel",
+          "settings": {
+            "fallback_image": "2q6a8648-2.webp",
+            "color": "red",
+            "heading": "Reserve a Room",
+            "text": "We have 3 private offices and a large conference room available to rent. Select a location to reserve a room today!",
+            "button_text": "Reserve Now",
+            "button_link": "shopify://pages/room-rentals"
+          }
+        }
+      },
+      "block_order": [
+        "order-ahead",
+        "reserve-room"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "page-hero",
+    "our-locations",
+    "split-cta"
+  ]
+}

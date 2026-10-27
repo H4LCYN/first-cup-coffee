@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-hero": {
+      "type": "section-page-hero",
+      "settings": {
+        "fallback_image": "location-hero-woodlands.webp",
+        "image_position_x": 0,
+        "image_position_y": 42,
+        "heading": "The Woodlands",
+        "text": "Fresh roasts, digital drive-thru, and a shop built for the community — now serving Spring and The Woodlands.",
+        "text_max_width": 490,
+        "button_1_text": "Order Ahead",
+        "button_1_link": "https://order.incentivio.com/c/firstcupcoffee/locations/woodlandsspring",
+        "button_2_text": "Reserve a Room",
+        "button_2_link": "https://firstcupcoffee.coworksapp.com/book/593?type=rooms"
+      }
+    },
+    "location-info": {
+      "type": "section-location-info",
+      "settings": {
+        "fallback_image": "woodlands-wide.webp",
+        "image_height": 384,
+        "image_position_y": 50,
+        "address": "<p>26403 Oak Ridge Drive<br>Spring, Texas 77380</p>",
+        "directions_link": "https://www.google.com/maps/dir/?api=1&destination=First+Cup+Coffee+Co%2C+26403+Oak+Ridge+Dr%2C+Spring%2C+TX+77380",
+        "phone": "(832) 510-4291",
+        "hours": "<p><strong>S</strong> Closed<br><strong>M</strong> 6 AM-10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>W</strong> 6 AM-10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>F</strong> 6 AM-11 PM<br><strong>S</strong> 6 AM-11 PM</p>",
+        "show_pickup": true,
+        "show_digital_drive_thru": true,
+        "show_delivery": true,
+        "show_dine_in": true,
+        "show_room_reservations": true,
+        "show_catering": true,
+        "map_query": "First Cup Coffee Co, 26403 Oak Ridge Dr, Spring, TX 77380"
+      }
+    }
+  },
+  "order": [
+    "page-hero",
+    "location-info"
+  ]
+}
