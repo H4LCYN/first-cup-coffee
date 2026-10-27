@@ -5,7 +5,7 @@
       {%- if section.settings.background_image != blank -%}
         <img src="{{ section.settings.background_image | img_url: '1920x' }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
       {%- else -%}
-        <img src="{{ 'featured-roast-background.png' | asset_url }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
+        <img src="{{ 'bafo-backdrop.webp' | asset_url }}" alt="" loading="lazy" class="featured-roast-2026_photo-image">
       {%- endif -%}
     </div>
     <div class="featured-roast-2026_grain">
@@ -24,6 +24,19 @@
     {%- else -%}
       <img src="{{ 'bafo-flat.png' | asset_img_url: '800x' }}" srcset="{{ 'bafo-flat.png' | asset_img_url: '400x' }} 400w, {{ 'bafo-flat.png' | asset_img_url: '600x' }} 600w, {{ 'bafo-flat.png' | asset_img_url: '800x' }} 800w" sizes="(max-width: 767px) 92vw, 400px" alt="" loading="lazy" decoding="async" class="featured-roast-2026_product">
     {%- endif -%}
+    {%- liquid
+      assign person_src = blank
+      if section.settings.person_image != blank
+        assign person_src = section.settings.person_image | image_url: width: 900
+      elsif section.settings.person_image_asset != blank
+        assign person_src = section.settings.person_image_asset | asset_url
+      endif
+    -%}
+    {%- if person_src != blank -%}
+      <div class="featured-roast-2026_person">
+        <img src="{{ person_src }}" alt="" width="450" height="450" loading="lazy" decoding="async" class="featured-roast-2026_person-image">
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -34,6 +47,7 @@
   }
 
   .featured-roast-2026_card {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     position: relative;
@@ -44,6 +58,28 @@
     border-radius: var(--desktop-border-radius);
     overflow: hidden;
     background-color: #000;
+    justify-content: center;
+  }
+
+  /* Cut-out of the partner (e.g. Nick Freitas), anchored to the card's bottom edge beside the bag.
+     Desktop only; smaller screens show just the copy and the bag. */
+  .featured-roast-2026_person {
+    display: none;
+  }
+
+  @media screen and (min-width: 992px) {
+    .featured-roast-2026_person {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .featured-roast-2026_person-image {
+      display: block;
+      width: 450px;
+      height: auto;
+    }
   }
 
   .featured-roast-2026_photo,
@@ -172,6 +208,19 @@
       "type": "image_picker",
       "id": "product_image",
       "label": "Product photo (floats on the right)"
+    },
+    {
+      "type": "image_picker",
+      "id": "person_image",
+      "label": "Person cut-out (desktop only)",
+      "info": "Transparent PNG shown at the bottom-right on desktop."
+    },
+    {
+      "type": "text",
+      "id": "person_image_asset",
+      "label": "Person cut-out fallback filename (theme asset)",
+      "info": "Used if no cut-out is picked above. Clear it to hide the cut-out.",
+      "default": "bafo-nick-freitas.webp"
     },
     {
       "type": "text",

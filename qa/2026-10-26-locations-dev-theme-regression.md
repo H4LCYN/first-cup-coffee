@@ -117,3 +117,11 @@ The live theme still has `templates/page.locations.liquid`, `page.location.liqui
 4. **Verified:** a full pull of live afterwards is byte-identical to the tested dev theme (343 files).
 5. **Production re-run** (new live vs the rollback): all 56 page loads clean with no new issues, and all interaction checks passed. firstcup.com serves the BAFO backdrop layout with the Vimeo video on `?view=bafo` and `?view=bafo-pods`; Trigger Fuel still renders its default layout.
 6. **Still to do:** assign the `bafo`, `bafo-5lb` and `bafo-pods` templates to the three Brew Around & Find Out products in admin. Until then customers see the old product page.
+
+## Go-live record (2026-10-27, homepage roast card)
+
+1. **Regression gate:** a full `/regression` on dev at commit 64bec0d passed: 56 page loads with nothing new against live, and all 9 interaction checks.
+2. **Rollback copy:** live was duplicated as `rollback-live-2026-10-27-pre-roast-card` **#159976489182**. Once it held all 343 files, every file matched live except `settings_data.json`, where Shopify dropped the same 15 unused navbar settings. To roll back, publish that theme.
+3. **Push:** live was rechecked just before the push, and was unchanged. One scoped push of `sections/home-cta-1.liquid` from a fresh dev pull, deletions off; the uploaded-file list named exactly that file. Nothing was deleted or held back.
+4. **Verified:** a full pull of live afterwards is byte-identical to the tested dev theme (343 files).
+5. **Production re-run** (new live vs the rollback): all 56 page loads clean with no new issues, and all interaction checks passed. The firstcup.com homepage shows the Featured Roast card with the BAFO backdrop and Nick Freitas on desktop.
