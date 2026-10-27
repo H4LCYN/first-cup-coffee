@@ -12,6 +12,18 @@
   {%- assign wfPage = "654d36a6d6abfe37729082ad" -%}
   {%- assign bodyClasses = "body" -%}
   {%- assign useJsonShell = true -%}
+{%- elsif template.name == 'page' and template.suffix == 'locations' and headerSnippetPath == blank -%}
+  {%- comment -%} templates/page.locations.json — same shell the old page.locations.liquid set up. {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-pagelocations" -%}
+  {%- assign wfPage = "673ff2c099025305de391b27" -%}
+  {%- assign bodyClasses = "body" -%}
+  {%- assign useJsonShell = true -%}
+{%- elsif template.name == 'page' and template.suffix contains 'location' and headerSnippetPath == blank -%}
+  {%- comment -%} templates/page.location*.json — the individual location pages (Pearland, Rosenberg, Woodlands). {%- endcomment -%}
+  {%- assign headerSnippetPath = "header-pageabout" -%}
+  {%- assign wfPage = "6753b5ff85557b7a32414ca4" -%}
+  {%- assign bodyClasses = "body" -%}
+  {%- assign useJsonShell = true -%}
 {%- elsif template == 'collection' and headerSnippetPath == blank -%}
   {%- comment -%}
     templates/collection.json is a JSON template, so it can't set these the way

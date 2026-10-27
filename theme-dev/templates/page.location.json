@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "page-hero": {
+      "type": "section-page-hero",
+      "settings": {
+        "fallback_image": "location-hero-pearland.webp",
+        "image_position_x": 0,
+        "image_position_y": 27,
+        "heading": "Pearland",
+        "text": "House roasts, digital drive-thru, and a shop made for the neighborhood — now pouring on East Broadway.",
+        "text_max_width": 490,
+        "button_1_text": "Order Ahead",
+        "button_1_link": "https://order.incentivio.com/c/firstcupcoffee/locations/pearland",
+        "button_2_text": "Reserve a Room",
+        "button_2_link": "https://firstcupcoffee.coworksapp.com/book/592?type=rooms"
+      }
+    },
+    "location-info": {
+      "type": "section-location-info",
+      "settings": {
+        "fallback_image": "pearland-wide_1.webp",
+        "image_height": 396,
+        "image_position_y": 50,
+        "address": "<p>2645 E Broadway Street<br>Pearland, Texas 77581</p>",
+        "directions_link": "https://www.google.com/maps/dir/?api=1&destination=First+Cup+Coffee+Co%2C+2645+E+Broadway+St%2C+Pearland%2C+TX+77581",
+        "phone": "(832) 736-4028",
+        "hours": "<p><strong>S</strong> Closed<br><strong>M</strong> 6 AM-10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>W</strong> 6 AM-10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>F</strong> 6 AM-11 PM<br><strong>S</strong> 6 AM-11 PM</p>",
+        "show_pickup": true,
+        "show_digital_drive_thru": true,
+        "show_delivery": true,
+        "show_dine_in": true,
+        "show_room_reservations": true,
+        "show_catering": true,
+        "map_query": "First Cup Coffee Co, 2645 E Broadway St, Pearland, TX 77581"
+      }
+    }
+  },
+  "order": [
+    "page-hero",
+    "location-info"
+  ]
+}

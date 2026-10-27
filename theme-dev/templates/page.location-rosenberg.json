@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "page-hero": {
+      "type": "section-page-hero",
+      "settings": {
+        "fallback_image": "location-hero-rosenberg.webp",
+        "image_position_x": 0,
+        "image_position_y": 64,
+        "heading": "Rosenberg",
+        "text": "Pull through the digital drive-thru or stay a while. Fresh roasts, dine-in, catering, and rooms you can reserve.",
+        "text_max_width": 552,
+        "button_1_text": "Order Ahead",
+        "button_1_link": "https://order.incentivio.com/c/firstcupcoffee/locations/rosenberg",
+        "button_2_text": "Reserve a Room",
+        "button_2_link": "https://firstcupcoffeerosenberg.coworksapp.com/book/591?type=Conference"
+      }
+    },
+    "location-info": {
+      "type": "section-location-info",
+      "settings": {
+        "fallback_image": "rosenberg-square-1.jpg",
+        "image_height": 472,
+        "image_position_y": 55,
+        "address": "<p>1548 Minonite Rd. Unit 120<br>Rosenberg, Texas 77469</p>",
+        "directions_link": "https://www.google.com/maps/dir/?api=1&destination=First+Cup+Coffee+Co%2C+1548+Minonite+Rd+Unit+120%2C+Rosenberg%2C+TX+77469",
+        "phone": "(832) 675-9499",
+        "hours": "<p><strong>S</strong> 8 AM-4 PM<br><strong>M</strong> 6 AM-10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>W</strong> 6 AM-10 PM<br><strong>T</strong> 6 AM-10 PM<br><strong>F</strong> 6 AM-11 PM<br><strong>S</strong> 6 AM-11 PM</p>",
+        "show_pickup": true,
+        "show_digital_drive_thru": true,
+        "show_delivery": true,
+        "show_dine_in": true,
+        "show_room_reservations": true,
+        "show_catering": true,
+        "map_query": "First Cup Coffee Co, 1548 Minonite Rd Unit 120, Rosenberg, TX 77469"
+      }
+    }
+  },
+  "order": [
+    "page-hero",
+    "location-info"
+  ]
+}
