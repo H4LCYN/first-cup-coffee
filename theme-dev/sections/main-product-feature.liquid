@@ -210,7 +210,7 @@
   }
 
   .fbb__add {
-    box-sizing: border-box; width: 100%; max-width: 468px; padding: 7.7px 23px; border: 0; border-radius: 2.2px;
+    box-sizing: border-box; width: 100%; max-width: none; padding: 7.7px 23px; border: 0; border-radius: 2.2px;
     background: var(--fpf-accent); color: #fff; cursor: pointer;
     font-family: Avenirnextltpro, sans-serif; font-weight: 700; font-size: 18px; line-height: 38px; text-transform: uppercase;
     transition: background-color .15s;
@@ -219,7 +219,7 @@
   .fbb__add:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   .fbb__add:disabled { opacity: .5; cursor: not-allowed; }
   /* Create a Box leads the options, then an "or" rule. Hidden until assets/box-builder.js shows the button. */
-  .fpf__box-lead { margin-top: 40px; display: flex; flex-direction: column; gap: 24px; max-width: 468px; }
+  .fpf__box-lead { margin-top: 40px; display: flex; flex-direction: column; gap: 10px; }
   .fpf__box-lead:not(:has(.fc-box-btn:not([hidden]))) { display: none; }
   .fpf__box-lead .fc-box-btn { margin-top: 0; }
   .fpf__box-lead .fc-box-btn--solid { background: var(--fpf-accent); border-color: var(--fpf-accent); }
@@ -418,7 +418,7 @@
         {%- comment -%} No variant passed: the box drawer asks for the texture itself. {%- endcomment -%}
         {%- if bundle != blank and bundle.variants.size > 0 -%}
           <div class="fpf__box-lead">
-            <p class="fcbox__message">All subscriptions are eligible for <b>FREE SHIPPING!</b></p>
+            <p class="fcbox__message shadow">All subscriptions are eligible for <b>FREE SHIPPING!</b></p>
             {%- render 'box-button', product: product, class: 'fc-box-btn--dark fc-box-btn--solid' -%}
             <p class="fpf__or">or</p>
           </div>
