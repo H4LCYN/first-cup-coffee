@@ -148,7 +148,7 @@ html.fcbox-open .fcbox-fab { display: none; }
 .fcbox-line__actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; }
 /* Cart page: stack the actions under the coffee list instead of beside the title. */
 .section_cart-page .fcbox-line .cart-item_wrapper:not(.align-center) { flex-direction: column; }
-.fcbox-line__actions .fcbox-edit { margin-top: 0; font-weight: 700; color: #000; }
+.fcbox-line__actions .fcbox-edit { margin-top: 0; font-weight: 700; color: #000; text-decoration: underline; }
 .fcbox-line__actions .fcbox-edit--remove { color: var(--fcbox-red); }
 /* A box is one bundle line: no quantity stepper or trash icon, Remove box replaces them. */
 .fcbox-line .udesly-input-wrapper, .fcbox-line .cart-item-remove, .fcbox-line .input-number-group,
