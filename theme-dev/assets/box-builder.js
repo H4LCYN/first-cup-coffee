@@ -598,7 +598,19 @@
     if (!t) return;
 
     if (t.hasAttribute('data-box-add')) { e.preventDefault(); addFromButton(t); return; }
-    if (t.hasAttribute('data-box-open')) { e.preventDefault(); open(t.getAttribute('data-box-open')); return; }
+    if (t.hasAttribute('data-box-open')) {
+      e.preventDefault();
+      var openKey = t.getAttribute('data-box-open');
+      // The mini cart only knows the line's bundle variant; map it back to its format.
+      var lineVariant = Number(t.getAttribute('data-box-line-variant'));
+      if (!openKey && lineVariant) {
+        openKey = ORDER.filter(function (k) {
+          return FORMATS[k].variants.some(function (v) { return v.id === lineVariant; });
+        })[0] || '';
+      }
+      open(openKey);
+      return;
+    }
     if (t.hasAttribute('data-box-fab')) { open(); return; }
     if (t.hasAttribute('data-box-close')) { close(); return; }
     if (t.hasAttribute('data-box-tab')) { ui.format = t.getAttribute('data-box-tab'); ui.message = ''; ui.error = ''; open(ui.format); return; }

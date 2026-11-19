@@ -138,6 +138,19 @@ html.fcbox-open .fcbox-fab { display: none; }
 }
 .fcbox-notes--mini .fc-box-btn:hover { background: none; color: var(--fcbox-gold); filter: brightness(.85); }
 .fcbox-notes--mini .fc-box-tag { display: none; }
+/* Box line in the cart page and the mini cart: bordered, one coffee per line, Edit / Remove. */
+.section_cart-page .cart-item_grid.fcbox-line, .cart_container .cart-item.fcbox-line {
+  margin: 12px 0; padding: 16px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px;
+}
+.fcbox-line__items { margin: 8px 0 0; padding: 0; list-style: none; color: #000; font-size: 15px; line-height: 1.4; }
+.fcbox-line__items li { padding: 6px 0; border-top: 1px solid var(--fcbox-line); }
+.fcbox-line__items li:first-child { border-top: 0; }
+.fcbox-line__actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; }
+.fcbox-line__actions .fcbox-edit { margin-top: 0; font-weight: 700; color: #000; }
+.fcbox-line__actions .fcbox-edit--remove { color: var(--fcbox-red); }
+/* A box is one bundle line: no quantity stepper or trash icon, Remove box replaces them. */
+.fcbox-line .udesly-input-wrapper, .fcbox-line .cart-item-remove, .fcbox-line .input-number-group,
+.fcbox-line .div-block-7 > [data-node-type="cart-remove-link"] { display: none; }
 .fcbox-edit { display: inline-block; margin-top: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
 
 /* Guided start: format chooser and the coffee picker inside the box ------- */

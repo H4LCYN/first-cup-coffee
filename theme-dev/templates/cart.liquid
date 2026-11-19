@@ -24,7 +24,7 @@
                     <div class="spacer-1"></div>
                     <div class="home-dashed-rule_right"></div>
                     <div class="spacer-1"></div>
-                    {%- for item in cart.items -%}<div class="cart-item_grid">
+                    {%- for item in cart.items -%}<div class="cart-item_grid{% if item.properties._box_format != blank %} fcbox-line{% endif %}">
                       <div class="cart-item_component">
                         <a href="{{ item.url }}" class="w-inline-block"><img src="{{ item.image | img_url: 'master' }}" loading="lazy" alt="{{ item.image.alt }}" class="cart-item-image"></a>
                         <div class="cart-item_wrapper">
@@ -33,11 +33,22 @@
                               <div class="cart-item-title">{{ item.title }}</div>
                               <div class="product-price compare-at">{{ item.variant.compare_at_price  | money }}</div>
                               <div class="p-medium is-cart">{{ item.final_line_price | money }}</div>
-                              <div class="p-medium is-cart">{%- render 'cart-item-properties', item: item -%}</div>
+                              {%- if item.properties._box_format != blank -%}
+                                {%- comment -%} One coffee per line; Contents is "1X Name (Texture), 2X Name" (assets/box-builder.js). {%- endcomment -%}
+                                <ul class="fcbox-line__items">
+                                  {%- assign box_contents = item.properties.Contents | split: ', ' -%}
+                                  {%- for c in box_contents -%}<li>{{ c }}</li>{%- endfor -%}
+                                </ul>
+                              {%- else -%}
+                                <div class="p-medium is-cart">{%- render 'cart-item-properties', item: item -%}</div>
+                              {%- endif -%}
                             </div>
                           </a>
                           {%- if item.properties._box_format != blank -%}
-                            <button type="button" class="fcbox-edit" data-box-open="{{ item.properties._box_format | escape }}">Edit box</button>
+                            <div class="fcbox-line__actions">
+                              <button type="button" class="fcbox-edit" data-box-open="{{ item.properties._box_format | escape }}">Edit box</button>
+                              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="fcbox-edit fcbox-edit--remove">Remove box</a>
+                            </div>
                           {%- endif -%}
                         </div>
                         <div id="w-node-_952baa3a-868a-a04c-c135-5dd9e90d483e-729082a5" class="cart-item_wrapper align-center">
