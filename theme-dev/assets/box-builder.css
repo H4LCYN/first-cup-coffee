@@ -128,16 +128,16 @@ html.fcbox-open .fcbox-fab { display: none; }
 .fcbox-notes[hidden] { display: none; }
 .fcbox-note { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; padding: 16px 18px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px; }
 .fcbox-note__text { margin: 0; font-size: 16px; line-height: 1.4; }
-.fcbox-note .fc-box-btn { width: 100%; min-height: 53px; font-size: 18px; }
-.fcbox-notes--mini { display: flex; flex-direction: column; gap: 12px; padding: 14px 12px 0; }
-.fcbox-notes--mini .fcbox-note { margin-bottom: 0; gap: 8px; }
-/* In the slide-out the note's action is a gold text link, not a button. */
-.fcbox-notes--mini .fc-box-btn, .fcbox-notes--mini .fc-box-btn--solid, .fcbox-notes--mini .fc-box-btn.has-tag {
+.fcbox-notes { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.fcbox-notes--mini { margin-bottom: 0; padding: 14px 12px 0; }
+.fcbox-notes .fcbox-note { margin-bottom: 0; gap: 8px; }
+/* The note's action is a gold text link, not a button (cart page and slide-out). */
+.fcbox-notes .fc-box-btn, .fcbox-notes .fc-box-btn--solid, .fcbox-notes .fc-box-btn.has-tag {
   width: auto; min-height: 0; margin: 0; padding: 0; border: 0; background: none; color: var(--fcbox-gold);
   justify-content: flex-start; align-self: flex-start; font-size: 15px; text-decoration: underline; text-underline-offset: 3px;
 }
-.fcbox-notes--mini .fc-box-btn:hover { background: none; color: var(--fcbox-gold); filter: brightness(.85); }
-.fcbox-notes--mini .fc-box-tag { display: none; }
+.fcbox-notes .fc-box-btn:hover { background: none; color: var(--fcbox-gold); filter: brightness(.85); }
+.fcbox-notes .fc-box-tag { display: none; }
 /* Box line in the cart page and the mini cart: bordered, one coffee per line, Edit / Remove. */
 .section_cart-page .cart-item_grid.fcbox-line, .cart_container .cart-item.fcbox-line {
   margin: 12px 0; padding: 16px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px;
@@ -148,6 +148,8 @@ html.fcbox-open .fcbox-fab { display: none; }
 /* Each coffee shows its own image, so the box's single bundle image is hidden. */
 .cart_container .fcbox-line .minicart-img, .section_cart-page .fcbox-line .cart-item_component > a:first-child { display: none; }
 .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1.41fr .5fr; }
+/* Cart page: the coffee list and actions span the whole line, under the title and price. */
+.section_cart-page .fcbox-line__details { grid-column: 1 / -1; }
 /* Mini cart box line: title and price share the top row; the coffee list and actions run full width below. */
 .cart_container .cart-item.fcbox-line { flex-wrap: wrap; align-items: flex-start; column-gap: 12px; }
 .cart_container .fcbox-line .minicart_prod-info-wrapper { display: contents; }
@@ -159,8 +161,6 @@ html.fcbox-open .fcbox-fab { display: none; }
 @media (max-width: 767px) { .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1fr; } }
 .fcbox-line__items li:first-child { border-top: 0; }
 .fcbox-line__actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; }
-/* Cart page: stack the actions under the coffee list instead of beside the title. */
-.section_cart-page .fcbox-line .cart-item_wrapper:not(.align-center) { flex-direction: column; }
 .fcbox-line__actions .fcbox-edit { margin-top: 0; font-weight: 700; color: #000; text-decoration: underline; }
 .fcbox-line__actions .fcbox-edit--remove { color: var(--fcbox-red); }
 /* A box is one bundle line: no quantity stepper or trash icon, Remove box replaces them. */

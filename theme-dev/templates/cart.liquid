@@ -33,39 +33,11 @@
                               <div class="cart-item-title">{{ item.title }}</div>
                               <div class="product-price compare-at">{{ item.variant.compare_at_price  | money }}</div>
                               <div class="p-medium is-cart">{{ item.final_line_price | money }}</div>
-                              {%- if item.properties._box_format != blank -%}
-                                {%- comment -%} One coffee per line; Contents is "1X Name (Texture), 2X Name" (assets/box-builder.js). {%- endcomment -%}
-                                <ul class="fcbox-line__items"{% if item.properties._box_items == blank %} data-box-line="{{ item.key }}"{% endif %}>
-                                  {%- if item.properties._box_items != blank -%}
-                                    {%- comment -%} _box_items is "handle:variant:qty|…" {%- endcomment -%}
-                                    {%- assign box_parts = item.properties._box_items | split: '|' -%}
-                                    {%- for part in box_parts -%}
-                                      {%- assign bits = part | split: ':' -%}
-                                      {%- assign bp = all_products[bits[0]] -%}
-                                      {%- assign bv_id = bits[1] | plus: 0 -%}
-                                      {%- assign bv = bp.variants | where: 'id', bv_id | first -%}
-                                      {%- assign b_img = bv.featured_image | default: bp.featured_image -%}
-                                      <li>
-                                        {%- if b_img -%}<img class="fcbox-line__img" src="{{ b_img | image_url: width: 120 }}" alt="" width="44" height="44" loading="lazy">{%- endif -%}
-                                        <span>{{ bits[2] }}X {{ bp.title }}{% if bv and bv.title != 'Default Title' %} ({{ bv.title }}){% endif %}</span>
-                                      </li>
-                                    {%- endfor -%}
-                                  {%- else -%}
-                                    {%- assign box_contents = item.properties.Contents | split: ', ' -%}
-                                    {%- for c in box_contents -%}<li>{{ c }}</li>{%- endfor -%}
-                                  {%- endif -%}
-                                </ul>
-                              {%- else -%}
+                              {%- unless item.properties._box_format != blank -%}
                                 <div class="p-medium is-cart">{%- render 'cart-item-properties', item: item -%}</div>
-                              {%- endif -%}
+                              {%- endunless -%}
                             </div>
                           </a>
-                          {%- if item.properties._box_format != blank -%}
-                            <div class="fcbox-line__actions">
-                              <button type="button" class="fcbox-edit" data-box-open="{{ item.properties._box_format | escape }}">Edit box</button>
-                              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="fcbox-edit fcbox-edit--remove">Remove box</a>
-                            </div>
-                          {%- endif -%}
                         </div>
                         <div id="w-node-_952baa3a-868a-a04c-c135-5dd9e90d483e-729082a5" class="cart-item_wrapper align-center">
                           <div class="udesly-input-wrapper">
@@ -94,6 +66,36 @@
                       <div id="w-node-e20065b3-02ae-3d79-6441-1b44f03b5d70-729082a5" class="cart-item_total">
                         <div class="p-medium is-cart">{{ item.final_line_price | money }}</div>
                       </div>
+                      {%- if item.properties._box_format != blank -%}
+                        {%- comment -%} Box coffees and actions run the full width of the line, under the title and price. {%- endcomment -%}
+                        <div class="fcbox-line__details">
+                        {%- comment -%} One coffee per line; Contents is "1X Name (Texture), 2X Name" (assets/box-builder.js). {%- endcomment -%}
+                        <ul class="fcbox-line__items"{% if item.properties._box_items == blank %} data-box-line="{{ item.key }}"{% endif %}>
+                          {%- if item.properties._box_items != blank -%}
+                            {%- comment -%} _box_items is "handle:variant:qty|…" {%- endcomment -%}
+                            {%- assign box_parts = item.properties._box_items | split: '|' -%}
+                            {%- for part in box_parts -%}
+                              {%- assign bits = part | split: ':' -%}
+                              {%- assign bp = all_products[bits[0]] -%}
+                              {%- assign bv_id = bits[1] | plus: 0 -%}
+                              {%- assign bv = bp.variants | where: 'id', bv_id | first -%}
+                              {%- assign b_img = bv.featured_image | default: bp.featured_image -%}
+                              <li>
+                                {%- if b_img -%}<img class="fcbox-line__img" src="{{ b_img | image_url: width: 120 }}" alt="" width="44" height="44" loading="lazy">{%- endif -%}
+                                <span>{{ bits[2] }}X {{ bp.title }}{% if bv and bv.title != 'Default Title' %} ({{ bv.title }}){% endif %}</span>
+                              </li>
+                            {%- endfor -%}
+                          {%- else -%}
+                            {%- assign box_contents = item.properties.Contents | split: ', ' -%}
+                            {%- for c in box_contents -%}<li>{{ c }}</li>{%- endfor -%}
+                          {%- endif -%}
+                        </ul>
+                        <div class="fcbox-line__actions">
+                          <button type="button" class="fcbox-edit" data-box-open="{{ item.properties._box_format | escape }}">Edit box</button>
+                          <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="fcbox-edit fcbox-edit--remove">Remove box</a>
+                        </div>
+                        </div>
+                      {%- endif -%}
                     </div>{%- endfor -%}
                     <div class="spacer-2"></div>
                     <div class="home-dashed-rule_right"></div>
@@ -121,8 +123,8 @@
         </div>
       </section>
       
-      {%- section 'footer' -%}
     </main>
+    {%- section 'footer' -%}
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=654ae336a6e86029761320fd" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="{{ 'first-cup-coffee.js' | asset_url }}" type="text/javascript"></script>
