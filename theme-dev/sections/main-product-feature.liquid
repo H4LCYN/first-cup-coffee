@@ -218,13 +218,22 @@
   .fbb__add:hover:not(:disabled) { filter: brightness(0.9); }
   .fbb__add:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   .fbb__add:disabled { opacity: .5; cursor: not-allowed; }
-  /* With a visible Create a Box button above it, Add to cart steps back to an outline. */
-  .fbb .fc-box-btn--solid { background: var(--fpf-accent); border-color: var(--fpf-accent); }
-  .fbb .fc-box-btn:not([hidden]) ~ .fbb__add {
-    margin-top: -16px; /* 30px form gap - 16 = 14px between the two buttons */
+  /* Create a Box leads the options, then an "or" rule. Hidden until assets/box-builder.js shows the button. */
+  .fpf__box-lead { margin-top: 40px; display: flex; flex-direction: column; gap: 24px; max-width: 468px; }
+  .fpf__box-lead:not(:has(.fc-box-btn:not([hidden]))) { display: none; }
+  .fpf__box-lead .fc-box-btn { margin-top: 0; }
+  .fpf__box-lead .fc-box-btn--solid { background: var(--fpf-accent); border-color: var(--fpf-accent); }
+  .fpf__or {
+    display: flex; align-items: center; gap: 16px; margin: 0;
+    font-family: Avenirnextltpro, sans-serif; font-weight: 700; font-size: 14px; line-height: 1;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--fpf-text);
+  }
+  .fpf__or::before, .fpf__or::after { content: ""; flex: 1; height: 1px; background: currentColor; opacity: .35; }
+  /* With Create a Box showing, Add to cart steps back to an outline. */
+  .fpf:has(.fpf__box-lead .fc-box-btn:not([hidden])) .fbb__add {
     border: 1.5px solid var(--fpf-accent); background: transparent; line-height: 35px;
   }
-  .fbb .fc-box-btn:not([hidden]) ~ .fbb__add:hover:not(:disabled) { background: var(--fpf-accent); filter: none; }
+  .fpf:has(.fpf__box-lead .fc-box-btn:not([hidden])) .fbb__add:hover:not(:disabled) { background: var(--fpf-accent); filter: none; }
   .fbb__error { margin: 12px 0 0; font-family: Avenirnextltpro, sans-serif; font-size: 14px; color: #ff6b61; }
 
   /* Feature area */
@@ -353,7 +362,7 @@
     .fbb__opt--big .fbb__btn { width: 100%; }
     .fbb__group--toggle > .fbb__opt { flex: 1 1 183px; }
     .fbb__tag--corner { left: auto; right: -6px; }
-    .fbb__add { max-width: none; }
+    .fbb__add, .fpf__box-lead { max-width: none; }
     .fpf__split-text { flex: auto }
     .fpf__feature { min-height: 0; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
     .fpf__feature:not(.fpf__feature--split):not(.fpf__feature--backdrop) { padding: 56px 24px 40px; }
@@ -409,6 +418,14 @@
 
         {%- if is_backdrop and copy_html != blank -%}
           <div class="fpf__summary">{{ copy_html }}</div>
+        {%- endif -%}
+
+        {%- comment -%} No variant passed: the box drawer asks for the texture itself. {%- endcomment -%}
+        {%- if bundle != blank and bundle.variants.size > 0 -%}
+          <div class="fpf__box-lead">
+            {%- render 'box-button', product: product, class: 'fc-box-btn--dark fc-box-btn--solid' -%}
+            <p class="fpf__or">or</p>
+          </div>
         {%- endif -%}
 
         {%- liquid
