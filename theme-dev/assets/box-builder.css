@@ -166,7 +166,7 @@ html.fcbox-open .fcbox-fab { display: none; }
   .section_cart-page .cart-item_grid > .fcbox-line { grid-template-columns: 2.2fr .5fr; }
 }
 .fcbox-line__items li:first-child { border-top: 0; }
-.fcbox-line__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 10px; }
+.fcbox-line__actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 15px; margin-top: 10px; }
 /* Edit box reads like the gold box links (.fcbox-notes .fc-box-btn); Remove box is the trash icon used on other lines. */
 .fcbox-line__actions .fcbox-edit {
   margin-top: 0; color: var(--fcbox-gold); font-family: Avenirnextltpro, "Avenir Next", sans-serif; font-weight: 700; font-size: 15px;
