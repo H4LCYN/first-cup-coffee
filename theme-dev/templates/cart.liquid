@@ -83,7 +83,7 @@
                         </ul>
                         <div class="fcbox-line__actions">
                           <button type="button" class="fcbox-edit" data-box-open="{{ item.properties._box_format | escape }}">Edit box</button>
-                          <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="fcbox-edit fcbox-edit--remove">Remove box</a>
+                          <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="fcbox-edit fcbox-edit--remove fa-icon" aria-label="Remove box">{{ 'tf2ed' | t }}</a>
                         </div>
                         </div>
                       {%- endif -%}
