@@ -1,5 +1,5 @@
-/* Cart page: white background with black type and gold actions, matching the PLP and PDP.
-   Scoped to the cart page section; the slide-out mini cart is not touched. */
+/* Cart page and slide-out mini cart: white background with black type and gold actions,
+   matching the PLP and PDP. Loaded site-wide from layout/theme.liquid for the mini cart. */
 
 .section_cart-page { background: #fff; color: #000; font-family: Avenirnextltpro, "Avenir Next", sans-serif; }
 .section_cart-page .cart-form, .section_cart-page .cart-item_info { color: #000; }
@@ -48,6 +48,26 @@
 .section_cart-page .btn.mobile-stretch { border: 0; background: #d2a014; color: #fff; }
 .section_cart-page .btn.mobile-stretch:hover { filter: brightness(.9); }
 .section_cart-page .btn:focus-visible, .section_cart-page .fcbox-edit:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+
+/* Slide-out mini cart (sections/navbar.liquid) */
+.cart_container { background: #fff; color: #000; font-family: Avenirnextltpro, "Avenir Next", sans-serif; }
+.cart_container .mini-cart-header { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, .1); }
+.cart_container .mini-cart_header-text {
+  color: #000; font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif;
+  font-weight: 700; font-size: 28px; line-height: 1; text-transform: uppercase;
+}
+.cart_container .fa-icon.is-minicart, .cart_container .close-button { color: #000; }
+.cart_container .cart-item { margin: 0; padding: 16px 0; border-bottom: 1px solid rgba(0, 0, 0, .1); }
+.cart_container .minicart-img { border-radius: 12px; background: #f3f3f3; }
+.cart_container .p-medium.is-minicart { color: #000; font-weight: 600; line-height: 1.3; }
+.cart_container .product-price.is-minicart { color: #000; font-weight: 700; }
+.cart_container .input-number.is-minicart { border: 1.5px solid #000; border-radius: 2.2px; background: #fff; color: #000; }
+.cart_container .mini-cart-footer { background: #fff; border-top: 1px solid rgba(0, 0, 0, .1); }
+.cart_container .btn-stretched.secondary {
+  min-height: 53px; border: 0; border-radius: 2.2px; background: #d2a014; color: #fff;
+  font-weight: 700; font-size: 18px; text-transform: uppercase;
+}
+.cart_container .btn-stretched.secondary:hover { background: #d2a014; color: #fff; filter: brightness(.9); }
 
 @media (max-width: 767px) {
   .section_cart-page .h3 { font-size: 36px; }
