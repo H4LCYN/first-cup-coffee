@@ -139,8 +139,9 @@ html.fcbox-open .fcbox-fab { display: none; }
 .fcbox-notes .fc-box-btn:hover { background: none; color: var(--fcbox-gold); filter: brightness(.85); }
 .fcbox-notes .fc-box-tag { display: none; }
 /* Box line in the cart page and the mini cart: bordered, one coffee per line, Edit / Remove. */
-.section_cart-page .cart-item_grid.fcbox-line, .cart_container .cart-item.fcbox-line {
-  margin: 12px 0; padding: 16px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px;
+/* The card is a wrapper inside the row, so the row keeps its own padding and divider line. */
+.section_cart-page .fcbox-line, .cart_container .fcbox-line {
+  padding: 16px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px;
 }
 .fcbox-line__items { margin: 8px 0 0; padding: 0; list-style: none; color: #000; font-size: 15px; line-height: 1.4; }
 .fcbox-line__items li { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--fcbox-line); }
@@ -150,17 +151,20 @@ html.fcbox-open .fcbox-fab { display: none; }
 .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1.41fr .5fr; }
 /* Cart page: the coffee list and actions span the whole line, under the title and price. */
 .section_cart-page .fcbox-line__details { grid-column: 1 / -1; }
-.section_cart-page .cart-item_grid.fcbox-line { row-gap: 0; margin-bottom: 28px; }
+.section_cart-page .cart-item_grid > .fcbox-line { grid-column: 1 / -1; display: grid; grid-template-columns: 2.3fr .4fr; column-gap: 16px; align-items: start; }
 .section_cart-page .fcbox-line .cart-item_component { margin-bottom: 0; }
 /* Mini cart box line: title and price share the top row; the coffee list and actions run full width below. */
-.cart_container .cart-item.fcbox-line { flex-wrap: wrap; align-items: flex-start; column-gap: 12px; }
+.cart_container .cart-item > .fcbox-line { flex: 1; display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 12px; }
 .cart_container .fcbox-line .minicart_prod-info-wrapper { display: contents; }
 .cart_container .fcbox-line .w-commerce-commercecartproductname { flex: 1; order: 0; }
 .cart_container .fcbox-line .div-block-7 { order: 1; align-self: flex-start; }
 .cart_container .fcbox-line .fcbox-line__items { order: 2; flex-basis: 100%; }
 .cart_container .fcbox-line .fcbox-line__actions { order: 3; flex-basis: 100%; }
 .cart_container .fcbox-line .minicart_prod-info-wrapper > div:has(.input-number-group) { display: none; }
-@media (max-width: 767px) { .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1fr; } }
+@media (max-width: 767px) {
+  .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1fr; }
+  .section_cart-page .cart-item_grid > .fcbox-line { grid-template-columns: 2.2fr .5fr; }
+}
 .fcbox-line__items li:first-child { border-top: 0; }
 .fcbox-line__actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; }
 .fcbox-line__actions .fcbox-edit { margin-top: 0; font-weight: 700; color: #000; text-decoration: underline; }

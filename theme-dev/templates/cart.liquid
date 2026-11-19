@@ -18,7 +18,7 @@
                     {%- assign box_lines = '' -%}
                     {%- assign other_lines = '' -%}
                     {%- for item in cart.items -%}
-                      {%- capture line_html -%}<div class="cart-item_grid{% if item.properties._box_format != blank %} fcbox-line{% endif %}">
+                      {%- capture line_html -%}<div class="cart-item_grid">{% if item.properties._box_format != blank %}<div class="fcbox-line">{% endif %}
                       <div class="cart-item_component">
                         <a href="{{ item.url }}" class="w-inline-block"><img src="{{ item.image | img_url: 'master' }}" loading="lazy" alt="{{ item.image.alt }}" class="cart-item-image"></a>
                         <div class="cart-item_wrapper">
@@ -91,7 +91,7 @@
                         </div>
                         </div>
                       {%- endif -%}
-                    </div>{%- endcapture -%}
+                    {% if item.properties._box_format != blank %}</div>{% endif %}</div>{%- endcapture -%}
                       {%- if item.properties._box_format != blank -%}
                         {%- assign box_lines = box_lines | append: line_html -%}
                       {%- else -%}
