@@ -25,10 +25,6 @@
                           <a href="{{ item.url }}" class="w-inline-block">
                             <div class="cart-item_info">
                               <div class="cart-item-title">{{ item.title }}</div>
-                              <div class="p-medium is-cart">{{ item.final_line_price | money }}</div>
-                              {%- unless item.properties._box_format != blank -%}
-                                <div class="p-medium is-cart">{%- render 'cart-item-properties', item: item -%}</div>
-                              {%- endunless -%}
                             </div>
                           </a>
                         </div>
@@ -101,8 +97,6 @@
                     <h3 class="h3">{{ 't10ade2ed' | t }}</h3>
                     {{ box_lines }}
                     {{ other_lines }}
-                    <div class="spacer-2"></div>
-                    <div class="home-dashed-rule_right"></div>
                   </div>
                   <div class="cart-footer"><textarea placeholder="{{ 't77790f97' | t }}" maxlength="5000" id="note" name="note" data-name="Note" class="cart-footer-text-area w-input">{{ cart.note }}</textarea>
                     <div id="w-node-_0c59d24f-7bac-3f4d-3277-ca12cab593e3-729082a5" class="cart-totals">
