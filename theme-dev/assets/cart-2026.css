@@ -51,7 +51,8 @@
 
 /* Slide-out mini cart (sections/navbar.liquid) */
 .cart_container { background: #fff; color: #000; font-family: Avenirnextltpro, "Avenir Next", sans-serif; }
-.cart_container .mini-cart-header { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, .1); }
+/* Sticky header stays above the scrolling notes and items (their buttons are position: relative). */
+.cart_container .mini-cart-header { z-index: 2; background: #fff; border-bottom: 1px solid rgba(0, 0, 0, .1); }
 .cart_container .mini-cart_header-text {
   color: #000; font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif;
   font-weight: 700; font-size: 28px; line-height: 1; text-transform: uppercase;

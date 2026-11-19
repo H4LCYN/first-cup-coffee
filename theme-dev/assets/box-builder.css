@@ -134,7 +134,7 @@ html.fcbox-open .fcbox-fab { display: none; }
 /* In the slide-out the note's action is a gold text link, not a button. */
 .fcbox-notes--mini .fc-box-btn, .fcbox-notes--mini .fc-box-btn--solid, .fcbox-notes--mini .fc-box-btn.has-tag {
   width: auto; min-height: 0; margin: 0; margin-left: 5px; padding: 0; border: 0; background: none; color: var(--fcbox-gold);
-  justify-content: flex-start; align-self: flex-start; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; z-index: -1;
+  justify-content: flex-start; align-self: flex-start; font-size: 15px; text-decoration: underline; text-underline-offset: 3px;
 }
 .fcbox-notes--mini .fc-box-btn:hover { background: none; color: var(--fcbox-gold); filter: brightness(.85); }
 .fcbox-notes--mini .fc-box-tag { display: none; }
