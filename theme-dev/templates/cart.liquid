@@ -35,7 +35,7 @@
                               <div class="p-medium is-cart">{{ item.final_line_price | money }}</div>
                               {%- if item.properties._box_format != blank -%}
                                 {%- comment -%} One coffee per line; Contents is "1X Name (Texture), 2X Name" (assets/box-builder.js). {%- endcomment -%}
-                                <ul class="fcbox-line__items">
+                                <ul class="fcbox-line__items"{% if item.properties._box_items == blank %} data-box-line="{{ item.key }}"{% endif %}>
                                   {%- if item.properties._box_items != blank -%}
                                     {%- comment -%} _box_items is "handle:variant:qty|…" {%- endcomment -%}
                                     {%- assign box_parts = item.properties._box_items | split: '|' -%}

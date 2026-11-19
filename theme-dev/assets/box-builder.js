@@ -715,7 +715,8 @@
   /* ---------- mini cart: one image per coffee in a box line ---------- */
 
   // The slide-out template can't see underscore properties, so read _box_items from /cart.js
-  // and rebuild each box line's list (navbar.liquid tags it with data-box-line = line key).
+  // and rebuild each box line's list (tagged with data-box-line = line key in navbar.liquid,
+  // and in cart.liquid when the line has no _box_items for Liquid to use).
   var decorating = false;
   function decorateMiniCart() {
     var lists = document.querySelectorAll('.fcbox-line__items[data-box-line]:not([data-box-done])');
@@ -725,9 +726,12 @@
       return Promise.all([].map.call(lists, function (ul) {
         ul.setAttribute('data-box-done', '');
         var line = cart.items.filter(function (i) { return i.key === ul.getAttribute('data-box-line'); })[0];
-        var raw = line && line.properties && line.properties._box_items;
-        if (!raw) return null;
-        var parts = raw.split('|').map(function (s) { var a = s.split(':'); return { h: a[0], v: Number(a[1]), q: Number(a[2]) }; });
+        var props = (line && line.properties) || {};
+        var parts = props._box_items
+          ? props._box_items.split('|').map(function (s) { var a = s.split(':'); return { h: a[0], v: Number(a[1]), q: Number(a[2]) }; })
+          // Lines added before _box_items existed: fall back to the box saved in the cookie.
+          : (state[props._box_format] && state[props._box_format].inCart ? state[props._box_format].items : []);
+        if (!parts.length) return null;
         return Promise.all(parts.map(function (p) { return ensureInfo(p.h).catch(function () { return null; }); })).then(function () {
           ul.innerHTML = parts.map(function (p) {
             var pi = info[p.h];
