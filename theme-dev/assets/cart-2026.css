@@ -22,6 +22,7 @@
 .section_cart-page .cart-item_info .p-medium.is-cart + .p-medium.is-cart { font-weight: 400; font-size: 14px; opacity: .75; }
 .section_cart-page .product-price.compare-at { color: rgba(0, 0, 0, .5); font-size: 14px; text-decoration: line-through; }
 .section_cart-page .product-price.compare-at:empty { display: none; }
+.section_cart-page .cart-item_total { align-items: baseline; gap: 8px; }
 .section_cart-page .cart-item_total .p-medium.is-cart { font-weight: 700; }
 .section_cart-page a { color: inherit; text-decoration: none; }
 
