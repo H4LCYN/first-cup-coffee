@@ -595,6 +595,9 @@
   /* ---------- events ---------- */
 
   document.addEventListener('click', function (e) {
+    // The Subscribe & Save page is retired: any link still pointing at it opens the box menu instead.
+    var oldPage = e.target.closest('a[href*="/pages/subscribe-save"]');
+    if (oldPage) { e.preventDefault(); open(''); return; }
     var t = e.target.closest('[data-box-add],[data-box-open],[data-box-fab],[data-box-close],[data-box-tab],[data-box-pick],[data-box-qty],[data-box-action],[data-box-format-pick],[data-box-add-variant]');
     if (!t) return;
 

@@ -15,20 +15,26 @@
                 <a href="{% if section.settings.coffee_link %}{{ section.settings.coffee_link }}{% else %}/collections/coffee{% endif %}" class="nav_menu-links-wrapper w-inline-block">
                   <div class="nav_link">{{ 't76ced3cc' | t }}</div>
                 </a>
+                {%- comment -%}
+                  Join the Club opens the box builder menu (assets/box-builder.js) unless a link is set.
+                  Without JS, or with the box builder off, it falls back to the bag subscription collection.
+                {%- endcomment -%}
                 {%- if section.settings.join_club_link != blank -%}
                   {%- assign join_club_url = section.settings.join_club_link -%}
+                  {%- assign join_club_box = false -%}
                 {%- else -%}
-                  {%- assign join_club_url = '/pages/subscribe-save' -%}
+                  {%- assign join_club_url = settings.box_bag_collection | default: '1-lb-bag-subscription' | prepend: '/collections/' -%}
+                  {%- assign join_club_box = true -%}
                 {%- endif -%}
-                {%- comment -%} Skip menu items that point at the Join the Club page (e.g. "Choose Your Plan") so it isn't listed twice. {%- endcomment -%}
+                {%- comment -%} Skip menu items that point at Join the Club or the retired Subscribe & Save page (e.g. "Choose Your Plan"). {%- endcomment -%}
                 {%- for link in section.settings.main_nav_menu.links -%}
-                  {%- if link.url == join_club_url -%}{%- continue -%}{%- endif -%}
+                  {%- if link.url == join_club_url or link.url contains '/pages/subscribe-save' -%}{%- continue -%}{%- endif -%}
                   <a href="{{ link.url }}" class="nav_menu-links-wrapper w-inline-block">
                     <div class="nav_link">{{ link.title }}</div>
                   </a>
                 {%- endfor -%}
                 {%- comment -%} Gold call-to-action at the end of the menu, per the 2026 nav design. {%- endcomment -%}
-                <a href="{{ join_club_url }}" class="nav_menu-links-wrapper w-inline-block is-highlight">
+                <a href="{{ join_club_url }}"{% if join_club_box and settings.box_enabled != false %} data-box-open=""{% endif %} class="nav_menu-links-wrapper w-inline-block is-highlight">
                   <div class="nav_link">{{ section.settings.join_club_text | escape }}</div>
                 </a>
               </div>
@@ -168,7 +174,7 @@
       "id": "join_club_link",
       "label": "Join the Club link",
       "type": "url",
-      "info": "Defaults to /pages/subscribe-save."
+      "info": "Leave empty to open the Box Builder menu."
     },
     {
       "type": "header",
