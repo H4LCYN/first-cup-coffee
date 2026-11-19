@@ -31,7 +31,6 @@
                           <a href="{{ item.url }}" class="w-inline-block">
                             <div class="cart-item_info">
                               <div class="cart-item-title">{{ item.title }}</div>
-                              <div class="product-price compare-at">{{ item.variant.compare_at_price  | money }}</div>
                               <div class="p-medium is-cart">{{ item.final_line_price | money }}</div>
                               {%- unless item.properties._box_format != blank -%}
                                 <div class="p-medium is-cart">{%- render 'cart-item-properties', item: item -%}</div>
@@ -64,6 +63,8 @@
                         </div>
                       </div>
                       <div id="w-node-e20065b3-02ae-3d79-6441-1b44f03b5d70-729082a5" class="cart-item_total">
+                        {%- assign line_compare = item.variant.compare_at_price | times: item.quantity -%}
+                        {%- if line_compare > item.final_line_price -%}<div class="product-price compare-at">{{ line_compare | money }}</div>{%- endif -%}
                         <div class="p-medium is-cart">{{ item.final_line_price | money }}</div>
                       </div>
                       {%- if item.properties._box_format != blank -%}

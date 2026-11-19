@@ -745,9 +745,35 @@
       }));
     }).catch(function () {}).then(function () { decorating = false; decorateMiniCart(); });
   }
-  new MutationObserver(decorateMiniCart).observe(document.body, { childList: true, subtree: true });
+  // Mini cart strikethrough: cart data has no compare-at price, so read it from the product.
+  var compareCache = {};
+  function decorateComparePrices() {
+    [].forEach.call(document.querySelectorAll('[data-compare-variant]:not([data-compare-done])'), function (el) {
+      el.setAttribute('data-compare-done', '');
+      var qty = Number(el.getAttribute('data-compare-qty')) || 1;
+      var vid = Number(el.getAttribute('data-compare-variant'));
+      function show(compare, price) {
+        if (!(compare > price)) return;
+        el.textContent = money(compare * qty);
+        el.hidden = false;
+      }
+      // Box bundle variants are already in the config (the bundle product has no public .js).
+      var boxV = ORDER.map(function (k) { return FORMATS[k].variants.filter(function (v) { return v.id === vid; })[0]; }).filter(Boolean)[0];
+      if (boxV) { show(boxV.compareAt, boxV.price); return; }
+      var handle = el.getAttribute('data-compare-handle');
+      if (!handle) return;
+      compareCache[handle] = compareCache[handle] || fetch(CFG.root + 'products/' + encodeURIComponent(handle) + '.js')
+        .then(function (res) { return res.ok ? res.json() : null; }).catch(function () { return null; });
+      compareCache[handle].then(function (p) {
+        var v = p && p.variants.filter(function (x) { return x.id === vid; })[0];
+        if (v) show(v.compare_at_price, v.price);
+      });
+    });
+  }
+  new MutationObserver(function () { decorateMiniCart(); decorateComparePrices(); }).observe(document.body, { childList: true, subtree: true });
 
   render();
   reconcile();
   decorateMiniCart();
+  decorateComparePrices();
 })();
