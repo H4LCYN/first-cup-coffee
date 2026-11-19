@@ -24,7 +24,15 @@
                         <div class="cart-item_wrapper">
                           <a href="{{ item.url }}" class="w-inline-block">
                             <div class="cart-item_info">
-                              <div class="cart-item-title">{{ item.title }}</div>
+                              {%- comment -%} Box lines: "Product - 3 Bags - 60 Days" (variant, then the delivery interval from the plan name). {%- endcomment -%}
+                              <div class="cart-item-title">
+                                {%- if item.properties._box_format != blank -%}
+                                  {{ item.product.title }} - {{ item.variant.title }}
+                                  {%- if item.selling_plan_allocation %} - {{ item.selling_plan_allocation.selling_plan.name | split: 'every ' | last }}{% endif -%}
+                                {%- else -%}
+                                  {{ item.title }}
+                                {%- endif -%}
+                              </div>
                             </div>
                           </a>
                         </div>

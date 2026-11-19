@@ -141,7 +141,7 @@ html.fcbox-open .fcbox-fab { display: none; }
 /* Box line in the cart page and the mini cart: bordered, one coffee per line, Edit / Remove. */
 /* The card is a wrapper inside the row, so the row keeps its own padding and divider line. */
 .section_cart-page .fcbox-line, .cart_container .fcbox-line {
-  padding: 16px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px;
+  padding: 16px; border: 1.5px solid var(--uniform-green); border-radius: 8px;
 }
 .fcbox-line__items { margin: 8px 0 0; padding: 0; list-style: none; color: #000; font-size: 15px; line-height: 1.4; }
 .fcbox-line__items li { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--fcbox-line); }
@@ -156,7 +156,10 @@ html.fcbox-open .fcbox-fab { display: none; }
 /* Mini cart box line: title and price share the top row; the coffee list and actions run full width below. */
 .cart_container .cart-item > .fcbox-line { flex: 1; display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 12px; }
 .cart_container .fcbox-line .minicart_prod-info-wrapper { display: contents; }
-.cart_container .fcbox-line .w-commerce-commercecartproductname { flex: 1; order: 0; }
+.cart_container .fcbox-line .w-commerce-commercecartproductname {
+  flex: 1; order: 0; font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif; font-weight: 700; font-size: 20px;
+  line-height: 1.05; text-transform: uppercase;
+}
 .cart_container .fcbox-line .div-block-7 { order: 1; align-self: flex-start; }
 .cart_container .fcbox-line .fcbox-line__items { order: 2; flex-basis: 100%; }
 .cart_container .fcbox-line .fcbox-line__actions { order: 3; flex-basis: 100%; }
