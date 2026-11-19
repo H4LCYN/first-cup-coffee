@@ -183,13 +183,14 @@
       </fieldset>
     </div>
 
+    {%- comment -%} Create a Box leads (solid); Add to cart then turns outline. See .fbb .fc-box-btn in main-product-feature. {%- endcomment -%}
+    {%- if has_bundle -%}
+      {%- render 'box-button', product: product, variant: current, class: 'fc-box-btn--dark fc-box-btn--solid' -%}
+    {%- endif -%}
     <button type="button" class="fbb__add" data-fbb-add aria-busy="false">
       <span data-fbb-add-label>{{ s.add_to_cart_label | default: 'Add to cart' }}</span>
     </button>
     <p class="fbb__error" data-fbb-error role="alert" hidden></p>
-    {%- if has_bundle -%}
-      {%- render 'box-button', product: product, variant: current, class: 'fc-box-btn--dark' -%}
-    {%- endif -%}
   </form>
 </div>
 

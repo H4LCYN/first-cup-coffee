@@ -218,6 +218,13 @@
   .fbb__add:hover:not(:disabled) { filter: brightness(0.9); }
   .fbb__add:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   .fbb__add:disabled { opacity: .5; cursor: not-allowed; }
+  /* With a visible Create a Box button above it, Add to cart steps back to an outline. */
+  .fbb .fc-box-btn--solid { background: var(--fpf-accent); border-color: var(--fpf-accent); }
+  .fbb .fc-box-btn:not([hidden]) ~ .fbb__add {
+    margin-top: -16px; /* 30px form gap - 16 = 14px between the two buttons */
+    border: 1.5px solid var(--fpf-accent); background: transparent; line-height: 35px;
+  }
+  .fbb .fc-box-btn:not([hidden]) ~ .fbb__add:hover:not(:disabled) { background: var(--fpf-accent); filter: none; }
   .fbb__error { margin: 12px 0 0; font-family: Avenirnextltpro, sans-serif; font-size: 14px; color: #ff6b61; }
 
   /* Feature area */
