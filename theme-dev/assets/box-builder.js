@@ -378,7 +378,7 @@
     else if (count >= cap) progress += '. Your box is full.';
     html += '<p class="fcbox__progress">' + progress + '</p>';
 
-    html += '<p class="fcbox__message">All boxes are eligible for <b>FREE SHIPPING!</b></p>';
+    html += '<p class="fcbox__message">All subscriptions are eligible for <b>FREE SHIPPING!</b></p>';
     if (ui.message) html += '<p class="fcbox__message" role="status">' + esc(ui.message) + '</p>';
 
     // Items
