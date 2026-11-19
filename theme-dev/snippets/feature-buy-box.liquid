@@ -187,6 +187,9 @@
       <span data-fbb-add-label>{{ s.add_to_cart_label | default: 'Add to cart' }}</span>
     </button>
     <p class="fbb__error" data-fbb-error role="alert" hidden></p>
+    {%- if has_bundle -%}
+      {%- render 'box-button', product: product, variant: current, class: 'fc-box-btn--dark' -%}
+    {%- endif -%}
   </form>
 </div>
 

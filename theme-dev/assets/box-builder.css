@@ -1,0 +1,141 @@
+/* Subscription box builder: buttons, floating "Your Box" pill, drawer, cart note.
+   White panel with black type and gold actions, matching the PLP and PDP. */
+
+:root { --fcbox-gold: #d2a014; --fcbox-ink: #111; --fcbox-line: rgba(0, 0, 0, .2); --fcbox-red: #c33a31; }
+
+html.fcbox-open { overflow: hidden; }
+
+/* Buttons ---------------------------------------------------------------- */
+.fc-box-btn {
+  position: relative; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 44px; padding: 14px 18px; border: 1.5px solid var(--fcbox-gold); border-radius: 2.2px;
+  background: transparent; color: #111; cursor: pointer;
+  font-family: Avenirnextltpro, "Avenir Next", sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2;
+  letter-spacing: .02em; text-transform: uppercase; transition: background-color .15s, color .15s, filter .15s;
+}
+.fc-box-btn[hidden] { display: none; }
+.fc-box-btn:hover, .fc-box-btn.is-active { background: var(--fcbox-gold); color: #fff; }
+.fc-box-btn:focus-visible { outline: 2px solid var(--fcbox-ink); outline-offset: 3px; }
+.fc-box-btn.has-tag { margin-top: 16px; }
+/* Solid gold: PLP cards and the cart prompt. */
+.fc-box-btn--card, .fc-box-btn--solid { background: var(--fcbox-gold); color: #fff; }
+.fc-box-btn--card:hover, .fc-box-btn--solid:hover { filter: brightness(.9); }
+.fc-box-btn--dark { color: #fff; max-width: 468px; margin-top: 14px; font-size: 18px; min-height: 53px; }
+.fc-box-btn--dark:focus-visible { outline-color: #fff; }
+.fc-box-btn--legacy { margin-top: 12px; }
+.fc-box-btn--dark.has-tag, .fc-box-btn--legacy.has-tag { margin-top: 26px; }
+@media (max-width: 767px) { .fc-box-btn--dark { max-width: none; } }
+
+/* Red pill above every box button ("Save up to 15%"), matching the Most Popular tags. */
+.fc-box-tag {
+  position: absolute; left: 50%; bottom: calc(100% - 6px); transform: translateX(-50%);
+  padding: 3px 9px; border: 1px solid var(--fcbox-gold); border-radius: 6px; background: var(--fcbox-red); color: #fff;
+  font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif; font-weight: 700; font-size: 12px; line-height: 1.25;
+  letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; pointer-events: none;
+}
+
+/* Floating pill ---------------------------------------------------------- */
+.fcbox-fab {
+  position: fixed; right: 20px; bottom: 20px; z-index: 9000; display: inline-flex; align-items: center; gap: 10px;
+  min-height: 48px; padding: 8px 10px 8px 18px; border: 0; border-radius: 999px; background: var(--fcbox-ink); color: #fff; cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+  font-family: Avenirnextltpro, "Avenir Next", sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .04em;
+}
+.fcbox-fab[hidden] { display: none; }
+.fcbox-fab__count { min-width: 32px; padding: 6px 9px; border-radius: 999px; background: var(--fcbox-gold); text-align: center; }
+.fcbox-fab:focus-visible { outline: 2px solid var(--fcbox-gold); outline-offset: 3px; }
+html.fcbox-open .fcbox-fab { display: none; }
+
+/* Drawer ----------------------------------------------------------------- */
+.fcbox { position: fixed; inset: 0; z-index: 9500; }
+.fcbox[hidden] { display: none; }
+.fcbox__scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .55); }
+.fcbox__panel {
+  position: absolute; top: 0; right: 0; bottom: 0; width: min(440px, 100%); display: flex; flex-direction: column;
+  background: #fff; color: var(--fcbox-ink); outline: 0; font-family: Avenirnextltpro, "Avenir Next", sans-serif;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, .2); animation: fcbox-in .2s ease-out;
+}
+@keyframes fcbox-in { from { transform: translateX(100%); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .fcbox__panel { animation: none; } }
+
+.fcbox__head { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 12px; }
+.fcbox__title { margin: 0; color: var(--fcbox-ink); font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif; font-weight: 700; font-size: 30px; line-height: 1.1; text-transform: uppercase; }
+.fcbox__close { width: 44px; height: 44px; margin-right: -10px; border: 0; background: none; color: var(--fcbox-ink); font-size: 32px; line-height: 1; cursor: pointer; }
+.fcbox__body { flex: 1; overflow-y: auto; padding: 0 24px 24px; display: flex; flex-direction: column; gap: 18px; }
+.fcbox button:focus-visible, .fcbox a:focus-visible, .fcbox input:focus-visible + .fcbox__pill { outline: 2px solid var(--fcbox-ink); outline-offset: 2px; }
+
+.fcbox__eyebrow { margin: 0; color: var(--fcbox-gold); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; }
+.fcbox__tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.fcbox__tab { min-height: 40px; padding: 6px 12px; border: 1.5px solid var(--fcbox-ink); border-radius: 2.2px; background: none; color: var(--fcbox-ink); font: inherit; font-weight: 700; font-size: 13px; text-transform: uppercase; cursor: pointer; }
+.fcbox__tab[aria-selected="true"] { border-color: var(--fcbox-gold); background: var(--fcbox-gold); color: #fff; }
+.fcbox__tab-n { opacity: .8; }
+
+.fcbox__slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.fcbox__slot { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1.5px dashed var(--fcbox-line); border-radius: 12px; background: #f6f6f6; color: rgba(0, 0, 0, .35); font-size: 26px; overflow: hidden; }
+.fcbox__slot.is-filled { border: 1.5px solid var(--fcbox-gold); background: #fff; }
+.fcbox__slot img { width: 100%; height: 100%; object-fit: contain; }
+.fcbox__progress, .fcbox__message { margin: 0; font-size: 15px; line-height: 1.4; }
+.fcbox__message { padding: 10px 12px; border-left: 3px solid var(--fcbox-gold); background: #f6f6f6; }
+
+.fcbox__pending { padding: 14px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px; }
+.fcbox__pending-title { margin: 0 0 10px; font-weight: 700; font-size: 15px; }
+.fcbox__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.fcbox__pill { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 6px 14px; border: 1.5px solid var(--fcbox-ink); border-radius: 2.2px; background: #fff; color: var(--fcbox-ink); font: inherit; font-weight: 700; font-size: 14px; text-transform: uppercase; cursor: pointer; }
+.fcbox__pill:disabled { opacity: .45; cursor: not-allowed; }
+.fcbox__pill-wrap { position: relative; }
+.fcbox__pill-wrap input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.fcbox__pill-wrap input:checked + .fcbox__pill, button.fcbox__pill:hover:not(:disabled) { border-color: var(--fcbox-gold); background: var(--fcbox-gold); color: #fff; }
+
+.fcbox__items { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.fcbox__item { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; }
+.fcbox__item-img { width: 56px; height: 56px; border-radius: 8px; background: #f6f6f6; object-fit: contain; }
+.fcbox__item-text { display: flex; flex-direction: column; min-width: 0; }
+.fcbox__item-title { font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif; font-weight: 700; font-size: 18px; line-height: 1.15; text-transform: uppercase; }
+.fcbox__item-variant { font-size: 13px; opacity: .75; }
+.fcbox__qty { display: flex; align-items: center; border: 1.5px solid var(--fcbox-ink); border-radius: 2.2px; }
+.fcbox__qty button { width: 40px; height: 40px; border: 0; background: none; color: var(--fcbox-ink); font-size: 20px; cursor: pointer; }
+.fcbox__qty button:disabled { opacity: .35; cursor: not-allowed; }
+.fcbox__qty span { min-width: 22px; text-align: center; font-weight: 700; }
+
+.fcbox__plans { margin: 0; padding: 0; border: 0; min-width: 0; }
+.fcbox__plans legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; color: var(--fcbox-ink); }
+
+.fcbox__foot { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--fcbox-line); display: flex; flex-direction: column; gap: 12px; }
+.fcbox__total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 15px; }
+.fcbox__total s { opacity: .6; }
+.fcbox__total strong { font-size: 20px; }
+.fcbox__tag { display: inline-block; padding: 2px 6px; border-radius: 2px; background: var(--fcbox-red); color: #fff; font-style: normal; font-weight: 700; font-size: 12px; text-transform: uppercase; }
+.fcbox__error { margin: 0; font-size: 14px; color: #b3261e; }
+.fcbox__error[hidden] { display: none; }
+.fcbox__cta { width: 100%; min-height: 53px; border: 0; border-radius: 2.2px; background: var(--fcbox-gold); color: #fff; font: inherit; font-weight: 700; font-size: 18px; text-transform: uppercase; cursor: pointer; }
+.fcbox__cta:hover:not(:disabled) { filter: brightness(.9); }
+.fcbox__cta:disabled { opacity: .5; cursor: not-allowed; }
+.fcbox__links { display: flex; justify-content: space-between; }
+.fcbox__links button, .fcbox__links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; background: none; color: var(--fcbox-ink); font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
+
+/* Cart prompt (cart page and slide-out mini cart) -------------------------- */
+.fcbox-notes[hidden] { display: none; }
+.fcbox-note { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; padding: 16px 18px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px; }
+.fcbox-note__text { margin: 0; font-size: 16px; line-height: 1.4; }
+.fcbox-note .fc-box-btn { width: 100%; min-height: 53px; font-size: 18px; }
+.fcbox-notes--mini { padding: 14px 12px 0; }
+.fcbox-notes--mini .fcbox-note { margin-bottom: 0; }
+.fcbox-edit { display: inline-block; margin-top: 6px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
+
+/* Guided start: format chooser and the coffee picker inside the box ------- */
+.fcbox__step { margin: 0; color: var(--fcbox-ink); font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.1; text-transform: uppercase; }
+.fcbox__formats { display: grid; gap: 12px; }
+.fcbox__format { display: grid; grid-template-columns: 84px 1fr; grid-template-rows: 1fr 1fr; column-gap: 14px; row-gap: 4px; padding: 12px; border: 1.5px solid var(--fcbox-ink); border-radius: 12px; background: #fff; color: var(--fcbox-ink); text-align: left; font: inherit; cursor: pointer; }
+.fcbox__format:hover { border-color: var(--fcbox-gold); background: #fdf7e6; }
+.fcbox__format img { grid-row: 1 / 3; width: 84px; height: 84px; object-fit: contain; }
+.fcbox__format-name { grid-column: 2; align-self: end; font-family: "Avenir Next Condensed", Avenirnextltpro, sans-serif; font-weight: 700; font-size: 24px; line-height: 1; text-transform: uppercase; }
+.fcbox__format-note { grid-column: 2; align-self: start; color: var(--fcbox-red); font-weight: 700; font-size: 13px; text-transform: uppercase; }
+.fcbox__picker { display: flex; flex-direction: column; gap: 14px; }
+.fcbox__choices { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.fcbox__choice { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: start; }
+.fcbox__choice-main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.fcbox__pill--add { min-height: 40px; padding: 4px 12px; font-size: 13px; }
+.fcbox__progress a { color: inherit; text-decoration: underline; }
+/* The picker makes the box long, so the total and Subscribe button stay pinned. */
+.fcbox__body { padding-bottom: 0; }
+.fcbox__foot { position: sticky; bottom: 0; z-index: 1; padding-bottom: 16px; background: #fff; }

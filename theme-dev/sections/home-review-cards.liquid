@@ -1,0 +1,53 @@
+{%- comment -%}
+  Curated static customer review excerpts (user-approved 2026-11-07). Verbatim excerpts from
+  Judge.me published 5/5 reviews labelled "This is a verified review" in Judge.me.
+  Source audit: Judge.me review IDs 1410657098, 1410657128, 1410657119, 1410657092.
+  Not an aggregate rating; not connected to the Judge.me widget.
+{%- endcomment -%}
+<section class="fc-reviews" aria-labelledby="fc-reviews-heading">
+  <div class="fc-reviews__inner">
+    <p class="fc-reviews__eyebrow">Customer review excerpts</p>
+    <h2 id="fc-reviews-heading" class="fc-reviews__heading">What customers are saying</h2>
+    <div class="fc-reviews__grid">
+      <figure class="fc-rev-card">
+        <div class="fc-rev-stars" role="img" aria-label="Rated 5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+        <blockquote class="fc-rev-quote"><p>“Best coffee i have had.It’s great after dinner with a sweet snack.”</p></blockquote>
+        <figcaption class="fc-rev-meta"><span class="fc-rev-name">Mark</span><span class="fc-rev-product">Pod Coffee Subscription - 24 Count</span><span class="fc-rev-foot"><span class="fc-rev-verified">Verified review</span> · <time datetime="2026-01-25">Jan 25, 2026</time></span></figcaption>
+      </figure>
+      <figure class="fc-rev-card">
+        <div class="fc-rev-stars" role="img" aria-label="Rated 5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+        <blockquote class="fc-rev-quote"><p>“I love this coffee, have purchased many times in 1lb bags. Graduated to the 5lb bag!!”</p></blockquote>
+        <figcaption class="fc-rev-meta"><span class="fc-rev-name">Nancy</span><span class="fc-rev-product">5lb Coffee Subscription - Ground</span><span class="fc-rev-foot"><span class="fc-rev-verified">Verified review</span> · <time datetime="2025-04-23">Apr 23, 2025</time></span></figcaption>
+      </figure>
+      <figure class="fc-rev-card">
+        <div class="fc-rev-stars" role="img" aria-label="Rated 5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+        <blockquote class="fc-rev-quote"><p>“Makes a fantastic cup of coffee using drip, cold brew, and by Keurig.”</p></blockquote>
+        <figcaption class="fc-rev-meta"><span class="fc-rev-name">Brian</span><span class="fc-rev-product">Coffee Club Subscription - Whole Bean</span><span class="fc-rev-foot"><span class="fc-rev-verified">Verified review</span> · <time datetime="2024-12-03">Dec 3, 2024</time></span></figcaption>
+      </figure>
+      <figure class="fc-rev-card">
+        <div class="fc-rev-stars" role="img" aria-label="Rated 5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+        <blockquote class="fc-rev-quote"><p>“The coffee tastes as excellent as it smells!”</p></blockquote>
+        <figcaption class="fc-rev-meta"><span class="fc-rev-name">Kathy</span><span class="fc-rev-product">Build A Custom Box</span><span class="fc-rev-foot"><span class="fc-rev-verified">Verified review</span> · <time datetime="2024-09-05">Sep 5, 2024</time></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<style>
+  .fc-reviews{background:#f6f1e6;color:#1d1d1b;padding:64px 20px}
+  .fc-reviews__inner{max-width:68rem;margin:0 auto;text-align:center}
+  .fc-reviews__eyebrow{margin:0 0 .5rem;font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3d441e}
+  .fc-reviews__heading{margin:0 0 2rem;font-size:2.4rem;line-height:1.1;color:#1d1d1b}
+  .fc-reviews__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25rem;text-align:left}
+  .fc-rev-card{margin:0;display:flex;flex-direction:column;gap:.85rem;background:#fff;border-top:4px solid #3d441e;border-radius:.6rem;padding:1.5rem 1.25rem;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .fc-rev-stars{color:#a76d11;font-size:1.15rem;letter-spacing:.1em;line-height:1}
+  .fc-rev-quote{margin:0;flex:1}
+  .fc-rev-quote p{margin:0;font-size:1.05rem;line-height:1.5;color:#1d1d1b}
+  .fc-rev-meta{display:flex;flex-direction:column;gap:.2rem;font-size:.9rem;line-height:1.35;color:#4a4a45}
+  .fc-rev-name{font-weight:700;color:#1d1d1b}
+  .fc-rev-verified{color:#3d441e;font-weight:600}
+  @media screen and (max-width:991px){.fc-reviews__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media screen and (max-width:479px){.fc-reviews{padding:44px 15px}.fc-reviews__heading{font-size:1.9rem}.fc-reviews__grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+{% schema %}
+{ "name": "Review excerpts", "settings": [], "presets": [{ "name": "Review excerpts" }] }
+{% endschema %}

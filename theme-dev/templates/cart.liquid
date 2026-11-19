@@ -6,12 +6,14 @@
     {%- section 'navbar' -%}
     {%- render 'preloader' -%}
     <main class="main-wrapper">
+      {{ 'cart-2026.css' | asset_url | stylesheet_tag }}
       <section class="section_cart-page">
         <div class="padding-global">
           <div class="container-large">
             <div class="padding-section-medium">
               <div class="cart-form w-form">
                 <form id="wf-form-Cart" name="wf-form-Cart" data-name="Cart" method="post" class="cart-form" data-wf-page-id="654d36a6d6abfe37729082a5" data-wf-element-id="0c59d24f-7bac-3f4d-3277-ca12cab593cf" action="{{ routes.cart_url }}">
+                  <div class="fcbox-notes" data-box-cart-panel hidden></div>
                   <div class="cart-items">
                     <h3 class="h3">{{ 't10ade2ed' | t }}</h3>
                     <div class="spacer-1"></div>
@@ -35,6 +37,9 @@
                               <div class="p-medium is-cart">{%- render 'cart-item-properties', item: item -%}</div>
                             </div>
                           </a>
+                          {%- if item.properties._box_format != blank -%}
+                            <button type="button" class="fcbox-edit" data-box-open="{{ item.properties._box_format | escape }}">Edit box</button>
+                          {%- endif -%}
                         </div>
                         <div id="w-node-_952baa3a-868a-a04c-c135-5dd9e90d483e-729082a5" class="cart-item_wrapper align-center">
                           <div class="udesly-input-wrapper">

@@ -18,6 +18,7 @@
                   <div class="mobile-product-header">
                     <div class="product_type">{{ product.type }}</div>
                     <h1 class="product_name">{{ product.title }}</h1>
+<!-- Start of Judge.me code --> <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'> {{ product.metafields.judgeme.badge }} </div> <!-- End of Judge.me code -->
                   </div>
                   <a href="#" class="product-lightbox w-inline-block w-lightbox"
                     ><img
@@ -53,6 +54,7 @@
                     <div class="desktop-product-header">
                       <div class="product_type">{{ product.type }}</div>
                       <h1 class="product_name">{{ product.title }}</h1>
+<!-- Start of Judge.me code --> <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'> {{ product.metafields.judgeme.badge }} </div> <!-- End of Judge.me code -->
                     </div>
                     <div data-commerce-type="variation-compare_at_price" class="product-price compare-at">
                       {{ product.selected_or_first_available_variant.compare_at_price | money }}
@@ -62,6 +64,7 @@
                       <p class="product_description-text">{{ product.metafields.udesly.description }}</p>
                       <div class="product_description-text">{{ product.description }}</div>
                     </div>
+                    {%- render 'format-switcher', product: product, legacy: true -%}
                     {%- if product.metafields.custom.subscription_type.value == 'Bag' -%}
                       <div class="subscription-product">
                         <div
@@ -529,6 +532,7 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
+                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -1012,6 +1016,7 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
+                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -1408,6 +1413,7 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
+                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -1456,6 +1462,7 @@
                   <div class="mobile-product-header">
                     <div class="product_type">{{ product.type }}</div>
                     <h1 class="product_name">{{ product.title }}</h1>
+<!-- Start of Judge.me code --> <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'> {{ product.metafields.judgeme.badge }} </div> <!-- End of Judge.me code -->
                   </div>
                   <a href="#" class="product-lightbox w-inline-block w-lightbox"
                     ><img
@@ -1491,6 +1498,7 @@
                     <div class="desktop-product-header">
                       <div class="product_type">{{ product.type }}</div>
                       <h1 class="product_name">{{ product.title }}</h1>
+<!-- Start of Judge.me code --> <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'> {{ product.metafields.judgeme.badge }} </div> <!-- End of Judge.me code -->
                     </div>
                     <div data-commerce-type="variation-compare_at_price" class="product-price compare-at">
                       {{ product.selected_or_first_available_variant.compare_at_price | money }}
@@ -1500,6 +1508,7 @@
                       <p class="product_description-text">{{ product.metafields.udesly.description }}</p>
                       <div class="product_description-text">{{ product.description }}</div>
                     </div>
+                    {%- render 'format-switcher', product: product, legacy: true -%}
                     <div class="default-product">
                       <div>
                         {%- form 'product',
@@ -1633,6 +1642,7 @@
                   <div class="mobile-product-header">
                     <div class="product_type">{{ product.type }}</div>
                     <h1 class="product_name">{{ product.title }}</h1>
+<!-- Start of Judge.me code --> <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'> {{ product.metafields.judgeme.badge }} </div> <!-- End of Judge.me code -->
                   </div>
                   <a href="#" class="product-lightbox w-inline-block w-lightbox"
                     ><img
@@ -1668,6 +1678,7 @@
                     <div class="desktop-product-header">
                       <div class="product_type">{{ product.type }}</div>
                       <h1 class="product_name">{{ product.title }}</h1>
+<!-- Start of Judge.me code --> <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'> {{ product.metafields.judgeme.badge }} </div> <!-- End of Judge.me code -->
                     </div>
                     <div data-commerce-type="variation-compare_at_price" class="product-price compare-at">
                       {{ product.selected_or_first_available_variant.compare_at_price | money }}
@@ -1677,6 +1688,7 @@
                       <p class="product_description-text">{{ product.metafields.udesly.description }}</p>
                       <div class="product_description-text">{{ product.description }}</div>
                     </div>
+                    {%- render 'format-switcher', product: product, legacy: true -%}
                     {%- if product.metafields.custom.subscription_type.value == 'Bag' -%}
                       <div class="subscription-product">
                         <div
@@ -2144,6 +2156,7 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
+                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -2627,6 +2640,7 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
+                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -3110,6 +3124,7 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
+                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -3244,6 +3259,7 @@
         </div>
       </div>
     {%- endif -%}
+    <div class="padding-global"><div class="container-large"><!-- Start of Judge.me code -->{% assign has_legacy = false %}{% if product.metafields.judgeme.widget.size > 20 %}{% assign has_legacy = true %}{% endif %}<div style='clear:both'></div><div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-product-id='{{ product.id }}' data-widget='review' data-auto-install='false' data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}' data-entry-point='review_widget.js' data-entry-key='review-widget/main.js'>{% if has_legacy %}<div class='jdgm-legacy-widget-content' style='display: none;'>{{ product.metafields.judgeme.widget }}</div>{% endif %}</div>{% if product.metafields.judgeme.review_widget_data %}<script>jdgm.data ||= {}; jdgm.data.reviewWidget ||= {}; jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}</script>{% endif %}<!-- End of Judge.me code --></div></div>
     <div class="section_related-products">
       <div class="padding-global">
         <div class="container-large">

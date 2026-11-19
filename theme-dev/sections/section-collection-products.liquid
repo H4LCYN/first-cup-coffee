@@ -95,7 +95,9 @@
         >
           {%- for item in collection.products -%}
             {%- assign roast = item.metafields.custom.roast_profile.value -%}
-            <a href="{{ item.url }}" role="listitem" class="plp-2026_card w-dyn-item">
+            {%- comment -%} The wrapper is the list item so the box button can sit outside the card link. {%- endcomment -%}
+            <div role="listitem" class="plp-2026_item w-dyn-item">
+            <a href="{{ item.url }}" class="plp-2026_card">
               <div class="plp-2026_card-media">
                 {%- if item.featured_image != blank -%}
                   <img
@@ -113,6 +115,7 @@
                 {%- if roast != blank -%}
                   <span class="plp-2026_card-roast">{{ roast }} {{ section.settings.roast_suffix }}</span>
                 {%- endif -%}
+                {%- render 'fc-tasting-notes', product_id: item.id -%}
                 <span fs-cmssort-field="Name" class="plp-2026_card-title">{{ item.title }}</span>
                 <span fs-cmssort-field="Price" class="plp-2026_card-price">{{ item.price | money }}</span>
               </div>
@@ -125,6 +128,8 @@
               <span fs-cmssort-field="Featured" class="plp-2026_card-hidden">{{ item.metafields.custom.featured.value }}</span>
               <span fs-cmsfilter-field="Package" class="plp-2026_card-hidden">{{ item.metafields.custom.packagetype.value }}</span>
             </a>
+            {%- render 'box-button', product: item, class: 'fc-box-btn--card' -%}
+            </div>
           {%- endfor -%}
         </div>
         </div>
@@ -405,6 +410,16 @@
     gap: 40px 60px;
   }
 
+  .plp-2026_item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .plp-2026_item .fc-box-btn {
+    margin-top: auto;
+  }
+
   .plp-2026_card {
     display: flex;
     flex-direction: column;
@@ -443,6 +458,15 @@
     font-size: 14px;
     line-height: 1.1;
     color: var(--butterscotch);
+  }
+
+  .plp-2026_card-notes {
+    font-family: Avenirnextltpro, sans-serif;
+    font-size: 13px;
+    line-height: 1.35;
+    text-transform: none;
+    color: #4a4a45;
+    max-width: 100%;
   }
 
   .plp-2026_card-title {
