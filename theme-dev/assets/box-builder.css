@@ -27,7 +27,7 @@ html.fcbox-open { overflow: hidden; }
 @media (max-width: 767px) { .fc-box-btn--dark { max-width: none; } }
 
 /* Standard PDP: Create a Box leads the options, then an "or" rule (templates/product.liquid). */
-.fc-box-lead { margin: 26px 0 24px; display: flex; flex-direction: column; gap: 22px; }
+.fc-box-lead { margin: 26px 0 24px; display: flex; flex-direction: column; gap: 28px; }
 .fc-box-lead:not(:has(.fc-box-btn:not([hidden]))) { display: none; }
 .fc-box-lead .fc-box-btn { margin-top: 0; min-height: 53px; font-size: 18px; }
 .fc-box-or {
