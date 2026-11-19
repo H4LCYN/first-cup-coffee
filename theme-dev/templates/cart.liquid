@@ -14,17 +14,11 @@
                 <form id="wf-form-Cart" name="wf-form-Cart" data-name="Cart" method="post" class="cart-form" data-wf-page-id="654d36a6d6abfe37729082a5" data-wf-element-id="0c59d24f-7bac-3f4d-3277-ca12cab593cf" action="{{ routes.cart_url }}">
                   <div class="fcbox-notes" data-box-cart-panel hidden></div>
                   <div class="cart-items">
-                    <h3 class="h3">{{ 't10ade2ed' | t }}</h3>
-                    <div class="spacer-1"></div>
-                    <div class="cart-label_grid">
-                      <div id="w-node-_0de1d94e-65b3-8655-e515-33335a9d2d49-729082a5" class="cart-label">{{ 't185958cf' | t }}</div>
-                      <div id="w-node-a795a532-aa55-41d4-b62d-020e8a6c6503-729082a5" class="cart-label is-quantity">{{ 'tn1df1ab75' | t }}</div>
-                      <div id="w-node-ec604839-7e00-6aeb-89a3-0b7e0b021b19-729082a5" class="cart-label">{{ 't4c4e324' | t }}</div>
-                    </div>
-                    <div class="spacer-1"></div>
-                    <div class="home-dashed-rule_right"></div>
-                    <div class="spacer-1"></div>
-                    {%- for item in cart.items -%}<div class="cart-item_grid{% if item.properties._box_format != blank %} fcbox-line{% endif %}">
+                    {%- comment -%} Box lines print above the column labels; everything else below them. {%- endcomment -%}
+                    {%- assign box_lines = '' -%}
+                    {%- assign other_lines = '' -%}
+                    {%- for item in cart.items -%}
+                      {%- capture line_html -%}<div class="cart-item_grid{% if item.properties._box_format != blank %} fcbox-line{% endif %}">
                       <div class="cart-item_component">
                         <a href="{{ item.url }}" class="w-inline-block"><img src="{{ item.image | img_url: 'master' }}" loading="lazy" alt="{{ item.image.alt }}" class="cart-item-image"></a>
                         <div class="cart-item_wrapper">
@@ -97,7 +91,27 @@
                         </div>
                         </div>
                       {%- endif -%}
-                    </div>{%- endfor -%}
+                    </div>{%- endcapture -%}
+                      {%- if item.properties._box_format != blank -%}
+                        {%- assign box_lines = box_lines | append: line_html -%}
+                      {%- else -%}
+                        {%- assign other_lines = other_lines | append: line_html -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <h3 class="h3">{{ 't10ade2ed' | t }}</h3>
+                    <div class="spacer-1"></div>
+                    {{ box_lines }}
+                    {%- if other_lines != blank -%}
+                    <div class="cart-label_grid">
+                      <div id="w-node-_0de1d94e-65b3-8655-e515-33335a9d2d49-729082a5" class="cart-label">{{ 't185958cf' | t }}</div>
+                      <div id="w-node-a795a532-aa55-41d4-b62d-020e8a6c6503-729082a5" class="cart-label is-quantity">{{ 'tn1df1ab75' | t }}</div>
+                      <div id="w-node-ec604839-7e00-6aeb-89a3-0b7e0b021b19-729082a5" class="cart-label">{{ 't4c4e324' | t }}</div>
+                    </div>
+                    <div class="spacer-1"></div>
+                    <div class="home-dashed-rule_right"></div>
+                    <div class="spacer-1"></div>
+                    {{ other_lines }}
+                    {%- endif -%}
                     <div class="spacer-2"></div>
                     <div class="home-dashed-rule_right"></div>
                   </div>
