@@ -62,7 +62,7 @@ html.fcbox-open .fcbox-fab { display: none; }
 .fcbox[hidden] { display: none; }
 .fcbox__scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .55); }
 .fcbox__panel {
-  position: absolute; top: 0; right: 0; bottom: 0; width: min(440px, 100%); display: flex; flex-direction: column;
+  position: absolute; top: 0; right: 0; bottom: 0; width: min(480px, 100%); display: flex; flex-direction: column;
   background: #fff; color: var(--fcbox-ink); outline: 0; font-family: Avenirnextltpro, "Avenir Next", sans-serif;
   box-shadow: -8px 0 30px rgba(0, 0, 0, .2); animation: fcbox-in .2s ease-out;
 }
