@@ -148,6 +148,7 @@ html.fcbox-open .fcbox-fab { display: none; }
 /* Each coffee shows its own image, so the box's single bundle image is hidden. */
 .cart_container .fcbox-line .minicart-img, .section_cart-page .fcbox-line .cart-item_component > a:first-child { display: none; }
 .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1.41fr .5fr; }
+.cart_container .fcbox-line .minicart_prod-info-wrapper { margin-left: 0; }
 @media (max-width: 767px) { .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1fr; } }
 .fcbox-line__items li:first-child { border-top: 0; }
 .fcbox-line__actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; }
