@@ -143,7 +143,12 @@ html.fcbox-open .fcbox-fab { display: none; }
   margin: 12px 0; padding: 16px; border: 1.5px solid var(--fcbox-gold); border-radius: 8px;
 }
 .fcbox-line__items { margin: 8px 0 0; padding: 0; list-style: none; color: #000; font-size: 15px; line-height: 1.4; }
-.fcbox-line__items li { padding: 6px 0; border-top: 1px solid var(--fcbox-line); }
+.fcbox-line__items li { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--fcbox-line); }
+.fcbox-line__img { flex: none; width: 44px; height: 44px; border-radius: 6px; background: #f3f3f3; object-fit: cover; }
+/* Each coffee shows its own image, so the box's single bundle image is hidden. */
+.cart_container .fcbox-line .minicart-img, .section_cart-page .fcbox-line .cart-item_component > a:first-child { display: none; }
+.section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1.41fr .5fr; }
+@media (max-width: 767px) { .section_cart-page .fcbox-line .cart-item_component { grid-template-columns: 1fr; } }
 .fcbox-line__items li:first-child { border-top: 0; }
 .fcbox-line__actions { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; }
 /* Cart page: stack the actions under the coffee list instead of beside the title. */

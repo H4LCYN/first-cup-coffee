@@ -569,7 +569,8 @@
       return i.q + 'X ' + p.title + (vt ? ' (' + vt + ')' : '');
     }).join(', ');
 
-    var props = { Contents: contents, _rb_id: rbId };
+    // _box_items ("handle:variant:qty|…") lets both carts show each coffee's own image.
+    var props = { Contents: contents, _rb_id: rbId, _box_items: box.items.map(function (i) { return i.h + ':' + i.v + ':' + i.q; }).join('|') };
     props[LINE_PROP] = key;
 
     if (box.inCart) await removeLines(key);
@@ -711,6 +712,38 @@
     reconcile();
   });
 
+  /* ---------- mini cart: one image per coffee in a box line ---------- */
+
+  // The slide-out template can't see underscore properties, so read _box_items from /cart.js
+  // and rebuild each box line's list (navbar.liquid tags it with data-box-line = line key).
+  var decorating = false;
+  function decorateMiniCart() {
+    var lists = document.querySelectorAll('.fcbox-line__items[data-box-line]:not([data-box-done])');
+    if (!lists.length || decorating) return;
+    decorating = true;
+    cartJson('cart.js').then(function (cart) {
+      return Promise.all([].map.call(lists, function (ul) {
+        ul.setAttribute('data-box-done', '');
+        var line = cart.items.filter(function (i) { return i.key === ul.getAttribute('data-box-line'); })[0];
+        var raw = line && line.properties && line.properties._box_items;
+        if (!raw) return null;
+        var parts = raw.split('|').map(function (s) { var a = s.split(':'); return { h: a[0], v: Number(a[1]), q: Number(a[2]) }; });
+        return Promise.all(parts.map(function (p) { return ensureInfo(p.h).catch(function () { return null; }); })).then(function () {
+          ul.innerHTML = parts.map(function (p) {
+            var pi = info[p.h];
+            if (!pi) return '';
+            var vt = variantLabel(pi.variants[p.v] && pi.variants[p.v].title);
+            var img = pi.image ? pi.image + (pi.image.indexOf('?') > -1 ? '&' : '?') + 'width=120' : '';
+            return '<li>' + (img ? '<img class="fcbox-line__img" src="' + esc(img) + '" alt="" width="44" height="44" loading="lazy">' : '') +
+              '<span>' + p.q + 'X ' + esc(pi.title) + (vt ? ' (' + esc(vt) + ')' : '') + '</span></li>';
+          }).join('');
+        });
+      }));
+    }).catch(function () {}).then(function () { decorating = false; decorateMiniCart(); });
+  }
+  new MutationObserver(decorateMiniCart).observe(document.body, { childList: true, subtree: true });
+
   render();
   reconcile();
+  decorateMiniCart();
 })();

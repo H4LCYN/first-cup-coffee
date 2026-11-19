@@ -36,8 +36,24 @@
                               {%- if item.properties._box_format != blank -%}
                                 {%- comment -%} One coffee per line; Contents is "1X Name (Texture), 2X Name" (assets/box-builder.js). {%- endcomment -%}
                                 <ul class="fcbox-line__items">
-                                  {%- assign box_contents = item.properties.Contents | split: ', ' -%}
-                                  {%- for c in box_contents -%}<li>{{ c }}</li>{%- endfor -%}
+                                  {%- if item.properties._box_items != blank -%}
+                                    {%- comment -%} _box_items is "handle:variant:qty|…" {%- endcomment -%}
+                                    {%- assign box_parts = item.properties._box_items | split: '|' -%}
+                                    {%- for part in box_parts -%}
+                                      {%- assign bits = part | split: ':' -%}
+                                      {%- assign bp = all_products[bits[0]] -%}
+                                      {%- assign bv_id = bits[1] | plus: 0 -%}
+                                      {%- assign bv = bp.variants | where: 'id', bv_id | first -%}
+                                      {%- assign b_img = bv.featured_image | default: bp.featured_image -%}
+                                      <li>
+                                        {%- if b_img -%}<img class="fcbox-line__img" src="{{ b_img | image_url: width: 120 }}" alt="" width="44" height="44" loading="lazy">{%- endif -%}
+                                        <span>{{ bits[2] }}X {{ bp.title }}{% if bv and bv.title != 'Default Title' %} ({{ bv.title }}){% endif %}</span>
+                                      </li>
+                                    {%- endfor -%}
+                                  {%- else -%}
+                                    {%- assign box_contents = item.properties.Contents | split: ', ' -%}
+                                    {%- for c in box_contents -%}<li>{{ c }}</li>{%- endfor -%}
+                                  {%- endif -%}
                                 </ul>
                               {%- else -%}
                                 <div class="p-medium is-cart">{%- render 'cart-item-properties', item: item -%}</div>
