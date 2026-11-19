@@ -64,6 +64,10 @@
                       <p class="product_description-text">{{ product.metafields.udesly.description }}</p>
                       <div class="product_description-text">{{ product.description }}</div>
                     </div>
+                    <div class="fc-box-lead">
+                      {%- render 'box-button', product: product, class: 'fc-box-btn--legacy fc-box-btn--solid' -%}
+                      <p class="fc-box-or">or</p>
+                    </div>
                     {%- render 'format-switcher', product: product, legacy: true -%}
                     {%- if product.metafields.custom.subscription_type.value == 'Bag' -%}
                       <div class="subscription-product">
@@ -532,7 +536,6 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
-                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -1016,7 +1019,6 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
-                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -1413,7 +1415,6 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
-                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -1687,6 +1688,10 @@
                     <div class="product-description_wrapper">
                       <p class="product_description-text">{{ product.metafields.udesly.description }}</p>
                       <div class="product_description-text">{{ product.description }}</div>
+                    </div>
+                    <div class="fc-box-lead">
+                      {%- render 'box-button', product: product, class: 'fc-box-btn--legacy fc-box-btn--solid' -%}
+                      <p class="fc-box-or">or</p>
                     </div>
                     {%- render 'format-switcher', product: product, legacy: true -%}
                     {%- if product.metafields.custom.subscription_type.value == 'Bag' -%}
@@ -2156,7 +2161,6 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
-                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -2640,7 +2644,6 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
-                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}
@@ -3124,7 +3127,6 @@
                                     class="subscription-add-to-cart is-margin-top w-button"
                                     value="{{ 'tn26bdceda' | t }}"
                                   >
-                                  {%- render 'box-button', product: product, class: 'fc-box-btn--legacy' -%}
                                   {% comment %}{%- render "product-variants-data" product: product -%}{% endcomment %}
                                 {%- endform -%}
                                 {% comment %}

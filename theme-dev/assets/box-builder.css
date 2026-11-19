@@ -26,6 +26,17 @@ html.fcbox-open { overflow: hidden; }
 .fc-box-btn--dark.has-tag, .fc-box-btn--legacy.has-tag { margin-top: 26px; }
 @media (max-width: 767px) { .fc-box-btn--dark { max-width: none; } }
 
+/* Standard PDP: Create a Box leads the options, then an "or" rule (templates/product.liquid). */
+.fc-box-lead { margin: 26px 0 24px; display: flex; flex-direction: column; gap: 22px; }
+.fc-box-lead:not(:has(.fc-box-btn:not([hidden]))) { display: none; }
+.fc-box-lead .fc-box-btn { margin-top: 0; min-height: 53px; font-size: 18px; }
+.fc-box-or {
+  display: flex; align-items: center; gap: 16px; margin: 0;
+  font-family: Avenirnextltpro, "Avenir Next", sans-serif; font-weight: 700; font-size: 14px; line-height: 1;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--fcbox-ink);
+}
+.fc-box-or::before, .fc-box-or::after { content: ""; flex: 1; height: 1px; background: currentColor; opacity: .25; }
+
 /* Red pill above every box button ("Save up to 15%"), matching the Most Popular tags. */
 .fc-box-tag {
   position: absolute; left: 50%; bottom: calc(100% - 6px); transform: translateX(-50%);
