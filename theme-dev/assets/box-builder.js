@@ -238,7 +238,7 @@
       var text = box.inCart
         ? 'You changed your ' + esc(FORMATS[key].label) + '. Update it so your cart matches.'
         : 'Your ' + esc(FORMATS[key].label) + ' has ' + unit(key, count) + ' and is not in your cart yet.';
-      html += '<div class="fcbox-note"><p class="fcbox-note__text">' + text +
+      html += '<div class="fcbox-note"><p class="fcbox-note__text">' + text + `&nbsp;` +
         '<button type="button" class="fc-box-btn fc-box-btn--solid" data-box-open="' + key + '">' +
         (box.inCart ? 'Update box' : 'Finish your box') + '</button></p></div>';
     });
