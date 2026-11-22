@@ -386,7 +386,7 @@
           endif
         -%}
         {%- if product_img != nil -%}
-          <img src="{{ product_img }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="401" height="665" loading="eager">
+          <img src="{{ product_img }}" alt="{{ s.product_image.alt | default: product.title | escape }}" width="401" height="665" loading="eager">
         {%- endif -%}
       </div>
 
@@ -415,15 +415,7 @@
           <div class="fpf__summary">{{ copy_html }}</div>
         {%- endif -%}
 
-        {%- comment -%} No variant passed: the box drawer asks for the texture itself. {%- endcomment -%}
-        {%- if bundle != blank and bundle.variants.size > 0 -%}
-          <div class="fpf__box-lead">
-            <p class="fcbox__message shadow">All subscriptions are eligible for <b>FREE SHIPPING!</b></p>
-            {%- render 'box-button', product: product, class: 'fc-box-btn--dark fc-box-btn--solid' -%}
-            <p class="fpf__or">or</p>
-          </div>
-        {%- endif -%}
-
+        {%- render 'feature-box-lead', product: product -%}
         {%- liquid
           assign format_count = 0
           for block in section.blocks

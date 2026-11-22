@@ -413,12 +413,20 @@
   .plp-2026_item {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    justify-content: space-between;
+    align-self: stretch;
+    height: 100%;
   }
 
-  .plp-2026_item .fc-box-btn {
+  /* Cards stretch to the tallest in the row; the CTA sits at the bottom (flex-end),
+     so one- and two-line titles still line up. Specificity beats .fc-box-btn.has-tag. */
+  .plp-2026_item .plp-2026_card {
+    flex: 1 1 auto;
+    padding-bottom: 28px;
+  }
+
+  .plp-2026_item .fc-box-btn.fc-box-btn--card {
     margin-top: auto;
+    flex: 0 0 auto;
   }
 
   .plp-2026_card {

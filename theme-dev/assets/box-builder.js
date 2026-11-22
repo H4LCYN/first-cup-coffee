@@ -504,7 +504,7 @@
     } else {
       var v = variants.filter(function (x) { return x.id === chosen; })[0];
       if (v && !v.available) ui.message = 'That option is sold out right now.';
-      else if (addItem(key, handle, chosen, 1)) ui.message = (btn.getAttribute('data-box-title') || 'Coffee') + ' added to your box.';
+      else addItem(key, handle, chosen, 1);
     }
     save();
     open(key);
@@ -629,7 +629,7 @@
     if (t.hasAttribute('data-box-add-variant')) {
       var pickHandle = t.getAttribute('data-handle');
       var picked = addItem(ui.format, pickHandle, Number(t.getAttribute('data-box-add-variant')), 1);
-      ui.message = picked ? (info[pickHandle] ? info[pickHandle].title : 'Coffee') + ' added to your box.' : '';
+      ui.message = '';
       save();
       return;
     }
@@ -638,7 +638,7 @@
     if (t.hasAttribute('data-box-pick')) {
       var p = ui.pending;
       ui.pending = null;
-      if (p && addItem(p.format, p.handle, Number(t.getAttribute('data-box-pick')), 1)) ui.message = p.title + ' added to your box.';
+      if (p) addItem(p.format, p.handle, Number(t.getAttribute('data-box-pick')), 1);
       save();
       return;
     }
