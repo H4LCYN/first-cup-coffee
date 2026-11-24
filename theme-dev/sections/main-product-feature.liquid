@@ -29,6 +29,7 @@
   assign banner = nil
   assign banner_mobile = nil
   assign banner_fg = nil
+  assign banner_accent = nil
   for block in section.blocks
     if block.type == 'banner_image' and banner == nil
       if block.settings.image != blank
@@ -45,6 +46,11 @@
         assign banner_fg = block.settings.foreground_image | image_url: width: 1100
       elsif block.settings.foreground_image_asset != blank
         assign banner_fg = block.settings.foreground_image_asset | asset_url
+      endif
+      if block.settings.accent_image != blank
+        assign banner_accent = block.settings.accent_image | image_url: width: 600
+      elsif block.settings.accent_image_asset != blank
+        assign banner_accent = block.settings.accent_image_asset | asset_url
       endif
     endif
   endfor
@@ -276,7 +282,9 @@
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 270px;
     background: linear-gradient(to bottom, var(--fpf-fade) 10.236%, transparent);
   }
-  .fpf__scene-fg { position: absolute; left: 90px; bottom: 0; display: block; width: 517px; max-width: 45%; height: auto; }
+  .fpf__scene-fg { position: absolute; left: 0; bottom: 0; display: block; width: 62%; max-width: none; height: auto; }
+  /* Accent cut-out (e.g. the JOMO mug): right of the foreground, over the landscape. */
+  .fpf__scene-accent { position: absolute; right: 7%; bottom: 28px; display: block; width: 22%; max-width: 280px; height: auto; }
 
   /* Backdrop layout (BAFO, Figma 500:354): the banner photo sits behind the lower part of the
      whole panel, left-aligned at 2448px wide on a 1292px panel; the product description's
@@ -345,7 +353,8 @@
     .fpf__split-text .fpf__body { font-size: 19px; line-height: 1.4; }
     .fpf__scene { height: 280px; margin: 24px -24px 0; background-image: var(--fpf-banner-m, var(--fpf-banner, none)); }
     .fpf__scene::before { height: 160px; }
-    .fpf__scene-fg { left: 12px; width: 62%; max-width: 340px; }
+    .fpf__scene-fg { left: 12px; width: 100%; max-width: 340px; }
+    .fpf__scene-accent { right: 12px; bottom: 16px; width: 30%; max-width: 140px; }
   }
 
   @media screen and (max-width: 991px) {
@@ -581,6 +590,9 @@
             {%- if banner_fg != nil -%}
               <img class="fpf__scene-fg" src="{{ banner_fg }}" alt="" width="517" height="406" loading="lazy">
             {%- endif -%}
+            {%- if banner_accent != nil -%}
+              <img class="fpf__scene-accent" src="{{ banner_accent }}" alt="" width="734" height="694" loading="lazy">
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -783,7 +795,9 @@
         { "type": "image_picker", "id": "mobile_image", "label": "Mobile banner image" },
         { "type": "text", "id": "mobile_image_asset", "label": "Mobile fallback filename (theme asset)" },
         { "type": "image_picker", "id": "foreground_image", "label": "Foreground cut-out (split and backdrop layouts)", "info": "Transparent PNG shown at the bottom-left of the panel." },
-        { "type": "text", "id": "foreground_image_asset", "label": "Foreground fallback filename (theme asset)" }
+        { "type": "text", "id": "foreground_image_asset", "label": "Foreground fallback filename (theme asset)" },
+        { "type": "image_picker", "id": "accent_image", "label": "Accent cut-out (split layout)", "info": "Transparent image shown to the right of the foreground, over the banner." },
+        { "type": "text", "id": "accent_image_asset", "label": "Accent fallback filename (theme asset)" }
       ]
     },
     {
