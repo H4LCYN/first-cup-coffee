@@ -13,6 +13,12 @@
     "collection_home_limit": 6,
     "collection_2_home": "roasts",
     "collection_2_home_limit": 11,
+    "cart_suggest_products": [
+      "jomo-cup",
+      "black-15-oz-first-cup-signature-mug",
+      "green-15-oz-first-cup-signature-mug",
+      "gold-15-oz-first-cup-signature-mug-copy"
+    ],
     "sections": {
       "top-ad": {
         "type": "top-ad",

@@ -1,0 +1,80 @@
+{%- comment -%}
+  Cart suggestions carousel (Theme settings > Cart Suggestions).
+  Always shows the products picked in theme settings, minus anything already
+  in the cart, as PLP-style cards with an Add to Cart button. If turned on there,
+  complementary products (Search & Discovery) for cart items are added in front.
+  Logic in assets/cart-suggest.js.
+{%- endcomment -%}
+{%- if settings.cart_suggest_enabled -%}
+  {%- assign in_cart_ids = cart.items | map: 'product_id' | join: ',' | prepend: ',' | append: ',' -%}
+  <div class="fc-suggest{% if mini %} fc-suggest--mini{% endif %}" data-fc-suggest data-max="{{ settings.cart_suggest_max }}" data-complementary="{{ settings.cart_suggest_complementary }}"{% if cart.item_count == 0 %} hidden{% endif %}>
+    <div class="fc-suggest__head">
+      <p class="fc-suggest__title">{{ settings.cart_suggest_heading | escape }}</p>
+      <div class="fc-suggest__nav">
+        <button type="button" class="fc-suggest__arrow" data-fc-suggest-prev aria-label="Previous products">&#8249;</button>
+        <button type="button" class="fc-suggest__arrow" data-fc-suggest-next aria-label="Next products">&#8250;</button>
+      </div>
+    </div>
+    <div class="fc-suggest__track" data-fc-suggest-list role="list">
+      {%- for p in settings.cart_suggest_products -%}
+        {%- unless p.available -%}{%- continue -%}{%- endunless -%}
+        {%- assign needle = p.id | prepend: ',' | append: ',' -%}
+        {%- assign v = p.selected_or_first_available_variant -%}
+        {%- assign roast = p.metafields.custom.roast_profile.value -%}
+        <div class="fc-suggest__item" role="listitem" data-product-id="{{ p.id }}"{% if in_cart_ids contains needle %} hidden{% endif %}>
+          <a href="{{ p.url }}" class="fc-suggest__card">
+            <div class="fc-suggest__media">
+              {%- if p.featured_image -%}
+                <img class="fc-suggest__img" src="{{ p.featured_image | image_url: width: 460 }}" alt="{{ p.featured_image.alt | default: p.title | escape }}" width="230" height="230" loading="lazy" decoding="async">
+              {%- endif -%}
+            </div>
+            <div class="fc-suggest__info">
+              {%- if roast != blank -%}<span class="fc-suggest__roast">{{ roast }} Roast</span>{%- endif -%}
+              <span class="fc-suggest__name">{{ p.title | escape }}</span>
+              <span class="fc-suggest__price">{{ v.price | money }}</span>
+            </div>
+          </a>
+          <button type="button" class="fc-suggest__add" data-fc-suggest-add="{{ v.id }}">Add to Cart</button>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  <script src="{{ 'cart-suggest.js' | asset_url }}" defer></script>
+  <style>
+    .fc-suggest { margin: 24px 0; padding: 24px 0 8px; border-top: 1px solid rgba(0,0,0,.12); --fcs-card: 227px; --fcs-gap: 24px; }
+    .fc-suggest--mini { margin: 0 12px 8px; padding: 14px 0 4px; --fcs-card: 148px; --fcs-gap: 12px; }
+    .fc-suggest__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .fc-suggest__title { margin: 0; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 24px; line-height: 1; text-transform: uppercase; color: #000; }
+    .fc-suggest--mini .fc-suggest__title { font-size: 18px; }
+    .fc-suggest__nav { display: flex; gap: 8px; }
+    .fc-suggest__nav[hidden] { display: none; }
+    .fc-suggest__arrow { width: 36px; height: 36px; padding: 0; border: 1.5px solid #000; border-radius: 50%; background: #fff; color: #000; font-size: 22px; line-height: 1; cursor: pointer; }
+    .fc-suggest--mini .fc-suggest__arrow { width: 30px; height: 30px; font-size: 18px; }
+    .fc-suggest__arrow:disabled { opacity: .3; cursor: default; }
+    .fc-suggest__track { display: grid; grid-auto-flow: column; grid-auto-columns: var(--fcs-card); gap: var(--fcs-gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; }
+    .fc-suggest__track::-webkit-scrollbar { display: none; }
+    .fc-suggest__item { display: flex; flex-direction: column; scroll-snap-align: start; }
+    .fc-suggest__item[hidden] { display: none; }
+    .fc-suggest__card { flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 16px; text-decoration: none; color: #000; }
+    .fc-suggest__media { width: 100%; aspect-ratio: 1; border-radius: 30px; overflow: hidden; background-color: var(--gray-4, #f2f2f2); }
+    .fc-suggest--mini .fc-suggest__media { border-radius: 18px; }
+    .fc-suggest__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .fc-suggest__info { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 4px; text-align: center; text-transform: uppercase; }
+    .fc-suggest__roast { font-family: Avenirnextltpro, sans-serif; font-weight: 700; font-size: 14px; line-height: 1.1; color: var(--butterscotch, #c9a13b); }
+    .fc-suggest__name { font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 24px; line-height: 1; color: #000; }
+    .fc-suggest__price { font-family: Avenirnextltpro, sans-serif; font-weight: 500; font-size: 18px; line-height: 1; color: #000; }
+    .fc-suggest--mini .fc-suggest__roast { font-size: 11px; }
+    .fc-suggest--mini .fc-suggest__name { font-size: 16px; }
+    .fc-suggest--mini .fc-suggest__price { font-size: 14px; }
+    .fc-suggest__add { margin-top: auto; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 44px; padding: 8px 12px; border: 1.5px solid var(--fcbox-gold, #c9a13b); border-radius: 2.2px; background: var(--fcbox-gold, #c9a13b); color: #fff; font-family: Avenirnextltpro, "Avenir Next", sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2; letter-spacing: .02em; text-transform: uppercase; cursor: pointer; transition: filter .15s; }
+    .fc-suggest--mini .fc-suggest__add { min-height: 38px; font-size: 13px; padding: 6px 8px; }
+    .fc-suggest__add:hover { filter: brightness(.9); }
+    .fc-suggest__add[disabled] { opacity: .6; cursor: wait; }
+    @media (max-width: 660px) {
+      .fc-suggest { --fcs-card: 160px; --fcs-gap: 14px; }
+      .fc-suggest__name { font-size: 18px; }
+      .fc-suggest__price { font-size: 15px; }
+      .fc-suggest__media { border-radius: 20px; }
+    }
+  </style>
+{%- endif -%}

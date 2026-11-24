@@ -319,5 +319,47 @@
         "default": "Subscribe to Box"
       }
     ]
+  },
+  {
+    "name": "Cart Suggestions",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Products shown in the cart page and slide-out cart under the items. Products already in the cart are hidden. Complementary products set in Search & Discovery for items in the cart are shown first."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_suggest_enabled",
+        "label": "Show cart suggestions",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_suggest_heading",
+        "label": "Heading",
+        "default": "Goes great with"
+      },
+      {
+        "type": "product_list",
+        "id": "cart_suggest_products",
+        "label": "Products to suggest",
+        "limit": 12
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_suggest_complementary",
+        "label": "Also suggest complementary products for items in the cart",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "cart_suggest_max",
+        "label": "Most products to show",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "default": 8
+      }
+    ]
   }
 ]
