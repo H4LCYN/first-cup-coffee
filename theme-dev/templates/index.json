@@ -275,7 +275,7 @@
           "type": "product",
           "settings": {
             "name": "<p>TRIGGER FUEL</p>",
-            "details": "<ul><li>Collaboration with Nick Freitas</li><li>Brazilian and Nicaraguan</li><li>Medium Dark</li><li>Black tea, orange rind, dark chocolate, fresh black pepper and apple</li></ul>",
+            "details": "<ul><li>Named after a Monument of Firsts</li><li>Brazilian/Nicaraguan Blend</li><li>Medium Dark Roast</li></ul>",
             "fallback_image": "trigger-fuel-bag.png",
             "link": "shopify://products/trigger",
             "roast_value": "dark"
@@ -314,6 +314,18 @@
         "paragraph": "A no-nonsense medium-dark roast for people who wake up with purpose. Build, defend, and don't go soft — start the day with this cup.",
         "button_text": "Order Now",
         "button_link": "shopify://products/brew-around-and-find-out"
+      }
+    },
+    "section-vimeo-video": {
+      "type": "section-vimeo-video",
+      "settings": {
+        "heading": "THE FIRST CUP STORY",
+        "video_id": "1230101474",
+        "video_hash": "76946f1f17",
+        "title": "Story 1 - Elijah",
+        "aspect_ratio": "42.55",
+        "video_ratio": "16 / 9",
+        "max_width": 960
       }
     },
     "section-our-locations": {
@@ -359,7 +371,6 @@
     },
     "section-prayer-callout": {
       "type": "section-prayer-callout",
-      "disabled": true,
       "settings": {
         "eyebrow": "First Cup Prays First",
         "heading": "In Need of Prayer?",
@@ -402,18 +413,6 @@
         "load_more_link": "",
         "follow_text": "FOLLOW US",
         "follow_link": "https://www.instagram.com/firstcupcoffeeco/"
-      }
-    },
-    "section-vimeo-video": {
-      "type": "section-vimeo-video",
-      "settings": {
-        "heading": "THE FIRST CUP STORY",
-        "video_id": "1230101474",
-        "video_hash": "76946f1f17",
-        "title": "Story 1 - Elijah",
-        "aspect_ratio": "42.55",
-        "video_ratio": "16 / 9",
-        "max_width": 960
       }
     },
     "home-review-cards": {
