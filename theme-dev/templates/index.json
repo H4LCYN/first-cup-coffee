@@ -271,6 +271,16 @@
             "roast_value": "dark"
           }
         },
+        "product-jomo": {
+          "type": "product",
+          "settings": {
+            "name": "<p>JOMO: JOY OF MISSING OUT</p>",
+            "details": "<ul><li>In Collaboration with Good Simple Living</li><li>Brazilian/Nicaraguan Blend</li><li>Medium Dark Roast</li></ul>",
+            "fallback_image": "jomo-bag.png",
+            "link": "shopify://products/jomo-joy-of-missing-out",
+            "roast_value": "dark"
+          }
+        },
         "product-trigger-fuel": {
           "type": "product",
           "settings": {
@@ -299,7 +309,8 @@
         "product-boston-common",
         "product-frankford",
         "product-brew-around",
-        "product-trigger-fuel"
+        "product-trigger-fuel",
+        "product-jomo"
       ],
       "settings": {
         "heading": "YOUR ROAST OPTIONS",
