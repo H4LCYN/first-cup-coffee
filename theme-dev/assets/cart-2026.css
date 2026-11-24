@@ -91,3 +91,22 @@
   .section_cart-page .h3 { font-size: 36px; }
   .section_cart-page .cart-item-title { font-size: 20px; }
 }
+
+/* Product page (templates/product.liquid) quantity and Add to cart. The old dark-theme
+   styles left the stepper white on the white page; match the cart page stepper instead,
+   and run Add to cart the full width under it. */
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper { flex-wrap: wrap; }
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper > .add-to-cart-button { flex: 1 1 100%; width: 100%; }
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper .input-number-group {
+  height: 44px; border: 1.5px solid #000; border-radius: 2.2px; background: #fff;
+}
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper .input-number {
+  width: 44px; height: 100%; color: #000; font-family: Avenirnextltpro, "Avenir Next", sans-serif; font-weight: 700; font-size: 16px;
+  -moz-appearance: textfield;
+}
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper .input-number::-webkit-inner-spin-button,
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper .input-number::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper .input-group-button { display: flex; }
+:is(.section_product, .section_imprint-header) .add-to-cart_wrapper :is(.input-number-decrement, .input-number-increment) {
+  min-width: 44px; color: #000; font-weight: 700; font-size: 18px; cursor: pointer; user-select: none;
+}
