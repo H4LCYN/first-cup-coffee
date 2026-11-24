@@ -30,6 +30,7 @@
   assign banner_mobile = nil
   assign banner_fg = nil
   assign banner_accent = nil
+  assign banner_accent_link = nil
   for block in section.blocks
     if block.type == 'banner_image' and banner == nil
       if block.settings.image != blank
@@ -51,6 +52,9 @@
         assign banner_accent = block.settings.accent_image | image_url: width: 600
       elsif block.settings.accent_image_asset != blank
         assign banner_accent = block.settings.accent_image_asset | asset_url
+      endif
+      if block.settings.accent_link != blank
+        assign banner_accent_link = block.settings.accent_link
       endif
     endif
   endfor
@@ -284,7 +288,9 @@
   }
   .fpf__scene-fg { position: absolute; left: 0; bottom: 0; display: block; width: 62%; max-width: none; height: auto; }
   /* Accent cut-out (e.g. the JOMO mug): right of the foreground, over the landscape. */
-  .fpf__scene-accent { position: absolute; right: 7%; bottom: 28px; display: block; width: 22%; max-width: 280px; height: auto; }
+  .fpf__scene-accent { position: absolute; right: 2%; bottom: 28px; display: block; width: 22%; max-width: 280px; height: auto; }
+  .fpf__scene-accent-link .fpf__scene-accent { transition: transform .2s; }
+  .fpf__scene-accent-link:hover .fpf__scene-accent { transform: translateY(-4px); }
 
   /* Backdrop layout (BAFO, Figma 500:354): the banner photo sits behind the lower part of the
      whole panel, left-aligned at 2448px wide on a 1292px panel; the product description's
@@ -591,7 +597,11 @@
               <img class="fpf__scene-fg" src="{{ banner_fg }}" alt="" width="517" height="406" loading="lazy">
             {%- endif -%}
             {%- if banner_accent != nil -%}
-              <img class="fpf__scene-accent" src="{{ banner_accent }}" alt="" width="734" height="694" loading="lazy">
+              {%- if banner_accent_link != nil -%}
+                <a href="{{ banner_accent_link }}" class="fpf__scene-accent-link"><img class="fpf__scene-accent" src="{{ banner_accent }}" alt="Shop the mug" width="734" height="694" loading="lazy"></a>
+              {%- else -%}
+                <img class="fpf__scene-accent" src="{{ banner_accent }}" alt="" width="734" height="694" loading="lazy">
+              {%- endif -%}
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -797,7 +807,8 @@
         { "type": "image_picker", "id": "foreground_image", "label": "Foreground cut-out (split and backdrop layouts)", "info": "Transparent PNG shown at the bottom-left of the panel." },
         { "type": "text", "id": "foreground_image_asset", "label": "Foreground fallback filename (theme asset)" },
         { "type": "image_picker", "id": "accent_image", "label": "Accent cut-out (split layout)", "info": "Transparent image shown to the right of the foreground, over the banner." },
-        { "type": "text", "id": "accent_image_asset", "label": "Accent fallback filename (theme asset)" }
+        { "type": "text", "id": "accent_image_asset", "label": "Accent fallback filename (theme asset)" },
+        { "type": "url", "id": "accent_link", "label": "Accent link", "info": "Makes the accent cut-out a link, e.g. to the product it shows." }
       ]
     },
     {

@@ -17,7 +17,8 @@
           "settings": {
             "image_asset": "jomo-landscape.jpg",
             "foreground_image_asset": "jomo-family.png",
-            "accent_image_asset": "jomo-mug.webp"
+            "accent_image_asset": "jomo-mug.webp",
+            "accent_link": "/products/jomo-cup?variant=49488755818718"
           }
         },
         "logo": {
