@@ -1,0 +1,103 @@
+{%- comment -%}
+  Subscription box builder: config + drawer shell, rendered once from layout/theme.liquid.
+
+  A box is a Recharge Bundle. There is one box per format (16 oz bags, 5 lb bulk, pods),
+  because each bundle product draws from its own collection. Bundle products, collections
+  and labels come from Theme settings > Box Builder. Box sizes, prices and "% off" are read
+  from the bundle product's variants, delivery options from its selling plans, so nothing
+  here needs to change when Recharge pricing changes.
+
+  Behaviour: assets/box-builder.js. Buttons: snippets/box-button.liquid.
+{%- endcomment -%}
+{%- comment -%} Theme setting defaults only exist on the storefront once the settings are saved in the editor, so every value has a fallback here. {%- endcomment -%}
+{%- unless settings.box_enabled == false -%}
+  {%- assign box_keys = 'bag,bulk,pod' | split: ',' -%}
+  <script type="application/json" data-box-config>
+    {
+      "root": {{ routes.root_url | json }},
+      "cartUrl": {{ routes.cart_url | json }},
+      "shopUrl": {{ routes.all_products_collection_url | json }},
+      "labels": {
+        "create": {{ settings.box_create_label | default: 'Create a Box' | json }},
+        "add": {{ settings.box_add_label | default: 'Add to Box' | json }},
+        "checkout": {{ settings.box_checkout_label | default: 'Subscribe to Box' | json }}
+      },
+      "formats": [
+        {%- for key in box_keys -%}
+          {%- liquid
+            assign label_id = 'box_' | append: key | append: '_label'
+            assign bundle_id = 'box_' | append: key | append: '_bundle'
+            assign coll_id = 'box_' | append: key | append: '_collection'
+            assign box_label = settings[label_id]
+            assign box_bundle_handle = settings[bundle_id]
+            assign box_coll_handle = settings[coll_id]
+            if key == 'bag'
+              assign box_label = box_label | default: '16 oz Bag Box'
+              assign box_bundle_handle = box_bundle_handle | default: 'test-product'
+              assign box_coll_handle = box_coll_handle | default: '1-lb-bag-subscription'
+              assign box_image = 'bags-arrangement-1-camera-7-1.webp'
+              assign box_short = '16 oz Bags'
+            elsif key == 'bulk'
+              assign box_label = box_label | default: '5 lb Bulk Box'
+              assign box_bundle_handle = box_bundle_handle | default: 'build-a-custom-box-bulk'
+              assign box_coll_handle = box_coll_handle | default: 'bulk-subscriptions'
+              assign box_image = 'bulk-arrangement-1-cam_studio_black_soft_light_02_front.png'
+              assign box_short = '5 lb Bulk'
+            else
+              assign box_label = box_label | default: 'Pods Box'
+              assign box_bundle_handle = box_bundle_handle | default: 'build-a-custom-box-pods'
+              assign box_coll_handle = box_coll_handle | default: 'pods-subscriptions'
+              assign box_image = 'coffee-capsule-mockup-03-1.webp'
+              assign box_short = 'Pods'
+            endif
+            assign box_bundle = all_products[box_bundle_handle]
+            assign box_collection = collections[box_coll_handle]
+          -%}
+          {
+            "key": {{ key | json }},
+            "short": {{ box_short | json }},
+            "image": {{ box_image | asset_url | json }},
+            "collectionHandle": {{ box_collection.handle | json }},
+            "label": {{ box_label | json }},
+            "bundleProductId": {{ box_bundle.id | default: 0 }},
+            "collectionId": {{ box_collection.id | default: 0 }},
+            "variants": [
+              {%- for bv in box_bundle.variants -%}
+                {"id": {{ bv.id }}, "bags": {{ bv.option1 | split: ' ' | first | plus: 0 }}, "price": {{ bv.price }}, "compareAt": {{ bv.compare_at_price | default: 0 }}, "available": {{ bv.available }}}{% unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            ],
+            "plans": [
+              {%- assign first_plan = true -%}
+              {%- for group in box_bundle.selling_plan_groups -%}
+                {%- for plan in group.selling_plans -%}
+                  {%- unless first_plan -%},{%- endunless -%}
+                  {%- assign first_plan = false -%}
+                  {"id": {{ plan.id }}, "name": {{ plan.name | json }}}
+                {%- endfor -%}
+              {%- endfor -%}
+            ]
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+
+  <button type="button" class="fcbox-fab" data-box-fab hidden>
+    <span class="fcbox-fab__label">Your Box</span>
+    <span class="fcbox-fab__count" data-box-fab-count></span>
+  </button>
+
+  <div class="fcbox" data-box-drawer hidden>
+    <div class="fcbox__scrim" data-box-close></div>
+    <aside class="fcbox__panel" role="dialog" aria-modal="true" aria-labelledby="fcbox-title" tabindex="-1">
+      <header class="fcbox__head">
+        <h2 class="fcbox__title" id="fcbox-title">Your Box</h2>
+        <button type="button" class="fcbox__close" data-box-close aria-label="Close box">&times;</button>
+      </header>
+      <div class="fcbox__body" data-box-body></div>
+    </aside>
+  </div>
+
+  {{ 'box-builder.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'box-builder.js' | asset_url }}" defer></script>
+{%- endunless -%}

@@ -1,0 +1,52 @@
+{%- comment -%}
+  "Create a Box" / "Add to Box" button for one product.
+
+  Params:
+    product   the coffee
+    variant   (optional) preselected variant; without it a multi-variant product asks in the drawer
+    class     (optional) extra class, e.g. 'fc-box-btn--card' or 'fc-box-btn--dark'
+
+  Renders nothing unless the product is in one of the box collections
+  (Theme settings > Box Builder). Stays hidden until assets/box-builder.js confirms
+  the matching bundle exists, then sets its own label.
+{%- endcomment -%}
+{%- unless settings.box_enabled == false -%}
+  {%- liquid
+    assign box_bag_coll = settings.box_bag_collection | default: '1-lb-bag-subscription'
+    assign box_bulk_coll = settings.box_bulk_collection | default: 'bulk-subscriptions'
+    assign box_pod_coll = settings.box_pod_collection | default: 'pods-subscriptions'
+    assign box_format = ''
+    for c in product.collections
+      if c.handle == box_bag_coll
+        assign box_format = 'bag'
+      elsif c.handle == box_bulk_coll
+        assign box_format = 'bulk'
+      elsif c.handle == box_pod_coll
+        assign box_format = 'pod'
+      endif
+      if box_format != ''
+        break
+      endif
+    endfor
+  -%}
+  {%- if box_format != '' -%}
+    {%- capture box_variants -%}
+      [{%- for v in product.variants -%}
+        {"id": {{ v.id }}, "title": {{ v.title | json }}, "available": {{ v.available }}}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}]
+    {%- endcapture -%}
+    <button
+      type="button"
+      class="fc-box-btn {{ class }}"
+      data-box-add
+      data-box-format="{{ box_format }}"
+      data-box-handle="{{ product.handle }}"
+      data-box-product-id="{{ product.id }}"
+      data-box-title="{{ product.title | escape }}"
+      data-box-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 200 }}{% endif %}"
+      data-box-variants="{{ box_variants | strip | escape }}"
+      {% if variant %}data-box-variant="{{ variant.id }}"{% endif %}
+      hidden
+    >{{ settings.box_create_label | default: 'Create a Box' }}</button>
+  {%- endif -%}
+{%- endunless -%}

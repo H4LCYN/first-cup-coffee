@@ -414,11 +414,16 @@
         "follow_text": "FOLLOW US",
         "follow_link": "https://www.instagram.com/firstcupcoffeeco/"
       }
+    },
+    "home-review-cards": {
+      "type": "home-review-cards",
+      "settings": {}
     }
   },
   "order": [
     "section-hero-carousel",
     "section-our-blends",
+    "home-review-cards",
     "home-cta-1",
     "section-vimeo-video",
     "section-our-locations",

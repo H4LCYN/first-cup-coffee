@@ -1,0 +1,66 @@
+{%- comment -%}
+  Size switcher: links a blend's 16 oz / 5 lb / Pods products.
+  Siblings are found automatically. Each format collection (Box Builder
+  theme settings) is searched for a product whose title, minus the
+  " - 5 Lb Bag" / " - Pods (24 Count)" suffix, matches this product's.
+  Renders nothing unless two or more sizes exist.
+
+  Params:
+    product  – current product (required)
+    label    – heading above the buttons (default theme setting)
+    legacy   – true on templates/product.liquid (adds standalone styles)
+{%- endcomment -%}
+{%- liquid
+  assign fs_key = product.title | downcase | replace: '&', 'and' | split: ' - 5 lb bag' | first | split: ' - pods' | first | handleize
+
+  assign fs_handles = settings.box_bag_collection | append: '|' | append: settings.box_bulk_collection | append: '|' | append: settings.box_pod_collection | split: '|'
+  assign fs_n1 = settings.format_bag_label | default: '16 oz Bag'
+  assign fs_n2 = settings.format_bulk_label | default: '5 lb Bag'
+  assign fs_n3 = settings.format_pod_label | default: 'Pods (24 Count)'
+  assign fs_names = fs_n1 | append: '|' | append: fs_n2 | append: '|' | append: fs_n3 | split: '|'
+
+  assign fs_count = 0
+  capture fs_buttons
+    for fs_handle in fs_handles
+      assign fs_name = fs_names[forloop.index0]
+      if fs_handle == blank
+        continue
+      endif
+      for fs_p in collections[fs_handle].products
+        assign fs_p_key = fs_p.title | downcase | replace: '&', 'and' | split: ' - 5 lb bag' | first | split: ' - pods' | first | handleize
+        if fs_p_key == fs_key
+          assign fs_count = fs_count | plus: 1
+          if fs_p.handle == product.handle
+            echo '<span class="fpf__format is-current" aria-current="page">' | append: fs_name | append: '</span>'
+          else
+            echo '<a class="fpf__format" href="' | append: fs_p.url | append: '">' | append: fs_name | append: '</a>'
+          endif
+          break
+        endif
+      endfor
+    endfor
+  endcapture
+-%}
+{%- if fs_count > 1 -%}
+  {%- if legacy -%}
+    <style>
+      .fc-formats--legacy { --fpf-text: currentColor; --fpf-accent: #d2a014; margin: 24px 0 30px; display: flex; flex-direction: column; gap: 11px; }
+      .fc-formats--legacy .fpf__formats-label { margin: 0; font-family: "Avenir Next Condensed", sans-serif; font-weight: 700; font-size: 15px; line-height: 15.9px; }
+      .fc-formats--legacy .fpf__formats-row { display: flex; flex-wrap: wrap; gap: 14px; }
+      .fc-formats--legacy .fpf__format {
+        display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+        min-width: 106px; height: 39px; padding: 6px 15px;
+        border: 2px solid currentColor; border-radius: 2px; background: transparent; color: inherit;
+        font-family: Roboto, sans-serif; font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.7px;
+        text-align: center; text-decoration: none; white-space: nowrap; transition: background-color .15s, border-color .15s;
+      }
+      .fc-formats--legacy a.fpf__format:hover { border-color: var(--fpf-accent); }
+      .fc-formats--legacy .fpf__format.is-current { background: var(--fpf-accent); border-color: var(--fpf-accent); color: #fff; }
+      .fc-formats--legacy a.fpf__format:focus-visible { outline: 2px solid var(--fpf-accent); outline-offset: 3px; }
+    </style>
+  {%- endif -%}
+  <div class="fpf__formats{% if legacy %} fc-formats--legacy{% endif %}">
+    <p class="fpf__formats-label">{{ label | default: settings.format_switcher_label | default: 'Size' }}</p>
+    <nav class="fpf__formats-row" aria-label="{{ label | default: settings.format_switcher_label | default: 'Size' | escape }}">{{ fs_buttons }}</nav>
+  </div>
+{%- endif -%}

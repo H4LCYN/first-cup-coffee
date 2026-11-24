@@ -1,0 +1,40 @@
+{%- comment -%}
+  Homepage Judge.me Reviews Carousel. Markup is Judge.me's documented Liquid snippet
+  (judge.me/help/en/articles/12058208). Hidden entirely until the store has reviews
+  and Judge.me has published a featured carousel.
+{%- endcomment -%}
+{%- assign jm_metafields = shop.metafields.judgeme -%}
+{%- assign jm_count = jm_metafields.all_reviews_count | plus: 0 -%}
+{%- if jm_count > 0 and jm_metafields.featured_carousel != blank -%}
+<section class="home-reviews" style="background: {{ section.settings.bg }}; color: {{ section.settings.text }};">
+  <div class="padding-global">
+    <div class="container-large">
+      <div style="padding: 48px 0;">
+        <!-- Start of Judge.me code -->
+        <div class='jdgm-carousel-wrapper'>
+          <div class='jdgm-carousel-title-and-link'>
+            <h2 class='jdgm-carousel-title'>{{ section.settings.heading | escape }}</h2>
+            <span class='jdgm-all-reviews-rating-wrapper' href='javascript:void(0)'>
+              <span style='display:block' data-score='{{ jm_metafields.all_reviews_rating }}' class='jdgm-all-reviews-rating' aria-label='{{ jm_metafields.all_reviews_rating }} stars' tabindex='0' role='img'></span>
+              <span style='display: block' class='jdgm-carousel-number-of-reviews' data-number-of-reviews='{{ jm_metafields.all_reviews_count }}'> from {{ shop.metafields.judgeme.all_reviews_count }} reviews </span>
+            </span>
+          </div>
+          {{ jm_metafields.featured_carousel }}
+        </div>
+        <!-- End of Judge.me code -->
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Judge.me reviews",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Let customers speak for us" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#222222" }
+  ],
+  "presets": [{ "name": "Judge.me reviews" }]
+}
+{% endschema %}

@@ -15,20 +15,26 @@
                 <a href="{% if section.settings.coffee_link %}{{ section.settings.coffee_link }}{% else %}/collections/coffee{% endif %}" class="nav_menu-links-wrapper w-inline-block">
                   <div class="nav_link">{{ 't76ced3cc' | t }}</div>
                 </a>
+                {%- comment -%}
+                  Join the Club opens the box builder menu (assets/box-builder.js) unless a link is set.
+                  Without JS, or with the box builder off, it falls back to the bag subscription collection.
+                {%- endcomment -%}
                 {%- if section.settings.join_club_link != blank -%}
                   {%- assign join_club_url = section.settings.join_club_link -%}
+                  {%- assign join_club_box = false -%}
                 {%- else -%}
-                  {%- assign join_club_url = '/pages/subscribe-save' -%}
+                  {%- assign join_club_url = settings.box_bag_collection | default: '1-lb-bag-subscription' | prepend: '/collections/' -%}
+                  {%- assign join_club_box = true -%}
                 {%- endif -%}
-                {%- comment -%} Skip menu items that point at the Join the Club page (e.g. "Choose Your Plan") so it isn't listed twice. {%- endcomment -%}
+                {%- comment -%} Skip menu items that point at Join the Club or the retired Subscribe & Save page (e.g. "Choose Your Plan"). {%- endcomment -%}
                 {%- for link in section.settings.main_nav_menu.links -%}
-                  {%- if link.url == join_club_url -%}{%- continue -%}{%- endif -%}
+                  {%- if link.url == join_club_url or link.url contains '/pages/subscribe-save' -%}{%- continue -%}{%- endif -%}
                   <a href="{{ link.url }}" class="nav_menu-links-wrapper w-inline-block">
                     <div class="nav_link">{{ link.title }}</div>
                   </a>
                 {%- endfor -%}
                 {%- comment -%} Gold call-to-action at the end of the menu, per the 2026 nav design. {%- endcomment -%}
-                <a href="{{ join_club_url }}" class="nav_menu-links-wrapper w-inline-block is-highlight">
+                <a href="{{ join_club_url }}"{% if join_club_box and settings.box_enabled != false %} data-box-open=""{% endif %} class="nav_menu-links-wrapper w-inline-block is-highlight">
                   <div class="nav_link">{{ section.settings.join_club_text | escape }}</div>
                 </a>
               </div>
@@ -66,9 +72,10 @@
                         <div class="fa-icon">{{ 't58' | t }}</div>
                       </a>
                     </div>
+                    <div class="fcbox-notes fcbox-notes--mini" data-box-cart-panel hidden></div>
                     <div class="w-commerce-commercecartformwrapper cart-form-wrapper">
                       <form style="display:none" class="w-commerce-commercecartform default-state" data-node-type="commerce-cart-form">
-                        <script type="text/x-wf-template" id="wf-template-a39490a8-b5f0-903b-4b49-2d852812f939"><div data-node-type="cart-item" class="cart-item w-commerce-commercecartitem" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93a"><img data-node-type="cart-item-image" class="minicart-img w-commerce-commercecartitemimage" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93b" src="<%= it.image %>"><div data-node-type="cart-item-info" class="minicart_prod-info-wrapper w-commerce-commercecartiteminfo" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93c"><div data-node-type="cart-product-name" class="p-medium is-minicart w-commerce-commercecartproductname" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93d"><%= it.title %></div><ul template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93f" class="w-commerce-commercecartoptionlist"><% Object.entries(it.properties).forEach( data =>  { %><li data-node-type="cart-option-list-item"><span data-node-type="cart-option-list-item-label" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f941"><%= data[0] %></span><span data-node-type="span">{{ 't726' | t }}</span><span data-node-type="cart-option-list-item-value" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f944"><%= data[1] %></span></li><% }) %></ul><div><div class="input-group input-number-group is-minicart"><input class="w-commerce-commercecartquantity input-number is-minicart" name="<%= it.id %>" type="number" min="0" min="1" value="<%= it.quantity %>" data-node-type="cart-quantity"></div></div></div><div class="div-block-7"><a data-node-type="cart-remove-link" href="#" role="button" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f945" data-product-id="<%= it.id %>"><div class="fa-icon is-minicart">{{ 'tf2ed' | t }}</div></a><div class="product-price is-minicart" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93e"><%= it.price %></div></div></div></script>
+                        <script type="text/x-wf-template" id="wf-template-a39490a8-b5f0-903b-4b49-2d852812f939"><div data-node-type="cart-item" class="cart-item w-commerce-commercecartitem" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93a"><% if (it.properties.Contents) { %><div class="fcbox-line"><% } %><img data-node-type="cart-item-image" class="minicart-img w-commerce-commercecartitemimage" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93b" src="<%= it.image %>"><div data-node-type="cart-item-info" class="minicart_prod-info-wrapper w-commerce-commercecartiteminfo" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93c"><div data-node-type="cart-product-name" class="p-medium is-minicart w-commerce-commercecartproductname" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93d"><% if (it.properties.Contents) { %><%= it.product_title %> - <%= it.variant_title %><% if (it.selling_plan_allocation) { %> - <%= it.selling_plan_allocation.selling_plan.name.split('every ').pop() %><% } %><% } else { %><%= it.title %><% } %></div><% if (it.properties.Contents) { %><ul class="fcbox-line__items" data-box-line="<%= it.id %>"><% it.properties.Contents.split(/, (?=\d+X )/).forEach(c => { %><li><%= c %></li><% }) %></ul><div class="fcbox-line__actions"><button type="button" class="fcbox-edit" data-box-open="" data-box-line-variant="<%= it.variant_id %>">Edit box</button><a data-node-type="cart-remove-link" href="#" role="button" data-product-id="<%= it.id %>" class="fcbox-edit fcbox-edit--remove fa-icon" aria-label="Remove box">{{ 'tf2ed' | t }}</a></div><% } else { %><ul template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93f" class="w-commerce-commercecartoptionlist"><% Object.entries(it.properties).forEach( data =>  { %><li data-node-type="cart-option-list-item"><span data-node-type="cart-option-list-item-label" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f941"><%= data[0] %></span><span data-node-type="span">{{ 't726' | t }}</span><span data-node-type="cart-option-list-item-value" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f944"><%= data[1] %></span></li><% }) %></ul><% } %><div class="fc-qty-row"><div class="input-group input-number-group is-minicart fc-qty"><button type="button" class="fc-qty__btn" data-qty-step="-1" aria-label="Decrease quantity">-</button><input class="w-commerce-commercecartquantity input-number is-minicart" name="<%= it.id %>" type="number" min="0" value="<%= it.quantity %>" data-node-type="cart-quantity"><button type="button" class="fc-qty__btn" data-qty-step="1" aria-label="Increase quantity">+</button></div><a data-node-type="cart-remove-link" href="#" role="button" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f945" data-product-id="<%= it.id %>"><div class="fa-icon is-minicart">{{ 'tf2ed' | t }}</div></a></div></div><div class="div-block-7"><s class="fc-compare-price" data-compare-handle="<%= it.handle %>" data-compare-variant="<%= it.variant_id %>" data-compare-qty="<%= it.quantity %>" hidden></s><div class="product-price is-minicart" template-part-bind="a39490a8-b5f0-903b-4b49-2d852812f93e"><%= it.total %></div></div><% if (it.properties.Contents) { %></div><% } %></div></script>
                         <div class="w-commerce-commercecartlist mini-cart-list" data-wf-collection="database.commerceOrder.userItems" data-wf-template-id="wf-template-a39490a8-b5f0-903b-4b49-2d852812f939"></div>
                         <div class="w-commerce-commercecartfooter mini-cart-footer">
                           <div aria-atomic="true" aria-live="polite" class="w-commerce-commercecartlineitem">
@@ -121,11 +128,10 @@
     .navbar .nav_utility-wrapper { height: 80px; padding-right: 8px; }
     .nav_divider { display: block; width: 1px; height: 20px; margin: 0 10px; background: #bfbfbf; }
     .nav_feature-link {
-      display: flex; align-items: center; box-sizing: border-box; width: 114px; height: 80px; padding: 0 16px;
+      display: flex; align-items: center; box-sizing: border-box; width: auto; height: 80px; padding: 0 16px;
       color: #fff; font-family: Roboto, sans-serif; font-weight: 500; font-size: 14px; line-height: 16.8px;
       letter-spacing: 0.7px; text-transform: uppercase; text-decoration: none;
     }
-    .nav_feature-link span { width: min-content; }
     .nav_feature-link:hover { color: var(--butterscotch); }
     .navbar .nav-link.is-utility, .navbar .cart-button { padding: 6.357px; }
     .navbar .nav_utility-wrapper .icon { width: 23.836px; }
@@ -134,6 +140,18 @@
 
 <script>var currentSection = document.currentScript.closest('.shopify-section');currentSection.setAttribute("data-animation","default");currentSection.setAttribute("data-collapse","medium");currentSection.setAttribute("data-duration","400");currentSection.setAttribute("data-easing","ease");currentSection.setAttribute("data-easing2","ease");currentSection.setAttribute("role","banner");currentSection.setAttribute("class","navbar w-nav");</script>
         
+<script>
+  // Slide-out cart quantity stepper: step the Webflow quantity field and let Udesly's change handler update the cart.
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.cart_container [data-qty-step]');
+    if (!btn) return;
+    var input = btn.parentNode.querySelector('[data-node-type="cart-quantity"]');
+    if (!input) return;
+    input.value = Math.max(0, (Number(input.value) || 0) + Number(btn.getAttribute('data-qty-step')));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+</script>
+
 {% schema %}
 {
   "name": "Navbar",
@@ -168,7 +186,7 @@
       "id": "join_club_link",
       "label": "Join the Club link",
       "type": "url",
-      "info": "Defaults to /pages/subscribe-save."
+      "info": "Leave empty to open the Box Builder menu."
     },
     {
       "type": "header",

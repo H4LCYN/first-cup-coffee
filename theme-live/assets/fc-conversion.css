@@ -1,0 +1,47 @@
+/* First Cup conversion overrides — loaded last from layout/theme.liquid. Draft 2026-11-07. */
+:root{--fc-cream:#f6f1e6;--fc-ink:#1d1d1b;--fc-olive:#3d441e;--fc-gold:#d29f13}
+
+/* ---------- Subscribe & Save: format chooser ---------- */
+.section_subscription-selection{background-color:var(--fc-cream)}
+.section_subscription-selection .subscribe-selections_wrapper{color:var(--fc-ink);gap:2rem}
+.section_subscription-selection .subscribe-selections_wrapper>h3{color:var(--fc-ink);letter-spacing:.04em;margin:0}
+.section_subscription-selection .subscribe-selections_component{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;width:100%;max-width:68rem;flex-direction:initial}
+.section_subscription-selection .subscribe-selection{
+  width:auto;max-width:none;background-color:var(--fc-olive);
+  background-image:linear-gradient(rgba(61,68,30,0) 20%,rgba(29,32,14,.92) 70%);
+  border:2px solid transparent;border-radius:var(--corner-radius,.6rem);
+  padding:1.5rem 1.5rem 2rem;justify-content:flex-end;gap:.75rem;
+  transition:border-color .2s,transform .2s;text-decoration:none}
+.section_subscription-selection .subscribe-selection:hover,
+.section_subscription-selection .subscribe-selection:focus-visible{border-color:var(--fc-gold);transform:translateY(-2px)}
+.section_subscription-selection .subscribe-selection:focus-visible{outline:3px solid var(--fc-gold);outline-offset:3px}
+.section_subscription-selection .subscribe-selection img{width:100%;max-width:16rem;height:auto;aspect-ratio:1/1;object-fit:contain}
+.section_subscription-selection .subscribe-selection_title{color:#fff;font-size:1.6rem;line-height:1.1;padding-top:0}
+.fc-sub-cta{display:inline-block;background:var(--fc-gold);color:var(--fc-ink);font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;font-size:.95rem;padding:.7rem 1.4rem;border-radius:999px}
+.subscribe-selection:hover .fc-sub-cta{background:#fff}
+
+/* ---------- Subscribe & Save: perks ---------- */
+.section_subscription-details{background-color:#fff}
+.section_subscription-details .subscription-det_wrapper{color:var(--fc-ink);gap:2rem}
+.section_subscription-details .subscription-det_wrapper>h3{margin:0;letter-spacing:.04em}
+.section_subscription-details .perks-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:2rem;max-width:68rem;margin:0 auto}
+.section_subscription-details .perk_component{background:var(--fc-cream);border-radius:var(--corner-radius,.6rem);padding:1.5rem 1.25rem;gap:.75rem}
+.section_subscription-details .perk_img-wrapper{width:100%;max-width:9rem}
+.section_subscription-details .perk_img-wrapper img{width:100%;height:auto}
+.section_subscription-details .perk_component .h4{font-size:1.6rem;line-height:1.15;margin:0;color:var(--fc-olive)}
+.section_subscription-details .perk_component p{margin:0;font-size:1rem;line-height:1.5;color:#3a3a36}
+
+@media screen and (max-width:991px){
+  .section_subscription-details .perks-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section_subscription-selection .subscribe-selections_component{gap:1rem}
+}
+@media screen and (max-width:767px){
+  .section_subscription-selection .subscribe-selections_component{grid-template-columns:minmax(0,1fr);max-width:26rem;margin:0 auto}
+  .section_subscription-selection .subscribe-selection img{max-width:12rem}
+}
+@media screen and (max-width:479px){
+  .section_subscription-details .perks-grid{grid-template-columns:minmax(0,1fr);gap:1rem}
+  .section_subscription-details .perk_img-wrapper{max-width:7rem}
+}

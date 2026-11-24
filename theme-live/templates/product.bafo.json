@@ -77,7 +77,8 @@
         "default_purchase_type": "subscribe",
         "popular_interval": "30",
         "popular_bag_count": "2",
-        "feature_layout": "backdrop"
+        "feature_layout": "backdrop",
+        "product_image": "shopify://shop_images/bafo-flat-min.png"
       }
     }
   },

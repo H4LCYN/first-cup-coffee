@@ -23,22 +23,7 @@
       "navbar": {
         "type": "navbar",
         "settings": {
-          "dark_roast_bundle_link": "shopify://products/dark-roast-bundle",
-          "dark_roast_bundle_text": "Dark Roast Bundle",
-          "medium_roast_bundle_link": "shopify://products/medium-roast-bundle",
-          "medium_roast_bundle_text": "Medium Roast Bundle",
-          "mediumdark_roast_bundle_link": "shopify://products/medium-dark-roast-bundle",
-          "mediumdark_roast_bundle_text": "Medium/Dark Roast Bundle",
-          "lightmedium_roast_bundle_text": "Light/Medium Roast Bundle",
-          "lightmedium_roast_bundle_link": "shopify://products/light-medium-roast-bundle",
-          "mega_menu_16_oz_bags_url": "https://firstcup.com/collections/coffee?package=16+oz+Bags",
           "account_portal": "/account",
-          "bulk_link": "https://firstcup.com/collections/coffee?package=5+lb+Bulk",
-          "pods_link": "https://firstcup.com/collections/coffee?package=Pods",
-          "light_roast_link": "https://firstcup.com/collections/coffee?roast=Light",
-          "medium_roast_link": "https://firstcup.com/collections/coffee?roast=Medium",
-          "dark_roast_link": "https://firstcup.com/collections/coffee?roast=Dark",
-          "blend_roast_link": "https://firstcup.com/collections/coffee?roast=Blend",
           "main_nav_menu": "main-menu-new-do-not-use-yet"
         }
       },

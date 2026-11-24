@@ -1,0 +1,71 @@
+{%- comment -%} Draft-only tasting notes keyed by product ID. Source: each product's own description (audit: tasting-notes-audit.csv). Migrate to a metafield later. {%- endcomment -%}
+{%- liquid
+  assign fc_notes = ''
+  case product_id
+    when 9379007201502
+      assign fc_notes = 'Black tea · Orange rind · Dark chocolate · Black pepper'
+    when 9379003531486
+      assign fc_notes = 'Black tea · Orange rind · Dark chocolate · Black pepper'
+    when 9376304791774
+      assign fc_notes = 'Black tea · Orange rind · Dark chocolate · Black pepper'
+    when 9066256629982
+      assign fc_notes = 'Black tea · Orange rind · Dark chocolate · Black pepper'
+    when 9066242638046
+      assign fc_notes = 'Black tea · Orange rind · Dark chocolate · Black pepper'
+    when 9063794671838
+      assign fc_notes = 'Black tea · Orange rind · Dark chocolate · Black pepper'
+    when 8015655731422
+      assign fc_notes = 'Orange · Apricot · Peach · Cinnamon'
+    when 8015655043294
+      assign fc_notes = 'Lime zest · Summer berry'
+    when 8015652421854
+      assign fc_notes = 'Milk chocolate · Caramel syrup · Raspberry'
+    when 8015650816222
+      assign fc_notes = 'Brown sugar · Fudge'
+    when 8015650488542
+      assign fc_notes = 'Citrus · Earthy'
+    when 8015646720222
+      assign fc_notes = 'Lemon zest · Cocoa · Walnut'
+    when 8015645507806
+      assign fc_notes = 'Milk chocolate · Ripe fruit · Allspice'
+    when 8011470766302
+      assign fc_notes = 'Smooth · Sweet · Nutty'
+    when 7839704219870
+      assign fc_notes = 'Orange · Apricot · Peach · Cinnamon'
+    when 7839696191710
+      assign fc_notes = 'Lime zest · Summer berry'
+    when 7839695700190
+      assign fc_notes = 'Milk chocolate · Caramel syrup · Raspberry'
+    when 7839695438046
+      assign fc_notes = 'Dark chocolate fudge · Orange zest'
+    when 7839694913758
+      assign fc_notes = 'Brown sugar · Fudge'
+    when 7839694586078
+      assign fc_notes = 'Citrus · Earthy'
+    when 7839694258398
+      assign fc_notes = 'Lemon zest · Cocoa · Walnut'
+    when 7839693897950
+      assign fc_notes = 'Milk chocolate · Ripe fruit · Allspice'
+    when 7836490629342
+      assign fc_notes = 'Smooth · Sweet · Nutty'
+    when 7800176574686
+      assign fc_notes = 'Orange · Apricot · Peach · Cinnamon'
+    when 7773440901342
+      assign fc_notes = 'Lime zest · Summer berry'
+    when 7773438345438
+      assign fc_notes = 'Milk chocolate · Caramel syrup · Raspberry'
+    when 7773436674270
+      assign fc_notes = 'Dark chocolate fudge · Orange zest'
+    when 7773434806494
+      assign fc_notes = 'Brown sugar · Fudge'
+    when 7773431955678
+      assign fc_notes = 'Citrus · Earthy'
+    when 7773427630302
+      assign fc_notes = 'Lemon zest · Cocoa · Walnut'
+    when 7773425008862
+      assign fc_notes = 'Milk chocolate · Ripe fruit · Allspice'
+    when 7773414621406
+      assign fc_notes = 'Smooth · Sweet · Nutty'
+  endcase
+-%}
+{%- if fc_notes != blank -%}<span class="plp-2026_card-notes">{{ fc_notes | escape }}</span>{%- endif -%}

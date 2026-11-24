@@ -157,6 +157,8 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
 }
 </style>
 
+{%- comment -%} Speed preview 2026-11-07: let the browser find the main hero image during HTML parse instead of after CSS. {%- endcomment -%}
+{{ 'prayer-wall-hero.jpg' | asset_url | preload_tag: as: 'image', fetchpriority: 'high' }}
 <section class="pw-section" id="prayer-wall" data-proxy="/apps/prayer-wall">
   <div class="pw-hero">
     <div class="pw-hero__bg"></div>
@@ -184,6 +186,11 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
         loggedIn: {% if customer %}true{% else %}false{% endif %},
         loginUrl: {{ '/customer_authentication/login?return_to=' | append: pw_return | json }},
       };
+      // Speed preview: start the initial prayer list request now, before the form/card templates are parsed.
+      // Same GET the page already makes; on any failure the original api('/') path runs.
+      window.__PW_INITIAL__ = fetch('/apps/prayer-wall/', { headers: { 'Content-Type': 'application/json' } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
     </script>
 
     <div id="pw-toasts"></div>
@@ -653,7 +660,9 @@ button#pw-submit-btn { display: flex; height: 40px; padding: 0 52px; justify-con
 
   async function reload() {
     try {
-      render(await api('/'));
+      const early = window.__PW_INITIAL__ ? await window.__PW_INITIAL__ : null;
+      window.__PW_INITIAL__ = null;
+      render(early || await api('/'));
     } catch {
       ROOT.innerHTML = '<p class="pw__error">Could not load prayer requests. Please refresh the page.</p>';
     }

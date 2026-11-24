@@ -52,6 +52,9 @@
       var soldOut = !variant || !variant.available;
       addBtn.disabled = soldOut;
       addLabel.textContent = soldOut ? cfg.soldOutLabel : idleLabel;
+      // Keep the "Add to Box" button (assets/box-builder.js) on the chosen variant.
+      var boxBtn = root.querySelector('[data-box-add]');
+      if (boxBtn && variant) boxBtn.setAttribute('data-box-variant', variant.id);
       showError('');
     }
 

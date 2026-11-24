@@ -206,5 +206,118 @@
         "default": 3
       }
     ]
+  },
+  {
+    "name": "Box Builder",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "box_enabled",
+        "label": "Enable the subscription box builder",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "16 oz bags"
+      },
+      {
+        "type": "text",
+        "id": "box_bag_label",
+        "label": "Box name",
+        "default": "16 oz Bag Box"
+      },
+      {
+        "type": "text",
+        "id": "box_bag_bundle",
+        "label": "Recharge bundle product handle",
+        "default": "test-product",
+        "info": "Its variants set the box sizes and prices; its selling plans set the delivery options."
+      },
+      {
+        "type": "text",
+        "id": "box_bag_collection",
+        "label": "Bundle collection handle",
+        "default": "1-lb-bag-subscription",
+        "info": "Products in this collection get the Create a Box button."
+      },
+      {
+        "type": "header",
+        "content": "5 lb bulk"
+      },
+      {
+        "type": "text",
+        "id": "box_bulk_label",
+        "label": "Box name",
+        "default": "5 lb Bulk Box"
+      },
+      {
+        "type": "text",
+        "id": "box_bulk_bundle",
+        "label": "Recharge bundle product handle",
+        "default": "build-a-custom-box-bulk"
+      },
+      {
+        "type": "text",
+        "id": "box_bulk_collection",
+        "label": "Bundle collection handle",
+        "default": "bulk-subscriptions"
+      },
+      {
+        "type": "header",
+        "content": "Pods"
+      },
+      {
+        "type": "text",
+        "id": "box_pod_label",
+        "label": "Box name",
+        "default": "Pods Box"
+      },
+      {
+        "type": "text",
+        "id": "box_pod_bundle",
+        "label": "Recharge bundle product handle",
+        "default": "build-a-custom-box-pods"
+      },
+      {
+        "type": "text",
+        "id": "box_pod_collection",
+        "label": "Bundle collection handle",
+        "default": "pods-subscriptions"
+      },
+      {
+        "type": "header",
+        "content": "Size switcher"
+      },
+      {
+        "type": "paragraph",
+        "content": "Size buttons on coffee pages link a blend's 16 oz, 5 lb and pod products. They are matched by title in the three collections above, ignoring the \" - 5 Lb Bag\" and \" - Pods (24 Count)\" suffixes."
+      },
+      { "type": "text", "id": "format_switcher_label", "label": "Heading", "default": "Size" },
+      { "type": "text", "id": "format_bag_label", "label": "16 oz button", "default": "16 oz Bag" },
+      { "type": "text", "id": "format_bulk_label", "label": "5 lb button", "default": "5 lb Bag" },
+      { "type": "text", "id": "format_pod_label", "label": "Pods button", "default": "Pods (24 Count)" },
+      {
+        "type": "header",
+        "content": "Labels"
+      },
+      {
+        "type": "text",
+        "id": "box_create_label",
+        "label": "Button, no box yet",
+        "default": "Create a Box"
+      },
+      {
+        "type": "text",
+        "id": "box_add_label",
+        "label": "Button, box started",
+        "default": "Add to Box"
+      },
+      {
+        "type": "text",
+        "id": "box_checkout_label",
+        "label": "Drawer button",
+        "default": "Subscribe to Box"
+      }
+    ]
   }
 ]
